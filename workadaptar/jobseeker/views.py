@@ -13,7 +13,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from jobseeker.tokens import account_activation_token
-
+from recruiter.models import Employer_job,Employer_jobquestion
 
 class SignUpView(View):
     form_class = SignUpForm
@@ -90,7 +90,8 @@ class ActivateAccount(View):
 def Home(request):
     c = Candidate.objects.get(user=request.user)
     if Candidate_profile.objects.get(user_id=c):
-        pass
+        job= Employer_job.objects.filter(is_saved=False, is_applied=False)
+        return render(request,'home',{'jobs':job})
     else:
         return redirect('')
 
