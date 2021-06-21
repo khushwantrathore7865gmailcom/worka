@@ -3,7 +3,7 @@ from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
 from .models import Employer,Employer_profile
-from .forms import SignUpForm,ProfileRegisterForm
+from .forms import SignUpForm,ProfileRegisterForm,JobPostForm
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -110,4 +110,12 @@ def ProfileView(request, pk):
     return render(request, 'dashboard/my-profile.html', {"form1": form1})
 
 def job_post(request):
-    pass
+    e = Employer.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = JobPostForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.employer_id = e
+            f.save()
+
+    return render(request, 'dashboard/addjob.html', {"form": form})

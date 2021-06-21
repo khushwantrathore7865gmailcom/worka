@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from user_custom.models import User_custom
-from .models import Employer_profile
+from .models import Employer_profile,Employer_job,Employer_jobquestions
 
 
 class SignUpForm(UserCreationForm):
@@ -39,3 +39,21 @@ class ProfileRegisterForm(forms.ModelForm):
             'company_logo',
         ]
 
+class JobPostForm(forms.ModelForm):
+    class Meta:
+        model = Employer_job
+        fields = [
+            'job_title',
+            'job_description',
+            'employment_type',
+            'job_location',
+            'job_experience',
+            'job_savelater',
+            'created_on',
+        ]
+class JobsQuestionForm(forms.ModelForm):
+    class Meta:
+        model = Employer_jobquestions
+        fields = [
+
+        ]

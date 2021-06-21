@@ -27,9 +27,8 @@ class Employer_profile(models.Model):
     company_logo = models.ImageField(blank=True, )
 
 
-class Employer_jobs(models.Model):
+class Employer_job(models.Model):
     employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    job_id = models.IntegerField(primary_key=True)
     job_title = models.CharField(max_length=1250)
     job_description = models.CharField(max_length=1250)
     employment_type = models.CharField(max_length=250)
@@ -42,7 +41,7 @@ class Employer_jobs(models.Model):
 class Employer_jobquestions(models.Model):
     employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
     question_id = models.IntegerField(primary_key=True)
-    job_id = models.ForeignKey(Employer_jobs, on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
     question = models.CharField(max_length=1250)
 
 
@@ -50,18 +49,17 @@ class Employer_candidate_jobanswer(models.Model):
     candidate_id = models.ForeignKey(Candidate, models.CASCADE)
     employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
 
-    job_id = models.ForeignKey(Employer_jobs, on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
     question_id = models.ForeignKey(Employer_jobquestions, on_delete=models.CASCADE)
     answer = models.CharField(max_length=1250)
 
 
 class Employer_job_responses(models.Model):
     employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    job_id = models.ForeignKey(Employer_jobs, on_delete=models.CASCADE)
+    job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
     candidate_id = models.ForeignKey(Candidate, models.CASCADE)
 
 
-class Employer_expired_jobs(models.Model):
+class Employer_expired_job(models.Model):
     employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    job_id = models.ForeignKey(Employer_jobs, on_delete=models.CASCADE)
-    id = models.IntegerField(primary_key=True)
+    job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
