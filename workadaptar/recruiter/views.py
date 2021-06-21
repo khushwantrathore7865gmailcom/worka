@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
-from .models import Employer,Employer_profile
-from .forms import SignUpForm,ProfileRegisterForm,JobPostForm
+from .models import Employer, Employer_profile
+from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -41,10 +41,10 @@ class SignUpView(View):
                 return HttpResponse('User with same email already exists, Please try again with different Username!!')
             else:
                 user = form.save(commit=False)
-                user.is_active = False# Deactivate account till it is confirmed
-                user.is_employeer=True
+                user.is_active = False  # Deactivate account till it is confirmed
+                user.is_employeer = True
                 user.save()
-                new_employe = Employer(user=user,is_email_verified=False)
+                new_employe = Employer(user=user, is_email_verified=False)
                 new_employe.save()
                 current_site = get_current_site(request)
                 subject = 'Activate Your WorkAdaptar Account'
@@ -87,6 +87,7 @@ class ActivateAccount(View):
                 request, ('The confirmation link was invalid, possibly because it has already been used.'))
             return redirect('dashboard_home')
 
+
 def Home(request):
     c = Employer.objects.get(user=request.user)
     if Employer_profile.objects.get(user_id=c):
@@ -106,16 +107,24 @@ def ProfileView(request, pk):
         #
     form1 = ProfileRegisterForm()
 
-
     return render(request, 'dashboard/my-profile.html', {"form1": form1})
+
 
 def job_post(request):
     e = Employer.objects.get(user=request.user)
     if request.method == 'POST':
-        form = JobPostForm(request.POST)
-        if form.is_valid():
-            f = form.save(commit=False)
-            f.employer_id = e
-            f.save()
+        form1 = JobPostForm(request.POST)
+        if form1.is_valid():
+            f1 = form1.save(commit=False)
+            f1.employer_id = e
 
-    return render(request, 'dashboard/addjob.html', {"form": form})
+            form2 = JobsQuestionForm(request.POST)
+            if form2.is_valid():
+                f2 = form2.save(commit=False)
+                f2.employer_id = e
+                f2.job_id = f1
+                f2.save()
+                f1.save()
+    form1 = JobPostForm(request.POST)
+    form2 = JobsQuestionForm(request.POST)
+    return render(request, 'dashboard/addjob.html', {"form1": form1, "form2": form2})

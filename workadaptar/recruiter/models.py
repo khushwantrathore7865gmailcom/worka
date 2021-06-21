@@ -41,9 +41,8 @@ class Employer_job(models.Model):
     is_applied = models.BooleanField(default=False)
 
 
-class Employer_jobquestions(models.Model):
+class Employer_jobquestion(models.Model):
     employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
-    question_id = models.IntegerField(primary_key=True)
     job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
     question = models.CharField(max_length=1250)
 
@@ -53,7 +52,7 @@ class Employer_candidate_jobanswer(models.Model):
     employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
 
     job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
-    question_id = models.ForeignKey(Employer_jobquestions, on_delete=models.CASCADE)
+    question_id = models.ForeignKey(Employer_jobquestion, on_delete=models.CASCADE)
     answer = models.CharField(max_length=1250)
 
 

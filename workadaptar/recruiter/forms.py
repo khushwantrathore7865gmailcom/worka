@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from user_custom.models import User_custom
-from .models import Employer_profile,Employer_job,Employer_jobquestions
+from .models import Employer_profile,Employer_job,Employer_jobquestion
 
 
 class SignUpForm(UserCreationForm):
@@ -53,7 +53,8 @@ class JobPostForm(forms.ModelForm):
         ]
 class JobsQuestionForm(forms.ModelForm):
     class Meta:
-        model = Employer_jobquestions
+        model = Employer_jobquestion
         fields = [
+            'question'
 
         ]
