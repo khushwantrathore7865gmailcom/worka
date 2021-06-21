@@ -36,6 +36,9 @@ class Employer_job(models.Model):
     job_experience = models.CharField(max_length=250)
     job_savelater = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
+    is_saved = models.BooleanField(default=False)
+    is_liked = models.BooleanField(default=False)
+    is_applied = models.BooleanField(default=False)
 
 
 class Employer_jobquestions(models.Model):
