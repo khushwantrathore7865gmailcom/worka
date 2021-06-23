@@ -13,7 +13,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from jobseeker.tokens import account_activation_token
-from recruiter.models import Employer_job,Employer_jobquestion
+from recruiter.models import Employer_job,Employer_jobquestion,Employer_job_Applied,Employer_job_Like,Employer_job_Saved
 
 class SignUpView(View):
     form_class = SignUpForm
@@ -90,7 +90,16 @@ class ActivateAccount(View):
 def Home(request):
     c = Candidate.objects.get(user=request.user)
     if Candidate_profile.objects.get(user_id=c):
-        job= Employer_job.objects.filter(is_saved=False, is_applied=False)
+
+        job= Employer_job.objects.all()
+        a =Employer_job_Applied.objects.filter(candidate_id=c)
+        s =Employer_job_Saved.objects.filter(candidate_id=c)
+        for j in job:
+            if (j in a) or (j in s):
+                job.exclude(j)
+            else:
+                continue
+
         return render(request,'home',{'jobs':job})
     else:
         return redirect('')
@@ -138,3 +147,23 @@ def ProfileView(request, pk):
 
     return render(request, 'dashboard/my-profile.html', {"form1": form1, 'form2': form2,"form3": form3, 'form4': form4})
 
+class JobApplyView(View):
+    template_name = 'dashboard/'
+
+    def get(self,request,pk,*args,**kwargs):
+        j = Employer_job.objects.get(pk=pk)
+        jq = Employer_jobquestion.objects.filter(job_id=j)
+        return render(request, self.template_name, {'jobq': jq})
+    def post(self,request,pk,*args,**kwargs):
+        pass
+
+
+def SavedJobs(request):
+    c = Candidate.objects.get(user=request.user)
+    s = Employer_job_Saved.objects.filter(candidate_id=c)
+    return render(request, 'home', {'jobs': s})
+
+def AppliedJobs(request):
+    c = Candidate.objects.get(user=request.user)
+    a = Employer_job_Applied.objects.filter(candidate_id=c)
+    return render(request, 'home', {'jobs': a})

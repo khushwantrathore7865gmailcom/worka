@@ -65,3 +65,20 @@ class Employer_job_responses(models.Model):
 class Employer_expired_job(models.Model):
     employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
     job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
+
+
+
+class Employer_job_Like(models.Model):
+    job_id = models.ForeignKey(Employer_job,on_delete=models.CASCADE)
+    candidate_id = models.ForeignKey(Candidate,on_delete=models.CASCADE)
+    liked_on = models.DateTimeField(auto_now_add=True)
+
+class Employer_job_Saved(models.Model):
+    job_id = models.ForeignKey(Employer_job,on_delete=models.CASCADE)
+    candidate_id = models.ForeignKey(Candidate,on_delete=models.CASCADE)
+    saved_on = models.DateTimeField(auto_now_add=True)
+
+class Employer_job_Applied(models.Model):
+    job_id = models.ForeignKey(Employer_job,on_delete=models.CASCADE)
+    candidate_id = models.ForeignKey(Candidate,on_delete=models.CASCADE)
+    applied_on = models.DateTimeField(auto_now_add=True)

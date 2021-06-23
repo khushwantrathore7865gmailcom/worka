@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
-from .models import Employer, Employer_profile,Employer_candidate_jobanswer
+from .models import Employer, Employer_profile, Employer_candidate_jobanswer, Employer_job, Employer_job_Applied
 from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm
 from django.views.generic import View
 from django.contrib import messages
@@ -129,6 +129,9 @@ def job_post(request):
     form2 = JobsQuestionForm(request.POST)
     return render(request, 'dashboard/addjob.html', {"form1": form1, "form2": form2})
 
-def job_Response(request):
-    response = Employer_candidate_jobanswer.objects.all()
-    return render(request,'dashboard/jobresponse.html',{'response':response})
+
+def job_Response(request, pk):
+    job = Employer_job.objects.get(pk=pk)
+    response = Employer_job_Applied.objects.filter(job_id=job)
+    return render(request, 'dashboard/jobresponse.html', {'response': response})
+

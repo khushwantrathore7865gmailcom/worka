@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 from user_custom.models import User_custom
 
-
 class Candidate(models.Model):
     user = models.OneToOneField(User_custom,null=True,on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -55,3 +54,4 @@ class Candidate_resume(models.Model):
     resume_link = models.FileField()
     coverletter_text = models.CharField(max_length=250)
     coverletter_link = models.FileField()
+
