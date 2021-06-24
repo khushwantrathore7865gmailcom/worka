@@ -2,8 +2,9 @@ from django.http import HttpResponse
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
-from .models import Candidate,Candidate_profile
-from jobseeker.forms import SignUpForm,ProfileRegisterForm,ProfileRegisterForm_edu,ProfileRegisterForm_profdetail,ProfileRegisterForm_resume
+from .models import Candidate, Candidate_profile
+from jobseeker.forms import SignUpForm, ProfileRegisterForm, ProfileRegisterForm_edu, ProfileRegisterForm_profdetail, \
+    ProfileRegisterForm_resume
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -13,7 +14,9 @@ from django.template.loader import render_to_string
 from django.contrib.auth import login
 from django.shortcuts import render, redirect
 from jobseeker.tokens import account_activation_token
-from recruiter.models import Employer_job,Employer_jobquestion,Employer_job_Applied,Employer_job_Like,Employer_job_Saved
+from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Applied, Employer_job_Like, \
+    Employer_job_Saved
+
 
 class SignUpView(View):
     form_class = SignUpForm
@@ -41,10 +44,10 @@ class SignUpView(View):
                 return HttpResponse('User with same email already exists, Please try again with different Username!!')
             else:
                 user = form.save(commit=False)
-                user.is_active = False# Deactivate account till it is confirmed
-                user.is_candidate=True
+                user.is_active = False  # Deactivate account till it is confirmed
+                user.is_candidate = True
                 user.save()
-                new_candidate = Candidate(user=user,is_email_verified=False)
+                new_candidate = Candidate(user=user, is_email_verified=False)
                 new_candidate.save()
                 current_site = get_current_site(request)
                 subject = 'Activate Your WorkAdaptar Account'
@@ -87,22 +90,24 @@ class ActivateAccount(View):
                 request, ('The confirmation link was invalid, possibly because it has already been used.'))
             return redirect('dashboard_home')
 
+
 def Home(request):
     c = Candidate.objects.get(user=request.user)
     if Candidate_profile.objects.get(user_id=c):
 
-        job= Employer_job.objects.all()
-        a =Employer_job_Applied.objects.filter(candidate_id=c)
-        s =Employer_job_Saved.objects.filter(candidate_id=c)
+        job = Employer_job.objects.all()
+        a = Employer_job_Applied.objects.filter(candidate_id=c)
+        s = Employer_job_Saved.objects.filter(candidate_id=c)
         for j in job:
             if (j in a) or (j in s):
                 job.exclude(j)
             else:
                 continue
 
-        return render(request,'home',{'jobs':job})
+        return render(request, 'home', {'jobs': job})
     else:
         return redirect('')
+
 
 # class ProfileRegister(View):
 #     form_class = ProfileRegisterForm
@@ -145,16 +150,19 @@ def ProfileView(request, pk):
     form3 = ProfileRegisterForm_profdetail()
     form4 = ProfileRegisterForm_resume()
 
-    return render(request, 'dashboard/my-profile.html', {"form1": form1, 'form2': form2,"form3": form3, 'form4': form4})
+    return render(request, 'dashboard/my-profile.html',
+                  {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4})
+
 
 class JobApplyView(View):
     template_name = 'dashboard/'
 
-    def get(self,request,pk,*args,**kwargs):
+    def get(self, request, pk, *args, **kwargs):
         j = Employer_job.objects.get(pk=pk)
         jq = Employer_jobquestion.objects.filter(job_id=j)
         return render(request, self.template_name, {'jobq': jq})
-    def post(self,request,pk,*args,**kwargs):
+
+    def post(self, request, pk, *args, **kwargs):
         pass
 
 
@@ -162,6 +170,7 @@ def SavedJobs(request):
     c = Candidate.objects.get(user=request.user)
     s = Employer_job_Saved.objects.filter(candidate_id=c)
     return render(request, 'home', {'jobs': s})
+
 
 def AppliedJobs(request):
     c = Candidate.objects.get(user=request.user)
