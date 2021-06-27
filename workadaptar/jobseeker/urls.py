@@ -3,6 +3,8 @@ from jobseeker.views import SignUpView, ActivateAccount
 from . import views
 from django.contrib.auth import views as auth_views  # import this
 urlpatterns = [
+     path('login', views.login, name='jobseeker/login'),
+    path('register', SignUpView.as_view(), name='jobseeker/register'),
     path('signup', SignUpView.as_view(), name='signup'),
     path('reset_password/', auth_views.PasswordResetView.as_view(
         template_name='account/password_reset.html'), name='reset_password'),
