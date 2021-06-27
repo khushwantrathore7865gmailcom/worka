@@ -31,7 +31,7 @@ Martial_Status = [
 class Candidate(models.Model):
     user = models.OneToOneField(User_custom, null=True, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
-    is_email_verified = models.BooleanField(default=False)
+    is_email_verified = models.BooleanField(default=True)
 
     def __str__(self):
         return f"{self.user.username}"
