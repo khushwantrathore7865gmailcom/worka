@@ -21,7 +21,9 @@ from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Ap
 class SignUpView(View):
     form_class = SignUpForm
 
+
     template_name = 'jobseeker/signup.html'
+
 
   
     def get(self, request, *args, **kwargs):
