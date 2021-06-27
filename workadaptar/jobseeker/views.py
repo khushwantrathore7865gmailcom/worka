@@ -21,14 +21,9 @@ from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Ap
 class SignUpView(View):
     form_class = SignUpForm
 
-    template_name = 'account/signup.html'
+    template_name = 'jobseeker/signup.html'
 
-    @classmethod
-    def ref(self, request, uid, *args, **kwargs):
-        form = self.form_class()
-        # link = request.GET.get('ref=', None)
-        return render(request, self.template_name, {'form': form, 'uid': uid})
-
+  
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         print(User_custom.objects.all())
@@ -89,6 +84,11 @@ class ActivateAccount(View):
             messages.warning(
                 request, ('The confirmation link was invalid, possibly because it has already been used.'))
             return redirect('dashboard_home')
+
+def index(request):
+    return render(request, 'index.html')
+def login(request):
+    return render(request, 'jobseeker/login.html')
 
 
 def Home(request):
