@@ -20,12 +20,6 @@ class SignUpView(View):
 
     template_name = 'account/signup.html'
 
-    @classmethod
-    def ref(self, request, uid, *args, **kwargs):
-        form = self.form_class()
-        # link = request.GET.get('ref=', None)
-        return render(request, self.template_name, {'form': form, 'uid': uid})
-
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         print(User_custom.objects.all())
@@ -91,7 +85,7 @@ class ActivateAccount(View):
 def Home(request):
     c = Employer.objects.get(user=request.user)
     if Employer_profile.objects.get(user_id=c):
-        pass
+        pass#add posted job by employer
     else:
         return redirect('')
 

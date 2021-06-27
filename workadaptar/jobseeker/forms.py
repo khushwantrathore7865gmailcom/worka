@@ -33,7 +33,9 @@ class ProfileRegisterForm(forms.ModelForm):
     class Meta:
         model = Candidate_profile
         fields = [
-            'birth_day',
+            'birth_date',
+            'birth_month',
+            'birth_year',
             'gender',
             'state',
             'marital_status',
@@ -47,7 +49,11 @@ class ProfileRegisterForm_edu(forms.ModelForm):
         fields = [
             'institute_name',
             'start_date',
+            'start_month',
+            'start_year',
             'end_date',
+            'end_month',
+            'end_year',
             'course_type',
             'degree',
         ]
@@ -71,5 +77,9 @@ class ProfileRegisterForm_profdetail(forms.ModelForm):
             'organization',
             'salary',
             'start_date',
+            'start_month',
+            'start_year',
             'end_date',
+            'end_month',
+            'end_year',
         ]
