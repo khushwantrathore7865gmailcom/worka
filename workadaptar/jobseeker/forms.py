@@ -12,7 +12,6 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User_custom
         fields = [
-            'username',
             'first_name',
             'last_name',
             'email',
@@ -22,9 +21,9 @@ class SignUpForm(UserCreationForm):
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
-        username = self.cleaned_data.get('username')
+        # username = self.cleaned_data.get('username')
 
-        if email and User_custom.objects.filter(email=email).exclude(username=username).exists():
+        if email and User_custom.objects.filter(email=email).exists():
             raise forms.ValidationError(u'Email addresses must be unique.')
         return email
 

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jobseeker',
     'recruiter',
-    'user_custom'
+    'user_custom',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -138,12 +139,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user_custom.User_custom'
 
 EMAIL_BACKEND='django_smtp_ssl.SSLEmailBackend'
-EMAIL_HOST="smtp.zoho.com.au"
-EMAIL_PORT=465
-EMAIL_USE_SSL=True
-EMAIL_HOST_USER="mail@fintop.com.au"
-DEFAULT_FROM_EMAIL="Fintop <mail@fintop.com.au>"
-EMAIL_HOST_PASSWORD="HHgcLSz4Ws9E"
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT= 465
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL="workadaptar@gmail.com"
+EMAIL_HOST_PASSWORD="Wor12345@"
 DJANGO_TABLES2_TEMPLATE = "django_tables2/semantic.html"
 RECAPTCHA_SITE_KEY = "6LdI20kaAAAAAGwmzHCfyonzLr5blCL0LQGgmOfJ"
 RECAPTCHA_SECRET_KEY = "6LdI20kaAAAAALHuggfJT_ly4WtvT0CGZxaQLYWF"

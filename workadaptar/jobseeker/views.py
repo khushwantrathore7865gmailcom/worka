@@ -11,7 +11,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
-from django.contrib.auth import login
+from django.contrib.auth import login,authenticate
 from django.shortcuts import render, redirect
 from jobseeker.tokens import account_activation_token
 from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Applied, Employer_job_Like, \
@@ -21,11 +21,8 @@ from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Ap
 class SignUpView(View):
     form_class = SignUpForm
 
-
     template_name = 'jobseeker/signup.html'
 
-
-  
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         print(User_custom.objects.all())
@@ -41,10 +38,11 @@ class SignUpView(View):
                 return HttpResponse('User with same email already exists, Please try again with different Username!!')
             else:
                 user = form.save(commit=False)
-                user.is_active = False  # Deactivate account till it is confirmed
+                user.username = user.email
+                user.is_active = True  # change this to False after testing
                 user.is_candidate = True
                 user.save()
-                new_candidate = Candidate(user=user, is_email_verified=False)
+                new_candidate = Candidate(user=user, is_email_verified=False)  # change is email to False after testing
                 new_candidate.save()
                 current_site = get_current_site(request)
                 subject = 'Activate Your WorkAdaptar Account'
@@ -81,16 +79,38 @@ class ActivateAccount(View):
             user.save()
             login(request, user)
             messages.success(request, ('Your account have been confirmed.'))
-            return redirect('dashboard_home')
+            return redirect('home')
         else:
             messages.warning(
                 request, ('The confirmation link was invalid, possibly because it has already been used.'))
-            return redirect('dashboard_home')
+            return redirect('home')
+
 
 def index(request):
     return render(request, 'index.html')
-def login(request):
-    return render(request, 'jobseeker/login.html')
+
+
+def login_candidate(request):
+
+    if request.user.is_authenticated and request.user.is_candidate:
+        print(request.user)
+        return redirect('home')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('pass')
+            print(username)
+            print(password)
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None and user.is_candidate:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.info(request, 'Username OR password is incorrect')
+
+        context = {}
+        return render(request, 'jobseeker/login.html', context)
 
 
 def Home(request):
