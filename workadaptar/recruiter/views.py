@@ -10,7 +10,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from .tokens import account_activation_token
 
@@ -18,7 +18,7 @@ from .tokens import account_activation_token
 class SignUpView(View):
     form_class = SignUpForm
 
-    template_name = 'account/signup.html'
+    template_name = 'employer/signup.html'
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
@@ -35,6 +35,7 @@ class SignUpView(View):
                 return HttpResponse('User with same email already exists, Please try again with different Username!!')
             else:
                 user = form.save(commit=False)
+                user.username = user.email
                 user.is_active = False  # Deactivate account till it is confirmed
                 user.is_employeer = True
                 user.save()
@@ -46,9 +47,9 @@ class SignUpView(View):
                     'user': user,
                     'domain': current_site.domain,
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token': account_activation_token.make_token(user),
+                    'token': account_activation_token.make_token(new_employe),
                 })
-                user.email_user(subject, message)
+                # user.email_user(subject, message)
                 messages.success(
                     request, ('Please check your mail for complete registration.'))
                 # return redirect('login')
@@ -81,11 +82,33 @@ class ActivateAccount(View):
                 request, ('The confirmation link was invalid, possibly because it has already been used.'))
             return redirect('dashboard_home')
 
+def login_employer(request):
+
+    if request.user.is_authenticated and request.user.is_employeer:
+        print(request.user)
+        return redirect('employer_home')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('pass')
+            print(username)
+            print(password)
+            user = authenticate(request, username=username, password=password)
+            print(user)
+            if user is not None and user.is_employeer:
+                login(request, user)
+                return redirect('employer_home')
+            else:
+                messages.info(request, 'Username OR password is incorrect')
+
+        context = {}
+        return render(request, 'employer/login.html', context)
 
 def Home(request):
     c = Employer.objects.get(user=request.user)
     if Employer_profile.objects.get(user_id=c):
-        pass#add posted job by employer
+        context = {}
+        return render(request, 'employer/job-post.html', context)
     else:
         return redirect('')
 

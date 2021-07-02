@@ -12,7 +12,6 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User_custom
         fields = [
-            'username',
             'first_name',
             'last_name',
             'email',
@@ -49,7 +48,7 @@ class JobPostForm(forms.ModelForm):
             'job_location',
             'job_experience',
             'job_savelater',
-            'created_on',
+
         ]
 class JobsQuestionForm(forms.ModelForm):
     class Meta:

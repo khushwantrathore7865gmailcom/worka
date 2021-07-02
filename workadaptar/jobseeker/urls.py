@@ -1,13 +1,14 @@
 from django.urls import include, path
-from jobseeker.views import SignUpView, ActivateAccount
+from jobseeker.views import SignUpView, ActivateAccount, jobseeker_Home
 from . import views
 from django.contrib.auth import views as auth_views  # import this
 
 urlpatterns = [
+    path('', jobseeker_Home, name='jobseeker_home'),
     path('login', views.login_candidate, name='jobseeker/login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='jobseeker/login'), name='logout'),
-    path('register', SignUpView.as_view(), name='jobseeker/register'),
-    path('signup', SignUpView.as_view(), name='signup'),
+    path('signup', SignUpView.as_view(), name='jobseeker/register'),
+
     path('reset_password/', auth_views.PasswordResetView.as_view(
         template_name='account/password_reset.html'), name='reset_password'),
     path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(

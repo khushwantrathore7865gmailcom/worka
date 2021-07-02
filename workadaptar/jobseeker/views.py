@@ -94,18 +94,18 @@ def login_candidate(request):
 
     if request.user.is_authenticated and request.user.is_candidate:
         print(request.user)
-        return redirect('home')
+        return redirect('jobseeker_home')
     else:
         if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('pass')
-            print(username)
-            print(password)
+            # print(username)
+            # print(password)
             user = authenticate(request, username=username, password=password)
 
             if user is not None and user.is_candidate:
                 login(request, user)
-                return redirect('home')
+                return redirect('jobseeker_home')
             else:
                 messages.info(request, 'Username OR password is incorrect')
 
@@ -113,7 +113,7 @@ def login_candidate(request):
         return render(request, 'jobseeker/login.html', context)
 
 
-def Home(request):
+def jobseeker_Home(request):
     c = Candidate.objects.get(user=request.user)
     if Candidate_profile.objects.get(user_id=c):
 
