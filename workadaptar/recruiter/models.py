@@ -37,11 +37,21 @@ class Employer_job(models.Model):
     employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
     job_title = models.CharField(max_length=100)
     job_description = models.CharField(max_length=1250)
-    employment_type = models.CharField(choices=Emply_Type, max_length=25, null=True, blank=True)  # parttime fulltime internship
+    employment_type = models.CharField(choices=Emply_Type, max_length=25, null=True,
+                                       blank=True)  # parttime fulltime internship
     job_location = models.CharField(max_length=50)
     job_experience = models.CharField(max_length=20)
     job_savelater = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
+
+    def get_applied_no(self):
+        print(self)
+        E = Employer_job_Applied.objects.filter(job_id=self)
+        print(E)
+        if E is None:
+            return 0
+        else:
+            return E.count()
 
 
 class Employer_jobquestion(models.Model):

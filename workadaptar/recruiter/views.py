@@ -107,7 +107,8 @@ def login_employer(request):
 def Home(request):
     c = Employer.objects.get(user=request.user)
     if Employer_profile.objects.get(employer=c):
-        context = {}
+        job = Employer_job.objects.filter(employer_id = c)
+        context = {'jobs':job}
         return render(request, 'employer/job-post.html', context)
     else:
         return redirect('')

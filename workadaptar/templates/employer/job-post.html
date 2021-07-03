@@ -97,6 +97,9 @@
     <li><a data-toggle="tab" href="#menu2">Saved job</a></li>
   </ul>
 
+
+
+
   <div class="tab-content">
     <div id="home" class="tab-pane fade">
       <h3>Loream Ipsum</h3>
@@ -114,34 +117,38 @@
 					<th>Action</th>
 				</tr>
 			</thead>
-			
+			{% for job in jobs %}
+			{% if job.job_savelater %}
+			{% else %}
 			<tbody>
 				<tr>
-					<td><input type="checkbox"><label></label> <span>Improve Landing Page Design</span></td>
-					<td>vartika-2540</td>
-					<td>22 - 4 - 2021</td>
-					<td>0</td>
+					<td><input type="checkbox"><label></label> <span>{{ job.job_title }}</span></td>
+					<td></td>
+					<td>{{ job.created_on }}</td>
+					<td>{{ job.get_applied_no }}</td>
 					<td><span>...</span></td>
 				</tr>
-				
-				<tr>
-					<td><input type="checkbox"><label></label> <span>Seniour Developer needed.</span></td>
-					<td>Nishant -2540</td>
-					<td>22 - 4 - 2021</td>
-					<td>265</td>
-					<td><span>...</span></td>
-				</tr>
-				
-				<tr>
-					<td><input type="checkbox"><label></label> <span>Expert webflow developer - US based</span></td>
-					<td>Vais - 2021</td>
-					<td>22 - 4 - 2021</td>
-					<td>475</td>
-					<td><span>...</span></td>
-				</tr>
+<!--				-->
+<!--				<tr>-->
+<!--					<td><input type="checkbox"><label></label> <span>Seniour Developer needed.</span></td>-->
+<!--					<td>Nishant -2540</td>-->
+<!--					<td>22 - 4 - 2021</td>-->
+<!--					<td>265</td>-->
+<!--					<td><span>...</span></td>-->
+<!--				</tr>-->
+<!--				-->
+<!--				<tr>-->
+<!--					<td><input type="checkbox"><label></label> <span>Expert webflow developer - US based</span></td>-->
+<!--					<td>Vais - 2021</td>-->
+<!--					<td>22 - 4 - 2021</td>-->
+<!--					<td>475</td>-->
+<!--					<td><span>...</span></td>-->
+<!--				</tr>-->
 				
 				
 			</tbody>
+			{% endif %}
+			{% endfor %}
 		</table>
 	  </div>
 	  
