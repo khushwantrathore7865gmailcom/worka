@@ -36,7 +36,7 @@ class SignUpView(View):
             else:
                 user = form.save(commit=False)
                 user.username = user.email
-                user.is_active = False  # Deactivate account till it is confirmed
+                user.is_active = True  # change this to False after testing
                 user.is_employeer = True
                 user.save()
                 new_employe = Employer(user=user, is_email_verified=False)
