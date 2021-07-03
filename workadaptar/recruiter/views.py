@@ -106,7 +106,7 @@ def login_employer(request):
 
 def Home(request):
     c = Employer.objects.get(user=request.user)
-    if Employer_profile.objects.get(user_id=c):
+    if Employer_profile.objects.get(employer=c):
         context = {}
         return render(request, 'employer/job-post.html', context)
     else:
