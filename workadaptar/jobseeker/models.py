@@ -73,6 +73,7 @@ class Candidate_profdetail(models.Model):
     end_date = models.IntegerField(null=True)
     end_month = models.IntegerField(null=True)
     end_year = models.IntegerField(null=True)
+    is_current = models.BooleanField(default=False)
 
 
 class Candidate_resume(models.Model):

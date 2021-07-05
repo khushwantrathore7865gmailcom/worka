@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
-from .models import Candidate, Candidate_profile
+from .models import Candidate, Candidate_profile, Candidate_edu, Candidate_skills, Candidate_profdetail, \
+    Candidate_resume
 from jobseeker.forms import SignUpForm, ProfileRegisterForm, ProfileRegisterForm_edu, ProfileRegisterForm_profdetail, \
     ProfileRegisterForm_resume
 from django.views.generic import View
@@ -11,7 +12,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from jobseeker.tokens import account_activation_token
 from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Applied, Employer_job_Like, \
@@ -91,7 +92,6 @@ def index(request):
 
 
 def login_candidate(request):
-
     if request.user.is_authenticated and request.user.is_candidate:
         print(request.user)
         return redirect('jobseeker_home')
@@ -128,7 +128,7 @@ def jobseeker_Home(request):
 
         return render(request, 'home', {'jobs': job})
     else:
-        return redirect('')
+        return redirect('create_profile')
 
 
 # class ProfileRegister(View):
@@ -145,10 +145,26 @@ def jobseeker_Home(request):
 #             f.save()
 #
 #         return redirect('dashboard_home')
+def ProfileView(request):
+    u = request.user
+    c = Candidate.objects.get(user=u)
+    profile = Candidate_profile.objects.get(user_id=c)
+    edu = Candidate_edu.objects.filter(user_id=c)
+    professional = Candidate_profdetail.objects.filter(user_id=c)
+    # resume = Candidate_resume.objects.get(user_id=c)
+    skills = Candidate_skills.objects.filter(user_id=c)
+    return render(request, 'jobseeker/skills.html', {
+        "user": u,
+        "profile": profile,
+        "edu": edu,
+        "professional": professional,
+        # "resume": resume,
+        "skills": skills,
+    })
 
 
 # @login_required(login_url='/login/')
-def ProfileView(request, pk):
+def ProfileEdit(request, pk):
     profile = Candidate.objects.get(user=User_custom.objects.get(id=pk))
     if request.method == 'POST':
         form1 = ProfileRegisterForm(request.POST)
@@ -172,7 +188,7 @@ def ProfileView(request, pk):
     form3 = ProfileRegisterForm_profdetail()
     form4 = ProfileRegisterForm_resume()
 
-    return render(request, 'dashboard/my-profile.html',
+    return render(request, 'jobseeker/skills.html',
                   {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4})
 
 

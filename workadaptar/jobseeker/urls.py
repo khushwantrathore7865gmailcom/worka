@@ -1,5 +1,5 @@
 from django.urls import include, path
-from jobseeker.views import SignUpView, ActivateAccount, jobseeker_Home
+from jobseeker.views import SignUpView, ActivateAccount, jobseeker_Home, ProfileView
 from . import views
 from django.contrib.auth import views as auth_views  # import this
 
@@ -17,7 +17,7 @@ urlpatterns = [
         template_name="account/password_reset_confirm.html"), name='password_reset_confirm'),
     path('account/reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='account/password_reset_complete.html'), name='password_reset_complete'),
-
+    path('viewprofile/', ProfileView, name='create_profile'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
 
 ]

@@ -1,0 +1,270 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  
+<!-- Mirrored from grocbees.com/job-portal/skills.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 03:56:35 GMT -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/style_skills.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    
+  </head>
+  <body class="skills-page">
+    
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-12">
+					<div class="top-navbar">
+						<nav class="navbar navbar-expand-lg ">
+  <a class="navbar-brand" href="#">LOGO</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav class="navbar mr-auto">
+  <form class="form-inline">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+      </div>
+      <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+  </form>
+</nav>
+	
+	
+	<ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Applied</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="#">Saved</a>
+      </li>
+	  <li class="nav-item active">
+        <a class="nav-link" href="#">Resume</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="#"><i class="fa fa-home" aria-hidden="true"></i></a>
+      </li>
+	  
+	  <li class="nav-item">
+        <a class="nav-link" href="#"><img src="images/job-portal/78a389427595e07efd8a3870fe50c28c.jpg"></a>
+      </li>
+	  
+	 </ul> 
+    
+  </div>
+</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+	</header>
+	
+<section class="job-portal">
+	<div class="container">
+		<div class="row">
+		
+			<div class="col-md-3 col-12">
+				<div class="job-left">
+						<img src="images/job-portal/41cbd7003237155f2c4d59e4cfedabc2.jpg">
+						<div class="job-left-desc">
+							<h2>{{user.first_name}} {{user.last_name}}</h2>
+							{% for p in professional %}
+<!--								<h4>UX/ UI Designer</h4>-->
+							{% if p.is_current %}
+								<h5>Current Compant</h5>
+								<h6>{{p.organization}}</h6>
+								<h5>Current Job position</h5>
+								<h6>{{p.designation}}</h6>
+								<h5>Working from </h5>
+								<h6>{{p.start_year}}</h6>
+							{% endif %}
+							{% endfor %}
+								<div class="download_btn">
+									<button><img src="images/download3.png">Download Resume</button>
+								</div>
+							</div>
+
+				</div>
+			</div>
+			
+			<div class="col-md-9 col-12">
+				<div class="row">
+						<div class="col-md-7 col-12">
+							<div class="skills-left">
+								<h3>Skills <img src="images/skills-btn.png"></h3>
+								<div class="skill-list">
+									<div class="skill-list-left">
+										<h3>Skills</h3>
+												{% for s in skills %}
+										<div>{{s.skill}}</div>
+										{% endfor %}
+									</div>
+									
+									<div class="skill-list-right">
+										<h3>Rating</h3>
+										{% for s in skills %}
+										<div>{{s.rating}}</div>
+										{% endfor %}
+									</div>
+									
+								</div>
+								
+								<h3>Education <img src="images/skills-btn.png"></h3>
+								<div class="skill-list second">
+									<div class="skill-list-left">
+												{% for s in edu %}
+												<div>{{s.institute_name}}</div>
+												{% endfor %}
+									</div>
+									
+									<div class="skill-list-right">
+														
+												{% for s in edu %}
+												<div>{{s.start_year}}-{{s.end_year}}</div>
+												{% endfor %}
+									</div>
+									
+								</div>
+								
+								
+								
+							</div>
+						</div>
+						
+						
+						<div class="col-md-5 col-12">
+							<div class="skills-right">
+							  <h3>Contact Details</h3>
+								<p><img src="images/mail.png"> <span><b>Email ID</b> : {{user.email}}</span></p>
+<!--								<p><img src="images/phone.png"> <span><b>Phone no.</b> : (252) 555-0126</span></p>-->
+								<p><img src="images/location.png"> <span><b>Address</b> : 1901 Thornridge Cir. Shiloh, Hawaii 81063</span></p>
+								
+								<hr>
+								<div class="contact-btn">
+									<button>Shorlist </button>
+									<button>Save for later</button>
+									<button><span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Report user</span></button>
+								
+								</div>
+							
+							</div>
+							
+						</div>
+						
+				</div>
+					
+					<div class="cont-det">
+						<h3>Contact Details</h3>
+						<p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. </p>
+						
+						<div class="whiteBox">
+								<label class="uploadImg">
+									<input type="file" name="propertyImage" id="file">
+								
+								<div class="box">
+									<span><img src="images/atttachment.png">Attached Resume</span>
+									<p>Amet minim mollit non deserun</p>
+									
+
+								</div>
+								</label>
+								
+							</div>
+
+					</div>
+					
+				<div class="employment">
+						<h3>Employment</h3>
+					{% for s in professional %}
+
+
+							<h4>{{s.designation}} <img src="images/skills-btn.png"></h4>
+							<p class="small">{{s.organization}}</p>
+					{% if p.is_current %}
+					<p class="small">{{s.start_month}} {{s.start_year}} to present</p>
+					{% else %}
+					<p class="small">{{s.start_month}} {{s.start_year}} to {{s.end_month}} {{s.end_year}}</p>
+					{% endif %}
+
+	<p>Available to join in 1 Months</p>
+<p>Created and automated build and deployment process for the application re-engineering setup for better user
+experience, and leading up to building a continuous integration system for all our products. Experience with container based deployments using Docker, working with Docker images... <span>Read More</span></p>
+	<p class="skills active"><span>Top 5 Key Skills:</span> {% for sk in skills %}{{sk.skill}} {% endfor %}</p>
+
+<hr>
+{% endfor %}
+<!--<h4>DevOps Engineer <img src="images/skills-btn.png"></h4>-->
+<!--<p class="small">Engagedly Software India Private Limited</p>-->
+<!--<p class="small">Aug 2020 to Present (11 months)</p>-->
+<!--<p>Available to join in 1 Months</p>-->
+<!--<p>Created and automated build and deployment process for the application re-engineering setup for better user-->
+<!--experience, and leading up to building a continuous integration system for all our products. Experience with container based deployments using Docker, working with Docker images... <span>Read More</span></p>-->
+<!--<p class="skills">Top 5 Key Skills:  AWS ECS,Docker,Kubernetes,Jfrog Pipelines,Jenkins</p>-->
+
+<!--<hr>-->
+
+
+<!--<h4>DevOps Engineer <img src="images/skills-btn.png"></h4>-->
+<!--<p class="small">Engagedly Software India Private Limited</p>-->
+<!--<p class="small">Aug 2020 to Present (11 months)</p>-->
+<!--<p>Available to join in 1 Months</p>-->
+<!--<p>Created and automated build and deployment process for the application re-engineering setup for better user-->
+<!--experience, and leading up to building a continuous integration system for all our products. Experience with container based deployments using Docker, working with Docker images... <span>Read More</span></p>-->
+<!--<p class="skills">Top 5 Key Skills:  AWS ECS,Docker,Kubernetes,Jfrog Pipelines,Jenkins</p>-->
+
+<!--<hr>-->
+		</div>
+
+<div class="employment-section">
+	<div class="employment-left">
+		<h5>Education</h5>
+		{% for s in edu %}
+		<p>{{s.institute_name}} <span><img src="images/skills-btn.png"></span></p>
+<!--		<p>Arizona State University <span><img src="images/skills-btn.png"></span></p>-->
+<!--		<span class="tech">Visveswaraiah Technological University (VTU) 2016 (Full Time)</span>-->
+		{% endfor %}
+	</div>
+	
+	<div class="employment-right">
+		<h5>Education</h5>
+		{% for s in professional %}
+		<p>{{s.designation}} </p>
+<!--		<p>Back-end development <span>Front-End developer</span></p>-->
+<!--		<p>Application development <span>UX/ UI Designer</span></p>-->
+<!--		<p>UX/ UI Designer</p>-->
+		{% endfor %}
+	</div>
+	
+	
+</div>
+				
+</div>
+			
+</div>
+	</div>
+</section>
+
+<footer>
+<p>Footer section</p>
+</footer>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+
+<!-- Mirrored from grocbees.com/job-portal/skills.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 03:56:40 GMT -->
+</html>
