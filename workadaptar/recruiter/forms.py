@@ -47,7 +47,7 @@ class JobPostForm(forms.ModelForm):
             'employment_type',
             'job_location',
             'job_experience',
-            'job_savelater',
+
 
         ]
 class JobsQuestionForm(forms.ModelForm):

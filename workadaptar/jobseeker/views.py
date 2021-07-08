@@ -16,7 +16,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from jobseeker.tokens import account_activation_token
 from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Applied, Employer_job_Like, \
-    Employer_job_Saved
+    Employer_job_Saved, Employer_candidate_jobanswer
 
 
 class SignUpView(View):
@@ -114,21 +114,81 @@ def login_candidate(request):
 
 
 def jobseeker_Home(request):
+    if request.method == 'POST':
+        print(request.POST)
+        pk = request.POST.get('pk')
+        print(pk)
+        c = Candidate.objects.get(user=request.user)
+        job = Employer_job.objects.get(pk=pk)
+        questions = Employer_jobquestion.objects.filter(job_id=job)
+        for q in questions:
+            print(request.POST.get(q.question))
+
+            get_text = request.POST.get(q.question)
+            print(get_text)
+            Employer_candidate_jobanswer.objects.create(candidate_id=c, question_id=q, answer=get_text).save()
+        Employer_job_Applied.objects.create(candidate_id=c, job_id=job).save()
+
+    job_ques = []
+    relevant_jobs = []
+    common = []
+    job_skills = []
     c = Candidate.objects.get(user=request.user)
     if Candidate_profile.objects.get(user_id=c):
+        skills = Candidate_skills.objects.filter(user_id=c)
 
-        job = Employer_job.objects.all()
-        a = Employer_job_Applied.objects.filter(candidate_id=c)
-        s = Employer_job_Saved.objects.filter(candidate_id=c)
-        for j in job:
-            if (j in a) or (j in s):
-                job.exclude(j)
-            else:
-                continue
+        my_sk = []
+        j = 0
+        for i in skills:
+            my_sk.insert(j, i.skill.lower())
+            j = j + 1
+        jobs = Employer_job.objects.all()
 
-        return render(request, 'home', {'jobs': job})
+        for job in jobs:
+            skills = []
+            sk = str(job.skill).split(",")
+            for i in sk:
+                skills.append(i.strip().lower())
+            common_skills = list(set(my_sk) & set(skills))
+            if len(common_skills) != 0:
+                try:
+                    userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
+                    # print(userS.job_id)
+                except Employer_job_Saved.DoesNotExist:
+                    userS = None
+                try:
+                    userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
+                    # print(userA.job_id)
+                except Employer_job_Applied.DoesNotExist:
+                    userA = None
+
+                if userA:
+                    # print(userA)
+                    continue
+                if userS:
+                    # print(userS)
+                    continue
+                relevant_jobs.append(job)
+                common.append(len(common_skills))
+                job_skills.append(len(skills))
+                job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
+
+                print(relevant_jobs)
+
+        objects = zip(relevant_jobs, common, job_skills, job_ques)
+
+        return render(request, 'jobseeker/home.html', {'jobs': objects})
     else:
         return redirect('create_profile')
+
+
+def save_later(request, pk):
+    c = Candidate.objects.get(user=request.user)
+    job = Employer_job.objects.get(pk=pk)
+    # print(c)
+    # print(job)
+    Employer_job_Saved.objects.create(job_id=job, candidate_id=c).save()
+    return redirect('jobseeker_home')
 
 
 # class ProfileRegister(View):
@@ -192,25 +252,88 @@ def ProfileEdit(request, pk):
                   {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4})
 
 
-class JobApplyView(View):
-    template_name = 'dashboard/'
-
-    def get(self, request, pk, *args, **kwargs):
-        j = Employer_job.objects.get(pk=pk)
-        jq = Employer_jobquestion.objects.filter(job_id=j)
-        return render(request, self.template_name, {'jobq': jq})
-
-    def post(self, request, pk, *args, **kwargs):
-        pass
-
-
 def SavedJobs(request):
+    if request.method == 'POST':
+        print(request.POST)
+        pk = request.POST.get('pk')
+        print(pk)
+        c = Candidate.objects.get(user=request.user)
+        job = Employer_job.objects.get(pk=pk)
+        questions = Employer_jobquestion.objects.filter(job_id=job)
+        for q in questions:
+            print(request.POST.get(q.question))
+
+            get_text = request.POST.get(q.question)
+            print(get_text)
+            Employer_candidate_jobanswer.objects.create(candidate_id=c, question_id=q, answer=get_text).save()
+        Employer_job_Applied.objects.create(candidate_id=c, job_id=job).save()
+
+    job_ques = []
+    relevant_jobs = []
+    common = []
+    job_skills = []
     c = Candidate.objects.get(user=request.user)
-    s = Employer_job_Saved.objects.filter(candidate_id=c)
-    return render(request, 'home', {'jobs': s})
+    if Candidate_profile.objects.get(user_id=c):
+        skills = Candidate_skills.objects.filter(user_id=c)
+
+        my_sk = []
+        j = 0
+        for i in skills:
+            my_sk.insert(j, i.skill.lower())
+            j = j + 1
+        jobs = Employer_job.objects.all()
+
+        for job in jobs:
+            skills = []
+            sk = str(job.skill).split(",")
+            for i in sk:
+                skills.append(i.strip().lower())
+            common_skills = list(set(my_sk) & set(skills))
+            if len(common_skills) != 0:
+                try:
+                    userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
+                    # print(userS.job_id)
+                except Employer_job_Saved.DoesNotExist:
+                    userS = None
+                # try:
+                #     userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
+                #     # print(userA.job_id)
+                # except Employer_job_Applied.DoesNotExist:
+                #     userA = None
+
+                # if userA:
+                #     # print(userA)
+                #     continue
+                if userS:
+                    # print(userS)
+                    # continue
+                    relevant_jobs.append(job)
+                    common.append(len(common_skills))
+                    job_skills.append(len(skills))
+                    job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
+
+                print(relevant_jobs)
+
+        objects = zip(relevant_jobs, common, job_skills, job_ques)
+    return render(request, 'jobseeker/savedjobs.html', {'jobs': objects})
 
 
 def AppliedJobs(request):
     c = Candidate.objects.get(user=request.user)
     a = Employer_job_Applied.objects.filter(candidate_id=c)
-    return render(request, 'home', {'jobs': a})
+    return render(request, 'jobseeker/applied.html', {'jobs': a})
+
+
+def remove_applied(request, pk):
+    Employer_job_Applied.objects.get(pk=pk).delete()
+
+    return redirect('AppliedJobs')
+def remove_saved(request, pk):
+    c = Candidate.objects.get(user=request.user)
+    job = Employer_job.objects.get(pk=pk)
+    savej = Employer_job_Saved.objects.filter(job_id = job)
+    for s in savej:
+        if s.candidate_id == c:
+            s.delete()
+
+    return redirect('SavedJobs')

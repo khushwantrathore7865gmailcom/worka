@@ -39,9 +39,10 @@ class Employer_job(models.Model):
     job_description = models.CharField(max_length=1250)
     employment_type = models.CharField(choices=Emply_Type, max_length=25, null=True,
                                        blank=True)  # parttime fulltime internship
+    skill = models.CharField(max_length=100,null=True)
     job_location = models.CharField(max_length=50)
     job_experience = models.CharField(max_length=20)
-    job_savelater = models.BooleanField(default=False)
+
     created_on = models.DateTimeField(auto_now_add=True)
 
     def get_applied_no(self):
@@ -53,16 +54,15 @@ class Employer_job(models.Model):
         else:
             return E.count()
 
-
 class Employer_jobquestion(models.Model):
-    employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    # employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
     job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
     question = models.CharField(max_length=100)
 
 
 class Employer_candidate_jobanswer(models.Model):
     candidate_id = models.ForeignKey(Candidate, models.CASCADE)
-    employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    # employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
     question_id = models.ForeignKey(Employer_jobquestion, on_delete=models.CASCADE)
     answer = models.CharField(max_length=1250)
 
