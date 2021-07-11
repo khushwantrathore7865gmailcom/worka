@@ -9,6 +9,7 @@ class User_custom(AbstractUser):
     confirmpass = models.CharField(max_length=32, blank=True)
     is_candidate = models.BooleanField(default=False)
     is_employeer = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self):
         return self.username

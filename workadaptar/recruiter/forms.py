@@ -50,6 +50,7 @@ class JobPostForm(forms.ModelForm):
 
 
         ]
+
 class JobsQuestionForm(forms.ModelForm):
     class Meta:
         model = Employer_jobquestion

@@ -111,40 +111,24 @@
 			<thead>
 				<tr>
 					<th>Posted Job</th>
-					<th>Share by</th>
+<!--					<th>Share by</th>-->
 					<th>Shared date</th>
 					<th>Candinate applied </th>
 					<th>Action</th>
 				</tr>
 			</thead>
 			{% for job in jobs %}
-			{% if job.job_savelater %}
+			{% if job.is_save_later %}
 			{% else %}
 			<tbody>
 				<tr>
-					<td><input type="checkbox"><label></label> <span>{{ job.job_title }}</span></td>
-					<td></td>
+					<td><input type="checkbox"><label></label> <a href="jobdetail/{{ job.pk }}"><span>{{ job.job_title }}</span></a></td>
+<!--					<td></td>-->
 					<td>{{ job.created_on }}</td>
 					<td>{{ job.get_applied_no }}</td>
-					<td><span>...</span></td>
+					<td><span><a class="btn btn-primary" href="editjob/{{ job.pk }}" role="button">Edit</a>
+					<a class="btn btn-primary" href="deletejob/{{ job.pk }}" role="button">Delete</a></span></td>
 				</tr>
-<!--				-->
-<!--				<tr>-->
-<!--					<td><input type="checkbox"><label></label> <span>Seniour Developer needed.</span></td>-->
-<!--					<td>Nishant -2540</td>-->
-<!--					<td>22 - 4 - 2021</td>-->
-<!--					<td>265</td>-->
-<!--					<td><span>...</span></td>-->
-<!--				</tr>-->
-<!--				-->
-<!--				<tr>-->
-<!--					<td><input type="checkbox"><label></label> <span>Expert webflow developer - US based</span></td>-->
-<!--					<td>Vais - 2021</td>-->
-<!--					<td>22 - 4 - 2021</td>-->
-<!--					<td>475</td>-->
-<!--					<td><span>...</span></td>-->
-<!--				</tr>-->
-				
 				
 			</tbody>
 			{% endif %}
@@ -154,10 +138,35 @@
 	  
     </div>
     <div id="menu2" class="tab-pane fade">
-      <h3>Loream Ipsum</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-    </div>
-    
+      <div class="table-main">
+		<table class="w-100">
+			<thead>
+				<tr>
+					<th>Posted Job</th>
+<!--					<th>Share by</th>-->
+					<th>Shared date</th>
+					<th>Candinate applied </th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			{% for job in jobs %}
+			{% if job.is_save_later %}
+
+			<tbody>
+				<tr>
+					<td><input type="checkbox"><label></label> <a href="jobdetail/{{ job.pk }}"><span>{{ job.job_title }}</span></a></td>
+<!--					<td></td>-->
+					<td>{{ job.created_on }}</td>
+					<td>{{ job.get_applied_no }}</td>
+					<td><span><a class="btn btn-primary" href="editjob/{{ job.pk }}" role="button">Edit</a>
+					<a class="btn btn-primary" href="deletejob/{{ job.pk }}" role="button">Delete</a></span></td>
+				</tr>
+
+			</tbody>
+			{% endif %}
+			{% endfor %}
+		</table>
+	  </div>
   </div>
   
 				</div>

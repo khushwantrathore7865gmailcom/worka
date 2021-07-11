@@ -39,9 +39,11 @@ class Employer_job(models.Model):
     job_description = models.CharField(max_length=1250)
     employment_type = models.CharField(choices=Emply_Type, max_length=25, null=True,
                                        blank=True)  # parttime fulltime internship
+
     skill = models.CharField(max_length=100,null=True)
     job_location = models.CharField(max_length=50)
     job_experience = models.CharField(max_length=20)
+    is_save_later = models.BooleanField(default=False)
 
     created_on = models.DateTimeField(auto_now_add=True)
 
@@ -88,3 +90,5 @@ class Employer_job_Applied(models.Model):
     job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
     candidate_id = models.ForeignKey(Candidate, on_delete=models.CASCADE)
     applied_on = models.DateTimeField(auto_now_add=True)
+    is_shortlisted = models.BooleanField(default=False)
+    is_disqualified = models.BooleanField(default=False)

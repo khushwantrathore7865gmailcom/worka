@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>title </title>
+  </head>
+  <body>
+  <h1>disqualified view</h1>
+    <h3>{{job.job_title}}</h3>
+
+    {% for c in candidate %}
+    {% if c.6.is_shortlisted %}
+
+    {% elif c.6.is_disqualified %}
+     <div class="card">
+  <div class="card-body">
+    <div>{{c.0.user_id}}</div>
+    <div>{{c.5.first_name}} {{c.5.last_name}}</div>
+    <div>{{c.0.birth_date}}/{{c.0.birth_month}}/{{c.0.birth_year}}</div>
+    <div>{{c.0.gender}}</div>
+    <div>{{c.0.marital_status}}</div>
+    <div>{{c.0.state}}</div>
+    {% for e in c.1 %}
+    <div>{{e.institute_name}}</div>
+    <div>{{e.course_type}}</div>
+    <div>{{e.degree}}</div>
+    {% endfor %}
+    {% for p in c.2 %}
+    <div>{{p.designation}}</div>
+    <div>{{p.organization}}</div>
+    <div>{{p.salary}}</div>
+    {% if p.is_current %}
+    still working from {{p.start_month}}/{{p.start_year}}
+    {% else %}
+    working from {{p.start_month}}/{{p.start_year}}-{{p.end_month}}/{{p.end_year}}
+    {% endif %}
+    {% endfor %}
+    {% for s in c.3 %}
+    <div>{{s.skill}}
+      {{s.rating}}</div>
+    {% endfor %}
+    <div>{{c.4.resume_link}}</div>
+    <div>{{c.4.coverletter_link}}</div>
+    {% for q,a in qna %}
+    <div>{{q.question}}</div>
+    {{a.answer}}
+    {% endfor %}
+
+  </div>
+    </div>
+    <a class="btn btn-primary" href="shortlist/{{c.6.pk}}" role="button">shorlist</a>
+
+    {% else %}
+
+    {% endif %}
+    {% endfor %}
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

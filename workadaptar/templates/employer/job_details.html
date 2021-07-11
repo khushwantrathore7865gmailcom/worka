@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{job.job_title}}
+{{job.job_description}}
+{{job.employment_type}}
+
+{{job.skill }}
+{{job.job_location }}
+{{job.job_experience}}
+
+
+{{job.created_on}}
+no of applied student :{{job.get_applied_no}}
+{% if job.is_save_later %}
+<a class="btn btn-primary" href="publishjob/{{ job.pk }}" role="button">publish</a>
+{% else %}
+<a class="btn btn-primary" href="applied_candidate/{{ job.pk }}" role="button">View applied candidate</a>
+{% endif %}
+</body>
+</html>
