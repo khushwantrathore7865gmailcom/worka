@@ -3,7 +3,7 @@ from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
 from .models import Employer, Employer_profile, Employer_candidate_jobanswer, Employer_job, Employer_job_Applied, \
-    Employer_jobquestion
+    Employer_jobquestion, Employer_expired_job
 from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm
 from django.views.generic import View
 from django.contrib import messages
@@ -15,6 +15,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from .tokens import account_activation_token
 from jobseeker.models import Candidate_profile, Candidate_edu, Candidate_profdetail, Candidate_resume, Candidate_skills
+from datetime import datetime
 
 
 class SignUpView(View):
@@ -108,10 +109,36 @@ def login_employer(request):
 
 
 def Home(request):
+    jobs = []
+    expired_job = []
     e = Employer.objects.get(user=request.user)
     if Employer_profile.objects.get(employer=e):
         job = Employer_job.objects.filter(employer_id=e)
-        context = {'jobs': job}
+        for j in job:
+            start_date = j.created_on
+            # print(start_date)
+            today = datetime.now()
+            # print(type(today))
+            stat_date = str(start_date)
+            start_date = stat_date[:19]
+            tday = str(today)
+            today = tday[:19]
+            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+            # print(s_date)
+            # print(e_date)
+            diff = abs((e_date - s_date).days)
+            print(diff)
+            if diff > 30:
+                if Employer_expired_job.object.get(job_id=j):
+                    expired_job.append(j)
+                else:
+                    Employer_expired_job.objects.create(job_id=j).save()
+                    expired_job.append(j)
+
+            else:
+                jobs.append(j)
+        context = {'jobs': jobs, 'expired': expired_job}
         return render(request, 'employer/job-post.html', context)
     else:
         return redirect('')
@@ -188,6 +215,7 @@ def disqualify(request, pk):
     e.save()
     print(e.job_id.pk)
     return redirect('view_applied_candidate', e.job_id.pk)
+
 
 def delete_job(request, pk):
     Employer_job.objects.get(pk=pk).delete()

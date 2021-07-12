@@ -6,6 +6,9 @@
     <title>Title</title>
 </head>
 <body>
+
+	{% if request.user == job.employer_id.user %}
+
 <div class="container">
 
 
@@ -41,6 +44,8 @@
     </div>
   </div>
 </div>
-
+    {% else %}
+    you are not allowed to acces the page
+{% endif %}
 </body>
 </html>

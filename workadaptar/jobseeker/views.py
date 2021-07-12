@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpResponse
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
@@ -16,7 +18,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from jobseeker.tokens import account_activation_token
 from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Applied, Employer_job_Like, \
-    Employer_job_Saved, Employer_candidate_jobanswer
+    Employer_job_Saved, Employer_candidate_jobanswer,Employer_expired_job
 
 
 class SignUpView(View):
@@ -128,7 +130,7 @@ def jobseeker_Home(request):
             print(get_text)
             Employer_candidate_jobanswer.objects.create(candidate_id=c, question_id=q, answer=get_text).save()
         Employer_job_Applied.objects.create(candidate_id=c, job_id=job).save()
-
+    jobs=[]
     job_ques = []
     relevant_jobs = []
     common = []
@@ -142,7 +144,28 @@ def jobseeker_Home(request):
         for i in skills:
             my_sk.insert(j, i.skill.lower())
             j = j + 1
-        jobs = Employer_job.objects.all()
+        job = Employer_job.objects.all()
+        for j in job:
+            start_date = j.created_on
+            # print(start_date)
+            today = datetime.now()
+            # print(type(today))
+            stat_date=str(start_date)
+            start_date = stat_date[:19]
+            tday =str(today)
+            today = tday[:19]
+            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+            # print(s_date)
+            # print(e_date)
+            diff = abs((e_date - s_date).days)
+            print(diff)
+            if diff >30:
+                # expired_job.append(j)
+                Employer_expired_job.objects.create(job_id=j).save()
+
+            else :
+                jobs.append(j)
 
         for job in jobs:
             skills = []

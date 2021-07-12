@@ -70,8 +70,9 @@ class Employer_candidate_jobanswer(models.Model):
 
 
 class Employer_expired_job(models.Model):
-    employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    # employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
     job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
+    created_on = models.DateTimeField(auto_now_add=True,null=True)
 
 
 class Employer_job_Like(models.Model):
