@@ -4,7 +4,7 @@ from user_custom.models import User_custom
 from django.utils.encoding import force_text
 from .models import Employer, Employer_profile, Employer_candidate_jobanswer, Employer_job, Employer_job_Applied, \
     Employer_jobquestion, Employer_expired_job
-from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm
+from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm, QuestionFormset
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -16,6 +16,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .tokens import account_activation_token
 from jobseeker.models import Candidate_profile, Candidate_edu, Candidate_profdetail, Candidate_resume, Candidate_skills
 from datetime import datetime
+from django.forms import modelformset_factory
+from django.db import transaction, IntegrityError
 
 
 class SignUpView(View):
@@ -246,22 +248,35 @@ def ProfileView(request, pk):
 
 def job_post(request):
     e = Employer.objects.get(user=request.user)
-    if request.method == 'POST':
+    if request.method == 'GET':
+        form1 = JobPostForm(request.GET or None)
+        formset = QuestionFormset(request.GET or None)
+    elif request.method == 'POST':
         form1 = JobPostForm(request.POST)
+        formset = QuestionFormset(request.POST)
         if form1.is_valid():
             f1 = form1.save(commit=False)
             f1.employer_id = e
+            f1.save()
+            print(f1)
+        if formset.is_valid():
+            for form in formset:
+                quest = form.cleaned_data.get('question')
+                if quest:
+                    Employer_jobquestion(job_id=f1, question=quest).save()
 
-            form2 = JobsQuestionForm(request.POST)
-            if form2.is_valid():
-                f2 = form2.save(commit=False)
-                f2.employer_id = e
-                f2.job_id = f1
-                f2.save()
-                f1.save()
-    form1 = JobPostForm(request.POST)
-    form2 = JobsQuestionForm(request.POST)
-    return render(request, 'employer/addjob.html', {"form1": form1, "form2": form2})
+                return redirect('job_post')
+    #
+    #         form2 = JobsQuestionForm(request.POST)
+    #         if form2.is_valid():
+    #             f2 = form2.save(commit=False)
+    #             f2.employer_id = e
+    #             f2.job_id = f1
+    #             f2.save()
+    #             f1.save()
+    # form1 = JobPostForm(request.POST)
+    # form2 = JobsQuestionForm(request.POST)
+    return render(request, 'employer/addjob.html', {"form1": form1, "form2": formset})
 
 
 def job_Response(request, pk):
