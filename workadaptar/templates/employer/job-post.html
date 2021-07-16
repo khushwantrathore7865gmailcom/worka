@@ -123,12 +123,12 @@
 			{% else %}
 			<tbody>
 				<tr>
-					<td><input type="checkbox"><label></label> <a href="jobdetail/{{ job.pk }}"><span>{{ job.job_title }}</span></a></td>
+					<td><input type="checkbox"><label></label> <a href="{% url 'recruiter:job_detail' job.pk %}"><span>{{ job.job_title }}</span></a></td>
 <!--					<td></td>-->
 					<td>{{ job.created_on }}</td>
 					<td>{{ job.get_applied_no }}</td>
-					<td><span><a class="btn btn-primary" href="editjob/{{ job.pk }}" role="button">Edit</a>
-					<a class="btn btn-primary" href="deletejob/{{ job.pk }}" role="button">Delete</a></span></td>
+					<td><span><a class="btn btn-primary" href="{% url 'recruiter:edit_job' job.pk %}" role="button">Edit</a>
+					<a class="btn btn-primary" href="{% url 'recruiter:delete_job' job.pk %}" role="button">Delete</a></span></td>
 				</tr>
 				
 			</tbody>
@@ -155,12 +155,12 @@
 
 			<tbody>
 				<tr>
-					<td><input type="checkbox"><label></label> <a href="jobdetail/{{ job.pk }}"><span>{{ job.job_title }}</span></a></td>
+					<td><input type="checkbox"><label></label> <a href="{% url 'recruiter:job_detail' job.pk %}"><span>{{ job.job_title }}</span></a></td>
 <!--					<td></td>-->
 					<td>{{ job.created_on }}</td>
 					<td>{{ job.get_applied_no }}</td>
-					<td><span><a class="btn btn-primary" href="editjob/{{ job.pk }}" role="button">Edit</a>
-					<a class="btn btn-primary" href="deletejob/{{ job.pk }}" role="button">Delete</a></span></td>
+					<td><span><a class="btn btn-primary" href="{% url 'recruiter:edit_job' job.pk %}" role="button">Edit</a>
+					<a class="btn btn-primary" href="{% url 'recruiter:delete_job' job.pk %}" role="button">Delete</a></span></td>
 				</tr>
 
 			</tbody>
@@ -177,6 +177,7 @@
 			</div>
 			
 </div>
+	</div>
 </section>
 
 <footer>

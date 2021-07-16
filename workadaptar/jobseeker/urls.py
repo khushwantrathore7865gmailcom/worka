@@ -2,7 +2,7 @@ from django.urls import include, path
 from jobseeker.views import SignUpView, ActivateAccount, jobseeker_Home, ProfileView, save_later, SavedJobs, AppliedJobs,remove_applied,remove_saved
 from . import views
 from django.contrib.auth import views as auth_views  # import this
-
+app_name='jobseeker'
 urlpatterns = [
     path('', jobseeker_Home, name='jobseeker_home'),
     path('savedJobs/', SavedJobs, name='SavedJobs'),

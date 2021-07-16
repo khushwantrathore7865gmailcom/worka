@@ -18,7 +18,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from jobseeker.tokens import account_activation_token
 from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Applied, Employer_job_Like, \
-    Employer_job_Saved, Employer_candidate_jobanswer,Employer_expired_job
+    Employer_job_Saved, Employer_candidate_jobanswer, Employer_expired_job, Employer_profile
 
 
 class SignUpView(View):
@@ -82,11 +82,11 @@ class ActivateAccount(View):
             user.save()
             login(request, user)
             messages.success(request, ('Your account have been confirmed.'))
-            return redirect('home')
+            return redirect('jobseeker:home')
         else:
             messages.warning(
                 request, ('The confirmation link was invalid, possibly because it has already been used.'))
-            return redirect('home')
+            return redirect('jobseeker:home')
 
 
 def index(request):
@@ -96,7 +96,7 @@ def index(request):
 def login_candidate(request):
     if request.user.is_authenticated and request.user.is_candidate:
         print(request.user)
-        return redirect('jobseeker_home')
+        return redirect('jobseeker:jobseeker_home')
     else:
         if request.method == 'POST':
             username = request.POST.get('username')
@@ -107,7 +107,7 @@ def login_candidate(request):
 
             if user is not None and user.is_candidate:
                 login(request, user)
-                return redirect('jobseeker_home')
+                return redirect('jobseeker:jobseeker_home')
             else:
                 messages.info(request, 'Username OR password is incorrect')
 
@@ -130,10 +130,11 @@ def jobseeker_Home(request):
             print(get_text)
             Employer_candidate_jobanswer.objects.create(candidate_id=c, question_id=q, answer=get_text).save()
         Employer_job_Applied.objects.create(candidate_id=c, job_id=job).save()
-    jobs=[]
+    jobs = []
     job_ques = []
     relevant_jobs = []
     common = []
+    companyprofile = []
     job_skills = []
     c = Candidate.objects.get(user=request.user)
     # if Candidate_profile.objects.get(user_id=c):
@@ -151,9 +152,9 @@ def jobseeker_Home(request):
         # print(start_date)
         today = datetime.now()
         # print(type(today))
-        stat_date=str(start_date)
+        stat_date = str(start_date)
         start_date = stat_date[:19]
-        tday =str(today)
+        tday = str(today)
         today = tday[:19]
         s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
         e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
@@ -161,11 +162,11 @@ def jobseeker_Home(request):
         # print(e_date)
         diff = abs((e_date - s_date).days)
         print(diff)
-        if diff >30:
+        if diff > 30:
             # expired_job.append(j)
             Employer_expired_job.objects.create(job_id=j).save()
 
-        else :
+        else:
             jobs.append(j)
 
     for job in jobs:
@@ -175,6 +176,8 @@ def jobseeker_Home(request):
             skills.append(i.strip().lower())
         common_skills = list(set(my_sk) & set(skills))
         if len(common_skills) != 0:
+            e = job.employer_id
+            companyprofile.append(Employer_profile.objects.get(employer=e))
             try:
                 userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
                 # print(userS.job_id)
@@ -199,9 +202,9 @@ def jobseeker_Home(request):
 
             print(relevant_jobs)
 
-    objects = zip(relevant_jobs, common, job_skills, job_ques)
+    objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
 
-    return render(request, 'jobseeker/home.html', {'jobs': objects})
+    return render(request, 'jobseeker/home.html', {'jobs': objects, 'c': c})
     # else:
     #     return redirect('create_profile')
 
@@ -212,7 +215,7 @@ def save_later(request, pk):
     # print(c)
     # print(job)
     Employer_job_Saved.objects.create(job_id=job, candidate_id=c).save()
-    return redirect('jobseeker_home')
+    return redirect('jobseeker:jobseeker_home')
 
 
 # class ProfileRegister(View):
@@ -293,6 +296,7 @@ def SavedJobs(request):
         Employer_job_Applied.objects.create(candidate_id=c, job_id=job).save()
 
     job_ques = []
+    companyprofile = []
     relevant_jobs = []
     common = []
     job_skills = []
@@ -329,6 +333,8 @@ def SavedJobs(request):
                 #     # print(userA)
                 #     continue
                 if userS:
+                    e = job.employer_id
+                    companyprofile.append(Employer_profile.objects.get(employer=e))
                     # print(userS)
                     # continue
                     relevant_jobs.append(job)
@@ -338,26 +344,34 @@ def SavedJobs(request):
 
                 print(relevant_jobs)
 
-        objects = zip(relevant_jobs, common, job_skills, job_ques)
+        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
     return render(request, 'jobseeker/savedjobs.html', {'jobs': objects})
 
 
 def AppliedJobs(request):
+    companyprofile = []
     c = Candidate.objects.get(user=request.user)
-    a = Employer_job_Applied.objects.filter(candidate_id=c)
-    return render(request, 'jobseeker/applied.html', {'jobs': a})
+    applied = Employer_job_Applied.objects.filter(candidate_id=c)
+    for a in applied:
+        e = a.job_id.employer_id
+        companyprofile.append(Employer_profile.objects.get(employer=e))
+
+    objects = zip(applied, companyprofile)
+    return render(request, 'jobseeker/applied.html', {'jobs': objects})
 
 
 def remove_applied(request, pk):
     Employer_job_Applied.objects.get(pk=pk).delete()
 
-    return redirect('AppliedJobs')
+    return redirect('jobseeker:AppliedJobs')
+
+
 def remove_saved(request, pk):
     c = Candidate.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
-    savej = Employer_job_Saved.objects.filter(job_id = job)
+    savej = Employer_job_Saved.objects.filter(job_id=job)
     for s in savej:
         if s.candidate_id == c:
             s.delete()
 
-    return redirect('SavedJobs')
+    return redirect('jobseeker:SavedJobs')

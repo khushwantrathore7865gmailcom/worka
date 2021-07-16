@@ -12,8 +12,8 @@
   </head>
   <body>
     <h1>{{job.job_title}}</h1>
-    <a class="btn btn-primary" href="shortlistview/{{job.pk}}" role="button">shorlist view</a>
-    <a class="btn btn-primary" href="disqualifyview/{{job.pk}}" role="button">disqualify view</a>
+    <a class="btn btn-primary" href="{% url 'recruiter:shortlist_view_applied_candidate' job.pk %}" role="button">shorlist view</a>
+    <a class="btn btn-primary" href="{% url 'recruiter:disqualify_view_applied_candidate' job.pk %}" role="button">disqualify view</a>
 
     {% for c in candidate %}
     {% if c.6.is_shortlisted %}
@@ -55,8 +55,8 @@
 
   </div>
     </div>
-    <a class="btn btn-primary" href="shortlist/{{c.6.pk}}" role="button">shorlist</a>
-    <a class="btn btn-primary" href="disqualify/{{c.6.pk}}" role="button">disqualify</a>
+    <a class="btn btn-primary" href="{% url 'recruiter:shortlist' c.6.pk %}" role="button">shorlist</a>
+    <a class="btn btn-primary" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">disqualify</a>
     {% endif %}
     {% endfor %}
 

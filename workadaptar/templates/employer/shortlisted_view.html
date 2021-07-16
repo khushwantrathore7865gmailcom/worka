@@ -52,7 +52,7 @@
 
   </div>
     </div>
-    <a class="btn btn-primary" href="disqualify/{{c.6.pk}}" role="button">disqualify</a>
+    <a class="btn btn-primary" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">disqualify</a>
     {% elif c.6.is_disqualified %}
     {% else %}
 

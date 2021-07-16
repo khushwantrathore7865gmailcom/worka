@@ -81,17 +81,17 @@ class ActivateAccount(View):
             user.save()
             login(request, user)
             messages.success(request, ('Your account have been confirmed.'))
-            return redirect('dashboard_home')
+            return redirect('recruiter:dashboard_home')
         else:
             messages.warning(
                 request, ('The confirmation link was invalid, possibly because it has already been used.'))
-            return redirect('dashboard_home')
+            return redirect('recruiter:dashboard_home')
 
 
 def login_employer(request):
     if request.user.is_authenticated and request.user.is_employeer:
         print(request.user)
-        return redirect('employer_home')
+        return redirect('recruiter:employer_home')
     else:
         if request.method == 'POST':
             username = request.POST.get('username')
@@ -102,7 +102,7 @@ def login_employer(request):
             print(user)
             if user is not None and user.is_employeer:
                 login(request, user)
-                return redirect('employer_home')
+                return redirect('recruiter:employer_home')
             else:
                 messages.info(request, 'Username OR password is incorrect')
 
@@ -155,7 +155,7 @@ def edit_job(request, pk):
         if form.is_valid():
             data = form.save(commit=False)
             data.save()
-            return redirect('employer_home')
+            return redirect('recruiter:employer_home')
     else:
         form = JobPostForm(instance=job)
     context = {
@@ -169,9 +169,10 @@ def edit_job(request, pk):
 def job_detail(request, pk):
     e = Employer.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
+    company=Employer_profile.objects.get(employer=e)
     # candidate_Applied = Employer_job_Applied.objects.filter(job_id=job)
     # objects = zip(job,candidate_Applied)
-    return render(request, 'employer/job_details.html', {'job': job})
+    return render(request, 'employer/job_details.html', {'job': job,'c':company})
 
 
 def view_applied_candidate(request, pk):
@@ -203,34 +204,93 @@ def view_applied_candidate(request, pk):
     question = zip(question, candidate_answer)
     return render(request, 'employer/job_candidate.html', {'candidate': objects, 'job': job, 'qna': question})
 
+def shortlistview_applied_candidate(request, pk):
+    candidate_user = []
+    candidate_profile = []
+    education_profile = []
+    professional_profile = []
+    skill = []
+    resume = []
+    candidate_answer = []
+    e = Employer.objects.get(user=request.user)
+    job = Employer_job.objects.get(pk=pk)
+    question = Employer_jobquestion.objects.filter(job_id=job)
+    candidate_Applied = Employer_job_Applied.objects.filter(job_id=job)
+    for can in candidate_Applied:
+        c = can.candidate_id
+        candidate_profile.append(Candidate_profile.objects.get(user_id=c))
+        candidate_user.append(c.user)
+        education_profile.append(Candidate_edu.objects.filter(user_id=c))
+        professional_profile.append(Candidate_profdetail.objects.filter(user_id=c))
+        skill.append(Candidate_skills.objects.filter(user_id=c))
+
+        resume.append(Candidate_resume.objects.get(user_id=c))
+        for q in question:
+            candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+
+    objects = zip(candidate_profile, education_profile, professional_profile, skill, resume,
+                  candidate_user, candidate_Applied)
+    question = zip(question, candidate_answer)
+    return render(request, 'employer/shortlisted_view.html', {'candidate': objects, 'job': job, 'qna': question})
+def disqualifyview_applied_candidate(request, pk):
+    candidate_user = []
+    candidate_profile = []
+    education_profile = []
+    professional_profile = []
+    skill = []
+    resume = []
+    candidate_answer = []
+    e = Employer.objects.get(user=request.user)
+    job = Employer_job.objects.get(pk=pk)
+    question = Employer_jobquestion.objects.filter(job_id=job)
+    candidate_Applied = Employer_job_Applied.objects.filter(job_id=job)
+    for can in candidate_Applied:
+        c = can.candidate_id
+        candidate_profile.append(Candidate_profile.objects.get(user_id=c))
+        candidate_user.append(c.user)
+        education_profile.append(Candidate_edu.objects.filter(user_id=c))
+        professional_profile.append(Candidate_profdetail.objects.filter(user_id=c))
+        skill.append(Candidate_skills.objects.filter(user_id=c))
+
+        resume.append(Candidate_resume.objects.get(user_id=c))
+        for q in question:
+            candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+
+    objects = zip(candidate_profile, education_profile, professional_profile, skill, resume,
+                  candidate_user, candidate_Applied)
+    question = zip(question, candidate_answer)
+    return render(request, 'employer/disqualified.html', {'candidate': objects, 'job': job, 'qna': question})
+
 
 def shortlist(request, pk):
     e = Employer_job_Applied.objects.get(pk=pk)
     e.is_shortlisted = True
+    e.is_disqualified = False
     e.save()
     print(e.job_id.pk)
-    return redirect('view_applied_candidate', e.job_id.pk)
+    return redirect('recruiter:view_applied_candidate', e.job_id.pk)
 
 
 def disqualify(request, pk):
     e = Employer_job_Applied.objects.get(pk=pk)
+    e.is_shortlisted = False
     e.is_disqualified = True
     e.save()
     print(e.job_id.pk)
-    return redirect('view_applied_candidate', e.job_id.pk)
+    return redirect('recruiter:view_applied_candidate', e.job_id.pk)
 
 
 def delete_job(request, pk):
     Employer_job.objects.get(pk=pk).delete()
 
-    return redirect('employer_home')
+    return redirect('recruiter:employer_home')
 
 
 def publish_job(request, pk):
     e = Employer_job.objects.get(pk=pk)
     e.is_save_later = False
     e.save()
-    return redirect('job_detail', pk)
+    return redirect('recruiter:job_detail', pk)
 
 
 # @login_required(login_url='/login/')
@@ -266,7 +326,7 @@ def job_post(request):
                 if quest:
                     Employer_jobquestion(job_id=f1, question=quest).save()
 
-                return redirect('job_post')
+                return redirect('recruiter:job_post')
     #
     #         form2 = JobsQuestionForm(request.POST)
     #         if form2.is_valid():
