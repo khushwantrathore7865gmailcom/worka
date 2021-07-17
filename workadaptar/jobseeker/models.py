@@ -3,6 +3,11 @@ from django.db import models
 # Create your models here.
 from user_custom.models import User_custom
 
+job_Type = [
+    ('Part time', 'Part time'),
+    ('Full time', 'Full time'),
+    ('Internship', 'Internship'),
+]
 Gender = [
     ('Male', 'Male'),
     ('Female', 'Female'),
@@ -43,6 +48,8 @@ class Candidate_profile(models.Model):
     birth_month = models.IntegerField(null=True)
     birth_year = models.IntegerField(null=True)
     gender = models.CharField(choices=Gender, max_length=255, null=True, blank=True)
+    address = models.CharField(max_length=250, blank=True)
+    city = models.CharField(max_length=50, blank=True)
     state = models.CharField(choices=state_choices, max_length=255, null=True, blank=True)
     marital_status = models.CharField(choices=Martial_Status, max_length=255, null=True, blank=True)
     profile_pic = models.ImageField(upload_to=None)
@@ -78,12 +85,20 @@ class Candidate_profdetail(models.Model):
 
 class Candidate_resume(models.Model):
     user_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='user_resume')
-    resume_link = models.FileField()
+    resume_link = models.FileField(upload_to=f"resume/{user_id}", blank=True)
     coverletter_text = models.CharField(max_length=250)
-    coverletter_link = models.FileField()
+    coverletter_link = models.FileField(upload_to=f"cover_letter/{user_id}", blank=True)
 
 
 class Candidate_skills(models.Model):
     user_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='user_skill')
     skill = models.CharField(max_length=100)
     rating = models.IntegerField()
+
+
+class Candidate_expdetail(models.Model):
+    user_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='user_expdetail')
+    department = models.CharField(max_length=150, blank=True)
+    role = models.CharField(max_length=150, blank=True)
+    job_type = models.CharField(choices=job_Type, max_length=255, null=True, blank=True)
+    exp_salary = models.CharField(max_length=150, blank=True)

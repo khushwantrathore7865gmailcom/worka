@@ -1,8 +1,10 @@
 from django.urls import include, path
-from jobseeker.views import SignUpView, ActivateAccount, jobseeker_Home, ProfileView, save_later, SavedJobs, AppliedJobs,remove_applied,remove_saved
+from .views import SignUpView, ActivateAccount, jobseeker_Home, ProfileView, save_later, SavedJobs, AppliedJobs, \
+    remove_applied, remove_saved, ProfileEdit
 from . import views
 from django.contrib.auth import views as auth_views  # import this
-app_name='jobseeker'
+
+app_name = 'jobseeker'
 urlpatterns = [
     path('', jobseeker_Home, name='jobseeker_home'),
     path('savedJobs/', SavedJobs, name='SavedJobs'),
@@ -22,7 +24,8 @@ urlpatterns = [
         template_name="account/password_reset_confirm.html"), name='password_reset_confirm'),
     path('account/reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='account/password_reset_complete.html'), name='password_reset_complete'),
-    path('viewprofile/', ProfileView, name='create_profile'),
+    path('viewprofile/', ProfileView, name='profile'),
+    path('profile_edit/', ProfileEdit, name='ProfileEdit'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
 
 ]

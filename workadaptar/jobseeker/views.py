@@ -6,8 +6,8 @@ from user_custom.models import User_custom
 from django.utils.encoding import force_text
 from .models import Candidate, Candidate_profile, Candidate_edu, Candidate_skills, Candidate_profdetail, \
     Candidate_resume
-from jobseeker.forms import SignUpForm, ProfileRegisterForm, ProfileRegisterForm_edu, ProfileRegisterForm_profdetail, \
-    ProfileRegisterForm_resume
+from .forms import SignUpForm, ProfileRegisterForm, ProfileRegisterForm_edu, ProfileRegisterForm_profdetail, \
+    ProfileRegisterForm_resume, ProfileRegistration_expdetail, ProfileRegistration_skills
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -55,11 +55,11 @@ class SignUpView(View):
                     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                     'token': account_activation_token.make_token(user),
                 })
-                user.email_user(subject, message)
+                # user.email_user(subject, message)
                 messages.success(
                     request, ('Please check your mail for complete registration.'))
-                # return redirect('login')
-                return render(request, self.template_name, {'form': form})
+                return redirect('jobseeker/login')
+                # return render(request, self.template_name, {'form': form})
         else:
             return render(request, self.template_name, {'form': form})
 
@@ -136,77 +136,80 @@ def jobseeker_Home(request):
     common = []
     companyprofile = []
     job_skills = []
-    c = Candidate.objects.get(user=request.user)
-    # if Candidate_profile.objects.get(user_id=c):
-    # uncomment this after making the profile update correct
-    skills = Candidate_skills.objects.filter(user_id=c)
+    u=request.user
+    c = Candidate.objects.get(user=u)
 
-    my_sk = []
-    j = 0
-    for i in skills:
-        my_sk.insert(j, i.skill.lower())
-        j = j + 1
-    job = Employer_job.objects.all()
-    for j in job:
-        start_date = j.created_on
-        # print(start_date)
-        today = datetime.now()
-        # print(type(today))
-        stat_date = str(start_date)
-        start_date = stat_date[:19]
-        tday = str(today)
-        today = tday[:19]
-        s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
-        e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
-        # print(s_date)
-        # print(e_date)
-        diff = abs((e_date - s_date).days)
-        print(diff)
-        if diff > 30:
-            # expired_job.append(j)
-            Employer_expired_job.objects.create(job_id=j).save()
+    if u.first_login:
 
-        else:
-            jobs.append(j)
+        skills = Candidate_skills.objects.filter(user_id=c)
 
-    for job in jobs:
-        skills = []
-        sk = str(job.skill).split(",")
-        for i in sk:
-            skills.append(i.strip().lower())
-        common_skills = list(set(my_sk) & set(skills))
-        if len(common_skills) != 0:
-            e = job.employer_id
-            companyprofile.append(Employer_profile.objects.get(employer=e))
-            try:
-                userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
-                # print(userS.job_id)
-            except Employer_job_Saved.DoesNotExist:
-                userS = None
-            try:
-                userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
-                # print(userA.job_id)
-            except Employer_job_Applied.DoesNotExist:
-                userA = None
+        my_sk = []
+        j = 0
+        for i in skills:
+            my_sk.insert(j, i.skill.lower())
+            j = j + 1
+        job = Employer_job.objects.all()
+        for j in job:
+            start_date = j.created_on
+            # print(start_date)
+            today = datetime.now()
+            # print(type(today))
+            stat_date = str(start_date)
+            start_date = stat_date[:19]
+            tday = str(today)
+            today = tday[:19]
+            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+            # print(s_date)
+            # print(e_date)
+            diff = abs((e_date - s_date).days)
+            print(diff)
+            if diff > 30:
+                # expired_job.append(j)
+                Employer_expired_job.objects.create(job_id=j).save()
 
-            if userA:
-                # print(userA)
-                continue
-            if userS:
-                # print(userS)
-                continue
-            relevant_jobs.append(job)
-            common.append(len(common_skills))
-            job_skills.append(len(skills))
-            job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
+            else:
+                jobs.append(j)
 
-            print(relevant_jobs)
+        for job in jobs:
+            skills = []
+            sk = str(job.skill).split(",")
+            for i in sk:
+                skills.append(i.strip().lower())
+            common_skills = list(set(my_sk) & set(skills))
+            if len(common_skills) != 0:
+                e = job.employer_id
+                companyprofile.append(Employer_profile.objects.get(employer=e))
+                try:
+                    userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
+                    # print(userS.job_id)
+                except Employer_job_Saved.DoesNotExist:
+                    userS = None
+                try:
+                    userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
+                    # print(userA.job_id)
+                except Employer_job_Applied.DoesNotExist:
+                    userA = None
 
-    objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                if userA:
+                    # print(userA)
+                    continue
+                if userS:
+                    # print(userS)
+                    continue
+                relevant_jobs.append(job)
+                common.append(len(common_skills))
+                job_skills.append(len(skills))
+                job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
 
-    return render(request, 'jobseeker/home.html', {'jobs': objects, 'c': c})
-    # else:
-    #     return redirect('create_profile')
+                print(relevant_jobs)
+
+        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+
+        return render(request, 'jobseeker/home.html', {'jobs': objects, 'c': c})
+    else:
+        u.first_login=True
+        return redirect('jobseeker:ProfileEdit')
 
 
 def save_later(request, pk):
@@ -251,32 +254,53 @@ def ProfileView(request):
 
 
 # @login_required(login_url='/login/')
-def ProfileEdit(request, pk):
-    profile = Candidate.objects.get(user=User_custom.objects.get(id=pk))
+def ProfileEdit(request):
+    profile = Candidate.objects.get(user=request.user)
     if request.method == 'POST':
         form1 = ProfileRegisterForm(request.POST)
-        if form1.is_valid():
+        form2 = ProfileRegisterForm_edu(request.POST)
+        form3 = ProfileRegisterForm_profdetail(request.POST)
+        form4 = ProfileRegisterForm_resume(request.POST)
+        form5 = ProfileRegistration_skills(request.POST)
+        form6 = ProfileRegistration_expdetail(request.POST)
+        if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid() and form6.is_valid():
             f1 = form1.save(commit=False)
             f1.user_id = profile
-        form2 = ProfileRegisterForm_edu(request.POST)
-        if form2.is_valid():
+            f1.save()
+
             f2 = form2.save(commit=False)
-            f2.user_id = profile
-        form3 = ProfileRegisterForm_profdetail(request.POST)
-        if form3.is_valid():
+            if f2.cleaned_data.get('institute_name'):
+
+                f2.user_id = profile
+                f2.save()
+
             f3 = form3.save(commit=False)
-            f3.user_id = profile
-        form4 = ProfileRegisterForm_resume(request.POST)
-        if form4.is_valid():
+            if f2.cleaned_data.get('designation'):
+                f3.user_id = profile
+                f3.save()
+
             f4 = form4.save(commit=False)
             f4.user_id = profile
-    form1 = ProfileRegisterForm()
-    form2 = ProfileRegisterForm_edu()
-    form3 = ProfileRegisterForm_profdetail()
-    form4 = ProfileRegisterForm_resume()
+            f4.save()
 
-    return render(request, 'jobseeker/skills.html',
-                  {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4})
+            f5 = form5.save(commit=False)
+            f5.user_id = profile
+            f5.save()
+
+            f6 = form6.save(commit=False)
+            f6.user_id = profile
+            f6.save()
+            return redirect('jobseeker:jobseeker_home')
+
+    form1 = ProfileRegisterForm()
+    form2 = ProfileRegisterForm_edu(queryset=Candidate_edu.objects.none())
+    form3 = ProfileRegisterForm_profdetail(queryset=Candidate_profdetail.objects.none())
+    form4 = ProfileRegisterForm_resume()
+    form5 = ProfileRegistration_skills()
+    form6 = ProfileRegistration_expdetail()
+
+    return render(request, 'jobseeker/Profile.html',
+                  {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, "form5": form5, 'form6': form6})
 
 
 def SavedJobs(request):
