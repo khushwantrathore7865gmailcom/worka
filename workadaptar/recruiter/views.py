@@ -14,7 +14,8 @@ from django.template.loader import render_to_string
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from .tokens import account_activation_token
-from jobseeker.models import Candidate_profile, Candidate_edu, Candidate_profdetail, Candidate_resume, Candidate_skills
+from jobseeker.models import Candidate_profile, Candidate_edu, Candidate_profdetail, Candidate_resume, Candidate_skills, \
+    Candidate_expdetail
 from datetime import datetime
 from django.forms import modelformset_factory
 from django.db import transaction, IntegrityError
@@ -46,19 +47,19 @@ class SignUpView(View):
                 user.save()
                 new_employe = Employer(user=user, is_email_verified=False)
                 new_employe.save()
-                current_site = get_current_site(request)
-                subject = 'Activate Your WorkAdaptar Account'
-                message = render_to_string('emails/account_activation_email.html', {
-                    'user': user,
-                    'domain': current_site.domain,
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token': account_activation_token.make_token(new_employe),
-                })
+                # current_site = get_current_site(request)
+                # subject = 'Activate Your WorkAdaptar Account'
+                # message = render_to_string('emails/account_activation_email.html', {
+                #     'user': user,
+                #     'domain': current_site.domain,
+                #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                #     'token': account_activation_token.make_token(new_employe),
+                # })
                 # user.email_user(subject, message)
                 messages.success(
                     request, ('Please check your mail for complete registration.'))
-                # return redirect('login')
-                return render(request, self.template_name, {'form': form})
+                return redirect('recruiter:employer/login')
+                # return render(request, self.template_name, {'form': form})
         else:
             return render(request, self.template_name, {'form': form})
 
@@ -169,10 +170,10 @@ def edit_job(request, pk):
 def job_detail(request, pk):
     e = Employer.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
-    company=Employer_profile.objects.get(employer=e)
+    company = Employer_profile.objects.get(employer=e)
     # candidate_Applied = Employer_job_Applied.objects.filter(job_id=job)
     # objects = zip(job,candidate_Applied)
-    return render(request, 'employer/job_details.html', {'job': job,'c':company})
+    return render(request, 'employer/job_details.html', {'job': job, 'c': company})
 
 
 def view_applied_candidate(request, pk):
@@ -204,6 +205,7 @@ def view_applied_candidate(request, pk):
     question = zip(question, candidate_answer)
     return render(request, 'employer/job_candidate.html', {'candidate': objects, 'job': job, 'qna': question})
 
+
 def shortlistview_applied_candidate(request, pk):
     candidate_user = []
     candidate_profile = []
@@ -212,6 +214,7 @@ def shortlistview_applied_candidate(request, pk):
     skill = []
     resume = []
     candidate_answer = []
+    expect = []
     e = Employer.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
     question = Employer_jobquestion.objects.filter(job_id=job)
@@ -223,15 +226,17 @@ def shortlistview_applied_candidate(request, pk):
         education_profile.append(Candidate_edu.objects.filter(user_id=c))
         professional_profile.append(Candidate_profdetail.objects.filter(user_id=c))
         skill.append(Candidate_skills.objects.filter(user_id=c))
-
+        expect.append(Candidate_expdetail.objects.get(user_id=c))
         resume.append(Candidate_resume.objects.get(user_id=c))
         for q in question:
             candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
 
     objects = zip(candidate_profile, education_profile, professional_profile, skill, resume,
-                  candidate_user, candidate_Applied)
+                  candidate_user, candidate_Applied, expect)
     question = zip(question, candidate_answer)
     return render(request, 'employer/shortlisted_view.html', {'candidate': objects, 'job': job, 'qna': question})
+
+
 def disqualifyview_applied_candidate(request, pk):
     candidate_user = []
     candidate_profile = []

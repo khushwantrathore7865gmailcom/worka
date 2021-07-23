@@ -52,7 +52,7 @@ class Candidate_profile(models.Model):
     city = models.CharField(max_length=50, blank=True)
     state = models.CharField(choices=state_choices, max_length=255, null=True, blank=True)
     marital_status = models.CharField(choices=Martial_Status, max_length=255, null=True, blank=True)
-    profile_pic = models.ImageField(upload_to=None)
+    profile_pic = models.ImageField(upload_to=f"profile/", default='profile/avatar.png')
 
 
 class Candidate_edu(models.Model):
@@ -102,3 +102,5 @@ class Candidate_expdetail(models.Model):
     role = models.CharField(max_length=150, blank=True)
     job_type = models.CharField(choices=job_Type, max_length=255, null=True, blank=True)
     exp_salary = models.CharField(max_length=150, blank=True)
+    prefer_location = models.CharField(max_length=150, blank=True)
+    Total_Working = models.CharField(max_length=50, blank=True)
