@@ -13,7 +13,7 @@ urlpatterns = [
     path('removeSaved/<int:pk>', remove_saved, name='remove_saved'),
     path('save/<int:pk>', save_later, name='save_job'),
     path('login', views.login_candidate, name='jobseeker/login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='jobseeker/login'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/jobseeker/login'), name='logout'),
     path('signup', SignUpView.as_view(), name='jobseeker/register'),
 
     path('reset_password/', auth_views.PasswordResetView.as_view(

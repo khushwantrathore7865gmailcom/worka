@@ -17,7 +17,7 @@ urlpatterns = [
     path('jobdetail/applied_candidate/shortlist/<int:pk>', shortlist, name='shortlist'),
     path('jobdetail/applied_candidate/disqualify/<int:pk>', disqualify, name='disqualify'),
     path('login', login_employer, name='employer/login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='employer/login'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/recruiter/login'), name='logout'),
     path('signup', SignUpView.as_view(), name='employer/register'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
 
