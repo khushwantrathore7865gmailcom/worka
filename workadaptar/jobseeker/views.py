@@ -48,17 +48,17 @@ class SignUpView(View):
                 new_candidate = Candidate(user=user, is_email_verified=False)  # change is email to False after testing
                 new_candidate.save()
                 current_site = get_current_site(request)
-                subject = 'Activate Your WorkAdaptar Account'
-                message = render_to_string('emails/account_activation_email.html', {
-                    'user': user,
-                    'domain': current_site.domain,
-                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token': account_activation_token.make_token(user),
-                })
+                # subject = 'Activate Your WorkAdaptar Account'
+                # message = render_to_string('emails/account_activation_email.html', {
+                #     'user': user,
+                #     'domain': current_site.domain,
+                #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                #     'token': account_activation_token.make_token(user),
+                # })
                 # user.email_user(subject, message)
                 messages.success(
                     request, ('Please check your mail for complete registration.'))
-                return redirect('jobseeker/login')
+                return redirect('jobseeker:jobseeker/login')
                 # return render(request, self.template_name, {'form': form})
         else:
             return render(request, self.template_name, {'form': form})
@@ -136,80 +136,85 @@ def jobseeker_Home(request):
     common = []
     companyprofile = []
     job_skills = []
-    u=request.user
+    u = request.user
     c = Candidate.objects.get(user=u)
+    try:
+        cp = Candidate_profile.objects.get(user_id=c)
+    except Candidate_profile.DoesNotExist:
+        cp = None
 
-    if u.first_login:
+    # if u.first_login:
 
-        skills = Candidate_skills.objects.filter(user_id=c)
+    skills = Candidate_skills.objects.filter(user_id=c)
 
-        my_sk = []
-        j = 0
-        for i in skills:
-            my_sk.insert(j, i.skill.lower())
-            j = j + 1
-        job = Employer_job.objects.all()
-        for j in job:
-            start_date = j.created_on
-            # print(start_date)
-            today = datetime.now()
-            # print(type(today))
-            stat_date = str(start_date)
-            start_date = stat_date[:19]
-            tday = str(today)
-            today = tday[:19]
-            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
-            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
-            # print(s_date)
-            # print(e_date)
-            diff = abs((e_date - s_date).days)
-            print(diff)
-            if diff > 30:
-                # expired_job.append(j)
-                Employer_expired_job.objects.create(job_id=j).save()
+    my_sk = []
+    j = 0
+    for i in skills:
+        my_sk.insert(j, i.skill.lower())
+        j = j + 1
+    job = Employer_job.objects.all()
+    for j in job:
+        start_date = j.created_on
+        # print(start_date)
+        today = datetime.now()
+        # print(type(today))
+        stat_date = str(start_date)
+        start_date = stat_date[:19]
+        tday = str(today)
+        today = tday[:19]
+        s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+        e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+        # print(s_date)
+        # print(e_date)
+        diff = abs((e_date - s_date).days)
+        print(diff)
+        if diff > 30:
+            # expired_job.append(j)
+            Employer_expired_job.objects.create(job_id=j).save()
 
-            else:
-                jobs.append(j)
+        else:
+            jobs.append(j)
 
-        for job in jobs:
-            skills = []
-            sk = str(job.skill).split(",")
-            for i in sk:
-                skills.append(i.strip().lower())
-            common_skills = list(set(my_sk) & set(skills))
-            if len(common_skills) != 0:
-                e = job.employer_id
-                companyprofile.append(Employer_profile.objects.get(employer=e))
-                try:
-                    userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
-                    # print(userS.job_id)
-                except Employer_job_Saved.DoesNotExist:
-                    userS = None
-                try:
-                    userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
-                    # print(userA.job_id)
-                except Employer_job_Applied.DoesNotExist:
-                    userA = None
+    for job in jobs:
+        skills = []
+        sk = str(job.skill).split(",")
+        for i in sk:
+            skills.append(i.strip().lower())
+        common_skills = list(set(my_sk) & set(skills))
+        if len(common_skills) != 0:
+            e = job.employer_id
+            companyprofile.append(Employer_profile.objects.get(employer=e))
+            try:
+                userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
+                # print(userS.job_id)
+            except Employer_job_Saved.DoesNotExist:
+                userS = None
+            try:
+                userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
+                # print(userA.job_id)
+            except Employer_job_Applied.DoesNotExist:
+                userA = None
 
-                if userA:
-                    # print(userA)
-                    continue
-                if userS:
-                    # print(userS)
-                    continue
-                relevant_jobs.append(job)
-                common.append(len(common_skills))
-                job_skills.append(len(skills))
-                job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
+            if userA:
+                # print(userA)
+                continue
+            if userS:
+                # print(userS)
+                continue
+            relevant_jobs.append(job)
+            common.append(len(common_skills))
+            job_skills.append(len(skills))
+            job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
 
-                print(relevant_jobs)
+            print(relevant_jobs)
 
-        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+    objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
 
-        return render(request, 'jobseeker/home.html', {'jobs': objects, 'c': c})
-    else:
-        u.first_login=True
-        return redirect('jobseeker:ProfileEdit')
+    return render(request, 'jobseeker/home.html', {'jobs': objects, 'c': c, 'cp': cp})
+    # else:
+    #     u.first_login=True
+    #       u.save()
+    #     return redirect('jobseeker:ProfileEdit')
 
 
 def save_later(request, pk):
@@ -270,7 +275,6 @@ def ProfileEdit(request):
 
             f2 = form2.save(commit=False)
             if f2.cleaned_data.get('institute_name'):
-
                 f2.user_id = profile
                 f2.save()
 

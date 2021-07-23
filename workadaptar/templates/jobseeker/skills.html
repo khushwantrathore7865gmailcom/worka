@@ -39,27 +39,26 @@
   </form>
 </nav>
 	
-	
 	<ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Applied</a>
+        <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="#">Saved</a>
+        <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
       </li>
 	  <li class="nav-item active">
         <a class="nav-link" href="#">Resume</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fa fa-home" aria-hidden="true"></i></a>
+        <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
       </li>
-	  
+
 	  <li class="nav-item">
         <a class="nav-link" href="#"><img src="images/job-portal/78a389427595e07efd8a3870fe50c28c.jpg"></a>
       </li>
-	  
-	 </ul> 
-    
+
+	 </ul>
+
   </div>
 </nav>
 					</div>
