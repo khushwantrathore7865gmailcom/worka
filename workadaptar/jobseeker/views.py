@@ -328,11 +328,17 @@ def SavedJobs(request):
     relevant_jobs = []
     common = []
     job_skills = []
+    my_sk = []
     c = Candidate.objects.get(user=request.user)
-    if Candidate_profile.objects.get(user_id=c):
+    try:
+        cp=Candidate_profile.objects.get(user_id=c)
+    except Candidate_profile.DoesNotExist:
+        cp=None
+    if cp:
         skills = Candidate_skills.objects.filter(user_id=c)
 
-        my_sk = []
+
+
         j = 0
         for i in skills:
             my_sk.insert(j, i.skill.lower())
@@ -373,7 +379,10 @@ def SavedJobs(request):
                 print(relevant_jobs)
 
         objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
-    return render(request, 'jobseeker/savedjobs.html', {'jobs': objects})
+
+        return render(request, 'jobseeker/savedjobs.html', {'jobs': objects})
+    else:
+        return render(request, 'jobseeker/savedjobs.html')
 
 
 def AppliedJobs(request):

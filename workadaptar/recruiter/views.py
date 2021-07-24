@@ -114,38 +114,47 @@ def login_employer(request):
 def Home(request):
     jobs = []
     expired_job = []
-    e = Employer.objects.get(user=request.user)
+
+    try:
+        e = Employer.objects.get(user=request.user)
+    except Employer.DoesNotExist:
+        e = None
     # uncomment this after making the profile update correct
     # if Employer_profile.objects.get(employer=e):
-    job = Employer_job.objects.filter(employer_id=e)
-    for j in job:
-        start_date = j.created_on
-        # print(start_date)
-        today = datetime.now()
-        # print(type(today))
-        stat_date = str(start_date)
-        start_date = stat_date[:19]
-        tday = str(today)
-        today = tday[:19]
-        s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
-        e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
-        # print(s_date)
-        # print(e_date)
-        diff = abs((e_date - s_date).days)
-        print(diff)
-        if diff > 30:
-            if Employer_expired_job.object.get(job_id=j):
-                expired_job.append(j)
-            else:
-                Employer_expired_job.objects.create(job_id=j).save()
-                expired_job.append(j)
+    if e:
+        try:
+            ep = Employer_profile.objects.get(employer=e)
+        except Employer_profile.DoesNotExist:
+            ep = None
+        job = Employer_job.objects.filter(employer_id=e)
+        for j in job:
+            start_date = j.created_on
+            # print(start_date)
+            today = datetime.now()
+            # print(type(today))
+            stat_date = str(start_date)
+            start_date = stat_date[:19]
+            tday = str(today)
+            today = tday[:19]
+            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+            # print(s_date)
+            # print(e_date)
+            diff = abs((e_date - s_date).days)
+            print(diff)
+            if diff > 30:
+                if Employer_expired_job.object.get(job_id=j):
+                    expired_job.append(j)
+                else:
+                    Employer_expired_job.objects.create(job_id=j).save()
+                    expired_job.append(j)
 
-        else:
-            jobs.append(j)
-    context = {'jobs': jobs, 'expired': expired_job}
-    return render(request, 'employer/job-post.html', context)
-    # else:
-    #     return redirect('')
+            else:
+                jobs.append(j)
+        context = {'jobs': jobs, 'expired': expired_job, 'ep': ep}
+        return render(request, 'employer/job-post.html', context)
+    else:
+        return redirect('recruiter:employer/login')
 
 
 def edit_job(request, pk):

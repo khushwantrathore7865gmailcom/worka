@@ -85,9 +85,9 @@ class Candidate_profdetail(models.Model):
 
 class Candidate_resume(models.Model):
     user_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='user_resume')
-    resume_link = models.FileField(upload_to=f"resume/{user_id}", blank=True)
+    resume_link = models.FileField(upload_to=f"resume/", blank=True)
     coverletter_text = models.CharField(max_length=250)
-    coverletter_link = models.FileField(upload_to=f"cover_letter/{user_id}", blank=True)
+    coverletter_link = models.FileField(upload_to=f"cover_letter/", blank=True)
 
 
 class Candidate_skills(models.Model):

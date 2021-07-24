@@ -44,7 +44,7 @@
 	
 	<ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="{% url 'recruiter:employer_home' %}">Home</a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="#">Saved</a>
@@ -64,7 +64,7 @@
       </li>
 	  
 	  <li class="nav-item">
-        <a class="nav-link" href="#"><img src="images/job-portal/78a389427595e07efd8a3870fe50c28c.jpg"></a>
+        <a class="nav-link" href="#"><img src={{ep.company_logo.url}}></a>
       </li>
 	  
 	 </ul> 
@@ -103,8 +103,35 @@
 
   <div class="tab-content">
     <div id="home" class="tab-pane fade">
-      <h3>Loream Ipsum</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <div class="table-main">
+		<table class="w-100">
+			<thead>
+				<tr>
+					<th>Posted Job</th>
+<!--					<th>Share by</th>-->
+					<th>Shared date</th>
+					<th>Candinate applied </th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			{% for job in expired %}
+			{% if job.job_id.is_save_later %}
+			{% else %}
+			<tbody>
+				<tr>
+					<td><input type="checkbox"><label></label> <a href="{% url 'recruiter:job_detail' job.pk %}"><span>{{ job.job_id.job_title }}</span></a></td>
+<!--					<td></td>-->
+					<td>{{ job.job_id.created_on }}</td>
+					<td>{{ job.job_id.get_applied_no }}</td>
+					<td><span><a class="btn btn-primary" href="{% url 'recruiter:edit_job' job.pk %}" role="button">Edit</a>
+					<a class="btn btn-primary" href="{% url 'recruiter:delete_job' job.pk %}" role="button">Delete</a></span></td>
+				</tr>
+
+			</tbody>
+			{% endif %}
+			{% endfor %}
+		</table>
+	  </div>
     </div>
     <div id="menu1" class="tab-pane fade in active">
       <div class="table-main">
@@ -130,7 +157,7 @@
 					<td><span><a class="btn btn-primary" href="{% url 'recruiter:edit_job' job.pk %}" role="button">Edit</a>
 					<a class="btn btn-primary" href="{% url 'recruiter:delete_job' job.pk %}" role="button">Delete</a></span></td>
 				</tr>
-				
+
 			</tbody>
 			{% endif %}
 			{% endfor %}
