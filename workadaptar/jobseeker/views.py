@@ -246,14 +246,14 @@ def ProfileView(request):
     profile = Candidate_profile.objects.get(user_id=c)
     edu = Candidate_edu.objects.filter(user_id=c)
     professional = Candidate_profdetail.objects.filter(user_id=c)
-    # resume = Candidate_resume.objects.get(user_id=c)
+    resume = Candidate_resume.objects.get(user_id=c)
     skills = Candidate_skills.objects.filter(user_id=c)
     return render(request, 'jobseeker/skills.html', {
         "user": u,
         "profile": profile,
         "edu": edu,
         "professional": professional,
-        # "resume": resume,
+        "resume": resume,
         "skills": skills,
     })
 

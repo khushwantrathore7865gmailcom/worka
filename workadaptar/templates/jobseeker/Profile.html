@@ -1,18 +1,20 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
+
+<!-- Mirrored from grocbees.com/job-portal/skills.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 03:56:35 GMT -->
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/style12.css' %}">
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/style_skills.css' %}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
   </head>
-  <body>
+  <body class="skills-page">
 
 	<header>
 		<div class="container">
@@ -37,7 +39,6 @@
   </form>
 </nav>
 
-
 	<ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
@@ -53,7 +54,7 @@
       </li>
 
 	  <li class="nav-item">
-        <a class="nav-link" href="#"><img src="images/job-portal/78a389427595e07efd8a3870fe50c28c.jpg"></a>
+        <a class="nav-link" href="{% url 'jobseeker:profile' %}"><img src={{profile.profile_pic.url}}></a>
       </li>
 
 	 </ul>
@@ -64,7 +65,13 @@
 				</div>
 			</div>
 		</div>
-    </header>
+
+	</header>
+    <section class="job-portal">
+	<div class="container">
+		<div class="row">
+            <div class="col-md-3 col-12">
+				<div class="job-left">
   	{% for field in form1 %}
       <p style="color:grey">
 
@@ -83,6 +90,12 @@
         {% endfor %}
       </p>
     {% endfor %}
+                    </div>
+			</div>
+            <div class="col-md-9 col-12">
+				<div class="row">
+						<div class="col-md-7 col-12">
+							<div class="skills-left">
 <h3>Educational detail</h3>
     {{ form2.management_form }}
 {% for form in form2 %}
@@ -104,6 +117,10 @@
     </div>
 </div>
 {% endfor %}
+                                </div>
+
+						<div class="col-md-7 col-12">
+							<div class="skills-left">
 <h3>Professional detail</h3>
     {{ form3.management_form }}
 {% for form in form3 %}
@@ -125,6 +142,7 @@
     </div>
 </div>
 {% endfor %}
+                                </div>
 <h3>Resume detail</h3>
 {% for field in form4 %}
       <p style="color:grey">
