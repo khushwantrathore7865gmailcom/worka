@@ -82,6 +82,10 @@
   <h2>shortlisted view</h2>
     <h3>{{job.job_title}}</h3>
 </div>
+                 <a class="btn btn-primary" href="{% url 'recruiter:disqualify_view_applied_candidate' job.pk %}" role="button">disqualify Candidate</a>
+               <a class="btn btn-primary" href="{% url 'recruiter:view_applied_candidate' job.pk %}" role="button">All applied Candidate </a>
+                <br>
+                <br>
 			</div>
     {% for c in candidate %}
 
@@ -155,11 +159,12 @@
     {% else %}
 
     {% endif %}
-                    {% endfor %}
-
-             </div>
+                                 </div>
 
 </div>
+                    {% endfor %}
+
+
 
 			</div>
 	</div>

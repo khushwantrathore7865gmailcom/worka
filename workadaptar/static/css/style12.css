@@ -26,6 +26,7 @@ h1,h2,h3,h4,h5,h6
 
 a{
 	font-family: 'Lato', sans-serif;
+
 }
 header
 {
@@ -2884,7 +2885,6 @@ form.form-inline.new-form .input-group {
 .advanced-search-body .search-search-body, .advanced-search-body .search-body-footer {
     padding: 0 20px;
 }
-
 
 
 }

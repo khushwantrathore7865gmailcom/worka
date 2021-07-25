@@ -13,8 +13,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/style_job_post.css'%}">
 	<link rel="stylesheet" type="text/css"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
-    
+    {% block mycss %}
+<style>
+  .button1 {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin:0px auto;
+  cursor: pointer;
+  float: right;
+  overflow: auto;
+
+  white-space: nowrap;
+}
+
+<!--.button1 {background-color: #4CAF50;} /* Green */-->
+</style>
+{% endblock mycss %}
   </head>
+
   <body>
 
 	<header>
@@ -40,11 +61,11 @@
     </div>
   </form>
 </nav>
-	
-	
+
+
 	<ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'recruiter:employer_home' %}">Home</a>
+       <a class="nav-link" href="{% url 'recruiter:employer_home' %}">Home</a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="#">Saved</a>
@@ -58,39 +79,44 @@
 	  <li class="nav-item">
         <a class="nav-link" href="#">About Us</a>
       </li>
-	  
+
 	  <li class="nav-item bell-icon">
         <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
       </li>
-	  
+
 	  <li class="nav-item">
         <a class="nav-link" href="#"><img src={{ep.company_logo.url}}></a>
       </li>
-	  
-	 </ul> 
-    
+
+	 </ul>
+
   </div>
 </nav>
 					</div>
 				</div>
 			</div>
 		</div>
-				
+
 	</header>
 
 <section class="job-portal">
 	<div class="container">
 		<div class="row">
+
 			<div class="col-md-10 mx-auto col-12">
+
 				<div class="heading">
 					<h2>Project & Job <span>Posted</span></h2>
-					
+
 				</div>
+					<a class="button1 btn btn-success" href="{% url 'recruiter:job_post' %} ">Add Job</a>
+
 			</div>
-		
-			
+
+
+
 			<div class="col-md-10 col-12 mx-auto">
-				
+
 				<div class="job-posted">
 					<ul class="nav nav-tabs">
     <li><a data-toggle="tab" href="#home">Past Job </a></li>
@@ -115,16 +141,16 @@
 				</tr>
 			</thead>
 			{% for job in expired %}
-			{% if job.job_id.is_save_later %}
+			{% if job.is_save_later %}
 			{% else %}
 			<tbody>
 				<tr>
-					<td><input type="checkbox"><label></label> <a href="{% url 'recruiter:job_detail' job.pk %}"><span>{{ job.job_id.job_title }}</span></a></td>
+					<td><input type="checkbox"><label></label> <a href="{% url 'recruiter:job_detail' job.pk %}"><span>{{ job.job_title }}</span></a></td>
 <!--					<td></td>-->
-					<td>{{ job.job_id.created_on }}</td>
-					<td>{{ job.job_id.get_applied_no }}</td>
-					<td><span><a class="btn btn-primary" href="{% url 'recruiter:edit_job' job.pk %}" role="button">Edit</a>
-					<a class="btn btn-primary" href="{% url 'recruiter:delete_job' job.pk %}" role="button">Delete</a></span></td>
+					<td>{{ job.created_on }}</td>
+					<td>{{ job.get_applied_no }}</td>
+					<td><span><a class="btn btn-success" href="{% url 'recruiter:edit_job' job.pk %}" role="button">Edit</a>
+					<a class="btn btn-success" href="{% url 'recruiter:delete_job' job.pk %}" role="button">Delete</a></span></td>
 				</tr>
 
 			</tbody>
@@ -132,6 +158,7 @@
 			{% endfor %}
 		</table>
 	  </div>
+
     </div>
     <div id="menu1" class="tab-pane fade in active">
       <div class="table-main">
@@ -154,8 +181,8 @@
 <!--					<td></td>-->
 					<td>{{ job.created_on }}</td>
 					<td>{{ job.get_applied_no }}</td>
-					<td><span><a class="btn btn-primary" href="{% url 'recruiter:edit_job' job.pk %}" role="button">Edit</a>
-					<a class="btn btn-primary" href="{% url 'recruiter:delete_job' job.pk %}" role="button">Delete</a></span></td>
+					<td><span><a class="btn btn-success" href="{% url 'recruiter:edit_job' job.pk %}" role="button">Edit</a>
+					<a class="btn btn-success" href="{% url 'recruiter:delete_job' job.pk %}" role="button">Delete</a></span></td>
 				</tr>
 
 			</tbody>
@@ -186,8 +213,8 @@
 <!--					<td></td>-->
 					<td>{{ job.created_on }}</td>
 					<td>{{ job.get_applied_no }}</td>
-					<td><span><a class="btn btn-primary" href="{% url 'recruiter:edit_job' job.pk %}" role="button">Edit</a>
-					<a class="btn btn-primary" href="{% url 'recruiter:delete_job' job.pk %}" role="button">Delete</a></span></td>
+					<td><span><a class="btn btn-success" href="{% url 'recruiter:edit_job' job.pk %}" role="button">Edit</a>
+					<a class="btn btn-success" href="{% url 'recruiter:delete_job' job.pk %}" role="button">Delete</a></span></td>
 				</tr>
 
 			</tbody>

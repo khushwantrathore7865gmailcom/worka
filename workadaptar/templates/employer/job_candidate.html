@@ -84,6 +84,8 @@
 </div>
                 <a class="btn btn-primary" href="{% url 'recruiter:shortlist_view_applied_candidate' job.pk %}" role="button">shorlist view</a>
     <a class="btn btn-primary" href="{% url 'recruiter:disqualify_view_applied_candidate' job.pk %}" role="button">disqualify view</a>
+                <br>
+                <br>
 
 			</div>
 
@@ -149,7 +151,8 @@
   </div>
 </div>
 
-    <a class="btn btn-primary" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">disqualify</a>				</div>
+    <a class="btn btn-primary" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">disqualify</a>
+    <a class="btn btn-primary" href="{% url 'recruiter:shortlist' c.6.pk %}" role="button">Shortlist</a>				</div>
 
 
 
@@ -160,11 +163,13 @@
 
 
     {% endif %}
+                    </div>
+       </div>
                     {% endfor %}
 
-             </div>
 
-</div>
+
+
 
 			</div>
 	</div>

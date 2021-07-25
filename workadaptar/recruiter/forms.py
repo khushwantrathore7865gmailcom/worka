@@ -56,6 +56,7 @@ class JobPostForm(forms.ModelForm):
             'employment_type',
             'job_location',
             'job_experience',
+            'is_save_later',
 
         ]
 
