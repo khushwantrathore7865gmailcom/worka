@@ -6,37 +6,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+ <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+       <link rel="stylesheet" type="text/css" href=" {% static 'css/style_skills.css' %}">
+
+    <link rel="stylesheet" href=" {% static 'css/style.css'%}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
 
     <title>Title</title>
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 </head>
-<body>
+<body class="skills-page">
+
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-12">
+					<div class="top-navbar">
+						<nav class="navbar navbar-expand-lg ">
+  <a class="navbar-brand" href="{% url 'recruiter:employer_home' %}">LOGO</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav class="navbar mr-auto">
+  <form class="form-inline">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+      </div>
+      <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+  </form>
+</nav>
+
+
+	<ul class="navbar-nav ml-auto">
+<!--      <li class="nav-item">-->
+<!--       <a class="nav-link" href="{% url 'recruiter:employer_home' %}">Home</a>-->
+<!--      </li>-->
+	  <li class="nav-item">
+        <a class="nav-link" href="{% url 'recruiter:job_post' %}">Add Job</a>
+      </li>
+<!--	  <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">Resume</a>-->
+<!--      </li>-->
+	  <li class="nav-item">
+        <a class="nav-link" href="#">Contact Us</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="#">About Us</a>
+      </li>
+<li class="nav-item">
+        <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+      </li>
+	  <li class="nav-item bell-icon">
+        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
+      </li>
+
+	  <li class="nav-item">
+        <a class="nav-link" href="#"><img src={{ep.company_logo.url}}></a>
+      </li>
+
+	 </ul>
+
+  </div>
+</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+
+<section class="job-portal">
+	<div class="container">
+		<div class="row">
+  <div class="col-md-7 col-12" >
+				<div class="skills-left">
 <form class="form-horizontal" method="POST" action="">
 {% csrf_token %}
 {{ form1|crispy }}
 {{ form2.management_form }}
 {% for form in form2 %}
 <div class="row form-row spacer">
-    <div class="col-2">
+    <div class="col-8">
         <label>{{form.question.label}}</label>
-    </div>
-    <div class="col-4">
+
+
         <div class="input-group">
             {{form.question}}
             <div class="input-group-append">
                 <button class="btn btn-success add-form-row">+</button>
             </div>
+
         </div>
     </div>
 </div>
 {% endfor %}
+<br>
 <div class="row spacer">
     <div class="col-4 offset-2">
-        <button type="submit" class="btn btn-block btn-primary">Create</button>
+        <button type="submit" class="btn btn-block btn-success">Create</button>
     </div>
 </div>
 </form>
+                </div>
+  </div>
+        </div>
+    </div>
+</section>
 
 {% block custom_js %}
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -340,7 +340,7 @@ def job_post(request):
                 if quest:
                     Employer_jobquestion(job_id=f1, question=quest).save()
 
-                return redirect('recruiter:job_post')
+                return redirect('recruiter:employer_home')
     #
     #         form2 = JobsQuestionForm(request.POST)
     #         if form2.is_valid():

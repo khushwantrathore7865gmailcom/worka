@@ -206,7 +206,7 @@ def jobseeker_Home(request):
             job_skills.append(len(skills))
             job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
 
-            print(relevant_jobs)
+            print(job_ques)
 
     objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
 

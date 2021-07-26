@@ -20,7 +20,7 @@
 				<div class="col-md-12 col-12">
 					<div class="top-navbar">
 						<nav class="navbar navbar-expand-lg ">
-  <a class="navbar-brand" href="#">LOGO</a>
+  <a class="navbar-brand" href="{% url 'jobseeker:jobseeker_home' %}">LOGO</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -51,7 +51,10 @@
 	  <li class="nav-item">
         <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
       </li>
-
+</li>
+	  <li class="nav-item bell-icon">
+        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
+      </li>
 	  <li class="nav-item">
         <a class="nav-link" href="{% url 'jobseeker:profile' %}"><img src={{profile.profile_pic.url}}></a>
       </li>
