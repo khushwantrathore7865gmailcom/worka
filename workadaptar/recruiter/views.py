@@ -209,10 +209,13 @@ def view_applied_candidate(request, pk):
         for q in question:
             candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
 
+    # quest = zip(question, candidate_answer)
+    print(candidate_answer)
     objects = zip(candidate_profile, education_profile, professional_profile, skill, resume,
                   candidate_user, candidate_Applied)
-    question = zip(question, candidate_answer)
-    return render(request, 'employer/job_candidate.html', {'candidate': objects, 'job': job, 'qna': question})
+
+    return render(request, 'employer/job_candidate.html',
+                  {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer})
 
 
 def shortlistview_applied_candidate(request, pk):

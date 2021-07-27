@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/style12.css' %}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+          <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
   </head>
   <body>
@@ -57,7 +59,7 @@
         <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'jobseeker:profile' %}"><img src={{profile.profile_pic.url}}></a>
+        <a class="nav-link" href="{% url 'jobseeker:profile' %}"><img src={{cp.profile_pic.url}}></a>
       </li>
 
 	 </ul>
@@ -121,39 +123,43 @@
          <li><a  href="{% url 'jobseeker:save_job' o.0.pk %}" ><img src="{% static 'images/ribban.png' %}"></a></li>
 <li><img src="{% static 'images/share.png' %}">
     </li> </ul>
-      <p>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Apply for the job
-</button>
-      </p>
+
+
+
+
   </div>
-                    </div>
+                            <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{o.0.pk}}" aria-expanded="false" aria-controls="collapseOne">
+        {{o.0.pk}}
+        </button>
+      </h5>
+    </div>
 
-
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-   <form action = "" method = "POST">
+    <div id={{o.0.pk}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+ <form action = "" method = "POST">
     {% csrf_token %}
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">{{o.0.job_title}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body ">
+
+
           {% for q in o.3 %}
        {{q.question}}
           <input type = "hidden" name = "pk" value="{{o.0.pk}}" />
           <input type="text" name="{{q.question}}" >
           {% endfor %}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <input class="btn btn-primary" type="submit" value="Apply">
-      </div>
-   </form>
+
+
+        <input class="btn btn-success" type="submit" value="Apply">
+
+   </form>     </div>
     </div>
   </div>
 </div>
+                    </div>
+
+
 
 </div>
 

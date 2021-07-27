@@ -2,7 +2,6 @@
 <!doctype html>
 <html lang="en">
 
-<!-- Mirrored from grocbees.com/job-portal/skills.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 03:56:35 GMT -->
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -12,7 +11,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href=" {% static 'css/style_skills.css' %}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+{% block mycss %}
+<style>
+  .job-left {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 
+  cursor: pointer;
+
+  overflow: auto;
+
+  white-space: nowrap;
+}
+  .skills-right {
+  margin-left: 25px;
+}
+
+</style>
+{% endblock mycss %}
   </head>
   <body class="skills-page">
 
@@ -22,7 +43,7 @@
 				<div class="col-md-12 col-12">
 					<div class="top-navbar">
 						<nav class="navbar navbar-expand-lg ">
-  <a class="navbar-brand" href="{% url 'jobseeker:jobseeker_home' %}">LOGO</a>
+  <a class="navbar-brand" href="#">LOGO</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -52,10 +73,7 @@
 	  <li class="nav-item">
         <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
       </li>
-</li>
-	  <li class="nav-item bell-icon">
-        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
-      </li>
+
 	  <li class="nav-item">
         <a class="nav-link" href="{% url 'jobseeker:profile' %}"><img src={{profile.profile_pic.url}}></a>
       </li>
@@ -73,7 +91,8 @@
     <section class="job-portal">
 	<div class="container">
 		<div class="row">
-            <div class="col-md-3 col-12">
+
+            <div class="col-md-3 col-12" >
 				<div class="job-left">
   	{% for field in form1 %}
       <p style="color:grey">
@@ -95,26 +114,29 @@
     {% endfor %}
                     </div>
 			</div>
+
             <div class="col-md-9 col-12">
+            <br>
+
 				<div class="row">
-						<div class="col-md-7 col-12">
-							<div class="skills-left">
+						<div class="col-md-5 col-12">
+							<div class="skills-right">
 <h3>Educational detail</h3>
     {{ form2.management_form }}
-{% for form in form2 %}
+{% for fom in form2 %}
 
 <div class="row form-row spacer">
     <div class="col-2">
 
-        <label>{{form.label}}</label>
+        <label>{{fom.label}}</label>
     </div>
-    <div class="col-4">
+    <div class="col-6">
         <div class="input-group2">
-            {{form}}
+            {{fom}}
             </div>
 
             <div class="input-group2-append">
-                <button class="btn btn-success add-form-row">+</button>
+                <button class="btn btn-success add-form-row1">+</button>
             </div>
 
     </div>
@@ -123,7 +145,7 @@
                                 </div>
 
 						<div class="col-md-7 col-12">
-							<div class="skills-left">
+							<div class="skills-right">
 <h3>Professional detail</h3>
     {{ form3.management_form }}
 {% for form in form3 %}
@@ -139,7 +161,7 @@
             </div>
 
             <div class="input-group1-append">
-                <button class="btn btn-success add-form-row">+</button>
+                <button class="btn btn-success add-form-row2">+</button>
             </div>
 
     </div>
@@ -178,9 +200,10 @@
         <div class="input-group1">
             {{form}}
             </div>
-
             <div class="input-group1-append">
+
                 <button class="btn btn-success add-form-row">+</button>
+
             </div>
 
     </div>
@@ -259,6 +282,16 @@ function deleteForm(prefix, btn) {
     return false;
 }
 $(document).on('click', '.add-form-row', function(e){
+    e.preventDefault();
+    cloneMore('.form-row:last', 'form');
+    return false;
+});
+$(document).on('click', '.add-form-row1', function(e){
+    e.preventDefault();
+    cloneMore('.fom-row:last', 'fom');
+    return false;
+});
+$(document).on('click', '.add-form-row2', function(e){
     e.preventDefault();
     cloneMore('.form-row:last', 'form');
     return false;
