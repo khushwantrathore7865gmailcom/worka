@@ -42,6 +42,7 @@ class SignUpView(View):
             else:
                 user = form.save(commit=False)
                 user.username = user.email
+                user.user_name = user.email
                 user.is_active = True  # change this to False after testing
                 user.is_employeer = True
                 user.save()
@@ -336,14 +337,20 @@ def job_post(request):
             f1 = form1.save(commit=False)
             f1.employer_id = e
             f1.save()
-            print(f1)
+            # print(f1)
         if formset.is_valid():
+            # print("formset:")
+            # print(formset)
             for form in formset:
+                # print("form:")
+                # print(form)
                 quest = form.cleaned_data.get('question')
+                # print("question:")
+                # print(quest)
                 if quest:
                     Employer_jobquestion(job_id=f1, question=quest).save()
 
-                return redirect('recruiter:employer_home')
+            return redirect('recruiter:employer_home')
     #
     #         form2 = JobsQuestionForm(request.POST)
     #         if form2.is_valid():

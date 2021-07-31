@@ -2,10 +2,20 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from user_custom.models import User_custom
 from .models import Candidate_profile, Candidate_edu, Candidate_profdetail, Candidate_resume, Candidate_skills, \
-    Candidate_expdetail
+    Candidate_expdetail, Resume_order
 
 from django.forms import modelformset_factory
 
+experience = [
+    ('1-3', '1-3'),
+    ('4-7', '4-7'),
+    ('8+', '8+'),
+]
+resume = [
+    ('A', 'A'),
+    ('B', 'B'),
+    ('C', 'C'),
+]
 job_Type = [
     ('Part time', 'Part time'),
     ('Full time', 'Full time'),
@@ -238,7 +248,6 @@ ProfileRegisterForm_profdetail = modelformset_factory(
         }),
     })
 
-
 # class ProfileRegisterForm_profdetail(forms.ModelForm):
 #     class Meta:
 #         model = Candidate_profdetail
@@ -273,6 +282,7 @@ ProfileRegistration_skills = modelformset_factory(
 
     })
 
+
 # class ProfileRegistration_skills(forms.ModelForm):
 #     class Meta:
 #         model = Candidate_skills
@@ -290,4 +300,16 @@ class ProfileRegistration_expdetail(forms.ModelForm):
             'role',
             'job_type',
             'exp_salary',
+        ]
+
+
+class Resumeforming(forms.ModelForm):
+    year_experience = forms.CharField(widget=forms.RadioSelect(choices=experience, ))
+    resume_type = forms.CharField(widget=forms.RadioSelect(choices=resume, ))
+
+    class Meta:
+        model = Resume_order
+        fields = [
+            'year_experience',
+            'resume_type',
         ]

@@ -58,12 +58,12 @@ class Candidate_profile(models.Model):
 class Candidate_edu(models.Model):
     user_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='user_edu')
     institute_name = models.CharField(max_length=250)
-    start_date = models.IntegerField(null=True)
-    start_month = models.IntegerField(null=True)
-    start_year = models.IntegerField(null=True)
-    end_date = models.IntegerField(null=True)
-    end_month = models.IntegerField(null=True)
-    end_year = models.IntegerField(null=True)
+    start_date = models.IntegerField(null=True, blank=True)
+    start_month = models.IntegerField(null=True, blank=True)
+    start_year = models.IntegerField(null=True, blank=True)
+    end_date = models.IntegerField(null=True, blank=True)
+    end_month = models.IntegerField(null=True, blank=True)
+    end_year = models.IntegerField(null=True, blank=True)
     course_type = models.CharField(max_length=250)
     degree = models.CharField(max_length=250)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -77,9 +77,9 @@ class Candidate_profdetail(models.Model):
     start_date = models.IntegerField(null=True)
     start_month = models.IntegerField(null=True)
     start_year = models.IntegerField(null=True)
-    end_date = models.IntegerField(null=True)
-    end_month = models.IntegerField(null=True)
-    end_year = models.IntegerField(null=True)
+    end_date = models.IntegerField(null=True, blank=True)
+    end_month = models.IntegerField(null=True, blank=True)
+    end_year = models.IntegerField(null=True, blank=True)
     is_current = models.BooleanField(default=False)
 
 
@@ -104,3 +104,12 @@ class Candidate_expdetail(models.Model):
     exp_salary = models.CharField(max_length=150, blank=True)
     prefer_location = models.CharField(max_length=150, blank=True)
     Total_Working = models.CharField(max_length=50, blank=True)
+
+
+#
+class Resume_order(models.Model):
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+    is_payment_Done = models.BooleanField(default=False)
+    year_experience = models.CharField(max_length=1024, null=True)
+    resume_type = models.CharField(max_length=1024, default='A')
+    amount = models.IntegerField(default=250, blank=True)

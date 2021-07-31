@@ -1,6 +1,6 @@
 from django.urls import include, path
 from .views import SignUpView, ActivateAccount, jobseeker_Home, ProfileView, save_later, SavedJobs, AppliedJobs, \
-    remove_applied, remove_saved, ProfileEdit
+    remove_applied, remove_saved, ProfileEdit, ResumeCreation
 from . import views
 from django.contrib.auth import views as auth_views  # import this
 
@@ -27,5 +27,6 @@ urlpatterns = [
     path('viewprofile/', ProfileView, name='profile'),
     path('profile_edit/', ProfileEdit, name='ProfileEdit'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
+    path('resume/', ResumeCreation, name='resume')
 
 ]

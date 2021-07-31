@@ -7,7 +7,7 @@ from django.utils.encoding import force_text
 from .models import Candidate, Candidate_profile, Candidate_edu, Candidate_skills, Candidate_profdetail, \
     Candidate_resume
 from .forms import SignUpForm, ProfileRegisterForm, ProfileRegisterForm_edu, ProfileRegisterForm_profdetail, \
-    ProfileRegisterForm_resume, ProfileRegistration_expdetail, ProfileRegistration_skills
+    ProfileRegisterForm_resume, ProfileRegistration_expdetail, ProfileRegistration_skills, Resumeforming
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -36,12 +36,14 @@ class SignUpView(View):
 
         if form.is_valid():
             emaill = form.cleaned_data['email']
+            # print(form.password1)
             if User_custom.objects.filter(email=emaill).exists():
 
                 return HttpResponse('User with same email already exists, Please try again with different Username!!')
             else:
                 user = form.save(commit=False)
                 user.username = user.email
+                user.user_name = user.email
                 user.is_active = True  # change this to False after testing
                 user.is_candidate = True
                 user.save()
@@ -331,13 +333,11 @@ def SavedJobs(request):
     my_sk = []
     c = Candidate.objects.get(user=request.user)
     try:
-        cp=Candidate_profile.objects.get(user_id=c)
+        cp = Candidate_profile.objects.get(user_id=c)
     except Candidate_profile.DoesNotExist:
-        cp=None
+        cp = None
     if cp:
         skills = Candidate_skills.objects.filter(user_id=c)
-
-
 
         j = 0
         for i in skills:
@@ -412,3 +412,26 @@ def remove_saved(request, pk):
             s.delete()
 
     return redirect('jobseeker:SavedJobs')
+
+
+def ResumeCreation(request):
+    c = Candidate.objects.get(user=request.user)
+    if request.method == 'GET':
+        form = Resumeforming(request.GET or None)
+    elif request.method == 'POST':
+        form = Resumeforming(request.POST)
+        if form.is_valid():
+
+            f = form.save(commit=False)
+            print(f)
+            f.candidate = c
+            if f.resume_type=='A':
+                f.amount = 250
+            elif f.resume_type=='B':
+                f.amount = 250
+            elif f.resume_type=='C':
+                f.amount = 250
+            f.save()
+            return redirect('jobseeker:SavedJobs')
+
+    return render(request, 'jobseeker/resume.html', {'form': form})
