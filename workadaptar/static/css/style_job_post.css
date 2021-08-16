@@ -30,15 +30,16 @@ a{
 header
 {
 	box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.12);
-
 }
 .hero-section {
     padding-top: 30px;
 }
+
 .navbar-brand {
     background: grey;
     border-radius: 50%;
     width: 50px;
+
     height: 50px;
     color: transparent;
 }
@@ -64,7 +65,7 @@ header ul.navbar-nav li.nav-item a {
 	font-weight: 500;
 	font-family: 'Roboto';
 	color:#000;
-	
+
 }
 .hero-section p {
     font-family: Roboto;
@@ -158,7 +159,7 @@ padding: 20px 0;
 }
 .mobile-main-images img
 {
-	
+
 		margin-bottom: 40px;
 }
 .heading {
@@ -358,7 +359,7 @@ section.fifth-section .heading button {
 {
 	width: 170px;
     height: 200px;
-    margin-bottom: auto;	
+    margin-bottom: auto;
 }
 .handpicked-inner-desc {
     position: absolute;
@@ -979,7 +980,7 @@ form.form-inline.new-form .input-group {
 }
 nav form.new-form .input-group-prepend span#basic-addon1{
 	background: #fff;
-	
+
 }
 .job-posted ul li a {//
     styleName: H#;
@@ -1052,7 +1053,7 @@ nav form.new-form .input-group-prepend span#basic-addon1{
 }
 .table-main table td{
 	position: relative;
-	
+
 }
 /***************/
 input[type="checkbox"] {width: 25px;height: 25px;position: absolute;z-index: 99999;opacity: 0;}
@@ -1174,7 +1175,7 @@ button.navbar-toggler span.navbar-toggler-icon:after {content: "";height: 2px;ba
         margin-right: 0;
         margin-bottom: 20px;
     }
-    
+
 
 
 
@@ -1197,7 +1198,7 @@ button.navbar-toggler span.navbar-toggler-icon:after {content: "";height: 2px;ba
 	.hero-section p{
 		text-align: center;
 	}
-	
+
 	.hero-section h1 {
     text-align: center;
 	line-height: 42px;
@@ -1235,7 +1236,7 @@ section.second-section {
 }
 .story-inner p {
     padding-bottom: 50px;
-}	
+}
 	.story-inner {
     margin-top: 70px;
 }
@@ -1294,7 +1295,7 @@ nav.navbar.navbar-expand-lg {
 .hero-form .form-group button{
 	margin-left:0;
 	margin-right:0;
-	
+
 }
 .hero-section {
     padding-top: 30px;

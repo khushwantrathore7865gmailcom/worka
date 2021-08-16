@@ -4,7 +4,16 @@ from user_custom.models import User_custom
 from .models import Employer_profile, Employer_job, Employer_jobquestion
 from django.forms import formset_factory
 
-
+experience = [
+    ('1-3', '1-3'),
+    ('4-7', '4-7'),
+    ('8+', '8+'),
+]
+job_Type = [
+    ('Part time', 'Part time'),
+    ('Full time', 'Full time'),
+    ('Internship', 'Internship'),
+]
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, widget=forms.TextInput(
         attrs={'placeholder': 'Enter your first name', 'class': "input100"}))
@@ -48,6 +57,19 @@ class ProfileRegisterForm(forms.ModelForm):
 
 
 class JobPostForm(forms.ModelForm):
+    job_title = forms.CharField(max_length=30,label='Job Title', required=False, widget=forms.TextInput(
+        attrs={'placeholder': 'Enter your Job Title', 'class': "input100"}))
+    job_description = forms.CharField(max_length=30, label='job description', required=False, widget=forms.TextInput(
+        attrs={'placeholder': 'Enter your Job description', 'class': "input100"}))
+    employment_type = forms.ChoiceField(choices=job_Type, required=False, label='employment type', widget=forms.Select(
+        attrs={ 'class': "input100"}))
+    job_location = forms.CharField(max_length=30, label='job location', required=False, widget=forms.TextInput(
+        attrs={'placeholder': 'Enter your job location', 'class': "input100"}))
+    job_experience = forms.ChoiceField(choices=experience, required=False, label='job experience', widget=forms.Select(
+        attrs={'class': "input100"}))
+    skill = forms.CharField(max_length=30, label='skill', required=False, widget=forms.TextInput(
+        attrs={'placeholder': 'Enter your skill', 'class': "input100"}))
+
     class Meta:
         model = Employer_job
         fields = [

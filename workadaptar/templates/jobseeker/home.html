@@ -8,11 +8,74 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/style12.css' %}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+  <link rel="stylesheet" href="{% static 'css/stylemod.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
           <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  		<style>
+.dropbtn {
+  background-color: #FFFFFF;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #03A84E;}
+		.job-left.job-left-images-new img {
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+}
+.job-left-desc {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0px 50px 0px rgb(0 0 1 / 25%);
+}
+
+.job-left.job-left-images-new {
+    position: relative;
+}
+
+.job-left.job-left-images-new:after {content: "";position: absolute;background: #fff;top: 22%;left: 0;width: 100%;height: 30%;z-index: -1;
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0px 50px 0px rgb(0 0 1 / 25%);
+}
+.job-left.job-left-images-new {
+    background: transparent;
+    box-shadow: none;
+}
+.job-left-desc {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 39px 50px 0px rgb(0 0 1 / 14%);
+}
+
+
+		</style>
   </head>
   <body>
 
@@ -42,25 +105,34 @@
 
 
 	<ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
       </li>
 	  <li class="nav-item">
         <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
       </li>
-	  <li class="nav-item active">
+
+	  <li class="nav-item">
         <a class="nav-link" href="#">Resume</a>
       </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
-      </li>
-</li>
+
 	  <li class="nav-item bell-icon">
         <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
       </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'jobseeker:profile' %}"><img src={{cp.profile_pic.url}}></a>
-      </li>
+         <li class="nav-item">
+<div class="dropdown">
+  <button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
+  <div class="dropdown-content">
+    <a href="{% url 'jobseeker:profile' %}">My Profile</a>
+    <a href="#">Edit Profile</a>
+    <a href="#">Log Out</a>
+  </div>
+</div>
+         </li>
+
 
 	 </ul>
 
@@ -82,16 +154,17 @@
 					<h4>100+ Handpicked Jobs Just For You</h4>
 				</div>
 			</div>
+
             <div class="col-md-3 col-12">
-				<div class="job-left">
-						<img src={{cp.profile_pic.url}}>
+				<div class="job-left job-left-images-new">
+						<img src="{{cp.profile_pic.url}}">
 						<div class="job-left-desc">
 							<h2>{{c.user.first_name}} {{c.user.last_name}}</h2>
-<!--								<h4>UX/ UI Designer</h4>-->
-								<h5>Email address:</h5>
+
+								<h5>Email:</h5>
 								<h6>{{c.user}}</h6>
-<!--								<h5>Location:</h5>-->
-<!--								<h6>Chandigarh</h6>-->
+								<h5>Location:</h5>
+								<h6>{{cp.city}},{{cp.state}}</h6>
 
 						</div>
 				</div>
@@ -103,7 +176,12 @@
        {% for o in jobs %}
 				<div class="job-right">
 					<div class="job-right-jobs">
+                        <div id="{{o.0.pk}}" class="carousel slide" data-interval="false">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
 						<div class="job-right-jobs-image">
+
+                            <img src={{o.4.company_logo.url}}>
             <div class="jobs-main">
             <div class="text-jobs">
       <h5>{{o.0.job_title}}</h5>
@@ -124,22 +202,36 @@
 <li><img src="{% static 'images/share.png' %}">
     </li> </ul>
 
+ <a class="carousel-control-next" href="#{{o.0.pk}}" role="button" data-slide="next">
 
+							<p>Apply</p>
+    <span class="sr-only">Next</span>
+ </a>
 
 
   </div>
-                            <div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{o.0.pk}}" aria-expanded="false" aria-controls="collapseOne">
-        {{o.0.pk}}
-        </button>
-      </h5>
-    </div>
+<!--                            <div class="accordion" id="accordionExample">-->
+<!--  <div class="card">-->
+<!--    <div class="card-header" id="headingOne">-->
+<!--      <h5 class="mb-0">-->
+<!--        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{o.0.pk}}" aria-expanded="false" aria-controls="collapseOne">-->
+<!--        {{o.0.pk}}-->
+<!--        </button>-->
+<!--      </h5>-->
+<!--    </div>-->
 
-    <div id={{o.0.pk}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
+<!--    <div id={{o.0.pk}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">-->
+<!--      <div class="card-body">-->
+<!--  </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+                    </div>
+     <div class="carousel-item">
+
+         <h3><span>Questions</span></h3>
+
+
  <form action = "" method = "POST">
     {% csrf_token %}
 
@@ -153,12 +245,22 @@
 
         <input class="btn btn-success" type="submit" value="Apply">
 
-   </form>     </div>
-    </div>
-  </div>
-</div>
-                    </div>
+   </form>
+               <div class="share">
+     <br>
+                   <br>
 
+			<a class="carousel-control-prev" href="#{{o.0.pk}}" role="button" data-slide="prev" style="float:right">
+    <p>Back</p>
+  </a>
+               </div>
+
+
+
+                        </div>
+                    </div>
+                        </div>
+                    </div>
 
 
 </div>

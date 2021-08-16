@@ -87,6 +87,7 @@
   <h2>Candidate Applied</h2>
     <h3>{{job.job_title}}</h3>
 </div>
+
                 <a class="btn btn-primary" href="{% url 'recruiter:shortlist_view_applied_candidate' job.pk %}" role="button">shorlist view</a>
     <a class="btn btn-primary" href="{% url 'recruiter:disqualify_view_applied_candidate' job.pk %}" role="button">disqualify view</a>
                 <br>
@@ -126,9 +127,9 @@
 							<div class="info-left">
 								<ul class="list-inline">
                            	<li><img src="{% static 'images/mail.png' %}"> Email ID: <span>{{c.0.user_id}}</span></li>
-<!--									<li><img src="images/phone.png"> Phone no. : <span>(252) 555-0126</span></li>-->
+									<li><img src="{% static 'images/phone.png' %}"> Phone no. : <span>{{c.0.phone}}</span></li>
 									<li><img src="{% static 'images/location.png' %}"> Location : <span>{{c.0.address}}</span></li>
-<!--									<li><img src="images/educa.png">Education :  <span>Software Engineering, MBA in.... </span></li>-->
+									<li><img src="{% static 'images/educa.png' %}">Education :  <span>{{c.1.degree}} from {{c.1.institute_name}}</span></li>
 
 								</ul>
 							</div>
@@ -146,19 +147,19 @@
 
 
 
-    <a class="btn btn-primary" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">disqualify</a>
-    <a class="btn btn-primary" href="{% url 'recruiter:shortlist' c.6.pk %}" role="button">Shortlist</a>
+    <a class="btn btn-success" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">disqualify</a>
+    <a class="btn btn-secondary" href="{% url 'recruiter:shortlist' c.6.pk %}" role="button">Shortlist</a>
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{c.0.user_id}}" aria-expanded="false" aria-controls="collapseOne">
-         {{c.0.user_id}}
+         Check the answer to your question
         </button>
       </h5>
     </div>
 
-    <div id={{c.0.user_id}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+    <div id={{c.0.user_id}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample" aria-expanded="false" >
       <div class="card-body">
 
     {% for q in question %}

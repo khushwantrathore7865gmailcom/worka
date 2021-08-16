@@ -143,13 +143,18 @@ def Home(request):
             # print(e_date)
             diff = abs((e_date - s_date).days)
             print(diff)
+            try:
+                e_j = Employer_expired_job.objects.get(job_id=j)
+            except Employer_expired_job.DoesNotExist:
+                e_j = None
             if diff > 30:
-                if Employer_expired_job.object.get(job_id=j):
+                if e_j:
                     expired_job.append(j)
                 else:
                     Employer_expired_job.objects.create(job_id=j).save()
                     expired_job.append(j)
-
+            elif e_j:
+                expired_job.append(j)
             else:
                 jobs.append(j)
         context = {'jobs': jobs, 'expired': expired_job, 'ep': ep}
@@ -193,6 +198,7 @@ def view_applied_candidate(request, pk):
     professional_profile = []
     skill = []
     resume = []
+    expect = []
     candidate_answer = []
     e = Employer.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
@@ -202,8 +208,9 @@ def view_applied_candidate(request, pk):
         c = can.candidate_id
         candidate_profile.append(Candidate_profile.objects.get(user_id=c))
         candidate_user.append(c.user)
-        education_profile.append(Candidate_edu.objects.filter(user_id=c))
+        education_profile.append(Candidate_edu.objects.filter(user_id=c).first())
         professional_profile.append(Candidate_profdetail.objects.filter(user_id=c))
+        expect.append(Candidate_expdetail.objects.get(user_id=c))
         skill.append(Candidate_skills.objects.filter(user_id=c))
 
         resume.append(Candidate_resume.objects.get(user_id=c))
@@ -213,7 +220,7 @@ def view_applied_candidate(request, pk):
     # quest = zip(question, candidate_answer)
     print(candidate_answer)
     objects = zip(candidate_profile, education_profile, professional_profile, skill, resume,
-                  candidate_user, candidate_Applied)
+                  candidate_user, candidate_Applied, expect)
 
     return render(request, 'employer/job_candidate.html',
                   {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer})
@@ -246,8 +253,9 @@ def shortlistview_applied_candidate(request, pk):
 
     objects = zip(candidate_profile, education_profile, professional_profile, skill, resume,
                   candidate_user, candidate_Applied, expect)
-    question = zip(question, candidate_answer)
-    return render(request, 'employer/shortlisted_view.html', {'candidate': objects, 'job': job, 'qna': question})
+    # question = zip(question, candidate_answer)
+    return render(request, 'employer/shortlisted_view.html',
+                  {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer})
 
 
 def disqualifyview_applied_candidate(request, pk):
@@ -257,6 +265,7 @@ def disqualifyview_applied_candidate(request, pk):
     professional_profile = []
     skill = []
     resume = []
+    expect = []
     candidate_answer = []
     e = Employer.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
@@ -268,6 +277,7 @@ def disqualifyview_applied_candidate(request, pk):
         candidate_user.append(c.user)
         education_profile.append(Candidate_edu.objects.filter(user_id=c))
         professional_profile.append(Candidate_profdetail.objects.filter(user_id=c))
+        expect.append(Candidate_expdetail.objects.get(user_id=c))
         skill.append(Candidate_skills.objects.filter(user_id=c))
 
         resume.append(Candidate_resume.objects.get(user_id=c))
@@ -275,9 +285,10 @@ def disqualifyview_applied_candidate(request, pk):
             candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
 
     objects = zip(candidate_profile, education_profile, professional_profile, skill, resume,
-                  candidate_user, candidate_Applied)
-    question = zip(question, candidate_answer)
-    return render(request, 'employer/disqualified.html', {'candidate': objects, 'job': job, 'qna': question})
+                  candidate_user, candidate_Applied, expect)
+    # question = zip(question, candidate_answer)
+    return render(request, 'employer/disqualified.html',
+                  {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer})
 
 
 def shortlist(request, pk):
@@ -312,17 +323,16 @@ def publish_job(request, pk):
 
 
 # @login_required(login_url='/login/')
-def ProfileView(request, pk):
-    profile = Employer.objects.get(user=User_custom.objects.get(id=pk))
-    if request.method == 'POST':
-        form1 = ProfileRegisterForm(request.POST)
-        if form1.is_valid():
-            f1 = form1.save(commit=False)
-            f1.user_id = profile
-        #
-    form1 = ProfileRegisterForm()
+def ProfileView(request):
+    u = request.user
+    e = Employer.objects.get(user=u)
+    profile = Employer_profile.objects.get(employer=e)
 
-    return render(request, 'dashboard/my-profile.html', {"form1": form1})
+    return render(request, 'employer/skills.html', {
+        "user": u,
+        "profile": profile,
+
+    })
 
 
 def job_post(request):

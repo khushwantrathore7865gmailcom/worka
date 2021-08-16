@@ -7,7 +7,7 @@
 {
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box; 
+	box-sizing: border-box;
 }
 
 body
@@ -65,7 +65,7 @@ header ul.navbar-nav li.nav-item a {
 	font-weight: 500;
 	font-family: 'Roboto';
 	color:#000;
-	
+
 }
 .hero-section p {
     font-family: Roboto;
@@ -159,7 +159,7 @@ padding: 20px 0;
 }
 .mobile-main-images img
 {
-	
+
 		margin-bottom: 40px;
 }
 .heading {
@@ -359,7 +359,7 @@ section.fifth-section .heading button {
 {
 	width: 170px;
     height: 200px;
-    margin-bottom: auto;	
+    margin-bottom: auto;
 }
 .handpicked-inner-desc {
     position: absolute;
@@ -980,7 +980,7 @@ form.form-inline.new-form .input-group {
 }
 nav form.new-form .input-group-prepend span#basic-addon1{
 	background: #fff;
-	
+
 }
 .job-posted ul li a {//
     styleName: H#;
@@ -1053,7 +1053,7 @@ nav form.new-form .input-group-prepend span#basic-addon1{
 }
 .table-main table td{
 	position: relative;
-	
+
 }
 /***************/
 input[type="checkbox"] {width: 25px;height: 25px;position: absolute;z-index: 99999;opacity: 0;}
@@ -1470,7 +1470,7 @@ line-height: 22px;
 letter-spacing: 0em;
 text-align: left;
 color: rgba(3, 168, 78, 1);
-    
+
 }
 
 .all-job-left .keywords input {
@@ -1492,7 +1492,7 @@ color: rgba(3, 168, 78, 1);
 
 .all-job-left .keywords {
 	position: relative;
-	
+
 }
 .all-job-left .keywords i {
     position: absolute;
@@ -2041,7 +2041,7 @@ max-w {
 body.skills-page .container
 {
 		max-width: 1200px;
-	
+
 }
 .skill-list.second .skill-list-right {justify-content: flex-start;display: flex;flex-direction: column;align-items: center;}
 .skills-right p {
@@ -2115,7 +2115,7 @@ label.uploadImg {
 .whiteBox, .whiteBox p  {
     width: auto;
     text-align: center;
-	
+
 }
 .whiteBox {background: url("../images/border.png");background-size: 100% 100%;width: 100%;
 	margin-top: 40px;
@@ -2268,7 +2268,7 @@ span.tech {
     max-width: 80%;
     flex: 0 0 80%;
 }
-	
+
 }
 
 
@@ -2363,7 +2363,7 @@ span.to {
         margin-right: 0;
         margin-bottom: 20px;
     }
-    
+
 
 
 
@@ -2386,7 +2386,7 @@ span.to {
 	.hero-section p{
 		text-align: center;
 	}
-	
+
 	.hero-section h1 {
     text-align: center;
 	line-height: 42px;
@@ -2424,7 +2424,7 @@ section.second-section {
 }
 .story-inner p {
     padding-bottom: 50px;
-}	
+}
 	.story-inner {
     margin-top: 70px;
 }
@@ -2483,7 +2483,7 @@ nav.navbar.navbar-expand-lg {
 .hero-form .form-group button{
 	margin-left:0;
 	margin-right:0;
-	
+
 }
 .hero-section {
     padding-top: 30px;
@@ -2523,7 +2523,7 @@ section.job-portal.all-jobs .heading-action ul li:last-child {
     margin-bottom: 20px;
 }
 .job-right.all-job-rights .jobs-main, .job-right.all-job-rights .job-right-jobs-image {
-    
+
     flex-wrap: wrap;
 }
 	.job-right.all-job-rights .job-right-jobs {
@@ -2681,7 +2681,7 @@ section.fifth-section .heading h3 {
 }
 
 .job-right.all-job-rights .text-jobs ul {
-    
+
     flex-wrap: wrap;
 }
 .job-right.all-job-rights p.min {
@@ -2726,7 +2726,7 @@ form.form-inline.new-form .input-group {
 .employment-section .employment-left
 {
 	border: none;
-	
+
 }
 .employment-right {
     margin-top: 40px;

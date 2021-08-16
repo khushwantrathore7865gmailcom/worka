@@ -8,14 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
  <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-       <link rel="stylesheet" type="text/css" href=" {% static 'css/style_skills.css' %}">
-
+<link rel="stylesheet" type="text/css" href=" {% static 'css/style_Addjob.css' %}">
     <link rel="stylesheet" href=" {% static 'css/style.css'%}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
 
     <title>Title</title>
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <style>
+        .input100{
+
+        }
+    </style>
 </head>
 <body class="skills-page">
 
@@ -88,12 +92,53 @@
 				<div class="skills-left">
 <form class="form-horizontal" method="POST" action="">
 {% csrf_token %}
-{{ form1|crispy }}
+
+    <label style="font-size: 20px;">{{form1.job_title.label}}</label>
+
+
+        <div class="input-group">
+            {{form1.job_title}}
+        </div>
+  <label style="font-size: 20px;">{{form1.job_description.label}}</label>
+
+
+        <div class="input-group">
+            {{form1.job_description}}
+        </div>
+
+      <label style="font-size: 20px;">{{form1.employment_type.label}}</label>
+
+
+        <div class="input-group">
+            {{form1.employment_type}}
+        </div>
+
+      <label style="font-size: 20px;">{{form1.job_location.label}}</label>
+
+
+        <div class="input-group">
+            {{form1.job_location}}
+        </div>
+  <label style="font-size: 20px;">{{form1.job_experience.label}}</label>
+
+
+        <div class="input-group">
+            {{form1.job_experience}}
+        </div>
+  <label style="font-size: 20px;">{{form1.skill.label}}</label>
+
+
+        <div class="input-group">
+            {{form1.skill}}
+        </div>
+
+
+
 {{ form2.management_form }}
 {% for form in form2 %}
 <div class="row form-row spacer">
     <div class="col-8">
-        <label>{{form.question.label}}</label>
+        <label style="font-size: 20px;">{{form.question.label}}</label>
 
 
         <div class="input-group">

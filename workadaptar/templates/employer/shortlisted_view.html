@@ -92,7 +92,7 @@
     {% for c in candidate %}
 
     {% if c.6.is_shortlisted %}
-          <div class="col-md-9 col-12">
+         <div class="col-md-9 col-12">
 
 				<div class="job-right all-job-rights">
 					<div class="job-right-jobs">
@@ -136,26 +136,43 @@
 <div class="download">
 							<button><a href="{{c.4.coverletter_link.url}}" ><img src="{% static 'images/download1.png' %}">Download Cover Letter</a></button>
 							<button><a href="{{c.4.resume_link.url}}"><img src="{% static 'images/download2.png' %}">Download Resume</a></button>
-<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
-  </a>
-      <div class="collapse" id="collapseExample">
 
-  <div class="card card-body">
-    {% for q,a in qna %}
-    <div>{{q.question}}</div>
-    {{a.answer}}
-    {% endfor %}
+
+
+    <a class="btn btn-primary" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">disqualify</a>
+<!--    <a class="btn btn-primary" href="{% url 'recruiter:shortlist' c.6.pk %}" role="button">Shortlist</a>-->
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{c.0.user_id}}" aria-expanded="false" aria-controls="collapseOne">
+         {{c.0.user_id}}
+        </button>
+      </h5>
+    </div>
+
+    <div id={{c.0.user_id}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+
+    {% for q in question %}
+          <div>
+          {{q.question}}</div>
+          {% endfor %}
+          {% for a in answer %}
+          {% if a.candidate_id == c.0.user_id %}
+          <div>
+          {{a.answer}}</div>
+          {% endif %}
+          {% endfor %}
+
+     </div>
+    </div>
   </div>
-</div>
-
-    <a class="btn btn-primary" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">disqualify</a>				</div>
+</div></div>
 
 
 
 </div>
-
-
 
     {% elif c.6.is_disqualified %}
     {% else %}
