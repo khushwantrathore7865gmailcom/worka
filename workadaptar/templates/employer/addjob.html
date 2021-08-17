@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
  <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 <link rel="stylesheet" type="text/css" href=" {% static 'css/style_Addjob.css' %}">
     <link rel="stylesheet" href=" {% static 'css/style.css'%}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
@@ -17,8 +18,24 @@
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
     <style>
         .input100{
-
+            width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
         }
+        .divv {
+            float: right;
+
+  background-color: lightgrey;
+  width: 400px;
+  border: 1px solid green;
+  padding: 30px;
+
+  margin: 0px;
+}
     </style>
 </head>
 <body class="skills-page">
@@ -86,17 +103,39 @@
 	</header>
 
 <section class="job-portal">
+<div class="col-md-12">
+				<div class="heading">
+					<h3>Post <span>Job</span></h3>
+
+                </div></div>
 	<div class="container">
+        <div class="divv">
+
+            <h4>Few guidelines</h4>
+
+                    <ul>
+                        <li>Proper formatting of the text/content of the posting with clear spaces and standard bullets (-) to be used.</li>
+                        <li>No short forms/abbreviations to be used in the text.</li>
+                        <li>Correct mail ID to be included at the end of the posting.</li>
+                        <li>Two skills should be separated by comma.</li>
+                        <li>No spelling mistakes in the content.</li>
+                        <li>JD should be concise and crisp - to the point.</li>
+                    </ul>
+
+        </div>
+
 		<div class="row">
-  <div class="col-md-7 col-12" >
-				<div class="skills-left">
+
+
+  <div class="col-md-10 col-12" >
+				<div class="">
 <form class="form-horizontal" method="POST" action="">
 {% csrf_token %}
 
     <label style="font-size: 20px;">{{form1.job_title.label}}</label>
 
 
-        <div class="input-group">
+        <div class="input-group ">
             {{form1.job_title}}
         </div>
   <label style="font-size: 20px;">{{form1.job_description.label}}</label>
@@ -116,7 +155,7 @@
       <label style="font-size: 20px;">{{form1.job_location.label}}</label>
 
 
-        <div class="input-group">
+        <div class="input-group" style="width: 100%;">
             {{form1.job_location}}
         </div>
   <label style="font-size: 20px;">{{form1.job_experience.label}}</label>
