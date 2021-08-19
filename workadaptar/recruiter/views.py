@@ -200,6 +200,7 @@ def view_applied_candidate(request, pk):
     resume = []
     expect = []
     candidate_answer = []
+    # Question=[]
     e = Employer.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
     question = Employer_jobquestion.objects.filter(job_id=job)
@@ -217,13 +218,15 @@ def view_applied_candidate(request, pk):
         for q in question:
             candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
 
-    # quest = zip(question, candidate_answer)
-    print(candidate_answer)
+    quest = zip(question, candidate_answer)
+    # print(candidate_answer)
     objects = zip(candidate_profile, education_profile, professional_profile, skill, resume,
                   candidate_user, candidate_Applied, expect)
 
     return render(request, 'employer/job_candidate.html',
                   {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer})
+    # return render(request, 'employer/job_candidate.html',
+    #               {'candidate': objects, 'job': job, 'quest': quest})
 
 
 def shortlistview_applied_candidate(request, pk):
@@ -245,6 +248,7 @@ def shortlistview_applied_candidate(request, pk):
         candidate_user.append(c.user)
         education_profile.append(Candidate_edu.objects.filter(user_id=c))
         professional_profile.append(Candidate_profdetail.objects.filter(user_id=c))
+
         skill.append(Candidate_skills.objects.filter(user_id=c))
         expect.append(Candidate_expdetail.objects.get(user_id=c))
         resume.append(Candidate_resume.objects.get(user_id=c))

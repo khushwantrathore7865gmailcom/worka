@@ -156,13 +156,17 @@
 
     {% for q in question %}
           <div>
-          {{q.question}}</div>
-          {% endfor %}
+     <span style="color: #03A84E;">Q.</span> {{q.question}}<span style="color: #03A84E;">?</span></div>
+
           {% for a in answer %}
+
+          {% if a.question_id == q %}
           {% if a.candidate_id == c.0.user_id %}
           <div>
           {{a.answer}}</div>
           {% endif %}
+          {% endif %}
+          {% endfor %}
           {% endfor %}
 
      </div>

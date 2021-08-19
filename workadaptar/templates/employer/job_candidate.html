@@ -130,6 +130,7 @@
 									<li><img src="{% static 'images/phone.png' %}"> Phone no. : <span>{{c.0.phone}}</span></li>
 									<li><img src="{% static 'images/location.png' %}"> Location : <span>{{c.0.address}}</span></li>
 									<li><img src="{% static 'images/educa.png' %}">Education :  <span>{{c.1.degree}} from {{c.1.institute_name}}</span></li>
+                                    <li><img src="{% static 'images/educa.png' %}">Company :  <span>{{c.2.0.organization}} </span></li>
 
 								</ul>
 							</div>
@@ -164,13 +165,17 @@
 
     {% for q in question %}
           <div>
-          {{q.question}}</div>
-          {% endfor %}
+     <span style="color: #03A84E;">Q.</span> {{q.question}}<span style="color: #03A84E;">?</span></div>
+
           {% for a in answer %}
+
+          {% if a.question_id == q %}
           {% if a.candidate_id == c.0.user_id %}
           <div>
           {{a.answer}}</div>
           {% endif %}
+          {% endif %}
+          {% endfor %}
           {% endfor %}
 
      </div>

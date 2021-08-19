@@ -148,10 +148,10 @@
 			{% else %}
 			<tbody>
 				<tr>
-					<td><input type="checkbox"><label></label> <span>{{ job.job_title }}</span></td>
+					<td><input type="checkbox"><label></label><a href="{% url 'recruiter:job_detail' job.pk %}"> <span>{{ job.job_title }}</span></a></td>
 <!--					<td></td>-->
 					<td>{{ job.created_on.date }}</td>
-					<td style="text-align: center">{{ job.get_applied_no }}</td>
+					<td style="text-align: center"><a href="{% url 'recruiter:view_applied_candidate' job.pk %}">{{ job.get_applied_no }}</a></td>
 					<td class="dropdown"><span class="dropdown-toggle" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 									<a class="dropdown-item" href="{% url 'recruiter:delete_job' job.pk %}"><img src="{% static 'images/btn-icon/delete.png' %}"> Delete Job</a>
@@ -186,10 +186,10 @@
 			{% else %}
 			<tbody>
 				<tr>
-					<td><input type="checkbox"><label></label> <span>{{ job.job_title }}</span></td>
+					<td><input type="checkbox"><label></label><a href="{% url 'recruiter:job_detail' job.pk %}"> <span>{{ job.job_title }}</span></a></td>
 <!--					<td></td>-->
 					<td>{{ job.created_on.date }}</td>
-					<td style="text-align: center">{{ job.get_applied_no }}</td>
+					<td style="text-align: center"><a href="{% url 'recruiter:view_applied_candidate' job.pk %}">{{ job.get_applied_no }}</a></td>
 					<td class="dropdown"><span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 									<a class="dropdown-item" href="{% url 'recruiter:delete_job' job.pk %}"><img src="{% static 'images/btn-icon/delete.png' %}"> Delete Job</a>
@@ -225,10 +225,10 @@
 
 			<tbody>
 				<tr>
-					<td><input type="checkbox"><label></label> <span>{{ job.job_title }}</span></td>
+					<td><input type="checkbox"><label></label><a href="{% url 'recruiter:job_detail' job.pk %}"> <span>{{ job.job_title }}</span></a></td>
 <!--					<td></td>-->
 					<td>{{ job.created_on.date }}</td>
-					<td style="text-align: center">{{ job.get_applied_no }}</td>
+					<td style="text-align: center"><a href="{% url 'recruiter:view_applied_candidate' job.pk %}">{{ job.get_applied_no }}</a></td>
 					<td class="dropdown"><span class="dropdown-toggle" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span>
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
 									<a class="dropdown-item" href="{% url 'recruiter:delete_job' job.pk %}"><img src="{% static 'images/btn-icon/delete.png' %}"> Delete Job</a>
