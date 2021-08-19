@@ -163,6 +163,23 @@ def Home(request):
         return redirect('recruiter:employer/login')
 
 
+def unpublish(request, pk):
+    user = request.user
+    job = Employer_job.objects.get(pk=pk)
+    # print(c)
+    # print(job)
+    Employer_expired_job.objects.create(job_id=job).save()
+    return redirect('recruiter:employer_home')
+
+
+def remove_unpublish(request, pk):
+    job = Employer_job.objects.get(pk=pk)
+    unpub_job = Employer_expired_job.objects.get(job_id=job)
+    unpub_job.delete()
+
+    return redirect('recruiter:employer_home')
+
+
 def edit_job(request, pk):
     user = request.user
     job = get_object_or_404(Employer_job, pk=pk)

@@ -1,7 +1,7 @@
 from django.urls import include, path
 from .views import SignUpView, ActivateAccount, Home, login_employer, edit_job, delete_job, job_detail, publish_job, \
     view_applied_candidate, disqualify, shortlist, job_post, shortlistview_applied_candidate, \
-    disqualifyview_applied_candidate,ProfileView
+    disqualifyview_applied_candidate,ProfileView,unpublish,remove_unpublish
 from . import views
 from django.contrib.auth import views as auth_views  # import this
 
@@ -20,6 +20,8 @@ urlpatterns = [
          name='disqualify_view_applied_candidate'),
     path('jobdetail/applied_candidate/shortlist/<int:pk>', shortlist, name='shortlist'),
     path('jobdetail/applied_candidate/disqualify/<int:pk>', disqualify, name='disqualify'),
+    path('unpublish/<int:pk>', unpublish, name='unpublish'),
+    path('removeunpublish/<int:pk>', remove_unpublish, name='remove_unpublish'),
     path('viewprofile/', ProfileView, name='profile'),
     path('login', login_employer, name='employer/login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/recruiter/login'), name='logout'),
