@@ -32,7 +32,8 @@ class CustomAccountManager(BaseUserManager):
 
 class User_custom(AbstractUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    user_name = models.CharField(max_length=150, unique=True)
+    user_name = models.CharField(max_length=150, unique=False, default='')
+    username = models.CharField(max_length=150, unique=False, default='')
     # first_name = models.CharField(max_length=150, blank=True)
 
     # password = models.CharField(max_length=32,widget=forms.PasswordInput)
@@ -45,8 +46,8 @@ class User_custom(AbstractUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     objects = CustomAccountManager()
 
-    USERNAME_FIELD = 'user_name'
-    REQUIRED_FIELDS = ['email']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['user_name']
 
     def __str__(self):
         return self.user_name
