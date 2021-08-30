@@ -5,6 +5,7 @@ from .models import Candidate_profile, Candidate_edu, Candidate_profdetail, Cand
     Candidate_expdetail, Resume_order
 
 from django.forms import modelformset_factory
+from django.forms import formset_factory
 
 experience = [
     ('1-3', '1-3'),
@@ -248,6 +249,7 @@ ProfileRegisterForm_profdetail = modelformset_factory(
         }),
     })
 
+
 # class ProfileRegisterForm_profdetail(forms.ModelForm):
 #     class Meta:
 #         model = Candidate_profdetail
@@ -262,25 +264,44 @@ ProfileRegisterForm_profdetail = modelformset_factory(
 #             'end_month',
 #             'end_year',
 #         ]
-
-
-ProfileRegistration_skills = modelformset_factory(
-
-    Candidate_skills,
-    fields=('skill',
-            'rating',
-            ),
-    extra=1,
-    widgets={'skill': forms.TextInput(attrs={
-        'class': 'form-control',
-
-    }),
-        'rating': forms.TextInput(attrs={
+#
+#
+# ProfileRegistration_skills = modelformset_factory(
+#
+#     Candidate_skills,
+#     fields=('skill',
+#             'rating',
+#             ),
+#     extra=1,
+#     widgets={'skill': forms.TextInput(attrs={
+#         'class': 'form-control',
+#
+#     }),
+#         'rating': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#
+#     })
+#
+class BookForm(forms.Form):
+    skill = forms.CharField(
+        label='Skill',
+        widget=forms.TextInput(attrs={
             'class': 'form-control',
+            'placeholder': 'Enter skill:'
+        })
+    )
+    rating = forms.CharField(
+        label='Rating',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter rating of skill:'
+        })
+    )
 
-        }),
 
-    })
+ProfileRegistration_skills = formset_factory(BookForm, extra=1)
 
 
 # class ProfileRegistration_skills(forms.ModelForm):

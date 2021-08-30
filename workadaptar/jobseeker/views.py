@@ -292,9 +292,16 @@ def ProfileEdit(request):
             f4.user_id = profile
             f4.save()
 
-            f5 = form5.save(commit=False)
-            f5.user_id = profile
-            f5.save()
+            # f5 = form5.save(commit=False)
+            # f5.user_id = profile
+            # f5.save()
+            for form in form5:
+                # extract name from each form and save
+                skill = form.cleaned_data.get('skill')
+                rating = form.cleaned_data.get('rating')
+                # save book instance
+                if skill:
+                    Candidate_skills(user_id=profile, skil=skill, rating=rating).save()
 
             f6 = form6.save(commit=False)
             f6.user_id = profile
@@ -385,7 +392,7 @@ def SavedJobs(request):
 
                 print(relevant_jobs)
 
-        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile,post_date,saved_date)
+        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile, post_date, saved_date)
 
         return render(request, 'jobseeker/savedjobs.html', {'jobs': objects})
     else:
