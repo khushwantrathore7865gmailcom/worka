@@ -108,6 +108,7 @@ class Candidate_expdetail(models.Model):
     exp_salary = models.CharField(max_length=150, blank=True)
     prefer_location = models.CharField(max_length=150, blank=True)
     Total_Working = models.CharField(max_length=50, blank=True)
+    Profile_Summary = models.CharField(max_length=50, blank=True)
 
 
 #
