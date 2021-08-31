@@ -150,6 +150,7 @@ def Home(request):
             if diff > 30:
                 if e_j:
                     expired_job.append(j)
+
                 else:
                     Employer_expired_job.objects.create(job_id=j).save()
                     expired_job.append(j)
@@ -176,6 +177,8 @@ def remove_unpublish(request, pk):
     job = Employer_job.objects.get(pk=pk)
     unpub_job = Employer_expired_job.objects.get(job_id=job)
     unpub_job.delete()
+    job.created_on=datetime.now()
+    job.save()
 
     return redirect('recruiter:employer_home')
 
