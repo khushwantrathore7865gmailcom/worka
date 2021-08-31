@@ -19,6 +19,7 @@ from jobseeker.models import Candidate_profile, Candidate_edu, Candidate_profdet
 from datetime import datetime
 from django.forms import modelformset_factory
 from django.db import transaction, IntegrityError
+from django.contrib.auth.decorators import login_required
 
 
 class SignUpView(View):
@@ -112,6 +113,7 @@ def login_employer(request):
         return render(request, 'employer/login.html', context)
 
 
+@login_required(login_url='/recruiter/login')
 def Home(request):
     jobs = []
     expired_job = []
@@ -164,6 +166,7 @@ def Home(request):
         return redirect('recruiter:employer/login')
 
 
+@login_required(login_url='/recruiter/login')
 def unpublish(request, pk):
     user = request.user
     job = Employer_job.objects.get(pk=pk)
@@ -173,16 +176,18 @@ def unpublish(request, pk):
     return redirect('recruiter:employer_home')
 
 
+@login_required(login_url='/recruiter/login')
 def remove_unpublish(request, pk):
     job = Employer_job.objects.get(pk=pk)
     unpub_job = Employer_expired_job.objects.get(job_id=job)
     unpub_job.delete()
-    job.created_on=datetime.now()
+    job.created_on = datetime.now()
     job.save()
 
     return redirect('recruiter:employer_home')
 
 
+@login_required(login_url='/recruiter/login')
 def edit_job(request, pk):
     user = request.user
     job = get_object_or_404(Employer_job, pk=pk)
@@ -202,6 +207,7 @@ def edit_job(request, pk):
     return render(request, 'employer/edit_job.html', context)
 
 
+@login_required(login_url='/recruiter/login')
 def job_detail(request, pk):
     e = Employer.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
@@ -211,6 +217,7 @@ def job_detail(request, pk):
     return render(request, 'employer/job_details.html', {'job': job, 'c': company})
 
 
+@login_required(login_url='/recruiter/login')
 def view_applied_candidate(request, pk):
     candidate_user = []
     candidate_profile = []
@@ -249,6 +256,7 @@ def view_applied_candidate(request, pk):
     #               {'candidate': objects, 'job': job, 'quest': quest})
 
 
+@login_required(login_url='/recruiter/login')
 def shortlistview_applied_candidate(request, pk):
     candidate_user = []
     candidate_profile = []
@@ -282,6 +290,7 @@ def shortlistview_applied_candidate(request, pk):
                   {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer})
 
 
+@login_required(login_url='/recruiter/login')
 def disqualifyview_applied_candidate(request, pk):
     candidate_user = []
     candidate_profile = []
@@ -315,6 +324,7 @@ def disqualifyview_applied_candidate(request, pk):
                   {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer})
 
 
+@login_required(login_url='/recruiter/login')
 def shortlist(request, pk):
     e = Employer_job_Applied.objects.get(pk=pk)
     e.is_shortlisted = True
@@ -324,6 +334,7 @@ def shortlist(request, pk):
     return redirect('recruiter:view_applied_candidate', e.job_id.pk)
 
 
+@login_required(login_url='/recruiter/login')
 def disqualify(request, pk):
     e = Employer_job_Applied.objects.get(pk=pk)
     e.is_shortlisted = False
@@ -333,12 +344,14 @@ def disqualify(request, pk):
     return redirect('recruiter:view_applied_candidate', e.job_id.pk)
 
 
+@login_required(login_url='/recruiter/login')
 def delete_job(request, pk):
     Employer_job.objects.get(pk=pk).delete()
 
     return redirect('recruiter:employer_home')
 
 
+@login_required(login_url='/recruiter/login')
 def publish_job(request, pk):
     e = Employer_job.objects.get(pk=pk)
     e.is_save_later = False
@@ -347,6 +360,7 @@ def publish_job(request, pk):
 
 
 # @login_required(login_url='/login/')
+@login_required(login_url='/recruiter/login')
 def ProfileView(request):
     u = request.user
     e = Employer.objects.get(user=u)
@@ -359,6 +373,7 @@ def ProfileView(request):
     })
 
 
+@login_required(login_url='/recruiter/login')
 def job_post(request):
     e = Employer.objects.get(user=request.user)
     if request.method == 'GET':
@@ -398,6 +413,7 @@ def job_post(request):
     return render(request, 'employer/addjob.html', {"form1": form1, "form2": formset})
 
 
+@login_required(login_url='/recruiter/login')
 def job_Response(request, pk):
     job = Employer_job.objects.get(pk=pk)
     response = Employer_job_Applied.objects.filter(job_id=job)

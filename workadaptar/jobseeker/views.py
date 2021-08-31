@@ -20,6 +20,7 @@ from jobseeker.tokens import account_activation_token
 from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Applied, Employer_job_Like, \
     Employer_job_Saved, Employer_candidate_jobanswer, Employer_expired_job, Employer_profile
 import razorpay
+from django.contrib.auth.decorators import login_required
 
 client = razorpay.Client(auth=("rzp_test_N6naZCMdnNcNcU", "pdkCmhFp28iS6acXCLJuyPFb"))
 
@@ -120,6 +121,7 @@ def login_candidate(request):
         return render(request, 'jobseeker/login.html', context)
 
 
+@login_required(login_url='/jobseeker/login')
 def jobseeker_Home(request):
     if request.method == 'POST':
         print(request.POST)
@@ -222,6 +224,7 @@ def jobseeker_Home(request):
     #     return redirect('jobseeker:ProfileEdit')
 
 
+@login_required(login_url='/jobseeker/login')
 def save_later(request, pk):
     c = Candidate.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
@@ -245,6 +248,7 @@ def save_later(request, pk):
 #             f.save()
 #
 #         return redirect('dashboard_home')
+@login_required(login_url='/jobseeker/login')
 def ProfileView(request):
     u = request.user
     c = Candidate.objects.get(user=u)
@@ -264,6 +268,7 @@ def ProfileView(request):
 
 
 # @login_required(login_url='/login/')
+@login_required(login_url='/jobseeker/login')
 def ProfileEdit(request):
     profile = Candidate.objects.get(user=request.user)
     if request.method == 'POST':
@@ -319,6 +324,7 @@ def ProfileEdit(request):
                   {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, "form5": form5, 'form6': form6})
 
 
+@login_required(login_url='/jobseeker/login')
 def SavedJobs(request):
     if request.method == 'POST':
         print(request.POST)
@@ -399,6 +405,7 @@ def SavedJobs(request):
         return render(request, 'jobseeker/savedjobs.html')
 
 
+@login_required(login_url='/jobseeker/login')
 def AppliedJobs(request):
     companyprofile = []
     c = Candidate.objects.get(user=request.user)
@@ -411,12 +418,14 @@ def AppliedJobs(request):
     return render(request, 'jobseeker/applied.html', {'jobs': objects})
 
 
+@login_required(login_url='/jobseeker/login')
 def remove_applied(request, pk):
     Employer_job_Applied.objects.get(pk=pk).delete()
 
     return redirect('jobseeker:AppliedJobs')
 
 
+@login_required(login_url='/jobseeker/login')
 def remove_saved(request, pk):
     c = Candidate.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
@@ -428,6 +437,7 @@ def remove_saved(request, pk):
     return redirect('jobseeker:SavedJobs')
 
 
+@login_required(login_url='/jobseeker/login')
 def ResumeCreation(request):
     c = Candidate.objects.get(user=request.user)
     if request.method == 'GET':
@@ -453,6 +463,7 @@ def ResumeCreation(request):
     return render(request, 'jobseeker/resume.html', {'form': form})
 
 
+@login_required(login_url='/jobseeker/login')
 def payment(request, pk):
     r = Resume_order.objects.get(pk=pk)
     a = r.amount * 100
