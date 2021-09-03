@@ -1,208 +1,279 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/style12.css'%}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
 
-  </head>
-  <body>
 
-	<header>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 col-12">
-					<div class="top-navbar">
-						<nav class="navbar navbar-expand-lg ">
-  <a class="navbar-brand" href="{% url 'recruiter:employer_home' %}">LOGO</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <nav class="navbar mr-auto">
-  <form class="form-inline new-form">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
-      </div>
-      <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
-	  <button class="search">Search</button>
-    </div>
-  </form>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="{% static 'css/style12.css'%}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+<script src="https://kit.fontawesome.com/5a2b925216.js" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+<body>
+
+<header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-12">
+      <div class="top-navbar">
+        <nav class="navbar navbar-expand-lg ">
+<a class="navbar-brand" href="{% url 'recruiter:employer_home' %}">LOGO</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav class="navbar mr-auto">
+<form class="form-inline new-form "id='navBarSearchForm'>
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text " id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+  </div>
+  <div> </div>
+  <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+<button class="search btn-sm">Search</button>
+</div>
+</form>
 </nav>
 
-
-	<ul class="navbar-nav ml-auto">
+<center>
+<ul class="navbar-nav ml-auto">
 <!--      <li class="nav-item">-->
 <!--       <a class="nav-link" href="{% url 'recruiter:employer_home' %}">Home</a>-->
 <!--      </li>-->
-	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'recruiter:job_post' %}">Add Job</a>
-      </li>
+<li class="nav-item ">
+    <a class="nav-link" href="{% url 'recruiter:job_post' %}"><i class="fas fa-briefcase"></i></a>
+    <span class="menu-text">Add job </span>
+  </li>
 <!--	  <li class="nav-item">-->
 <!--        <a class="nav-link" href="#">Resume</a>-->
 <!--      </li>-->
-	  <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="#">About Us</a>
-      </li>
+<li class="nav-item ">
+    <a class="nav-link " href="#"><i class="fas fa-camera fa-xs"></i></a>
+    <span class="menu-text">Contact Us </span>
+  </li>
+
 <li class="nav-item">
-        <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
-      </li>
-	  <li class="nav-item bell-icon">
-        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
-      </li>
+    <a class="nav-link" href="#"><i class="fas fa-address-card fa-2x"></i></a>
+    <span class="menu-text">About Us </span>
+  </li>
+<li class="nav-item ">
+    <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+    <span class="menu-text">Home</span>
+  </li>
+<li class="nav-item bell-icon ">
+    <a class="nav-link" href="#"><i class="fa fa-bell" aria-hidden="true"></i> </a>
+    <span class="menu-text">Notification</span>
+  </li>
 
-	  <li class="nav-item">
-        <a class="nav-link" href="#"><img src={{ep.company_logo.url}}></a>
-      </li>
+<li class="nav-item">
+    <a class="nav-link" href="#"><img src="{% static 'images/test1.png'%}"></a>
+  </li>
 
-	 </ul>
-
-  </div>
-</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</header>
-    <section class="job-portal all-jobs">
-	<div class="container main-wid">
-		<div class="row">
-			<div class="col-md-10 col-12 mx-auto">
-				<div class="heading">
-  <h2>shortlisted view</h2>
-    <h3>{{job.job_title}}</h3>
+</ul>
+</center>
 </div>
-                 <a class="btn btn-primary" href="{% url 'recruiter:disqualify_view_applied_candidate' job.pk %}" role="button">disqualify Candidate</a>
-               <a class="btn btn-primary" href="{% url 'recruiter:view_applied_candidate' job.pk %}" role="button">All applied Candidate </a>
-                <br>
-                <br>
-			</div>
-    {% for c in candidate %}
+</nav>
+      </div>
+    </div>
+  </div>
+</div>
 
-    {% if c.6.is_shortlisted %}
-         <div class="col-md-9 col-12">
+</header>
 
-				<div class="job-right all-job-rights">
-					<div class="job-right-jobs">
-					<input type="checkbox" placehlder="check">
-
-						<div class="job-right-jobs-image">
-
-						<img src={{c.0.profile_pic.url}}>
-						<div class="jobs-main">
-							<div class="text-jobs">
-                              <h5>{{c.5.first_name}} {{c.5.last_name}}</h5>
+<section class="job-portal all-jobs">
+<div class="container main-wid">
+<div class="row">
+  <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 mx-auto">
+    <div class="heading">
+      <center> <h2 class="text-center">SHORTLISTED VIEW</h2>  </center>
+<br>
+<h3 class="text-primary text-left"> {{job.job_title}}</h3>
+<div class="col-md-12 col- s12 l12">
+  <div class="job-right all-job-rights">
+    <div class="job-right-jobs">
 
   <ul class="list-inline">
+    <li class="list-inline-item"><h9>ACTION TAKEN </h9> </li>
+    <li class="list-inline-item"><h9>ACTION TAKEN </h9> </li>
+    <li class="list-inline-item"><h9>ACTION TAKEN </h9> </li>
+    <li class="list-inline-item"><h9>ACTION TAKEN </h9> </li>
+ </ul>
 
-									<li><img src="{% static 'images/suitcase.png' %}">{{c.7.Total_Working}}</li>
 
-									<li><img src="{% static 'images/money.png' %}"> {{c.7.exp_salary}}</li>
-									<li><img src="{% static 'images/location.png' %}"> {{c.7.prefer_location}}</li>
-								</ul>
-							</div>
-                            </div>
-					</div>
-               <div class="info">
-							<div class="info-left">
-								<ul class="list-inline">
-                           	<li><img src="{% static 'images/mail.png' %}"> Email ID: <span>{{c.0.user_id}}</span></li>
+
+
+
+
+    </div>
+      </div>
+  </div>
+
+
+</div>
+</div>
+<br>
+<br>
+  </div>
+{% for c in candidate %}
+
+{% if c.6.is_shortlisted %}
+      <div class="col-xs-12 s12 l12">
+
+    <div class="job-right all-job-rights">
+      <div class="job-right-jobs">
+      <input type="checkbox" placehlder="check">
+
+        <div class="job-right-jobs-image">
+        <img src={{c.0.profile_pic.url}}>
+        <div class="jobs-main">
+          <div class="text-jobs">
+            <h5>{{c.5.first_name}} {{c.5.last_name}}</h5>
+              <ul class="list-inline">
+              <li><img src="{% static 'images/suitcase.png' %}">{{c.7.Total_Working}}</li>
+              <li><img src="{% static 'images/money.png' %}"> {{c.7.exp_salary}}</li>
+              <li><img src="{% static 'images/location.png' %}"> {{c.7.prefer_location}}</li>
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+          <div class="info">
+          <div class="info-left">
+            <ul class="list-inline">
+                        <li><img src="{% static 'images/mail.png' %}"> Email ID: <span>{{c.0.user_id}}</span></li>
 <!--									<li><img src="images/phone.png"> Phone no. : <span>(252) 555-0126</span></li>-->
-									<li><img src="{% static 'images/location.png' %}"> Location : <span>{{c.0.address}}</span></li>
+              <li><img src="{% static 'images/location.png' %}"> Location : <span>{{c.0.address}}</span></li>
 <!--									<li><img src="images/educa.png">Education :  <span>Software Engineering, MBA in.... </span></li>-->
+              <li>                                 {{ post.body|safe|truncatewords:"50"|linebreaks }}
+                <a href="{{ url_for_full_content }}">view  more</a></li>
+            </ul>
+            </div>
 
-								</ul>
-							</div>
-                   <div class="info-right">
-								<h3>Skills</h3>
-								<p>{% for s in c.3 %}
-                                {{s.skill}}({{s.rating}}),
-                                    {% endfor %}
-                                </p>
-							</div>
-						</div>
+
+                  <div class="info-right p-3 mb-2 bg-secondary bgcolor ccc">
+              <h3 class="text-green">Skills</h3>
+              <p class="text-black">{% for s in c.3 %}
+                              {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),
+                              {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),
+                              {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),
+                              {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),
+                               {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),
+                              {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),
+
+                                  {% endfor %}
+                              </p>
+                              <div class = "post_body text-white">
+                                {{ post.body|safe|truncatewords:"50"|linebreaks }}
+                                <a href="{{ url_for_full_content }}">view  more</a>
+                                <br>
+                                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Apply</a>
+                                <a class="btn btn-success" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">disqualify</a>
+                    </div>
+                  </div>
+                </div>
+
+
 <div class="download">
-							<button><a href="{{c.4.coverletter_link.url}}" ><img src="{% static 'images/download1.png' %}">Download Cover Letter</a></button>
-							<button><a href="{{c.4.resume_link.url}}"><img src="{% static 'images/download2.png' %}">Download Resume</a></button>
+
+          <a class="btn btn-success" href="{{c.4.coverletter_link.url}}" role="button">Download Cover letter</a>
+          <a class="btn btn-success" href="{{c.4.resume_link.url}}" role="button">Resume link</a>
+
+</div>
 
 
-
-    <a class="btn btn-primary" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">disqualify</a>
 <!--    <a class="btn btn-primary" href="{% url 'recruiter:shortlist' c.6.pk %}" role="button">Shortlist</a>-->
 <div class="accordion" id="accordionExample">
-  <div class="card">
-    <div class="card-header" id="headingOne">
-      <h5 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{c.0.user_id}}" aria-expanded="false" aria-controls="collapseOne">
-         {{c.0.user_id}}
-        </button>
-      </h5>
-    </div>
+<div class="card">
+<div class="card-header" id="headingOne">
+  <h5 class="mb-0">
+    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{c.0.user_id}}" aria-expanded="false" aria-controls="collapseOne">
+      {{c.0.user_id}}
+    </button>
+  </h5>
+</div>
 
-    <div id={{c.0.user_id}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body">
+<div id={{c.0.user_id}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+  <div class="card-body">
 
-    {% for q in question %}
-          <div>
-     <span style="color: #03A84E;">Q.</span> {{q.question}}<span style="color: #03A84E;">?</span></div>
+{% for q in question %}
+      <div>
+  <span style="color: #03A84E;">Q.</span> {{q.question}}<span style="color: #03A84E;">?</span></div>
 
-          {% for a in answer %}
+      {% for a in answer %}
 
-          {% if a.question_id == q %}
-          {% if a.candidate_id == c.0.user_id %}
-          <div>
-          {{a.answer}}</div>
-          {% endif %}
-          {% endif %}
-          {% endfor %}
-          {% endfor %}
+      {% if a.question_id == q %}
+      {% if a.candidate_id == c.0.user_id %}
+      <div>
+      {{a.answer}}</div>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
 
-     </div>
-    </div>
   </div>
+</div>
+</div>
 </div></div>
 
 
 
 </div>
 
-    {% elif c.6.is_disqualified %}
-    {% else %}
+{% elif c.6.is_disqualified %}
+{% else %}
 
-    {% endif %}
-                                 </div>
+{% endif %}
+</div>
 
 </div>
-                    {% endfor %}
+ {% endfor %}
 
 
 
-			</div>
-	</div>
+  </div>
+</div>
 </section>
 
 
+
 <footer>
-<p>Footer section</p>
+<p>Footerc section</p>
 </footer>
 
+<style>
+ul#menu li {
+  display:inline;
+}
+#spacer {
+padding: 21px;
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+}
+
+
+.menu-text{
+  font-size: 0.7em;
+
+}
+.bgcolor{background-color: rgba(228, 13, 13, 0.801);}
+.bgcolor {
+  background-color: #b9bcbe!important;
+}
+</style>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
 </html>
