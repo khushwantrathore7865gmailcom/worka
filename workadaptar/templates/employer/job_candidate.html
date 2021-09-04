@@ -107,13 +107,18 @@
 				<div class="job-right all-job-rights">
 					<div class="job-right-jobs">
           
-					<input type="checkbox" placehlder="check">
+					<!-- <input type="checkbox" placehlder="check"> -->
           <div class="col-md-4 col-4 p-3 mb-2 bgcolor">
              							<div class="text-jobs">
 
               <h5>Skills</h5>  </div>
               <p class="text-black">{% for s in c.3 %}
-
+                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Human Resource Management</a>
+                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Shortlist</a>
+                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Shortlist</a>
+                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Shortlist</a>
+                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Shortlist</a>
+                
                               {% comment %} {{s.skill}}({{s.rating}}),  {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),
                               {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),
                               {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),  {% endcomment %}
