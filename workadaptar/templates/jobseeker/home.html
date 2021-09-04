@@ -127,8 +127,8 @@
   <button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
   <div class="dropdown-content">
     <a href="{% url 'jobseeker:profile' %}">My Profile</a>
-    <a href="#">Edit Profile</a>
-    <a href="#">Log Out</a>
+    <a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
+    <a href="{% url 'jobseeker:logout' %}">Log Out</a>
   </div>
 </div>
          </li>

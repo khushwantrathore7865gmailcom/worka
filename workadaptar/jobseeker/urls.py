@@ -1,6 +1,6 @@
 from django.urls import include, path
 from .views import SignUpView, ActivateAccount, jobseeker_Home, ProfileView, save_later, SavedJobs, AppliedJobs, \
-    remove_applied, remove_saved, ProfileEdit, ResumeCreation,payment
+    remove_applied, remove_saved, ProfileEdit, ResumeCreation,payment,create_profile
 from . import views
 from django.contrib.auth import views as auth_views  # import this
 
@@ -26,6 +26,7 @@ urlpatterns = [
         template_name='account/password_reset_complete.html'), name='password_reset_complete'),
     path('viewprofile/', ProfileView, name='profile'),
     path('profile_edit/', ProfileEdit, name='ProfileEdit'),
+    path('create_profile/',create_profile, name='create_profile'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
     path('resume/', ResumeCreation, name='resume'),
     path('resume_payment/<int:pk>', payment, name='resume_payment'),
