@@ -176,9 +176,9 @@
        {% for o in jobs %}
 				<div class="job-right">
 					<div class="job-right-jobs">
-                        <div id="{{o.0.pk}}" class="carousel slide" data-interval="false">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
+<!--                        <div id="{{o.0.pk}}" class="carousel slide" data-interval="false">-->
+<!--  <div class="carousel-inner">-->
+<!--    <div class="carousel-item active">-->
 						<div class="job-right-jobs-image">
 
                             <img src={{o.4.company_logo.url}}>
@@ -202,11 +202,11 @@
 <li><img src="{% static 'images/share.png' %}">
     </li> </ul>
 
- <a class="carousel-control-next" href="#{{o.0.pk}}" role="button" data-slide="next">
+<!-- <a class="carousel-control-next" href="#{{o.0.pk}}" role="button" data-slide="next">-->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{o.0.pk}}">
+							Apply
+</button>
 
-							<p>Apply</p>
-    <span class="sr-only">Next</span>
- </a>
 
 
   </div>
@@ -226,13 +226,16 @@
 <!--    </div>-->
 <!--  </div>-->
 <!--</div>-->
-                    </div>
-     <div class="carousel-item">
-
-         <h3><span>Questions</span></h3>
-
-
- <form action = "" method = "POST">
+<!--                    </div>-->
+                        <div class="modal fade" id="{{o.0.pk}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Questions to be answered by you </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action = "" method = "POST">
     {% csrf_token %}
 
 
@@ -246,24 +249,51 @@
         <input class="btn btn-success" type="submit" value="Apply">
 
    </form>
-               <div class="share">
-     <br>
-                   <br>
-
-			<a class="carousel-control-prev" href="#{{o.0.pk}}" role="button" data-slide="prev" style="float:right">
-    <p>Back</p>
-  </a>
-               </div>
-
-
-
-                        </div>
-                    </div>
-                        </div>
-                    </div>
-
-
+      </div>
+<!--      <div class="modal-footer">-->
+<!--        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--        <button type="button" class="btn btn-primary">Understood</button>-->
+<!--      </div>-->
+    </div>
+  </div>
 </div>
+<!--     <div class="carousel-item">-->
+
+<!--         <h3><span>Questions</span></h3>-->
+
+
+<!-- <form action = "" method = "POST">-->
+<!--    {% csrf_token %}-->
+
+
+<!--          {% for q in o.3 %}-->
+<!--       {{q.question}}-->
+<!--          <input type = "hidden" name = "pk" value="{{o.0.pk}}" />-->
+<!--          <input type="text" name="{{q.question}}" >-->
+<!--          {% endfor %}-->
+
+
+<!--        <input class="btn btn-success" type="submit" value="Apply">-->
+
+<!--   </form>-->
+<!--               <div class="share">-->
+<!--     <br>-->
+<!--                   <br>-->
+
+<!--			<a class="carousel-control-prev" href="#{{o.0.pk}}" role="button" data-slide="prev" style="float:right">-->
+<!--    <p>Back</p>-->
+<!--  </a>-->
+<!--               </div>-->
+
+
+
+<!--                        </div>-->
+                    </div>
+                        </div>
+<!--                    </div>-->
+
+
+<!--</div>-->
 
 
 
