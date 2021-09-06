@@ -154,6 +154,10 @@ def jobseeker_Home(request):
             cep = Candidate_expdetail.objects.get(user_id=c)
         except Candidate_expdetail.DoesNotExist:
             cep = None
+        try:
+            cr = Candidate_resume.objects.get(user_id=c)
+        except Candidate_resume.DoesNotExist:
+            cr = None
         if u.first_login:
 
             skills = Candidate_skills.objects.filter(user_id=c)
@@ -221,7 +225,7 @@ def jobseeker_Home(request):
 
             objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
 
-            return render(request, 'jobseeker/home.html', {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep})
+            return render(request, 'jobseeker/home.html', {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
         else:
             u.first_login = True
             u.save()

@@ -144,7 +144,11 @@
 		</div>
 
 	</header>
-
+    {% if cr is None %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  You haven't upload Resume please  <a href="{% url 'jobseeker:ProfileEdit' %}" class="alert-link">Upload resume</a>.
+</div>
+    {% endif %}
 <section class="job-portal">
 	<div class="container">
 		<div class="row">
