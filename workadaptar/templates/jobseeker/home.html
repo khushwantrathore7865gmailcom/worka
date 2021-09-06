@@ -162,23 +162,27 @@
 							<h2>{{c.user.first_name}} {{c.user.last_name}}</h2>
 
 								<h5>Email:</h5>
-								<h6>{{c.user}}</h6>
+                            {% if c.is_email_verified %}
+                            <h6>{{c.user}}  <i>verified</i></h6>
+                            {% else %}
+                            <h6>{{c.user}}  <a href="#"><i>verify</i></a></h6>
+                            {% endif %}
+                                <h5>Resume Headline:</h5>
+								<h6>{{cep.Profile_Summary}}</h6>
 								<h5>Location:</h5>
 								<h6>{{cp.city}},{{cp.state}}</h6>
+
 
 						</div>
 				</div>
 			</div>
 
-<!--<div class="card">-->
-<!--  <div class="card-body">-->
+
    <div class="col-md-9 col-12">
        {% for o in jobs %}
 				<div class="job-right">
 					<div class="job-right-jobs">
-<!--                        <div id="{{o.0.pk}}" class="carousel slide" data-interval="false">-->
-<!--  <div class="carousel-inner">-->
-<!--    <div class="carousel-item active">-->
+
 						<div class="job-right-jobs-image">
 
                             <img src={{o.4.company_logo.url}}>
@@ -202,32 +206,28 @@
 <li><img src="{% static 'images/share.png' %}">
     </li> </ul>
 
-<!-- <a class="carousel-control-next" href="#{{o.0.pk}}" role="button" data-slide="next">-->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{o.0.pk}}">
 							Apply
 </button>
 
 
 
-  </div>
-<!--                            <div class="accordion" id="accordionExample">-->
-<!--  <div class="card">-->
-<!--    <div class="card-header" id="headingOne">-->
-<!--      <h5 class="mb-0">-->
-<!--        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{o.0.pk}}" aria-expanded="false" aria-controls="collapseOne">-->
-<!--        {{o.0.pk}}-->
-<!--        </button>-->
-<!--      </h5>-->
-<!--    </div>-->
 
-<!--    <div id={{o.0.pk}} class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">-->
-<!--      <div class="card-body">-->
-<!--  </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!--                    </div>-->
-                        <div class="modal fade" id="{{o.0.pk}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  </div>
+
+                    </div>
+                        </div>
+
+
+
+
+{% endfor %}
+</div>
+
+        </div>
+    </div>
+    </section>
+      <div class="modal fade" id="{{o.0.pk}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -257,52 +257,6 @@
     </div>
   </div>
 </div>
-<!--     <div class="carousel-item">-->
-
-<!--         <h3><span>Questions</span></h3>-->
-
-
-<!-- <form action = "" method = "POST">-->
-<!--    {% csrf_token %}-->
-
-
-<!--          {% for q in o.3 %}-->
-<!--       {{q.question}}-->
-<!--          <input type = "hidden" name = "pk" value="{{o.0.pk}}" />-->
-<!--          <input type="text" name="{{q.question}}" >-->
-<!--          {% endfor %}-->
-
-
-<!--        <input class="btn btn-success" type="submit" value="Apply">-->
-
-<!--   </form>-->
-<!--               <div class="share">-->
-<!--     <br>-->
-<!--                   <br>-->
-
-<!--			<a class="carousel-control-prev" href="#{{o.0.pk}}" role="button" data-slide="prev" style="float:right">-->
-<!--    <p>Back</p>-->
-<!--  </a>-->
-<!--               </div>-->
-
-
-
-<!--                        </div>-->
-                    </div>
-                        </div>
-<!--                    </div>-->
-
-
-<!--</div>-->
-
-
-
-{% endfor %}
-</div>
-
-        </div>
-    </div>
-    </section>
  <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

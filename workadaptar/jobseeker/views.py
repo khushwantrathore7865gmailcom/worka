@@ -5,7 +5,7 @@ from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
 from .models import Candidate, Candidate_profile, Candidate_edu, Candidate_skills, Candidate_profdetail, \
-    Candidate_resume, Resume_order
+    Candidate_resume, Resume_order, Candidate_expdetail
 from .forms import SignUpForm, ProfileRegisterForm, ProfileRegisterForm_edu, ProfileRegisterForm_profdetail, \
     ProfileRegisterForm_resume, ProfileRegistration_expdetail, ProfileRegistration_skills, Resumeforming
 from django.views.generic import View
@@ -150,7 +150,10 @@ def jobseeker_Home(request):
             cp = Candidate_profile.objects.get(user_id=c)
         except Candidate_profile.DoesNotExist:
             cp = None
-
+        try:
+            cep = Candidate_expdetail.objects.get(user_id=c)
+        except Candidate_expdetail.DoesNotExist:
+            cep = None
         if u.first_login:
 
             skills = Candidate_skills.objects.filter(user_id=c)
@@ -218,13 +221,14 @@ def jobseeker_Home(request):
 
             objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
 
-            return render(request, 'jobseeker/home.html', {'jobs': objects, 'c': c, 'cp': cp})
+            return render(request, 'jobseeker/home.html', {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep})
         else:
-            u.first_login=True
+            u.first_login = True
             u.save()
             return redirect('jobseeker:create_profile')
     else:
         return redirect('jobseeker:jobseeker/login')
+
 
 @login_required(login_url='/jobseeker/login')
 def save_later(request, pk):
@@ -417,7 +421,6 @@ def SavedJobs(request):
             return render(request, 'jobseeker/savedjobs.html')
     else:
         return redirect('jobseeker:jobseeker/login')
-
 
 
 @login_required(login_url='/jobseeker/login')
