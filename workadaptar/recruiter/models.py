@@ -60,7 +60,7 @@ class Employer_jobquestion(models.Model):
     # employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
     job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
     question = models.CharField(max_length=100)
-    # answer_size =models.IntegerField()
+    answer_size =models.IntegerField(default=10)
 
 
 class Employer_candidate_jobanswer(models.Model):
