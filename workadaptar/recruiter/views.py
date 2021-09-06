@@ -415,11 +415,10 @@ def job_post(request):
                 # print("formset:")
                 # print(formset)
                 for form in formset:
-                    # print("form:")
-                    # print(form)
+
                     quest = form.cleaned_data.get('question')
-                    # print("question:")
-                    # print(quest)
+                    # ans =form.cleaned_data.get('answer_size')
+
                     if quest:
                         Employer_jobquestion(job_id=f1, question=quest).save()
 

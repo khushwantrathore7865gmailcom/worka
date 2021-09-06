@@ -91,17 +91,11 @@ class JobsQuestionForm(forms.Form):
             'placeholder': 'Enter Question here'
         })
     )
-    # class Meta:
-    #     model = Employer_jobquestion
-    #     fields = [
-    #         'question'
-    #
-    #     ]
-    #     widget = {
-    #         'question': forms.TextInput(attrs={
-    #             'class': 'formset-field',
-    #             'placeholder': 'Enter Your Questions here'
-    #         }),
-    #     }
+    # answer_size =forms.IntegerField(label='size of answer',
+    #     widget=forms.TextInput(attrs={
+    #         'class': 'form-control',
+    #         'placeholder': 'Enter maxlength of answer by the candidate'
+    #     }))
+
 
 QuestionFormset = formset_factory(JobsQuestionForm, extra=1)
