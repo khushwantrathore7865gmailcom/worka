@@ -12,6 +12,11 @@
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 
@@ -99,7 +104,7 @@
 <!--          </div>-->
           <div  class="right-align" >
             <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " href="#demo-modal2-fixed-footer"><i class=" tiny material-icons">create</i></a>
-              <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " href="#demo-modal3-fixed-footer"><i class=" tiny material-icons">add</i></a> <Br>
+              <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " data-toggle="modal" data-target="#myModal">+</a> <Br>
             </div>
           <h6><b>Education </b><i class="  tiny material-icons "> input</i> </h6> <br>
                   <span>
@@ -538,6 +543,46 @@
         </div>
       </div>
 
+      <div class="container">
+        
+        <!-- Trigger the modal with a button -->
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button>
+      
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+              </div>
+              <div class="modal-body">
+                <p>This is a large modal.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
   <!--JavaScript at end of body for optimized loading-->
   <script type="text/javascript" src="js/materialize.min.js"></script>
 
@@ -551,13 +596,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js">
   </script>
 </body>
-<script>
-  $(document).ready(function () {
-    $('.modal').modal();
-  })
-
-
-</script>
 
 <script>
   $('.multi-field-wrapper').each(function() {
