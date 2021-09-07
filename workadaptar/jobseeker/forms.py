@@ -208,31 +208,31 @@ ProfileRegisterForm_profdetail = modelformset_factory(
             'end_year',),
     extra=1,
     widgets={'designation': forms.TextInput(attrs={
-        'class': 'form-control',
+        'class': 'input100',
 
     }),
         'organization': forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'input100',
 
         }),
         'salary': forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'input100',
 
         }),
         'start_date': forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'input100',
 
         }),
         'start_month': forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'input100',
 
         }),
         'start_year': forms.TextInput(attrs={
-            'class': 'form-control',
+            'class': 'input100',
 
         }),
         'is_current': forms.CheckboxInput(attrs={
-            'class': 'form-control',
+            'class': 'input100',
 
         }),
         'end_date': forms.TextInput(attrs={
