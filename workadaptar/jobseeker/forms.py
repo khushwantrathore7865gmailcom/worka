@@ -114,64 +114,11 @@ class ProfileRegisterForm(forms.ModelForm):
 
         ]
 
-
-ProfileRegisterForm_edu = modelformset_factory(
-
-    Candidate_edu,
-    fields=('institute_name',
-            'start_date',
-            'start_month',
-            'start_year',
-            'end_date',
-            'end_month',
-            'end_year',
-            'course_type',
-            'degree',),
-    extra=1,
-    widgets={'institute_name': forms.TextInput(attrs={
-        'class': 'form-control',
-
-    }),
-        'start_date': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-        'start_month': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-        'start_year': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-        'end_date': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-        'end_month': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-        'end_year': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-        'course_type': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-        'degree': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-    })
-
-
-# class ProfileRegisterForm_edu(forms.ModelForm):
-#     class Meta:
-#         model = Candidate_edu
-#         fields = [
-#             'institute_name',
+#
+# ProfileRegisterForm_edu = modelformset_factory(
+#
+#     Candidate_edu,
+#     fields=('institute_name',
 #             'start_date',
 #             'start_month',
 #             'start_year',
@@ -179,8 +126,83 @@ ProfileRegisterForm_edu = modelformset_factory(
 #             'end_month',
 #             'end_year',
 #             'course_type',
-#             'degree',
-#         ]
+#             'degree',),
+#     extra=1,
+#     widgets={'institute_name': forms.TextInput(attrs={
+#         'class': 'form-control',
+#
+#     }),
+#         'start_date': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#         'start_month': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#         'start_year': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#         'end_date': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#         'end_month': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#         'end_year': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#         'course_type': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#         'degree': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#     })
+
+
+class ProfileRegisterForm_edu(forms.ModelForm):
+    institute_name = forms.CharField(max_length=30, required=False, label='institute name', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+
+    course_type = forms.CharField(max_length=30, required=False, label='course type', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    degree = forms.CharField(max_length=30, required=False, label='degree', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    start_date = forms.CharField(max_length=30, required=False, label='start date', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    start_month = forms.CharField(max_length=30, required=False, label='start month', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    start_year = forms.CharField(max_length=30, required=False, label='start year', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+
+    end_date = forms.CharField(max_length=30, required=False, label='end date', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    end_month = forms.CharField(max_length=30, required=False, label='end month', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    end_year = forms.CharField(max_length=30, required=False, label='end year', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+
+
+    class Meta:
+        model = Candidate_edu
+        fields = [
+            'institute_name',
+            'start_date',
+            'start_month',
+            'start_year',
+            'end_date',
+            'end_month',
+            'end_year',
+            'course_type',
+            'degree',
+        ]
 
 
 class ProfileRegisterForm_resume(forms.ModelForm):
@@ -192,11 +214,88 @@ class ProfileRegisterForm_resume(forms.ModelForm):
             'coverletter_link',
         ]
 
+#
+# ProfileRegisterForm_profdetail = modelformset_factory(
+#
+#     Candidate_profdetail,
+#     fields=('designation',
+#             'organization',
+#             'salary',
+#             'start_date',
+#             'start_month',
+#             'start_year',
+#             'is_current',
+#             'end_date',
+#             'end_month',
+#             'end_year',),
+#     extra=1,
+#     widgets={'designation': forms.TextInput(attrs={
+#         'class': 'input100',
+#
+#     }),
+#         'organization': forms.TextInput(attrs={
+#             'class': 'input100',
+#
+#         }),
+#         'salary': forms.TextInput(attrs={
+#             'class': 'input100',
+#
+#         }),
+#         'start_date': forms.TextInput(attrs={
+#             'class': 'input100',
+#
+#         }),
+#         'start_month': forms.TextInput(attrs={
+#             'class': 'input100',
+#
+#         }),
+#         'start_year': forms.TextInput(attrs={
+#             'class': 'input100',
+#
+#         }),
+#         'is_current': forms.CheckboxInput(attrs={
+#             'class': 'input100',
+#
+#         }),
+#         'end_date': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#         'end_month': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#         'end_year': forms.TextInput(attrs={
+#             'class': 'form-control',
+#
+#         }),
+#     })
 
-ProfileRegisterForm_profdetail = modelformset_factory(
 
-    Candidate_profdetail,
-    fields=('designation',
+class ProfileRegisterForm_profdetail(forms.ModelForm):
+    designation = forms.CharField(max_length=30, required=False, label='designation', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    organization = forms.CharField(max_length=30, required=False, label='organization', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    salary = forms.CharField(max_length=30, required=False, label='salary', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    start_date = forms.CharField(max_length=30, required=False, label='start date', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    start_month = forms.CharField(max_length=30, required=False, label='start month', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    start_year = forms.CharField(max_length=30, required=False, label='start year', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    is_current = forms.BooleanField(label='Currently working',widget=forms.CheckboxInput())
+    end_date = forms.CharField(max_length=30, required=False, label='end date', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    end_month = forms.CharField(max_length=30, required=False, label='end month', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    end_year = forms.CharField(max_length=30, required=False, label='end year', widget=forms.TextInput(
+        attrs={'class': "input100"}))
+    class Meta:
+        model = Candidate_profdetail
+        fields = [
+            'designation',
             'organization',
             'salary',
             'start_date',
@@ -205,65 +304,8 @@ ProfileRegisterForm_profdetail = modelformset_factory(
             'is_current',
             'end_date',
             'end_month',
-            'end_year',),
-    extra=1,
-    widgets={'designation': forms.TextInput(attrs={
-        'class': 'input100',
-
-    }),
-        'organization': forms.TextInput(attrs={
-            'class': 'input100',
-
-        }),
-        'salary': forms.TextInput(attrs={
-            'class': 'input100',
-
-        }),
-        'start_date': forms.TextInput(attrs={
-            'class': 'input100',
-
-        }),
-        'start_month': forms.TextInput(attrs={
-            'class': 'input100',
-
-        }),
-        'start_year': forms.TextInput(attrs={
-            'class': 'input100',
-
-        }),
-        'is_current': forms.CheckboxInput(attrs={
-            'class': 'input100',
-
-        }),
-        'end_date': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-        'end_month': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-        'end_year': forms.TextInput(attrs={
-            'class': 'form-control',
-
-        }),
-    })
-
-
-# class ProfileRegisterForm_profdetail(forms.ModelForm):
-#     class Meta:
-#         model = Candidate_profdetail
-#         fields = [
-#             'designation',
-#             'organization',
-#             'salary',
-#             'start_date',
-#             'start_month',
-#             'start_year',
-#             'end_date',
-#             'end_month',
-#             'end_year',
-#         ]
+            'end_year',
+        ]
 #
 #
 # ProfileRegistration_skills = modelformset_factory(

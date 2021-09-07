@@ -264,54 +264,6 @@
         <div class="card-panel ">
           <h5 class="left-align">Career Profile </h5>
 
-<!--              <p> Department  :Tech support </p>-->
-
-
-<!--   <p> role:IT head</p>-->
-<!--   <p> job type:Full Time</p>-->
-<!--   <p> Desired salary:5.5 lakhs</p>-->
-<!--    <p>Desired location:Jaipur</p>-->
-<!--   <p> Total Experience:7 years</p>-->
-<!--    <p>Resume Headline: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in est sagittis, vestibulum nisl sit amet,-->
-<!--            ultrices lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus luctus luctus pharetra.-->
-<!--            Nullam malesuada elit sed est consectetur, lobortis placerat sem blandit. Etiam lacinia tempus felis, vitae-->
-<!--            maximus augue pulvinar porttitor. Nam.</p>-->
-<!--          <div class="row">-->
-
-<!--            <div class="col s6">-->
-<!--              <b>-->
-<!--                <h5 class="left-align">Education </h5>-->
-<!--              </b>-->
-<!--              <p> UX / UI Designer</p>-->
-<!--              <p> UX / UI Designer</p>-->
-<!--              <p> UX / UI Designer</p>-->
-<!--            </div>-->
-
-<!--            <div class="col s6 ">-->
-<!--              <b>-->
-<!--                <h5 class="left-align">Education </h5>-->
-<!--              </b>-->
-
-<!--              <table class="responsive-table">-->
-<!--                <tr>-->
-<!--                  <th>Company</th>-->
-<!--                  <th>Contact</th>-->
-<!--                  <th>Country</th>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>Alfreds Futterkiste</td>-->
-<!--                  <td>Maria Anders</td>-->
-<!--                  <td>Germany</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>Centro comercial Moctezuma</td>-->
-<!--                  <td>Francisco Chang</td>-->
-<!--                  <td>Mexico</td>-->
-<!--                </tr>-->
-<!--              </table>-->
-<!--            </div>-->
-<!--          </div>-->
-
         </div>
 
 
@@ -579,44 +531,59 @@
 
 
         <div class="input-group ">
-        {{form3.management_form}}
+
             {{form3.designation.label}}
             {{form3.designation}}
         </div>
-  {% comment %} <label style="font-size: 20px;">organization</label> {% endcomment %}
+                   <div class="input-group ">
 
-
-        <div class="input-group">
+            {{form3.organization.label}}
             {{form3.organization}}
         </div>
+                   <div class="input-group ">
 
-      {% comment %} <label style="font-size: 20px;">salary</label> {% endcomment %}
-
-
-        <div class="input-group">
+            {{form3.salary.label}}
             {{form3.salary}}
         </div>
+                   <div class="input-group ">
 
-      {% comment %} <label style="font-size: 20px;">{{form3.job_location.label}}</label>
-
-
-        <div class="input-group" style="width: 100%;">
-            {{form3.salary_date}}
-
-
-        </div> {% endcomment %}
-  {% comment %} <label style="font-size: 20px;">{{form3.job_experience.label}}</label>
-
-
-        <div class="input-group">
-            {{form3.job_experience}}
+            {{form3.start_date.label}}
+            {{form3.start_date}}
         </div>
-  <label style="font-size: 20px;">{{form3.skill.label}}</label>
+                      <div class="input-group ">
+
+            {{form3.start_month.label}}
+            {{form3.start_month}}
+        </div>
+                      <div class="input-group ">
+
+            {{form3.start_year.label}}
+            {{form3.start_year}}
+        </div>
+                    <div class="input-group ">
+
+            {{form3.is_current.label}}
+            {{form3.is_current}}
+        </div>
+                      <div class="input-group ">
+
+            {{form3.end_date.label}}
+            {{form3.end_date}}
+        </div>   <div class="input-group ">
+
+            {{form3.end_month.label}}
+            {{form3.end_month}}
+        </div>
+                      <div class="input-group ">
+
+            {{form3.end_year.label}}
+            {{form3.end_year}}
+        </div>
 
 
-        <div class="input-group">
-            {{form3.skill}}
-        </div> {% endcomment %}
+
+
+
 
               
     <input type="submit" value="Submit">

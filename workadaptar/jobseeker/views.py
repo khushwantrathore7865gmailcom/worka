@@ -383,8 +383,8 @@ def create_profile(request):
             return redirect('jobseeker:jobseeker_home')
 
     form1 = ProfileRegisterForm()
-    form2 = ProfileRegisterForm_edu(queryset=Candidate_edu.objects.none())
-    form3 = ProfileRegisterForm_profdetail(queryset=Candidate_profdetail.objects.none())
+    form2 = ProfileRegisterForm_edu()
+    form3 = ProfileRegisterForm_profdetail()
     form4 = ProfileRegisterForm_resume()
     form5 = ProfileRegistration_skills()
     form6 = ProfileRegistration_expdetail()
