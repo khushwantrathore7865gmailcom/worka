@@ -57,17 +57,17 @@ class ProfileRegisterForm(forms.ModelForm):
 
 
 class JobPostForm(forms.ModelForm):
-    job_title = forms.CharField(max_length=30,label='Job Title', required=False, widget=forms.TextInput(
+    job_title = forms.CharField(max_length=50,label='Job Title', required=False, widget=forms.TextInput(
         attrs={'placeholder': 'Enter your Job Title', 'class': "input100"}))
-    job_description = forms.CharField(max_length=30, label='job description', required=False, widget=forms.TextInput(
+    job_description = forms.CharField(max_length=1500, label='job description', required=False, widget=forms.Textarea(
         attrs={'placeholder': 'Enter your Job description', 'class': "input100"}))
     employment_type = forms.ChoiceField(choices=job_Type, required=False, label='employment type', widget=forms.Select(
         attrs={ 'class': "input100"}))
-    job_location = forms.CharField(max_length=30, label='job location', required=False, widget=forms.TextInput(
+    job_location = forms.CharField(max_length=100, label='job location', required=False, widget=forms.TextInput(
         attrs={'placeholder': 'Enter your job location', 'class': "input100"}))
     job_experience = forms.ChoiceField(choices=experience, required=False, label='job experience', widget=forms.Select(
         attrs={'class': "input100"}))
-    skill = forms.CharField(max_length=30, label='skill', required=False, widget=forms.TextInput(
+    skill = forms.CharField(max_length=50, label='skill', required=False, widget=forms.TextInput(
         attrs={'placeholder': 'Enter your skill', 'class': "input100"}))
 
     class Meta:

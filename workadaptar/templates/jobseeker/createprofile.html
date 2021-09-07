@@ -557,7 +557,13 @@
                 <h4 class="modal-title">Modal Header</h4>
               </div>
               <div class="modal-body">
-                <p>This is a large modal.</p>
+               <form  method="post" action="">
+    {% csrf_token %}
+    {{ form3.designation }}
+       
+              
+    <input type="submit" value="Submit">
+</form>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
