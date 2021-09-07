@@ -463,40 +463,43 @@
             <caption>  Add Skill </caption>
             <form class="form-horizontal" method="POST" action="">
               {% csrf_token %}
-              {{ form5.management_form }}
-              {% for form in form5 %}
-          <div class="row form-row spacer">
-              <div class="col-8">
+              {{form3}}
+<!--              {{ form5.management_form }}-->
+<!--              {% for form in form5 %}-->
+<!--          <div class="row form-row spacer">-->
+<!--              <div class="col-8">-->
 
 
 
-                  <div class="input-group">
-                    <div class="row">
-                      <div class="input-field col s6">
-                        <i class="material-icons prefix">account_circle</i>
-                        {{form.skill}}
-                        <label style="font-size: 20px;">{{form.skill.label}}</label>
-                      </div>
-                      <div class="input-field col s6">
-                        <i class="material-icons prefix">star</i>
-                        {{form.rating}}
-                        <label style="font-size: 20px;">{{form.rating.label}}</label>
-                      </div>
+<!--                  <div class="input-group">-->
+<!--                    <div class="row">-->
+<!--                      <div class="input-field col s6">-->
+<!--                        <i class="material-icons prefix">account_circle</i>-->
+<!--                        {{form.skill}}-->
+<!--                        <label style="font-size: 20px;">{{form.skill.label}}</label>-->
+<!--                      </div>-->
+<!--                      <div class="input-field col s6">-->
+<!--                        <i class="material-icons prefix">star</i>-->
+<!--                        {{form.rating}}-->
+<!--                        <label style="font-size: 20px;">{{form.rating.label}}</label>-->
+<!--                      </div>-->
 
-                      <div class="input-group-append">
-                          <button class="btn btn-success add-form-row btn-small">+</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          {% endfor %}
-          <br>
-          <div class="row spacer">
-              <div class="col-4 offset-2">
-                  <button type="submit" class="btn btn-block btn-success btn-small">Create</button>
-              </div>
-          </div>
+<!--                      <div class="input-group-append">-->
+<!--                          <button class="btn btn-success add-form-row btn-small">+</button>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--          {% endfor %}-->
+<!--          <br>-->
+<!--          <div class="row spacer">-->
+<!--              <div class="col-4 offset-2">-->
+<!--                  <button type="submit" class="btn btn-block btn-success btn-small">Create</button>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--          </div>-->
           </form>
+
 
           </div>
 

@@ -165,16 +165,19 @@
 						<div class="job-left-desc">
 							<h2>{{c.user.first_name}} {{c.user.last_name}}</h2>
 
-								<h5>Email:</h5>
+								<h5>Email:
                             {% if c.is_email_verified %}
-                            <h6>{{c.user}}  <i>verified</i></h6>
+                            <span>{{c.user}}  <i>verified</i></span>
                             {% else %}
-                            <h6>{{c.user}}  <a href="#"><i>verify</i></a></h6>
+                            <span>{{c.user}}  <a href="#"><i>verify</i></a></span>
                             {% endif %}
-                                <h5>Resume Headline:</h5>
-								<h6>{{cep.Profile_Summary}}</h6>
-								<h5>Location:</h5>
-								<h6>{{cp.city}},{{cp.state}}</h6>
+                                    </h5>
+                                <h5>Resume Headline:
+								<span>{{cep.Profile_Summary}}</span></h5>
+								<h5>Location:
+								<span>{{cp.city}},{{cp.state}}</span></h5>
+                            <h5>Designation:
+								<span>{{cep.role}}</span></h5>
 
 
 						</div>
@@ -197,11 +200,20 @@
             </div>
             </div>
                         </div>
-    <p class="job-para"> {{o.0.job_description}}<br>
-        {{o.0.employment_type}}<br>
+    <p class="job-para">
+        Employment type: {{o.0.employment_type}}<br>
         Location:  {{o.0.job_location}}<br>
         Experience:  {{o.0.job_experience}}<br>
         common skills :{{o.1}} out of {{o.2}}<br>
+        Job description:<br>
+        {{o.0.job_description}}
+        About Company:<br>
+        company type:<br>
+        {{o.4.company_type}}<br>
+<!--        Job description:<br>-->
+<!--        {{o.4.company_name}}<br>-->
+<!--        Job description:<br>-->
+<!--        {{o.4.company_name}}<br>-->
     </p>
   <div class="share">
      <ul class="list-inline">
