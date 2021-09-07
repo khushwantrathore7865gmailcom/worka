@@ -265,11 +265,27 @@ def save_later(request, pk):
 def ProfileView(request):
     u = request.user
     c = Candidate.objects.get(user=u)
-    profile = Candidate_profile.objects.get(user_id=c)
-    edu = Candidate_edu.objects.filter(user_id=c)
-    professional = Candidate_profdetail.objects.filter(user_id=c)
-    resume = Candidate_resume.objects.get(user_id=c)
-    skills = Candidate_skills.objects.filter(user_id=c)
+    try:
+        profile = Candidate_profile.objects.get(user_id=c)
+    except Candidate_profile.DoesNotExist:
+        profile = None
+    try:
+        edu = Candidate_edu.objects.filter(user_id=c)
+    except Candidate_edu.DoesNotExist:
+        edu = None
+    try:
+        professional = Candidate_profdetail.objects.filter(user_id=c)
+    except Candidate_profdetail.DoesNotExist:
+        professional = None
+    try:
+        resume = Candidate_resume.objects.get(user_id=c)
+    except Candidate_resume.DoesNotExist:
+        resume = None
+
+    try:
+        skills = Candidate_skills.objects.filter(user_id=c)
+    except Candidate_skills.DoesNotExist:
+        skills = None
     return render(request, 'jobseeker/skills.html', {
         "user": u,
         "profile": profile,
@@ -327,8 +343,8 @@ def ProfileEdit(request):
             return redirect('jobseeker:jobseeker_home')
 
     form1 = ProfileRegisterForm()
-    form2 = ProfileRegisterForm_edu(queryset=Candidate_edu.objects.none())
-    form3 = ProfileRegisterForm_profdetail(queryset=Candidate_profdetail.objects.none())
+    form2 = ProfileRegisterForm_edu()
+    form3 = ProfileRegisterForm_profdetail()
     form4 = ProfileRegisterForm_resume()
     form5 = ProfileRegistration_skills()
     form6 = ProfileRegistration_expdetail()
@@ -400,6 +416,7 @@ def SavedJobs(request):
         pk = request.POST.get('pk')
         print(pk)
         c = Candidate.objects.get(user=request.user)
+
         job = Employer_job.objects.get(pk=pk)
         questions = Employer_jobquestion.objects.filter(job_id=job)
         for q in questions:
@@ -471,9 +488,9 @@ def SavedJobs(request):
 
             objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile, post_date, saved_date)
 
-            return render(request, 'jobseeker/savedjobs.html', {'jobs': objects})
+            return render(request, 'jobseeker/savedjobs.html', {'jobs': objects,'cp':cp})
         else:
-            return render(request, 'jobseeker/savedjobs.html')
+            return render(request, 'jobseeker/savedjobs.html',{'cp':cp})
     else:
         return redirect('jobseeker:jobseeker/login')
 
@@ -484,13 +501,14 @@ def AppliedJobs(request):
     user = request.user
     if user is not None and user.is_candidate:
         c = Candidate.objects.get(user=request.user)
+        cp = Candidate_profile.objects.get(user_id=c)
         applied = Employer_job_Applied.objects.filter(candidate_id=c)
         for a in applied:
             e = a.job_id.employer_id
             companyprofile.append(Employer_profile.objects.get(employer=e))
 
         objects = zip(applied, companyprofile)
-        return render(request, 'jobseeker/applied.html', {'jobs': objects})
+        return render(request, 'jobseeker/applied.html', {'jobs': objects,'cp':cp})
     else:
         return redirect('jobseeker:jobseeker/login')
 

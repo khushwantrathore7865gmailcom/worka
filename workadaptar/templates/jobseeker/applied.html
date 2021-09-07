@@ -98,9 +98,9 @@
 <div class="dropdown">
   <button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
   <div class="dropdown-content">
-    <a href="{% url 'jobseeker:profile' %}">My Profile</a>
-    <a href="#">Edit Profile</a>
-    <a href="#">Log Out</a>
+   <a href="{% url 'jobseeker:profile' %}">My Profile</a>
+    <a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
+    <a href="{% url 'jobseeker:logout' %}">Log Out</a>
   </div>
 </div>
          </li>
@@ -132,20 +132,25 @@
 				<div class="job-right">
 					<div class="job-right-jobs">
 						<div class="job-right-jobs-image">
-                                                        <img src={{o.4.company_logo.url}}>
+                                                        <img src={{o.1.company_logo.url}}>
 
             <div class="jobs-main">
             <div class="text-jobs">
       <h5>{{o.0.job_id.job_title}}</h5>
-                <p>{{o.4.company_name}}</p>
+                   <p style="font-size:21px">{{o.1.company_name}}</p>
             </div>
             </div>
                         </div>
-    <p class="job-para"> {{o.0.job_id.job_description}}<br>
-        {{o.0.job_id.employment_type}}<br>
-        Location:  {{o.0.job_id.job_location}}<br>
-        Experience:  {{o.0.job_id.job_experience}}<br>
-
+    <p class="job-para">
+        Employment type: {{o.0.employment_type}}<br>
+        Location:  {{o.0.job_location}}<br>
+        Experience:  {{o.0.job_experience}}<br>
+        Salary :  {{o.0.job_salary}}<br>
+        Job description:<br>
+        {{o.0.job_description}}
+        About Company:<br>
+        company type:<br>
+        {{o.1.about_company}}<br>
     </p>
   <div class="share">
      <ul class="list-inline">
@@ -155,38 +160,13 @@
     </li> </ul>
       <p><a class="btn btn-primary" href="{% url 'jobseeker:remove' o.0.pk %}" role="button">remove</a></p>
       <p>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  Apply for the job
-</button>
+
       </p>
   </div>
                     </div>
 
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-   <form action = "" method = "POST">
-    {% csrf_token %}
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">{{o.0.job_title}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-          {% for q in o.3 %}
-       {{q.question}}
-          <input type = "hidden" name = "pk" value="{{o.0.pk}}" />
-          <input type="text" name="{{q.question}}" >
-          {% endfor %}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <input class="btn btn-primary" type="submit" value="Apply">
-      </div>
-   </form>
-    </div>
-  </div>
-</div>
+
 
 </div>
 

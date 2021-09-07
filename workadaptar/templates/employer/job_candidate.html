@@ -14,6 +14,47 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
+<script src="https://kit.fontawesome.com/5a2b925216.js" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+    .dropbtn {
+  background-color: #FFFFFF;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #03A84E;}
+
+
+</style>
   </head>
   <body>
 
@@ -46,28 +87,40 @@
 <!--      <li class="nav-item">-->
 <!--       <a class="nav-link" href="{% url 'recruiter:employer_home' %}">Home</a>-->
 <!--      </li>-->
-	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'recruiter:job_post' %}">Add Job</a>
-      </li>
+<li class="nav-item ">
+    <a class="nav-link" href="{% url 'recruiter:job_post' %}"><i class="fas fa-briefcase"></i></a>
+    <span class="menu-text">Add job </span>
+  </li>
 <!--	  <li class="nav-item">-->
 <!--        <a class="nav-link" href="#">Resume</a>-->
 <!--      </li>-->
-	  <li class="nav-item">
-        <a class="nav-link" href="#">Contact Us</a>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="#">About Us</a>
-      </li>
-<li class="nav-item">
-        <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
-      </li>
-	  <li class="nav-item bell-icon">
-        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
-      </li>
+<li class="nav-item ">
+    <a class="nav-link " href="#"><i class="fas fa-camera fa-xs"></i></a>
+    <span class="menu-text">Contact Us </span>
+  </li>
 
-	  <li class="nav-item">
-        <a class="nav-link" href="#"><img src={{ep.company_logo.url}}></a>
-      </li>
+<li class="nav-item">
+    <a class="nav-link" href="#"><i class="fas fa-address-card fa-2x"></i></a>
+    <span class="menu-text">About Us </span>
+  </li>
+<li class="nav-item ">
+    <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+    <span class="menu-text">Home</span>
+  </li>
+<li class="nav-item bell-icon ">
+    <a class="nav-link" href="#"><i class="fa fa-bell" aria-hidden="true"></i> </a>
+    <span class="menu-text">Notification</span>
+  </li>
+
+<li class="nav-item">
+<div class="dropdown">
+  <button class="dropbtn"><img src={{cp.company_logo.url}}></button>
+  <div class="dropdown-content">
+      <a href="#">My Profile</a>
+    <a href="#">Edit Profile</a>
+    <a href="{% url 'recruiter:logout' %}">Log Out</a>
+  </div>
+</div>  </li>
 
 	 </ul>
 

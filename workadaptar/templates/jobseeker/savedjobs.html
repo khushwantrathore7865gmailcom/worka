@@ -98,9 +98,9 @@
 <div class="dropdown">
   <button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
   <div class="dropdown-content">
-    <a href="{% url 'jobseeker:profile' %}">My Profile</a>
-    <a href="#">Edit Profile</a>
-    <a href="#">Log Out</a>
+   <a href="{% url 'jobseeker:profile' %}">My Profile</a>
+    <a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
+    <a href="{% url 'jobseeker:logout' %}">Log Out</a>
   </div>
 </div>
          </li>
@@ -134,17 +134,21 @@
             <div class="jobs-main">
             <div class="text-jobs">
       <h5>{{o.0.job_title}}</h5>
-                <p>{{o.4.company_name}}</p>
+              <p style="font-size:21px">{{o.4.company_name}}</p>
             </div>
-                <p class="min"><span></span></p>
             </div>
                         </div>
-    <p class="job-para"> {{o.0.job_description}}<br>
-        {{o.0.employment_type}}<br>
+    <p class="job-para">
+        Employment type: {{o.0.employment_type}}<br>
         Location:  {{o.0.job_location}}<br>
         Experience:  {{o.0.job_experience}}<br>
+        Salary :  {{o.0.job_salary}}<br>
         common skills :{{o.1}} out of {{o.2}}<br>
-    </p>
+        Job description:<br>
+        {{o.0.job_description}}
+        About Company:<br>
+        company type:<br>
+        {{o.4.about_company}}<br></p>
   <div class="share">
      <ul class="list-inline">
          <li><img src="{% static 'images/heart.png' %}"></li>

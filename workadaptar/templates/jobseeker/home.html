@@ -204,12 +204,13 @@
         Employment type: {{o.0.employment_type}}<br>
         Location:  {{o.0.job_location}}<br>
         Experience:  {{o.0.job_experience}}<br>
+        Salary :  {{o.0.job_salary}}<br>
         common skills :{{o.1}} out of {{o.2}}<br>
         Job description:<br>
         {{o.0.job_description}}
         About Company:<br>
         company type:<br>
-        {{o.4.company_type}}<br>
+        {{o.4.about_company}}<br>
 <!--        Job description:<br>-->
 <!--        {{o.4.company_name}}<br>-->
 <!--        Job description:<br>-->
@@ -222,7 +223,7 @@
 <li><img src="{% static 'images/share.png' %}">
     </li> </ul>
 
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{o.0.pk}}">
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#{{o.0.pk}}">
 							Apply
 </button>
 

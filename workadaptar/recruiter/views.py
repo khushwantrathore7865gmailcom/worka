@@ -241,6 +241,8 @@ def view_applied_candidate(request, pk):
         candidate_answer = []
         # Question=[]
         e = Employer.objects.get(user=request.user)
+
+        cp = Employer_profile.objects.get(employer=e)
         job = Employer_job.objects.get(pk=pk)
         question = Employer_jobquestion.objects.filter(job_id=job)
         candidate_Applied = Employer_job_Applied.objects.filter(job_id=job)
@@ -263,7 +265,7 @@ def view_applied_candidate(request, pk):
                       candidate_user, candidate_Applied, expect)
 
         return render(request, 'employer/job_candidate.html',
-                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer})
+                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer,'cp':cp})
         # return render(request, 'employer/job_candidate.html',
         #               {'candidate': objects, 'job': job, 'quest': quest})
     else:
@@ -274,6 +276,8 @@ def view_applied_candidate(request, pk):
 def shortlistview_applied_candidate(request, pk):
     user = request.user
     if user is not None and user.is_employeer:
+        e =Employer.objects.get(user=user)
+        cp = Employer_profile.objects.get(employer=e)
         candidate_user = []
         candidate_profile = []
         education_profile = []
@@ -303,7 +307,7 @@ def shortlistview_applied_candidate(request, pk):
                       candidate_user, candidate_Applied, expect)
         # question = zip(question, candidate_answer)
         return render(request, 'employer/shortlisted_view.html',
-                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer})
+                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer,'cp':cp})
     else:
         return redirect('recruiter:employer/login')
 
@@ -312,6 +316,8 @@ def shortlistview_applied_candidate(request, pk):
 def disqualifyview_applied_candidate(request, pk):
     user = request.user
     if user is not None and user.is_employeer:
+        e = Employer.objects.get(user=user)
+        cp = Employer_profile.objects.get(employer=e)
         candidate_user = []
         candidate_profile = []
         education_profile = []
@@ -341,7 +347,7 @@ def disqualifyview_applied_candidate(request, pk):
                       candidate_user, candidate_Applied, expect)
         # question = zip(question, candidate_answer)
         return render(request, 'employer/disqualified.html',
-                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer})
+                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer,'cp':cp})
     else:
         return redirect('recruiter:employer/login')
 

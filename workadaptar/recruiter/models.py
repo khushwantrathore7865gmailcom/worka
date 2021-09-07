@@ -31,6 +31,7 @@ class Employer_profile(models.Model):
     company_type = models.CharField(max_length=250, blank=True, )
     company_name = models.CharField(max_length=250, blank=True, )
     company_logo = models.ImageField(blank=True, )
+    about_company = models.CharField(max_length=2250, blank=True, )
 
 
 class Employer_job(models.Model):
@@ -40,7 +41,8 @@ class Employer_job(models.Model):
     employment_type = models.CharField(choices=Emply_Type, max_length=25, null=True,
                                        blank=True)  # parttime fulltime internship
 
-    skill = models.CharField(max_length=100,null=True)
+    skill = models.CharField(max_length=100, null=True)
+    job_salary = models.CharField(max_length=1250, blank=True, )
     job_location = models.CharField(max_length=50)
     job_experience = models.CharField(max_length=20)
     is_save_later = models.BooleanField(default=False)
@@ -56,11 +58,12 @@ class Employer_job(models.Model):
         else:
             return E.count()
 
+
 class Employer_jobquestion(models.Model):
     # employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
     job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
     question = models.CharField(max_length=100)
-    answer_size =models.IntegerField(default=10)
+    answer_size = models.IntegerField(default=10)
 
 
 class Employer_candidate_jobanswer(models.Model):
@@ -73,7 +76,7 @@ class Employer_candidate_jobanswer(models.Model):
 class Employer_expired_job(models.Model):
     # employer_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
     job_id = models.ForeignKey(Employer_job, on_delete=models.CASCADE)
-    created_on = models.DateTimeField(auto_now_add=True,null=True)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
 
 
 class Employer_job_Like(models.Model):
