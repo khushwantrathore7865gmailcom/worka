@@ -1,3 +1,5 @@
+{% load crispy_forms_tags %}
+
 {% load static %}
 <!DOCTYPE html>
 <html>
@@ -12,11 +14,25 @@
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href=" {% static 'css/style.css'%}">
 
+<link rel="stylesheet" type="text/css" href=" {% static 'css/style_Addjob.css' %}">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+ .input100{
+            width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+        }
+  </style>
 </head>
 
 
@@ -104,7 +120,7 @@
 <!--          </div>-->
           <div  class="right-align" >
             <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " href="#demo-modal2-fixed-footer"><i class=" tiny material-icons">create</i></a>
-              <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " data-toggle="modal" data-target="#myModal">+</a> <Br>
+              <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " data-toggle="modal" data-target="#educationmodel">+</a> <Br>
             </div>
           <h6><b>Education </b><i class="  tiny material-icons "> input</i> </h6> <br>
                   <span>
@@ -546,30 +562,72 @@
       <div class="container">
         
         <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Large Modal</button>
       
         <!-- Modal -->
-        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal fade" id="educationmodel" role="dialog">
           <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Modal Header</h4>
               </div>
-              <div class="modal-body">
-               <form  method="post" action="">
+              <div class="row">
+              <div class="col-md-10 col-12">
+               <form class="form-horizontal" method="post" action="">
     {% csrf_token %}
-    {{ form3.designation }}
-       
+               {% comment %} <label style="font-size: 20px;">Designation</label> {% endcomment %}
+
+
+        <div class="input-group ">
+        {{form3.management_form}}
+            {{form3.designation.label}}
+            {{form3.designation}}
+        </div>
+  {% comment %} <label style="font-size: 20px;">organization</label> {% endcomment %}
+
+
+        <div class="input-group">
+            {{form3.organization}}
+        </div>
+
+      {% comment %} <label style="font-size: 20px;">salary</label> {% endcomment %}
+
+
+        <div class="input-group">
+            {{form3.salary}}
+        </div>
+
+      {% comment %} <label style="font-size: 20px;">{{form3.job_location.label}}</label>
+
+
+        <div class="input-group" style="width: 100%;">
+            {{form3.salary_date}}
+
+
+        </div> {% endcomment %}
+  {% comment %} <label style="font-size: 20px;">{{form3.job_experience.label}}</label>
+
+
+        <div class="input-group">
+            {{form3.job_experience}}
+        </div>
+  <label style="font-size: 20px;">{{form3.skill.label}}</label>
+
+
+        <div class="input-group">
+            {{form3.skill}}
+        </div> {% endcomment %}
+
               
     <input type="submit" value="Submit">
 </form>
+              </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
-          </div>
+          
         </div>
       </div>
       

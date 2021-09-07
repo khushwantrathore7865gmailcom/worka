@@ -339,7 +339,58 @@ def ProfileEdit(request):
 
 @login_required(login_url='/jobseeker/login')
 def create_profile(request):
-    return render(request, 'jobseeker/createprofile.html')
+    profile = Candidate.objects.get(user=request.user)
+    if request.method == 'POST':
+        form1 = ProfileRegisterForm(request.POST)
+        form2 = ProfileRegisterForm_edu(request.POST)
+        form3 = ProfileRegisterForm_profdetail(request.POST)
+        form4 = ProfileRegisterForm_resume(request.POST)
+        form5 = ProfileRegistration_skills(request.POST)
+        form6 = ProfileRegistration_expdetail(request.POST)
+        if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid() and form6.is_valid():
+            f1 = form1.save(commit=False)
+            f1.user_id = profile
+            f1.save()
+
+            f2 = form2.save(commit=False)
+            if f2.cleaned_data.get('institute_name'):
+                f2.user_id = profile
+                f2.save()
+
+            f3 = form3.save(commit=False)
+            if f2.cleaned_data.get('designation'):
+                f3.user_id = profile
+                f3.save()
+
+            f4 = form4.save(commit=False)
+            f4.user_id = profile
+            f4.save()
+
+            # f5 = form5.save(commit=False)
+            # f5.user_id = profile
+            # f5.save()
+            for form in form5:
+                # extract name from each form and save
+                skill = form.cleaned_data.get('skill')
+                rating = form.cleaned_data.get('rating')
+                # save book instance
+                if skill:
+                    Candidate_skills(user_id=profile, skil=skill, rating=rating).save()
+
+            f6 = form6.save(commit=False)
+            f6.user_id = profile
+            f6.save()
+            return redirect('jobseeker:jobseeker_home')
+
+    form1 = ProfileRegisterForm()
+    form2 = ProfileRegisterForm_edu(queryset=Candidate_edu.objects.none())
+    form3 = ProfileRegisterForm_profdetail(queryset=Candidate_profdetail.objects.none())
+    form4 = ProfileRegisterForm_resume()
+    form5 = ProfileRegistration_skills()
+    form6 = ProfileRegistration_expdetail()
+
+    return render(request, 'jobseeker/createprofile.html',
+                  {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, "form5": form5, 'form6': form6})
 
 
 @login_required(login_url='/jobseeker/login')
