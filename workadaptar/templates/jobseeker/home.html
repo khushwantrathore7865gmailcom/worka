@@ -242,9 +242,22 @@
 {% endfor %}
 </div>
 
+
         </div>
+        {{pjs}}
+        {{pjs.number}}
+            {{pjs.paginator.num_pages}}
+
+    {% if pjs.has_previous %}
+    <a href="#">Previous page</a>
+    {% endif %}
+    {% if pjs.has_next %}
+    <a href="#">Next page</a>
+    {% endif %}
     </div>
+
     </section>
+
       <div class="modal fade" id="{{o.0.pk}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -275,6 +288,7 @@
     </div>
   </div>
 </div>
+
  <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
