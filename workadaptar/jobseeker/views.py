@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.db.models import Q
 from django.http import HttpResponse
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
@@ -123,6 +124,342 @@ def login_candidate(request):
 
 @login_required(login_url='/jobseeker/login')
 def jobseeker_Home(request):
+    if request.method == 'GET':
+        val = request.GET.get('search_box', None)
+        print("val")
+        print(val)
+        if val:
+            job = Employer_job.objects.filter(
+                Q(job_title__icontains=val) |
+                Q(skill__icontains=val) |
+                Q(job_description__icontains=val) |
+                Q(job_salary__icontains=val) |
+                Q(job_location__icontains=val)
+            ).distinct()
+            print(job)
+            jobs = []
+            job_ques = []
+            relevant_jobs = []
+            common = []
+            companyprofile = []
+            job_skills = []
+            u = request.user
+            if u is not None and u.is_candidate:
+                c = Candidate.objects.get(user=u)
+                try:
+                    cp = Candidate_profile.objects.get(user_id=c)
+                except Candidate_profile.DoesNotExist:
+                    cp = None
+                try:
+                    cep = Candidate_expdetail.objects.get(user_id=c)
+                except Candidate_expdetail.DoesNotExist:
+                    cep = None
+                try:
+                    cr = Candidate_resume.objects.get(user_id=c)
+                except Candidate_resume.DoesNotExist:
+                    cr = None
+                if u.first_login:
+
+                    skills = Candidate_skills.objects.filter(user_id=c)
+                    print("skills")
+                    print(skills)
+                    if len(skills) != 0:
+
+                        my_sk = []
+                        j = 0
+                        for i in skills:
+                            my_sk.insert(j, i.skill.lower())
+                            j = j + 1
+
+                        for j in job:
+                            start_date = j.created_on
+                            # print(start_date)
+                            today = datetime.now()
+                            # print(type(today))
+                            stat_date = str(start_date)
+                            start_date = stat_date[:19]
+                            tday = str(today)
+                            today = tday[:19]
+                            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                            # print(s_date)
+                            # print(e_date)
+                            diff = abs((e_date - s_date).days)
+                            print(diff)
+                            if diff > 30:
+                                # expired_job.append(j)
+                                Employer_expired_job.objects.create(job_id=j).save()
+
+                            else:
+                                jobs.append(j)
+
+                        for job in jobs:
+                            skills = []
+                            sk = str(job.skill).split(",")
+                            for i in sk:
+                                skills.append(i.strip().lower())
+                            common_skills = list(set(my_sk) & set(skills))
+                            if len(common_skills) != 0:
+                                e = job.employer_id
+                                companyprofile.append(Employer_profile.objects.get(employer=e))
+                                try:
+                                    userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
+                                    # print(userS.job_id)
+                                except Employer_job_Saved.DoesNotExist:
+                                    userS = None
+                                try:
+                                    userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
+                                    # print(userA.job_id)
+                                except Employer_job_Applied.DoesNotExist:
+                                    userA = None
+
+                                if userA:
+                                    # print(userA)
+                                    continue
+                                if userS:
+                                    # print(userS)
+                                    continue
+                                relevant_jobs.append(job)
+                                common.append(len(common_skills))
+                                job_skills.append(len(skills))
+                                job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
+
+                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+
+                        return render(request, 'jobseeker/home.html',
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                    else:
+
+                        print("len job")
+                        print(len(job))
+                        for j in job:
+                            start_date = j.created_on
+                            # print(start_date)
+                            today = datetime.now()
+                            # print(type(today))
+                            stat_date = str(start_date)
+                            start_date = stat_date[:19]
+                            tday = str(today)
+                            today = tday[:19]
+                            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                            # print(s_date)
+                            # print(e_date)
+                            diff = abs((e_date - s_date).days)
+                            # print(diff)
+                            if diff > 30:
+                                # expired_job.append(j)
+                                Employer_expired_job.objects.create(job_id=j).save()
+
+                            else:
+                                jobs.append(j)
+                            print("len")
+                            print(len(jobs))
+                        for jo in jobs:
+                            skills = []
+                            sk = str(jo.skill).split(",")
+                            for i in sk:
+                                skills.append(i.strip().lower())
+                            common_skill = []
+                            e = jo.employer_id
+                            companyprofile.append(Employer_profile.objects.get(employer=e))
+                            try:
+                                userS = Employer_job_Saved.objects.get(job_id=jo.pk, candidate_id=c)
+                                # print(userS.job_id)
+                            except Employer_job_Saved.DoesNotExist:
+                                userS = None
+                            try:
+                                userA = Employer_job_Applied.objects.get(job_id=jo.pk, candidate_id=c)
+                                # print(userA.job_id)
+                            except Employer_job_Applied.DoesNotExist:
+                                userA = None
+
+                            if userA:
+                                # print(userA)
+                                continue
+                            if userS:
+                                # print(userS)
+                                continue
+                            relevant_jobs.append(jo)
+                            print("job:")
+                            print(jo)
+
+                            common.append(len(common_skill))
+                            job_skills.append(len(skills))
+                            job_ques.append(Employer_jobquestion.objects.filter(job_id=jo))
+                        print("job_quest:")
+                        print(job_ques)
+                        print("relevant_jobs")
+                        print(len(relevant_jobs))
+                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                        return render(request, 'jobseeker/home.html',
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+        else:
+            jobs = []
+            job_ques = []
+            relevant_jobs = []
+            common = []
+            companyprofile = []
+            job_skills = []
+            u = request.user
+            if u is not None and u.is_candidate:
+                c = Candidate.objects.get(user=u)
+                try:
+                    cp = Candidate_profile.objects.get(user_id=c)
+                except Candidate_profile.DoesNotExist:
+                    cp = None
+                try:
+                    cep = Candidate_expdetail.objects.get(user_id=c)
+                except Candidate_expdetail.DoesNotExist:
+                    cep = None
+                try:
+                    cr = Candidate_resume.objects.get(user_id=c)
+                except Candidate_resume.DoesNotExist:
+                    cr = None
+                if u.first_login:
+
+                    skills = Candidate_skills.objects.filter(user_id=c)
+                    print(skills)
+                    if len(skills) != 0:
+
+                        my_sk = []
+                        j = 0
+                        for i in skills:
+                            my_sk.insert(j, i.skill.lower())
+                            j = j + 1
+                        job = Employer_job.objects.all()
+                        for j in job:
+                            start_date = j.created_on
+                            # print(start_date)
+                            today = datetime.now()
+                            # print(type(today))
+                            stat_date = str(start_date)
+                            start_date = stat_date[:19]
+                            tday = str(today)
+                            today = tday[:19]
+                            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                            # print(s_date)
+                            # print(e_date)
+                            diff = abs((e_date - s_date).days)
+                            print(diff)
+                            if diff > 30:
+                                # expired_job.append(j)
+                                Employer_expired_job.objects.create(job_id=j).save()
+
+                            else:
+                                jobs.append(j)
+
+                        for job in jobs:
+                            skills = []
+                            sk = str(job.skill).split(",")
+                            for i in sk:
+                                skills.append(i.strip().lower())
+                            common_skills = list(set(my_sk) & set(skills))
+                            if len(common_skills) != 0:
+                                e = job.employer_id
+                                companyprofile.append(Employer_profile.objects.get(employer=e))
+                                try:
+                                    userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
+                                    # print(userS.job_id)
+                                except Employer_job_Saved.DoesNotExist:
+                                    userS = None
+                                try:
+                                    userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
+                                    # print(userA.job_id)
+                                except Employer_job_Applied.DoesNotExist:
+                                    userA = None
+
+                                if userA:
+                                    # print(userA)
+                                    continue
+                                if userS:
+                                    # print(userS)
+                                    continue
+                                relevant_jobs.append(job)
+                                common.append(len(common_skills))
+                                job_skills.append(len(skills))
+                                job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
+
+                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+
+                        return render(request, 'jobseeker/home.html',
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                    else:
+                        job = Employer_job.objects.all()
+                        print("len job")
+                        print(len(job))
+                        for j in job:
+                            start_date = j.created_on
+                            # print(start_date)
+                            today = datetime.now()
+                            # print(type(today))
+                            stat_date = str(start_date)
+                            start_date = stat_date[:19]
+                            tday = str(today)
+                            today = tday[:19]
+                            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                            # print(s_date)
+                            # print(e_date)
+                            diff = abs((e_date - s_date).days)
+                            # print(diff)
+                            if diff > 30:
+                                # expired_job.append(j)
+                                Employer_expired_job.objects.create(job_id=j).save()
+
+                            else:
+                                jobs.append(j)
+                            print("len")
+                            print(len(jobs))
+                        for jo in jobs:
+                            skills = []
+                            sk = str(jo.skill).split(",")
+                            for i in sk:
+                                skills.append(i.strip().lower())
+                            common_skill = []
+                            e = jo.employer_id
+                            companyprofile.append(Employer_profile.objects.get(employer=e))
+                            try:
+                                userS = Employer_job_Saved.objects.get(job_id=jo.pk, candidate_id=c)
+                                # print(userS.job_id)
+                            except Employer_job_Saved.DoesNotExist:
+                                userS = None
+                            try:
+                                userA = Employer_job_Applied.objects.get(job_id=jo.pk, candidate_id=c)
+                                # print(userA.job_id)
+                            except Employer_job_Applied.DoesNotExist:
+                                userA = None
+
+                            if userA:
+                                # print(userA)
+                                continue
+                            if userS:
+                                # print(userS)
+                                continue
+                            relevant_jobs.append(jo)
+                            print("job:")
+                            print(jo)
+
+                            common.append(len(common_skill))
+                            job_skills.append(len(skills))
+                            job_ques.append(Employer_jobquestion.objects.filter(job_id=jo))
+                        print("job_quest:")
+                        print(job_ques)
+                        print("relevant_jobs")
+                        print(len(relevant_jobs))
+                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                        return render(request, 'jobseeker/home.html',
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+
+                else:
+                    u.first_login = True
+                    u.save()
+                    return redirect('jobseeker:create_profile')
+            else:
+                return redirect('jobseeker:jobseeker/login')
+
+
     if request.method == 'POST':
         print(request.POST)
         pk = request.POST.get('pk')
@@ -137,171 +474,7 @@ def jobseeker_Home(request):
             print(get_text)
             Employer_candidate_jobanswer.objects.create(candidate_id=c, question_id=q, answer=get_text).save()
         Employer_job_Applied.objects.create(candidate_id=c, job_id=job).save()
-    jobs = []
-    job_ques = []
-    relevant_jobs = []
-    common = []
-    companyprofile = []
-    job_skills = []
-    u = request.user
-    if u is not None and u.is_candidate:
-        c = Candidate.objects.get(user=u)
-        try:
-            cp = Candidate_profile.objects.get(user_id=c)
-        except Candidate_profile.DoesNotExist:
-            cp = None
-        try:
-            cep = Candidate_expdetail.objects.get(user_id=c)
-        except Candidate_expdetail.DoesNotExist:
-            cep = None
-        try:
-            cr = Candidate_resume.objects.get(user_id=c)
-        except Candidate_resume.DoesNotExist:
-            cr = None
-        if u.first_login:
 
-            skills = Candidate_skills.objects.filter(user_id=c)
-            print(skills)
-            if len(skills)!=0:
-
-                my_sk = []
-                j = 0
-                for i in skills:
-                    my_sk.insert(j, i.skill.lower())
-                    j = j + 1
-                job = Employer_job.objects.all()
-                for j in job:
-                    start_date = j.created_on
-                    # print(start_date)
-                    today = datetime.now()
-                    # print(type(today))
-                    stat_date = str(start_date)
-                    start_date = stat_date[:19]
-                    tday = str(today)
-                    today = tday[:19]
-                    s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
-                    e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
-                    # print(s_date)
-                    # print(e_date)
-                    diff = abs((e_date - s_date).days)
-                    print(diff)
-                    if diff > 30:
-                        # expired_job.append(j)
-                        Employer_expired_job.objects.create(job_id=j).save()
-
-                    else:
-                        jobs.append(j)
-
-                for job in jobs:
-                    skills = []
-                    sk = str(job.skill).split(",")
-                    for i in sk:
-                        skills.append(i.strip().lower())
-                    common_skills = list(set(my_sk) & set(skills))
-                    if len(common_skills) != 0:
-                        e = job.employer_id
-                        companyprofile.append(Employer_profile.objects.get(employer=e))
-                        try:
-                            userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
-                            # print(userS.job_id)
-                        except Employer_job_Saved.DoesNotExist:
-                            userS = None
-                        try:
-                            userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
-                            # print(userA.job_id)
-                        except Employer_job_Applied.DoesNotExist:
-                            userA = None
-
-                        if userA:
-                            # print(userA)
-                            continue
-                        if userS:
-                            # print(userS)
-                            continue
-                        relevant_jobs.append(job)
-                        common.append(len(common_skills))
-                        job_skills.append(len(skills))
-                        job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
-
-
-
-
-                objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
-
-                return render(request, 'jobseeker/home.html', {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
-            else:
-                job = Employer_job.objects.all()
-                print("len job")
-                print(len(job))
-                for j in job:
-                    start_date = j.created_on
-                    # print(start_date)
-                    today = datetime.now()
-                    # print(type(today))
-                    stat_date = str(start_date)
-                    start_date = stat_date[:19]
-                    tday = str(today)
-                    today = tday[:19]
-                    s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
-                    e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
-                    # print(s_date)
-                    # print(e_date)
-                    diff = abs((e_date - s_date).days)
-                    # print(diff)
-                    if diff > 30:
-                        # expired_job.append(j)
-                        Employer_expired_job.objects.create(job_id=j).save()
-
-                    else:
-                        jobs.append(j)
-                    print("len")
-                    print(len(jobs))
-                for jo in jobs:
-                    skills = []
-                    sk = str(jo.skill).split(",")
-                    for i in sk:
-                        skills.append(i.strip().lower())
-                    common_skill = []
-                    e = jo.employer_id
-                    companyprofile.append(Employer_profile.objects.get(employer=e))
-                    try:
-                        userS = Employer_job_Saved.objects.get(job_id=jo.pk, candidate_id=c)
-                        # print(userS.job_id)
-                    except Employer_job_Saved.DoesNotExist:
-                        userS = None
-                    try:
-                        userA = Employer_job_Applied.objects.get(job_id=jo.pk, candidate_id=c)
-                        # print(userA.job_id)
-                    except Employer_job_Applied.DoesNotExist:
-                        userA = None
-
-                    if userA:
-                        # print(userA)
-                        continue
-                    if userS:
-                        # print(userS)
-                        continue
-                    relevant_jobs.append(jo)
-                    print("job:")
-                    print(jo)
-
-                    common.append(len(common_skill))
-                    job_skills.append(len(skills))
-                    job_ques.append(Employer_jobquestion.objects.filter(job_id=jo))
-                print("job_quest:")
-                print(job_ques)
-                print("relevant_jobs")
-                print(len(relevant_jobs))
-                objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
-                return render(request, 'jobseeker/home.html',
-                              {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
-
-        else:
-            u.first_login = True
-            u.save()
-            return redirect('jobseeker:create_profile')
-    else:
-        return redirect('jobseeker:jobseeker/login')
 
 
 @login_required(login_url='/jobseeker/login')
@@ -333,37 +506,208 @@ def save_later(request, pk):
 #         return redirect('dashboard_home')
 @login_required(login_url='/jobseeker/login')
 def ProfileView(request):
-    u = request.user
-    c = Candidate.objects.get(user=u)
-    try:
-        profile = Candidate_profile.objects.get(user_id=c)
-    except Candidate_profile.DoesNotExist:
-        profile = None
-    try:
-        edu = Candidate_edu.objects.filter(user_id=c)
-    except Candidate_edu.DoesNotExist:
-        edu = None
-    try:
-        professional = Candidate_profdetail.objects.filter(user_id=c)
-    except Candidate_profdetail.DoesNotExist:
-        professional = None
-    try:
-        resume = Candidate_resume.objects.get(user_id=c)
-    except Candidate_resume.DoesNotExist:
-        resume = None
+    if request.method == 'GET':
+        val = request.GET.get('search_box', None)
+        print("val")
+        print(val)
+        if val:
+            job = Employer_job.objects.filter(
+                Q(job_title__icontains=val) |
+                Q(skill__icontains=val) |
+                Q(job_description__icontains=val) |
+                Q(job_salary__icontains=val) |
+                Q(job_location__icontains=val)
+            ).distinct()
+            print(job)
+            jobs = []
+            job_ques = []
+            relevant_jobs = []
+            common = []
+            companyprofile = []
+            job_skills = []
+            u = request.user
+            if u is not None and u.is_candidate:
+                c = Candidate.objects.get(user=u)
+                try:
+                    cp = Candidate_profile.objects.get(user_id=c)
+                except Candidate_profile.DoesNotExist:
+                    cp = None
+                try:
+                    cep = Candidate_expdetail.objects.get(user_id=c)
+                except Candidate_expdetail.DoesNotExist:
+                    cep = None
+                try:
+                    cr = Candidate_resume.objects.get(user_id=c)
+                except Candidate_resume.DoesNotExist:
+                    cr = None
+                if u.first_login:
 
-    try:
-        skills = Candidate_skills.objects.filter(user_id=c)
-    except Candidate_skills.DoesNotExist:
-        skills = None
-    return render(request, 'jobseeker/skills.html', {
-        "user": u,
-        "profile": profile,
-        "edu": edu,
-        "professional": professional,
-        "resume": resume,
-        "skills": skills,
-    })
+                    skills = Candidate_skills.objects.filter(user_id=c)
+                    print("skills")
+                    print(skills)
+                    if len(skills) != 0:
+
+                        my_sk = []
+                        j = 0
+                        for i in skills:
+                            my_sk.insert(j, i.skill.lower())
+                            j = j + 1
+
+                        for j in job:
+                            start_date = j.created_on
+                            # print(start_date)
+                            today = datetime.now()
+                            # print(type(today))
+                            stat_date = str(start_date)
+                            start_date = stat_date[:19]
+                            tday = str(today)
+                            today = tday[:19]
+                            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                            # print(s_date)
+                            # print(e_date)
+                            diff = abs((e_date - s_date).days)
+                            print(diff)
+                            if diff > 30:
+                                # expired_job.append(j)
+                                Employer_expired_job.objects.create(job_id=j).save()
+
+                            else:
+                                jobs.append(j)
+
+                        for job in jobs:
+                            skills = []
+                            sk = str(job.skill).split(",")
+                            for i in sk:
+                                skills.append(i.strip().lower())
+                            common_skills = list(set(my_sk) & set(skills))
+                            if len(common_skills) != 0:
+                                e = job.employer_id
+                                companyprofile.append(Employer_profile.objects.get(employer=e))
+                                try:
+                                    userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
+                                    # print(userS.job_id)
+                                except Employer_job_Saved.DoesNotExist:
+                                    userS = None
+                                try:
+                                    userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
+                                    # print(userA.job_id)
+                                except Employer_job_Applied.DoesNotExist:
+                                    userA = None
+
+                                if userA:
+                                    # print(userA)
+                                    continue
+                                if userS:
+                                    # print(userS)
+                                    continue
+                                relevant_jobs.append(job)
+                                common.append(len(common_skills))
+                                job_skills.append(len(skills))
+                                job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
+
+                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+
+                        return render(request, 'jobseeker/home.html',
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                    else:
+
+                        print("len job")
+                        print(len(job))
+                        for j in job:
+                            start_date = j.created_on
+                            # print(start_date)
+                            today = datetime.now()
+                            # print(type(today))
+                            stat_date = str(start_date)
+                            start_date = stat_date[:19]
+                            tday = str(today)
+                            today = tday[:19]
+                            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                            # print(s_date)
+                            # print(e_date)
+                            diff = abs((e_date - s_date).days)
+                            # print(diff)
+                            if diff > 30:
+                                # expired_job.append(j)
+                                Employer_expired_job.objects.create(job_id=j).save()
+
+                            else:
+                                jobs.append(j)
+                            print("len")
+                            print(len(jobs))
+                        for jo in jobs:
+                            skills = []
+                            sk = str(jo.skill).split(",")
+                            for i in sk:
+                                skills.append(i.strip().lower())
+                            common_skill = []
+                            e = jo.employer_id
+                            companyprofile.append(Employer_profile.objects.get(employer=e))
+                            try:
+                                userS = Employer_job_Saved.objects.get(job_id=jo.pk, candidate_id=c)
+                                # print(userS.job_id)
+                            except Employer_job_Saved.DoesNotExist:
+                                userS = None
+                            try:
+                                userA = Employer_job_Applied.objects.get(job_id=jo.pk, candidate_id=c)
+                                # print(userA.job_id)
+                            except Employer_job_Applied.DoesNotExist:
+                                userA = None
+
+                            if userA:
+                                # print(userA)
+                                continue
+                            if userS:
+                                # print(userS)
+                                continue
+                            relevant_jobs.append(jo)
+                            print("job:")
+                            print(jo)
+
+                            common.append(len(common_skill))
+                            job_skills.append(len(skills))
+                            job_ques.append(Employer_jobquestion.objects.filter(job_id=jo))
+                        print("job_quest:")
+                        print(job_ques)
+                        print("relevant_jobs")
+                        print(len(relevant_jobs))
+                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                        return render(request, 'jobseeker/home.html',
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+        else:
+            u = request.user
+            c = Candidate.objects.get(user=u)
+            try:
+                profile = Candidate_profile.objects.get(user_id=c)
+            except Candidate_profile.DoesNotExist:
+                profile = None
+            try:
+                edu = Candidate_edu.objects.filter(user_id=c)
+            except Candidate_edu.DoesNotExist:
+                edu = None
+            try:
+                professional = Candidate_profdetail.objects.filter(user_id=c)
+            except Candidate_profdetail.DoesNotExist:
+                professional = None
+            try:
+                resume = Candidate_resume.objects.get(user_id=c)
+            except Candidate_resume.DoesNotExist:
+                resume = None
+
+            try:
+                skills = Candidate_skills.objects.filter(user_id=c)
+            except Candidate_skills.DoesNotExist:
+                skills = None
+            return render(request, 'jobseeker/skills.html', {
+                "user": u,
+                "profile": profile,
+                "edu": edu,
+                "professional": professional,
+                "resume": resume,
+                "skills": skills,
+            })
 
 
 # @login_required(login_url='/login/')
@@ -481,6 +825,243 @@ def create_profile(request):
 
 @login_required(login_url='/jobseeker/login')
 def SavedJobs(request):
+    if request.method == 'GET':
+        val = request.GET.get('search_box', None)
+        print("val")
+        print(val)
+        if val:
+            job = Employer_job.objects.filter(
+                Q(job_title__icontains=val) |
+                Q(skill__icontains=val) |
+                Q(job_description__icontains=val) |
+                Q(job_salary__icontains=val) |
+                Q(job_location__icontains=val)
+            ).distinct()
+            print(job)
+            jobs = []
+            job_ques = []
+            relevant_jobs = []
+            common = []
+            companyprofile = []
+            job_skills = []
+            u = request.user
+            if u is not None and u.is_candidate:
+                c = Candidate.objects.get(user=u)
+                try:
+                    cp = Candidate_profile.objects.get(user_id=c)
+                except Candidate_profile.DoesNotExist:
+                    cp = None
+                try:
+                    cep = Candidate_expdetail.objects.get(user_id=c)
+                except Candidate_expdetail.DoesNotExist:
+                    cep = None
+                try:
+                    cr = Candidate_resume.objects.get(user_id=c)
+                except Candidate_resume.DoesNotExist:
+                    cr = None
+                if u.first_login:
+
+                    skills = Candidate_skills.objects.filter(user_id=c)
+                    print("skills")
+                    print(skills)
+                    if len(skills) != 0:
+
+                        my_sk = []
+                        j = 0
+                        for i in skills:
+                            my_sk.insert(j, i.skill.lower())
+                            j = j + 1
+
+                        for j in job:
+                            start_date = j.created_on
+                            # print(start_date)
+                            today = datetime.now()
+                            # print(type(today))
+                            stat_date = str(start_date)
+                            start_date = stat_date[:19]
+                            tday = str(today)
+                            today = tday[:19]
+                            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                            # print(s_date)
+                            # print(e_date)
+                            diff = abs((e_date - s_date).days)
+                            print(diff)
+                            if diff > 30:
+                                # expired_job.append(j)
+                                Employer_expired_job.objects.create(job_id=j).save()
+
+                            else:
+                                jobs.append(j)
+
+                        for job in jobs:
+                            skills = []
+                            sk = str(job.skill).split(",")
+                            for i in sk:
+                                skills.append(i.strip().lower())
+                            common_skills = list(set(my_sk) & set(skills))
+                            if len(common_skills) != 0:
+                                e = job.employer_id
+                                companyprofile.append(Employer_profile.objects.get(employer=e))
+                                try:
+                                    userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
+                                    # print(userS.job_id)
+                                except Employer_job_Saved.DoesNotExist:
+                                    userS = None
+                                try:
+                                    userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
+                                    # print(userA.job_id)
+                                except Employer_job_Applied.DoesNotExist:
+                                    userA = None
+
+                                if userA:
+                                    # print(userA)
+                                    continue
+                                if userS:
+                                    # print(userS)
+                                    continue
+                                relevant_jobs.append(job)
+                                common.append(len(common_skills))
+                                job_skills.append(len(skills))
+                                job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
+
+                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+
+                        return render(request, 'jobseeker/home.html',
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                    else:
+
+                        print("len job")
+                        print(len(job))
+                        for j in job:
+                            start_date = j.created_on
+                            # print(start_date)
+                            today = datetime.now()
+                            # print(type(today))
+                            stat_date = str(start_date)
+                            start_date = stat_date[:19]
+                            tday = str(today)
+                            today = tday[:19]
+                            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                            # print(s_date)
+                            # print(e_date)
+                            diff = abs((e_date - s_date).days)
+                            # print(diff)
+                            if diff > 30:
+                                # expired_job.append(j)
+                                Employer_expired_job.objects.create(job_id=j).save()
+
+                            else:
+                                jobs.append(j)
+                            print("len")
+                            print(len(jobs))
+                        for jo in jobs:
+                            skills = []
+                            sk = str(jo.skill).split(",")
+                            for i in sk:
+                                skills.append(i.strip().lower())
+                            common_skill = []
+                            e = jo.employer_id
+                            companyprofile.append(Employer_profile.objects.get(employer=e))
+                            try:
+                                userS = Employer_job_Saved.objects.get(job_id=jo.pk, candidate_id=c)
+                                # print(userS.job_id)
+                            except Employer_job_Saved.DoesNotExist:
+                                userS = None
+                            try:
+                                userA = Employer_job_Applied.objects.get(job_id=jo.pk, candidate_id=c)
+                                # print(userA.job_id)
+                            except Employer_job_Applied.DoesNotExist:
+                                userA = None
+
+                            if userA:
+                                # print(userA)
+                                continue
+                            if userS:
+                                # print(userS)
+                                continue
+                            relevant_jobs.append(jo)
+                            print("job:")
+                            print(jo)
+
+                            common.append(len(common_skill))
+                            job_skills.append(len(skills))
+                            job_ques.append(Employer_jobquestion.objects.filter(job_id=jo))
+                        print("job_quest:")
+                        print(job_ques)
+                        print("relevant_jobs")
+                        print(len(relevant_jobs))
+                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                        return render(request, 'jobseeker/home.html',
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+        else:
+            job_ques = []
+            companyprofile = []
+            relevant_jobs = []
+            common = []
+            job_skills = []
+            my_sk = []
+            post_date = []
+            saved_date = []
+            user = request.user
+            if user is not None and user.is_candidate:
+                c = Candidate.objects.get(user=request.user)
+                try:
+                    cp = Candidate_profile.objects.get(user_id=c)
+                except Candidate_profile.DoesNotExist:
+                    cp = None
+                if cp:
+                    skills = Candidate_skills.objects.filter(user_id=c)
+
+                    j = 0
+                    for i in skills:
+                        my_sk.insert(j, i.skill.lower())
+                        j = j + 1
+                    jobs = Employer_job.objects.all()
+
+                    for job in jobs:
+                        skills = []
+                        sk = str(job.skill).split(",")
+                        for i in sk:
+                            skills.append(i.strip().lower())
+                        common_skills = list(set(my_sk) & set(skills))
+                        if len(common_skills) != 0:
+                            try:
+                                userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
+                                # print(userS.job_id)
+                            except Employer_job_Saved.DoesNotExist:
+                                userS = None
+                            # try:
+                            #     userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
+                            #     # print(userA.job_id)
+                            # except Employer_job_Applied.DoesNotExist:
+                            #     userA = None
+
+                            # if userA:
+                            #     # print(userA)
+                            #     continue
+                            if userS:
+                                e = job.employer_id
+                                post_date.append(job.created_on)
+                                saved_date.append(userS.saved_on)
+                                companyprofile.append(Employer_profile.objects.get(employer=e))
+                                # print(userS)
+                                # continue
+                                relevant_jobs.append(job)
+                                common.append(len(common_skills))
+                                job_skills.append(len(skills))
+                                job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
+
+                            print(relevant_jobs)
+
+                    objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile, post_date, saved_date)
+
+                    return render(request, 'jobseeker/savedjobs.html', {'jobs': objects, 'cp': cp})
+                else:
+                    return render(request, 'jobseeker/savedjobs.html', {'cp': cp})
+            else:
+                return redirect('jobseeker:jobseeker/login')
     if request.method == 'POST':
         print(request.POST)
         pk = request.POST.get('pk')
@@ -497,90 +1078,199 @@ def SavedJobs(request):
             Employer_candidate_jobanswer.objects.create(candidate_id=c, question_id=q, answer=get_text).save()
         Employer_job_Applied.objects.create(candidate_id=c, job_id=job).save()
 
-    job_ques = []
-    companyprofile = []
-    relevant_jobs = []
-    common = []
-    job_skills = []
-    my_sk = []
-    post_date = []
-    saved_date = []
-    user = request.user
-    if user is not None and user.is_candidate:
-        c = Candidate.objects.get(user=request.user)
-        try:
-            cp = Candidate_profile.objects.get(user_id=c)
-        except Candidate_profile.DoesNotExist:
-            cp = None
-        if cp:
-            skills = Candidate_skills.objects.filter(user_id=c)
 
-            j = 0
-            for i in skills:
-                my_sk.insert(j, i.skill.lower())
-                j = j + 1
-            jobs = Employer_job.objects.all()
-
-            for job in jobs:
-                skills = []
-                sk = str(job.skill).split(",")
-                for i in sk:
-                    skills.append(i.strip().lower())
-                common_skills = list(set(my_sk) & set(skills))
-                if len(common_skills) != 0:
-                    try:
-                        userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
-                        # print(userS.job_id)
-                    except Employer_job_Saved.DoesNotExist:
-                        userS = None
-                    # try:
-                    #     userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
-                    #     # print(userA.job_id)
-                    # except Employer_job_Applied.DoesNotExist:
-                    #     userA = None
-
-                    # if userA:
-                    #     # print(userA)
-                    #     continue
-                    if userS:
-                        e = job.employer_id
-                        post_date.append(job.created_on)
-                        saved_date.append(userS.saved_on)
-                        companyprofile.append(Employer_profile.objects.get(employer=e))
-                        # print(userS)
-                        # continue
-                        relevant_jobs.append(job)
-                        common.append(len(common_skills))
-                        job_skills.append(len(skills))
-                        job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
-
-                    print(relevant_jobs)
-
-            objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile, post_date, saved_date)
-
-            return render(request, 'jobseeker/savedjobs.html', {'jobs': objects,'cp':cp})
-        else:
-            return render(request, 'jobseeker/savedjobs.html',{'cp':cp})
-    else:
-        return redirect('jobseeker:jobseeker/login')
 
 
 @login_required(login_url='/jobseeker/login')
 def AppliedJobs(request):
-    companyprofile = []
-    user = request.user
-    if user is not None and user.is_candidate:
-        c = Candidate.objects.get(user=request.user)
-        cp = Candidate_profile.objects.get(user_id=c)
-        applied = Employer_job_Applied.objects.filter(candidate_id=c)
-        for a in applied:
-            e = a.job_id.employer_id
-            companyprofile.append(Employer_profile.objects.get(employer=e))
+    if request.method == 'GET':
+        val = request.GET.get('search_box', None)
+        print("val")
+        print(val)
+        if val:
+            job = Employer_job.objects.filter(
+                Q(job_title__icontains=val) |
+                Q(skill__icontains=val) |
+                Q(job_description__icontains=val) |
+                Q(job_salary__icontains=val) |
+                Q(job_location__icontains=val)
+            ).distinct()
+            print(job)
+            jobs = []
+            job_ques = []
+            relevant_jobs = []
+            common = []
+            companyprofile = []
+            job_skills = []
+            u = request.user
+            if u is not None and u.is_candidate:
+                c = Candidate.objects.get(user=u)
+                try:
+                    cp = Candidate_profile.objects.get(user_id=c)
+                except Candidate_profile.DoesNotExist:
+                    cp = None
+                try:
+                    cep = Candidate_expdetail.objects.get(user_id=c)
+                except Candidate_expdetail.DoesNotExist:
+                    cep = None
+                try:
+                    cr = Candidate_resume.objects.get(user_id=c)
+                except Candidate_resume.DoesNotExist:
+                    cr = None
+                if u.first_login:
 
-        objects = zip(applied, companyprofile)
-        return render(request, 'jobseeker/applied.html', {'jobs': objects,'cp':cp})
-    else:
-        return redirect('jobseeker:jobseeker/login')
+                    skills = Candidate_skills.objects.filter(user_id=c)
+                    print("skills")
+                    print(skills)
+                    if len(skills) != 0:
+
+                        my_sk = []
+                        j = 0
+                        for i in skills:
+                            my_sk.insert(j, i.skill.lower())
+                            j = j + 1
+
+                        for j in job:
+                            start_date = j.created_on
+                            # print(start_date)
+                            today = datetime.now()
+                            # print(type(today))
+                            stat_date = str(start_date)
+                            start_date = stat_date[:19]
+                            tday = str(today)
+                            today = tday[:19]
+                            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                            # print(s_date)
+                            # print(e_date)
+                            diff = abs((e_date - s_date).days)
+                            print(diff)
+                            if diff > 30:
+                                # expired_job.append(j)
+                                Employer_expired_job.objects.create(job_id=j).save()
+
+                            else:
+                                jobs.append(j)
+
+                        for job in jobs:
+                            skills = []
+                            sk = str(job.skill).split(",")
+                            for i in sk:
+                                skills.append(i.strip().lower())
+                            common_skills = list(set(my_sk) & set(skills))
+                            if len(common_skills) != 0:
+                                e = job.employer_id
+                                companyprofile.append(Employer_profile.objects.get(employer=e))
+                                try:
+                                    userS = Employer_job_Saved.objects.get(job_id=job.pk, candidate_id=c)
+                                    # print(userS.job_id)
+                                except Employer_job_Saved.DoesNotExist:
+                                    userS = None
+                                try:
+                                    userA = Employer_job_Applied.objects.get(job_id=job.pk, candidate_id=c)
+                                    # print(userA.job_id)
+                                except Employer_job_Applied.DoesNotExist:
+                                    userA = None
+
+                                if userA:
+                                    # print(userA)
+                                    continue
+                                if userS:
+                                    # print(userS)
+                                    continue
+                                relevant_jobs.append(job)
+                                common.append(len(common_skills))
+                                job_skills.append(len(skills))
+                                job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
+
+                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+
+                        return render(request, 'jobseeker/home.html',
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                    else:
+
+                        print("len job")
+                        print(len(job))
+                        for j in job:
+                            start_date = j.created_on
+                            # print(start_date)
+                            today = datetime.now()
+                            # print(type(today))
+                            stat_date = str(start_date)
+                            start_date = stat_date[:19]
+                            tday = str(today)
+                            today = tday[:19]
+                            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                            # print(s_date)
+                            # print(e_date)
+                            diff = abs((e_date - s_date).days)
+                            # print(diff)
+                            if diff > 30:
+                                # expired_job.append(j)
+                                Employer_expired_job.objects.create(job_id=j).save()
+
+                            else:
+                                jobs.append(j)
+                            print("len")
+                            print(len(jobs))
+                        for jo in jobs:
+                            skills = []
+                            sk = str(jo.skill).split(",")
+                            for i in sk:
+                                skills.append(i.strip().lower())
+                            common_skill = []
+                            e = jo.employer_id
+                            companyprofile.append(Employer_profile.objects.get(employer=e))
+                            try:
+                                userS = Employer_job_Saved.objects.get(job_id=jo.pk, candidate_id=c)
+                                # print(userS.job_id)
+                            except Employer_job_Saved.DoesNotExist:
+                                userS = None
+                            try:
+                                userA = Employer_job_Applied.objects.get(job_id=jo.pk, candidate_id=c)
+                                # print(userA.job_id)
+                            except Employer_job_Applied.DoesNotExist:
+                                userA = None
+
+                            if userA:
+                                # print(userA)
+                                continue
+                            if userS:
+                                # print(userS)
+                                continue
+                            relevant_jobs.append(jo)
+                            print("job:")
+                            print(jo)
+
+                            common.append(len(common_skill))
+                            job_skills.append(len(skills))
+                            job_ques.append(Employer_jobquestion.objects.filter(job_id=jo))
+                        print("job_quest:")
+                        print(job_ques)
+                        print("relevant_jobs")
+                        print(len(relevant_jobs))
+                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                        return render(request, 'jobseeker/home.html',
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+        else:
+            companyprofile = []
+            user = request.user
+            if user is not None and user.is_candidate:
+                c = Candidate.objects.get(user=request.user)
+                try:
+                    cp = Candidate_profile.objects.get(user_id=c)
+                except Candidate_profile.DoesNotExist:
+                    cp=None
+                applied = Employer_job_Applied.objects.filter(candidate_id=c)
+                for a in applied:
+                    e = a.job_id.employer_id
+                    companyprofile.append(Employer_profile.objects.get(employer=e))
+
+                objects = zip(applied, companyprofile)
+                return render(request, 'jobseeker/applied.html', {'jobs': objects, 'cp': cp})
+            else:
+                return redirect('jobseeker:jobseeker/login')
 
 
 @login_required(login_url='/jobseeker/login')
