@@ -132,31 +132,90 @@
 		</div>
 
 	</header>
-        <section class="job-portal all-jobs">
+       <section class="job-portal all-jobs">
 	<div class="container main-wid">
 		<div class="row">
 			<div class="col-md-10 col-12 mx-auto">
 				<div class="heading">
-  <center> <h2 class="text-center">Candidate Applied</h2>  </center>
-    <br>
-<h2 class="text-primary "> {{job.job_title}}</h2>
-<br>
-</div>
-
-                <a class="btn btn-primary" href="{% url 'recruiter:shortlist_view_applied_candidate' job.pk %}" role="button">shorlist view</a>
-    <a class="btn btn-primary" href="{% url 'recruiter:disqualify_view_applied_candidate' job.pk %}" role="button">disqualify view</a>
-                <br>
-                <br>
-
+					<h3>{{job.job_title}}</h3>
+				</div>
 			</div>
+
+			<div class="col-md-10 col-12 mx-auto">
+				<div class="heading-action">
+					<ul class="list-inline">
+						<li>Action <span>Taken</span></li>
+                        <li><a href="{% url 'recruiter:shortlist_view_applied_candidate' job.pk %}"><span><img src="images/ribban.png"></span> Shortlisted candidate</a></li>
+						<li><a href="{% url 'recruiter:disqualify_view_applied_candidate' job.pk %}"><span><i class="fa fa-check-circle" aria-hidden="true"></i></span> Disqualified candidates</a>  </li>
+
+					</ul>
+				</div>
+			</div>
+
+
+			<div class="col-md-3 col-12">
+				<div class="all-job-left">
+                      <form class="form-inline" type="get">
+						<h3>Quick Search</h3>
+						<div class="keywords">
+							<input type="text" id="keyword_box" name="keyword_box" Placeholder="keywords">
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</div>
+						<div class="keywords">
+							<input type="text" id="company_box" name="company_box"Placeholder="Company">
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</div>
+						<div class="keywords">
+							<input type="text" id="location_box" name="location_box"Placeholder="Destination">
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</div>
+
+						<div class="keywords-exp">
+							<h4>Experience (in years) </h4>
+
+							<input type="text" id="min_box" name="min_box" placeholder="Min"> to</span>
+							<input type="text" id="max_box" name="max_box"  placeholder="Max">
+						</div>
+						<div class="keywords-ctc">
+							<h4>CTC  </h4>
+							<div class="ctc-inner">
+							 <span class="from">From</span>
+							<input type="text" id="min_salary_box" name="min_salary_box" placeholder="Minimum"> to</span>
+							<input type="text" id="max_salary_box" name="max_salary_box"  placeholder="Max">
+
+						</div>
+
+						</div>
+<!--						<div class="keywords-ctc-active">-->
+<!--							<h4>Active in</h4>-->
+
+<!--							 <select>-->
+<!--								<option>Active in</option>-->
+<!--								<option>Active in</option>-->
+<!--								<option>Active in</option>-->
+<!--								<option>Active in</option>-->
+<!--							 </select>-->
+<!--						</div>-->
+
+						<div class="keywords-srch">
+							<button type="submit"><i class="fa fa-search" aria-hidden="true"></i> Refine Search</button>
+							<button class="clear" type="reset">Clear</button>
+
+						</div>
+                      </form>
+				</div>
+			</div>
+
+
+
 
     {% for c in candidate %}
 
-    {% if c.6.is_shortlisted %}
+
+   <div class="col-md-9 col-12">
+{% if c.6.is_shortlisted %}
     {% elif c.6.is_disqualified %}
     {% else %}
-   <div class="col-md-9 col-12">
-
 				<div class="job-right all-job-rights">
 					<div class="job-right-jobs">
           

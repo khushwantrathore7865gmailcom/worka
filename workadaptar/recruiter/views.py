@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.db.models import Q
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
@@ -244,20 +245,134 @@ def view_applied_candidate(request, pk):
 
         cp = Employer_profile.objects.get(employer=e)
         job = Employer_job.objects.get(pk=pk)
+
+        valkey = request.GET.get('keyword_box', None)
+        valcomp = request.GET.get('company_box', None)
+        valloc = request.GET.get('location_box', None)
+        valmin_box = request.GET.get('min_box', None)
+        valmax_box = request.GET.get('max_box', None)
+        valmin_salary_box = request.GET.get('min_salary_box', None)
+        valmax_salary_box = request.GET.get('max_salary_box', None)
         question = Employer_jobquestion.objects.filter(job_id=job)
         candidate_Applied = Employer_job_Applied.objects.filter(job_id=job)
         for can in candidate_Applied:
             c = can.candidate_id
-            candidate_profile.append(Candidate_profile.objects.get(user_id=c))
-            candidate_user.append(c.user)
-            education_profile.append(Candidate_edu.objects.filter(user_id=c).first())
-            professional_profile.append(Candidate_profdetail.objects.filter(user_id=c))
-            expect.append(Candidate_expdetail.objects.get(user_id=c))
-            skill.append(Candidate_skills.objects.filter(user_id=c))
+            c_p = Candidate_profile.objects.get(user_id=c)
+            c_e = Candidate_edu.objects.filter(user_id=c).first()
+            p_p = Candidate_profdetail.objects.filter(user_id=c)
+            c_ed = Candidate_expdetail.objects.get(user_id=c)
+            c_sk = Candidate_skills.objects.filter(user_id=c)
+            if (valkey is not None) | (valloc is not None) | (valcomp is not None) | (valmax_box is not None) | (
+                    valmin_box is not None) | (
+                    valmin_box is not None) | (valmax_salary_box is not None) | (valmin_salary_box is not None):
+                for c_sks in c_sk:
+                    try:
+                        c_skss = c_sks.skill
+                    except c_sks.DoesNotExist:
+                        pass
+                    if c_skss == valkey:
 
-            resume.append(Candidate_resume.objects.get(user_id=c))
-            for q in question:
-                candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+                        candidate_profile.append(c_p)
+                        print("working filter")
+                        print(candidate_profile)
+                        candidate_user.append(c.user)
+                        education_profile.append(c_e)
+                        professional_profile.append(p_p)
+                        expect.append(c_ed)
+                        skill.append(c_sk)
+
+                        resume.append(Candidate_resume.objects.get(user_id=c))
+                        for q in question:
+                            candidate_answer.append(
+                                Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+                        continue
+                    else:
+                        pass
+
+                if valloc in c_ed.prefer_location:
+                    print(valloc)
+
+                    candidate_profile.append(c_p)
+                    print("working location filter")
+                    print(candidate_profile)
+                    candidate_user.append(c.user)
+                    education_profile.append(c_e)
+                    professional_profile.append(p_p)
+                    expect.append(c_ed)
+                    skill.append(c_sk)
+
+                    resume.append(Candidate_resume.objects.get(user_id=c))
+                    for q in question:
+                        candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+                    continue
+                for p_ps in p_p:
+                    try:
+                        p_pss = p_ps.organization
+                    except c_sks.DoesNotExist:
+                        pass
+                    if p_pss == valcomp:
+
+                        candidate_profile.append(c_p)
+                        print("working filter")
+                        print(candidate_profile)
+                        candidate_user.append(c.user)
+                        education_profile.append(c_e)
+                        professional_profile.append(p_p)
+                        expect.append(c_ed)
+                        skill.append(c_sk)
+
+                        resume.append(Candidate_resume.objects.get(user_id=c))
+                        for q in question:
+                            candidate_answer.append(
+                                Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+                        continue
+                    else:
+                        pass
+                if valmin_box <= c_ed.Total_Working <= valmax_box:
+
+                    candidate_profile.append(c_p)
+                    print("working location filter")
+                    print(candidate_profile)
+                    candidate_user.append(c.user)
+                    education_profile.append(c_e)
+                    professional_profile.append(p_p)
+                    expect.append(c_ed)
+                    skill.append(c_sk)
+
+                    resume.append(Candidate_resume.objects.get(user_id=c))
+                    for q in question:
+                        candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+                    continue
+                if valmin_salary_box <= c_ed.exp_salary <= valmax_salary_box:
+
+                    candidate_profile.append(c_p)
+                    print("working location filter")
+                    print(candidate_profile)
+                    candidate_user.append(c.user)
+                    education_profile.append(c_e)
+                    professional_profile.append(p_p)
+                    expect.append(c_ed)
+                    skill.append(c_sk)
+
+                    resume.append(Candidate_resume.objects.get(user_id=c))
+                    for q in question:
+                        candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+                    continue
+
+
+                else:
+                    pass
+            else:
+                candidate_profile.append(c_p)
+                candidate_user.append(c.user)
+                education_profile.append(c_e)
+                professional_profile.append(p_p)
+                expect.append(c_ed)
+                skill.append(c_sk)
+
+                resume.append(Candidate_resume.objects.get(user_id=c))
+                for q in question:
+                    candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
 
         quest = zip(question, candidate_answer)
         # print(candidate_answer)
@@ -265,7 +380,7 @@ def view_applied_candidate(request, pk):
                       candidate_user, candidate_Applied, expect)
 
         return render(request, 'employer/job_candidate.html',
-                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer,'cp':cp})
+                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer, 'cp': cp})
         # return render(request, 'employer/job_candidate.html',
         #               {'candidate': objects, 'job': job, 'quest': quest})
     else:
@@ -276,7 +391,7 @@ def view_applied_candidate(request, pk):
 def shortlistview_applied_candidate(request, pk):
     user = request.user
     if user is not None and user.is_employeer:
-        e =Employer.objects.get(user=user)
+        e = Employer.objects.get(user=user)
         cp = Employer_profile.objects.get(employer=e)
         candidate_user = []
         candidate_profile = []
@@ -307,7 +422,7 @@ def shortlistview_applied_candidate(request, pk):
                       candidate_user, candidate_Applied, expect)
         # question = zip(question, candidate_answer)
         return render(request, 'employer/shortlisted_view.html',
-                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer,'cp':cp})
+                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer, 'cp': cp})
     else:
         return redirect('recruiter:employer/login')
 
@@ -347,7 +462,7 @@ def disqualifyview_applied_candidate(request, pk):
                       candidate_user, candidate_Applied, expect)
         # question = zip(question, candidate_answer)
         return render(request, 'employer/disqualified.html',
-                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer,'cp':cp})
+                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer, 'cp': cp})
     else:
         return redirect('recruiter:employer/login')
 
@@ -453,12 +568,13 @@ def job_Response(request, pk):
         return render(request, 'dashboard/jobresponse.html', {'response': response})
     else:
         return redirect('recruiter:employer/login')
+
+
 @login_required(login_url='/recruiter/login')
 def advance_Search(request):
     user = request.user
     if user is not None and user.is_employeer:
         if request.method == 'GET':
-
             return render(request, 'dashboard/jobresponse.html', {'response': response})
     else:
         return redirect('recruiter:employer/login')
