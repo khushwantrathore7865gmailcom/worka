@@ -244,15 +244,12 @@
 
 
         </div>
-        {{pjs}}
-        {{pjs.number}}
-            {{pjs.paginator.num_pages}}
 
     {% if pjs.has_previous %}
-    <a href="#">Previous page</a>
+    <a href="{% url 'jobseeker:jobseeker_home' %}?page={{pjs.previous_page_number}}">Previous page</a>
     {% endif %}
     {% if pjs.has_next %}
-    <a href="#">Next page</a>
+    <a href="{% url 'jobseeker:jobseeker_home' %}?page={{pjs.next_page_number}}">Next page</a>
     {% endif %}
     </div>
 

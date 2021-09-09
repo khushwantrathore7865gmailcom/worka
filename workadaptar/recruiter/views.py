@@ -453,3 +453,12 @@ def job_Response(request, pk):
         return render(request, 'dashboard/jobresponse.html', {'response': response})
     else:
         return redirect('recruiter:employer/login')
+@login_required(login_url='/recruiter/login')
+def advance_Search(request):
+    user = request.user
+    if user is not None and user.is_employeer:
+        if request.method == 'GET':
+
+            return render(request, 'dashboard/jobresponse.html', {'response': response})
+    else:
+        return redirect('recruiter:employer/login')

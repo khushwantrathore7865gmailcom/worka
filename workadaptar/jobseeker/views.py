@@ -225,7 +225,7 @@ def jobseeker_Home(request):
                                 job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
 
                         pj = Paginator(relevant_jobs, 5)
-                        pjs = Paginator(relevant_jobs, 5)
+                        pjt = Paginator(relevant_jobs, 5)
                         pc = Paginator(common, 5)
                         pjs = Paginator(job_skills, 5)
                         pjq = Paginator(job_ques, 5)
@@ -233,12 +233,14 @@ def jobseeker_Home(request):
                         page_num = request.GET.get('page', 1)
                         try:
                             pj_objects = pj.page(page_num)
+                            pjt_objects = pjt.page(page_num)
                             pc_objects = pc.page(page_num)
                             pjs_objects = pjs.page(page_num)
                             pjq_objects = pjq.page(page_num)
                             pcp_objects = pcp.page(page_num)
                         except EmptyPage:
                             pj_objects = pj.page(1)
+                            pjt_objects = pjt.page(1)
                             pc_objects = pc.page(1)
                             pjs_objects = pjs.page(1)
                             pjq_objects = pjq.page(1)
@@ -246,7 +248,7 @@ def jobseeker_Home(request):
                         objects = zip(pj_objects, pc_objects, pjs_objects, pjq_objects, pcp_objects)
 
                         return render(request, 'jobseeker/home.html',
-                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr, 'pjs': pjt_objects})
                     else:
 
                         print("len job")
@@ -311,7 +313,7 @@ def jobseeker_Home(request):
                         print("relevant_jobs")
                         print(len(relevant_jobs))
                         pj = Paginator(relevant_jobs, 5)
-                        pjs = Paginator(relevant_jobs, 5)
+                        pjt = Paginator(relevant_jobs, 5)
                         pc = Paginator(common, 5)
                         pjs = Paginator(job_skills, 5)
                         pjq = Paginator(job_ques, 5)
@@ -319,12 +321,14 @@ def jobseeker_Home(request):
                         page_num = request.GET.get('page', 1)
                         try:
                             pj_objects = pj.page(page_num)
+                            pjt_objects = pjt.page(page_num)
                             pc_objects = pc.page(page_num)
                             pjs_objects = pjs.page(page_num)
                             pjq_objects = pjq.page(page_num)
                             pcp_objects = pcp.page(page_num)
                         except EmptyPage:
                             pj_objects = pj.page(1)
+                            pjt_objects = pjt.page(1)
                             pc_objects = pc.page(1)
                             pjs_objects = pjs.page(1)
                             pjq_objects = pjq.page(1)
@@ -332,7 +336,7 @@ def jobseeker_Home(request):
                         objects = zip(pj_objects, pc_objects, pjs_objects, pjq_objects, pcp_objects)
 
                         return render(request, 'jobseeker/home.html',
-                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr, 'pjs': pjt_objects})
 
         else:
             jobs = []
@@ -421,7 +425,7 @@ def jobseeker_Home(request):
                                 job_skills.append(len(skills))
                                 job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
                         pj = Paginator(relevant_jobs, 5)
-                        pjs = Paginator(relevant_jobs, 5)
+                        pjt = Paginator(relevant_jobs, 5)
                         pc = Paginator(common, 5)
                         pjs = Paginator(job_skills, 5)
                         pjq = Paginator(job_ques, 5)
@@ -429,12 +433,14 @@ def jobseeker_Home(request):
                         page_num = request.GET.get('page', 1)
                         try:
                             pj_objects = pj.page(page_num)
+                            pjt_objects = pjt.page(page_num)
                             pc_objects = pc.page(page_num)
                             pjs_objects = pjs.page(page_num)
                             pjq_objects = pjq.page(page_num)
                             pcp_objects = pcp.page(page_num)
                         except EmptyPage:
                             pj_objects = pj.page(1)
+                            pjt_objects = pjt.page(1)
                             pc_objects = pc.page(1)
                             pjs_objects = pjs.page(1)
                             pjq_objects = pjq.page(1)
@@ -442,7 +448,7 @@ def jobseeker_Home(request):
                         objects = zip(pj_objects, pc_objects, pjs_objects, pjq_objects, pcp_objects)
 
                         return render(request, 'jobseeker/home.html',
-                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr,'pjs':pjt_objects})
                     else:
                         job = Employer_job.objects.all()
                         print("len job")
@@ -507,7 +513,7 @@ def jobseeker_Home(request):
                         print("relevant_jobs")
                         print(len(relevant_jobs))
                         pj = Paginator(relevant_jobs, 5)
-                        pjs = Paginator(relevant_jobs, 5)
+                        pjt = Paginator(relevant_jobs, 5)
                         pc = Paginator(common, 5)
                         pjs = Paginator(job_skills, 5)
                         pjq = Paginator(job_ques, 5)
@@ -515,12 +521,14 @@ def jobseeker_Home(request):
                         page_num = request.GET.get('page', 1)
                         try:
                             pj_objects = pj.page(page_num)
+                            pjt_objects = pjt.page(page_num)
                             pc_objects = pc.page(page_num)
                             pjs_objects = pjs.page(page_num)
                             pjq_objects = pjq.page(page_num)
                             pcp_objects = pcp.page(page_num)
                         except EmptyPage:
                             pj_objects = pj.page(1)
+                            pjt_objects = pjt.page(1)
                             pc_objects = pc.page(1)
                             pjs_objects = pjs.page(1)
                             pjq_objects = pjq.page(1)
@@ -528,7 +536,7 @@ def jobseeker_Home(request):
                         objects = zip(pj_objects, pc_objects, pjs_objects, pjq_objects, pcp_objects)
 
                         return render(request, 'jobseeker/home.html',
-                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr, 'pjs': pjt_objects})
 
                 else:
                     u.first_login = True
@@ -1000,11 +1008,35 @@ def SavedJobs(request):
                                 common.append(len(common_skills))
                                 job_skills.append(len(skills))
                                 job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
-
-                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                        pj = Paginator(relevant_jobs, 5)
+                        pjt = Paginator(relevant_jobs, 5)
+                        pc = Paginator(common, 5)
+                        pjs = Paginator(job_skills, 5)
+                        pjq = Paginator(job_ques, 5)
+                        pcp = Paginator(companyprofile, 5)
+                        page_num = request.GET.get('page', 1)
+                        try:
+                            pj_objects = pj.page(page_num)
+                            pjt_objects = pjt.page(page_num)
+                            pc_objects = pc.page(page_num)
+                            pjs_objects = pjs.page(page_num)
+                            pjq_objects = pjq.page(page_num)
+                            pcp_objects = pcp.page(page_num)
+                        except EmptyPage:
+                            pj_objects = pj.page(1)
+                            pjt_objects = pjt.page(1)
+                            pc_objects = pc.page(1)
+                            pjs_objects = pjs.page(1)
+                            pjq_objects = pjq.page(1)
+                            pcp_objects = pcp.page(1)
+                        objects = zip(pj_objects, pc_objects, pjs_objects, pjq_objects, pcp_objects)
 
                         return render(request, 'jobseeker/home.html',
-                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr, 'pjs': pjt_objects})
+                        # objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                        #
+                        # return render(request, 'jobseeker/home.html',
+                        #               {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
                     else:
 
                         print("len job")
@@ -1058,19 +1090,37 @@ def SavedJobs(request):
                                 # print(userS)
                                 continue
                             relevant_jobs.append(jo)
-                            print("job:")
-                            print(jo)
+
 
                             common.append(len(common_skill))
                             job_skills.append(len(skills))
                             job_ques.append(Employer_jobquestion.objects.filter(job_id=jo))
-                        print("job_quest:")
-                        print(job_ques)
-                        print("relevant_jobs")
-                        print(len(relevant_jobs))
-                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                        pj = Paginator(relevant_jobs, 5)
+                        pjt = Paginator(relevant_jobs, 5)
+                        pc = Paginator(common, 5)
+                        pjs = Paginator(job_skills, 5)
+                        pjq = Paginator(job_ques, 5)
+                        pcp = Paginator(companyprofile, 5)
+                        page_num = request.GET.get('page', 1)
+                        try:
+                            pj_objects = pj.page(page_num)
+                            pjt_objects = pjt.page(page_num)
+                            pc_objects = pc.page(page_num)
+                            pjs_objects = pjs.page(page_num)
+                            pjq_objects = pjq.page(page_num)
+                            pcp_objects = pcp.page(page_num)
+                        except EmptyPage:
+                            pj_objects = pj.page(1)
+                            pjt_objects = pjt.page(1)
+                            pc_objects = pc.page(1)
+                            pjs_objects = pjs.page(1)
+                            pjq_objects = pjq.page(1)
+                            pcp_objects = pcp.page(1)
+                        objects = zip(pj_objects, pc_objects, pjs_objects, pjq_objects, pcp_objects)
+
                         return render(request, 'jobseeker/home.html',
-                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr, 'pjs': pjt_objects})
+
         else:
             job_ques = []
             companyprofile = []
@@ -1129,11 +1179,32 @@ def SavedJobs(request):
                                 job_skills.append(len(skills))
                                 job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
 
-                            print(relevant_jobs)
+                    pj = Paginator(relevant_jobs, 1)
+                    pjt = Paginator(relevant_jobs, 1)
+                    pc = Paginator(common, 1)
+                    pjs = Paginator(job_skills, 1)
+                    pjq = Paginator(job_ques, 1)
+                    pcp = Paginator(companyprofile, 1)
+                    page_num = request.GET.get('page', 1)
+                    try:
+                        pj_objects = pj.page(page_num)
+                        pjt_objects = pjt.page(page_num)
+                        pc_objects = pc.page(page_num)
+                        pjs_objects = pjs.page(page_num)
+                        pjq_objects = pjq.page(page_num)
+                        pcp_objects = pcp.page(page_num)
+                    except EmptyPage:
+                        pj_objects = pj.page(1)
+                        pjt_objects = pjt.page(1)
+                        pc_objects = pc.page(1)
+                        pjs_objects = pjs.page(1)
+                        pjq_objects = pjq.page(1)
+                        pcp_objects = pcp.page(1)
+                    objects = zip(pj_objects, pc_objects, pjs_objects, pjq_objects, pcp_objects)
 
-                    objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile, post_date, saved_date)
+                    return render(request, 'jobseeker/savedjobs.html',
+                                  {'jobs': objects, 'c': c, 'cp': cp, 'pjs': pjt_objects})
 
-                    return render(request, 'jobseeker/savedjobs.html', {'jobs': objects, 'cp': cp})
                 else:
                     return render(request, 'jobseeker/savedjobs.html', {'cp': cp})
             else:
@@ -1257,10 +1328,31 @@ def AppliedJobs(request):
                                 job_skills.append(len(skills))
                                 job_ques.append(Employer_jobquestion.objects.filter(job_id=job))
 
-                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                        pj = Paginator(relevant_jobs, 5)
+                        pjt = Paginator(relevant_jobs, 5)
+                        pc = Paginator(common, 5)
+                        pjs = Paginator(job_skills, 5)
+                        pjq = Paginator(job_ques, 5)
+                        pcp = Paginator(companyprofile, 5)
+                        page_num = request.GET.get('page', 1)
+                        try:
+                            pj_objects = pj.page(page_num)
+                            pjt_objects = pjt.page(page_num)
+                            pc_objects = pc.page(page_num)
+                            pjs_objects = pjs.page(page_num)
+                            pjq_objects = pjq.page(page_num)
+                            pcp_objects = pcp.page(page_num)
+                        except EmptyPage:
+                            pj_objects = pj.page(1)
+                            pjt_objects = pjt.page(1)
+                            pc_objects = pc.page(1)
+                            pjs_objects = pjs.page(1)
+                            pjq_objects = pjq.page(1)
+                            pcp_objects = pcp.page(1)
+                        objects = zip(pj_objects, pc_objects, pjs_objects, pjq_objects, pcp_objects)
 
                         return render(request, 'jobseeker/home.html',
-                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr, 'pjs': pjt_objects})
                     else:
 
                         print("len job")
@@ -1320,13 +1412,31 @@ def AppliedJobs(request):
                             common.append(len(common_skill))
                             job_skills.append(len(skills))
                             job_ques.append(Employer_jobquestion.objects.filter(job_id=jo))
-                        print("job_quest:")
-                        print(job_ques)
-                        print("relevant_jobs")
-                        print(len(relevant_jobs))
-                        objects = zip(relevant_jobs, common, job_skills, job_ques, companyprofile)
+                        pj = Paginator(relevant_jobs, 5)
+                        pjt = Paginator(relevant_jobs, 5)
+                        pc = Paginator(common, 5)
+                        pjs = Paginator(job_skills, 5)
+                        pjq = Paginator(job_ques, 5)
+                        pcp = Paginator(companyprofile, 5)
+                        page_num = request.GET.get('page', 1)
+                        try:
+                            pj_objects = pj.page(page_num)
+                            pjt_objects = pjt.page(page_num)
+                            pc_objects = pc.page(page_num)
+                            pjs_objects = pjs.page(page_num)
+                            pjq_objects = pjq.page(page_num)
+                            pcp_objects = pcp.page(page_num)
+                        except EmptyPage:
+                            pj_objects = pj.page(1)
+                            pjt_objects = pjt.page(1)
+                            pc_objects = pc.page(1)
+                            pjs_objects = pjs.page(1)
+                            pjq_objects = pjq.page(1)
+                            pcp_objects = pcp.page(1)
+                        objects = zip(pj_objects, pc_objects, pjs_objects, pjq_objects, pcp_objects)
+
                         return render(request, 'jobseeker/home.html',
-                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr})
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr, 'pjs': pjt_objects})
         else:
             companyprofile = []
             user = request.user
@@ -1341,8 +1451,33 @@ def AppliedJobs(request):
                     e = a.job_id.employer_id
                     companyprofile.append(Employer_profile.objects.get(employer=e))
 
-                objects = zip(applied, companyprofile)
-                return render(request, 'jobseeker/applied.html', {'jobs': objects, 'cp': cp})
+                pj = Paginator(applied, 5)
+                pjt = Paginator(applied, 5)
+                pc = Paginator(companyprofile, 5)
+                # pjs = Paginator(job_skills, 5)
+                # pjq = Paginator(job_ques, 5)
+                # pcp = Paginator(companyprofile, 5)
+                page_num = request.GET.get('page', 1)
+                try:
+                    pj_objects = pj.page(page_num)
+                    pjt_objects = pjt.page(page_num)
+                    pc_objects = pc.page(page_num)
+                    # pjs_objects = pjs.page(page_num)
+                    # pjq_objects = pjq.page(page_num)
+                    # pcp_objects = pcp.page(page_num)
+                except EmptyPage:
+                    pj_objects = pj.page(1)
+                    pjt_objects = pjt.page(1)
+                    pc_objects = pc.page(1)
+                    # pjs_objects = pjs.page(1)
+                    # pjq_objects = pjq.page(1)
+                    # pcp_objects = pcp.page(1)
+                objects = zip(pj_objects, pc_objects)
+
+                return render(request, 'jobseeker/applied.html',
+                              {'jobs': objects, 'c': c, 'cp': cp,'pjs': pjt_objects})
+                # objects = zip(applied, companyprofile)
+                # return render(request, 'jobseeker/applied.html', {'jobs': objects, 'cp': cp})
             else:
                 return redirect('jobseeker:jobseeker/login')
 

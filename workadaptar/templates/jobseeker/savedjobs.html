@@ -196,7 +196,14 @@
 {% endfor %}
 </div>
 
+
         </div>
+           {% if pjs.has_previous %}
+    <a href="{% url 'jobseeker:SavedJobs' %}?page={{pjs.previous_page_number}}">Previous page</a>
+    {% endif %}
+    {% if pjs.has_next %}
+    <a href="{% url 'jobseeker:SavedJobs' %}?page={{pjs.next_page_number}}">Next page</a>
+    {% endif %}
     </div>
 
     </section>

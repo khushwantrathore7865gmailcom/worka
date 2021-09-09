@@ -142,12 +142,12 @@
             </div>
                         </div>
     <p class="job-para">
-        Employment type: {{o.0.employment_type}}<br>
-        Location:  {{o.0.job_location}}<br>
-        Experience:  {{o.0.job_experience}}<br>
-        Salary :  {{o.0.job_salary}}<br>
+        Employment type: {{o.0.job_id.employment_type}}<br>
+        Location:  {{o.0.job_id.job_location}}<br>
+        Experience:  {{o.0.job_id.job_experience}}<br>
+        Salary :  {{o.0.job_id.job_salary}}<br>
         Job description:<br>
-        {{o.0.job_description}}
+        {{o.0.job_id.job_description}}
         About Company:<br>
         company type:<br>
         {{o.1.about_company}}<br>
@@ -176,6 +176,12 @@
 </div>
 
         </div>
+        {% if pjs.has_previous %}
+    <a href="{% url 'jobseeker:SavedJobs' %}?page={{pjs.previous_page_number}}">Previous page</a>
+    {% endif %}
+    {% if pjs.has_next %}
+    <a href="{% url 'jobseeker:SavedJobs' %}?page={{pjs.next_page_number}}">Next page</a>
+    {% endif %}
     </div>
 
     </section>
