@@ -1,199 +1,397 @@
-{% load crispy_forms_tags %}
-
 {% load static %}
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 
 <head>
-  <!--Import Google Icon Font-->
-
-<script src="https://kit.fontawesome.com/5a2b925216.js" crossorigin="anonymous"></script>
-
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href=" {% static 'css/style.css'%}">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link rel="stylesheet" type="text/css" href=" {% static 'css/style_Addjob.css' %}">
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  <style>
- .input100{
-            width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+ <style>
+
+.right-align {
+    text-align: right;
+}
+
+.dropbtn {
+  background-color: #FFFFFF;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-        }
-  </style>
-</head>
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #03A84E;}
+		.job-left.job-left-images-new img {
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+}
+.modal-dialog {
+    max-width: 800px;
+    margin: 1.75rem auto;
+}
+.modelstyle{
+  padding:50px;
+}
+
+.employment, .employment-section {
+    box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
+    box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
+    background: #fff;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+.skills-left {
+    box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
+    box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+}
+.skills-right {
+    box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
+    box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+}
+u
+{
+  color: blue;
+}
+.custom-select {
+  position: relative;
+  font-family: Arial;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: DodgerBlue;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+		</style>
+  </head>
+  <body>
+
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-12">
+					<div class="top-navbar">
+						<nav class="navbar navbar-expand-lg ">
+  <a class="navbar-brand" href="{% url 'jobseeker:jobseeker_home' %}">LOGO</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav class="navbar mr-auto">
+  <form class="form-inline">
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+      </div>
+      <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+  </form>
+</nav>
 
 
-<br>
-  <br>
-  <br>
-  <br>
-<body>
 
-  <div class="container">
+	<ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
+      </li>
 
-  
-<div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	  <li class="nav-item">
+        <a class="nav-link" href="#">Resume</a>
+      </li>
+
+	  <li class="nav-item bell-icon">
+        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
+      </li>
+         <li class="nav-item">
+<div class="dropdown">
+  <button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
+  <div class="dropdown-content">
+    <a href="{% url 'jobseeker:profile' %}">My Profile</a>
+    <a href="#">Edit Profile</a>
+    <a href="#">Log Out</a>
+  </div>
+</div>
+         </li>
+
+
+	 </ul>
+
+  </div>
+</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+
+<section class="job-portal">
+	<div class="container">
+  <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
   <strong>Please fill your profile in order to get jobs results</strong>
 </div>
-    <div class="row">
-      <div class="col l3 s12  ">
-        <div class="card">
-          <div class="card-image">
-            <img alt="Qries" src ="" width="150" height="200">
-          </div>
-          <center>
+		<div class="row">
 
-            <div class="card-content">
-            <div  class="right-align" >
-              <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " href="#demo-modal-fixed-footer"><i class=" tiny material-icons">create</i></a> <Br>
-              </div>
-              <br>
-              <h6> <b>Jonathan Lewis </b></h6>
-              <span>
-<small><b><i class="fas fa-edit"></i> Add Headline </small></b> <br>
-<small><b><i class="fas fa-edit"></i>Add Current Company </small> </b> <br>
-<small><b><i class="fas fa-edit"></i> Add Current job position </small> </b> <br>
-
-<small><b><i class="fas fa-edit"></i> Add Year of Experience </small> </b> <br>
-
-</span>
-            </div>
-          </center>
-          {% comment %} <div class="card-action">
-            <center>
-              <button class="btn waves-effect waves-light" type="submit" name="action">Download Resume
-                <i class="material-icons left">file_download</i>
-              </button>
-            </center>
-          </div> {% endcomment %}
-        </div>
-
-      </div>
-      <div class="col s12  m6 l6">
-        <div class="card-panel ">
-          <div  class="right-align" >
-            <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " href="#demo-modal1-fixed-footer"><i class=" tiny material-icons">create</i></a>
-            <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " href="#demo-modal5-fixed-footer"><i class=" tiny material-icons">add</i></a>
-            <Br>
-            </div>
-          <h6> <b>Skills </b> <i class="tiny material-icons 2x"> input</i> </h6> <br>
-                  <span>
-<small><b><i class="fas fa-edit"></i> Add Skills </small></b> <br>
-
-</span>
-<!--           <p> java(4),python(5)</p>-->
-<!--          <div class="row">-->
-<!--            <div class="col s6">-->
-<!--              <p> UX / UI Designer</p>-->
-<!--            </div>-->
-<!--            <div class="col s6">-->
-<!--              <p>Back-end development </p>-->
-<!--            </div>-->
-<!--            <div class="col s6">-->
-<!--              <p>Front-End developer </p>-->
-<!--            </div>-->
-<!--            <div class="col s6">-->
-<!--              <p>Application development </p>-->
-<!--            </div>-->
-
-<!--            <div class="col s6">-->
-<!--              <p> UX / UI Designer</p>-->
-<!--            </div>-->
-<!--            <div class="col s6">-->
-<!--              <p> UX / UI Designer</p>-->
-<!--            </div>-->
-
-<!--          </div>-->
-          <div  class="right-align" >
-            <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " href="#demo-modal2-fixed-footer"><i class=" tiny material-icons">create</i></a>
-              <a class="btn-floating btn-small waves-effect waves-light green modal-trigger " data-toggle="modal" data-target="#educationmodel">+</a> <Br>
-            </div>
-          <h6><b>Education </b><i class="  tiny material-icons "> input</i> </h6> <br>
-                  <span>
-<small><b><i class="fas fa-edit"></i> Add Post Graduation </small></b> <br>
-<small><b><i class="fas fa-edit"></i>Add Under Graduation </small> </b> <br>
-<small><b><i class="fas fa-edit"></i> Add 12th  </small> </b> <br>
-
-<small><b><i class="fas fa-edit"></i> Add 10th </small> </b> <br>
-
-</span>
-<!--          <div class="row">-->
-<!--            <div class="col s6">-->
-<!--              <p>University of Delhi</p>-->
-<!--            </div>-->
-<!--            <div class="col s6">-->
-<!--              <p> 2020-01-04 </p>-->
-<!--            </div>-->
-
-<!--            <div class="col s6">-->
-<!--              <p>Delhi University</p>-->
-<!--            </div>-->
-<!--            <div class="col s6">-->
-<!--              <p> 2017-01-04</p>-->
-<!--            </div>-->
-
-<!--            <div class="col s6">-->
-<!--              <p>SMIT </p>-->
-<!--            </div>-->
-<!--            <div class="col s6">-->
-<!--              <p> 2017-01-04</p>-->
-<!--            </div>-->
-
-<!--          </div>-->
-        </div>
-      </div>
-
-      <div class="col l3 s12 m6 ">
-        <div class="card-panel ">
-          <span>
-            <h6 class="center-align"> Contact Details</h6> <br>
-            <small>
-              <p> Email ID <i class="tiny material-icons left">email</i> info@joobsneeker.com </p>
-            </small>
-            <small>
-              <p> Phone <i class="tiny material-icons left">phone_in_talk</i> +91 9434447967 </p>
-            </small>
-<!--            <small>-->
-<!--              <p> Address <i class="tiny material-icons left">location_on</i> Ranipool majitar,732234</p>-->
-<!--            </small>-->
-
-            <div class="divider"></div>
+			<div class="col-md-3 col-12">
+				<div class="job-left">
+						<img src={{profile.profile_pic.url}}>
             <br>
             <center>
-
+              <div class='file file--uploading'>
+                <label for='input-file'>
+                  <i class="fa fa-paperclip" aria-hidden="true"> </i>Add Profile Photo
+                </label>
+                <input id='input-file' type='file' />
+              </div>
             </center>
-          </span>
-        </div>
-      </div>
+            <br>
 
 
-      <div class="col s12 m12 l12 ">
+						<div class="job-left-desc">
+							<h2>{{user.first_name}} {{user.last_name}}</h2>
+							{% for p in professional %}
+<!--								<h4>UX/ UI Designer</h4>-->
+							{% if p.is_current %}
+								<h5>Current Compant</h5>
+								<h6>{{p.organization}}</h6>
+								<h5>Current Job position</h5>
+								<h6>{{p.designation}}</h6>
+								<h5>Working from </h5>
+								<h6>{{p.start_year}}</h6>
+							{% endif %}
+							{% endfor %}
+              <br>
+              <div  class="center-align" >
+<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+
+              <a href="#" data-toggle="modal" data-target="#educationmodel"><b><u>Edit Details</u></b></a> <Br>
+            </div>
+								{% comment %} <div class="download_btn">
+									<a class="btn btn-primary" href={{resume.resume_link.url}} role="button"><img src=" {% static 'images/download3.png' %} ">Download Resume</a>
+								</div> {% endcomment %}
+							</div>
+
+				</div>
+			</div>
+
+			<div class="col-md-9 col-12">
+				<div class="row">
+						<div class="col-md-7 col-12">
+							<div class="skills-left">
+              <div  class="right-align" >
+            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+
+              <a href="#" data-toggle="modal" data-target="#educationmodel"><b><u>Add Skills</u></b></a> <Br>
+            </div>
+								<h5><b>Skills</b> </h5>
+								<div class="skill-list">
+									{% comment %} <div class="skill-list-left">
+										<h3>Skills</h3>
+												{% for s in skills %}
+										<div>{{s.skill}}</div>
+										{% endfor %}
+									</div>
+
+									<div class="skill-list-right">
+										<h3>Rating</h3>
+										{% for s in skills %}
+										<div>{{s.rating}}</div>
+										{% endfor %}
+									</div> {% endcomment %}
+
+								</div>
+                <br>
+                <br>
+                 <div  class="right-align" >
+            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+
+              <a href="#" data-toggle="modal" data-target="#educationmodel"><b><u>Add Education</u></b></a> <Br>
+            </div>
+          <h5><b>Education </b> </h5> <br>
+          <span>
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u> Add Post Graduation </u></b></a></small></b> <br>
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u>Add Under Graduation </u></b></a></small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u> Add 12th </u></b></a> </small> </b> <br>
+
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+ <a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u>Add 10th</u></b></a> </small> </b> <br>
+
+</span>
+								<div class="skill-list second">
+									<div class="skill-list-left">
+												{% for s in edu %}
+												<div>{{s.institute_name}}</div>
+												{% endfor %}
+									</div>
+
+									<div class="skill-list-right">
+
+												{% for s in edu %}
+												<div>{{s.start_year}}-{{s.end_year}}</div>
+												{% endfor %}
+									</div>
+
+								</div>
+
+
+
+							</div>
+						</div>
+
+
+						<div class="col-md-5 col-12">
+							<div class="skills-right">
+               <div  class="right-align" >
+<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+
+              <a href="#" data-toggle="modal" data-target="#personalmodel"><b><u>Edit Details</u></b></a> <Br>
+            </div>
+
+							  <h5><b>Contact Details</b></h5>
+                <br>
+								<p><img src=" {% static 'images/mail.png' %}"> <span><b>Email ID</b> : {{user.email}}</span></p>
+<!--								<p><img src="images/phone.png"> <span><b>Phone no.</b> : (252) 555-0126</span></p>-->
+								<p><img src=" {% static 'images/location.png' %}"> <span><b>Address</b> : 1901 Thornridge Cir. Shiloh, Hawaii 81063</span></p>
+
+<!--								<hr>-->
+<!--								<div class="contact-btn">-->
+<!--									<button>Shorlist </button>-->
+<!--									<button>Save for later</button>-->
+<!--									<button><span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Report user</span></button>-->
+<!--								-->
+<!--								</div>-->
+
+							</div>
+
+						</div>
+
+				</div>
+
+
+				<div class="employment">
+
         <div class="card-panel ">
+                 <div  class="right-align" >
+
+       <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+
+
+              <a href="#" data-toggle="modal" data-target="#educationmodel"><b><u>Download Resume</u></b></a> <Br>
+            </div>
+            </div>
           <span>
             <b>
-              <h5 class="left-align"> Contact Details</h5>
+              <h5 class="left-align">Attach Resume/CV</h5>
             </b>
             <small>
-              <p> please upload supported format png,docx </p>
+              <p> please upload in pdf format only</p>
             </small>
             <center>
               <div class='file file--uploading'>
                 <label for='input-file'>
-                  <i class="material-icons">attachment</i>Attach Resume
+                  <i class="fa fa-paperclip" aria-hidden="true"> </i>Attach Resume
                 </label>
                 <input id='input-file' type='file' />
               </div>
@@ -202,337 +400,183 @@
           </span>
         </div>
       </div>
+</div>
+
+				<div class="employment">
+         <div  class="right-align" >
+            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+
+              <a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u>Add Employment</u></b></a> <Br>
+            </div>
+
+						<h5><b>Employment</b></h5>
+            <br>
+                          <span>
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u> Add Current Company </u></b></a></small></b> <br>
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u>Add previous Company </u></b></a> </small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u> Add Internship</u></b></a> </small> </b> <br>
 
 
-      <div class="col s12 m12 l12">
-        <div class="card-panel ">
-          <span>
-            <b>
-              <h5 class="left-align">Employment</h5>
-            </b>
+
+</span>
+					{% for s in professional %}
 
 
-                    <span>
-<small><b><i class="fas fa-edit"></i> Add Current Company </small></b> <br>
-<small><b><i class="fas fa-edit"></i>Add previous Company </small> </b> <br>
-<small><b><i class="fas fa-edit"></i> Add Internship </small> </b> <br>
+							<h4>{{s.designation}} <img src=" {% static 'images/skills-btn.png' %} "></h4>
+							<p class="small">{{s.organization}}</p>
+					{% if p.is_current %}
+					<p class="small">{{s.start_month}} {{s.start_year}} to present</p>
+					{% else %}
+					<p class="small">{{s.start_month}} {{s.start_year}} to {{s.end_month}} {{s.end_year}}</p>
+					{% endif %}
+
+	<p>Available to join in 1 Months</p>
+<p>Created and automated build and deployment process for the application re-engineering setup for better user
+experience, and leading up to building a continuous integration system for all our products. Experience with container based deployments using Docker, working with Docker images... <span>Read More</span></p>
+	<p class="skills active"><span>Top 5 Key Skills:</span> {% for sk in skills %}{{sk.skill}} {% endfor %}</p>
+
+<hr>
+{% endfor %}
+
+		</div>
+
+<div class="employment">
+         <div  class="right-align" >
+            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+
+              <a href="#" data-toggle="modal" data-target="#careermodel"><b><u>Add Career</u></b></a> <Br>
+            </div>
+
+						<h5><b>Career Profile</b></h5>
+            <br>
+                          <span>
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u> Add Expected Role </u></b></a></small></b> <br>
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u>Add Expected Salary </u></b></a> </small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u> Add Expected Employment Type</u></b></a> </small> </b>
+<br>
+<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u> Add Preffered Location</u></b></a> </small> </b> <br>
+
 
 
 
 </span>
 
-<!--            <p> <b> DevOps Engineer </b> <i class="  tiny material-icons 2x"> input</i> </p>-->
-<!--            <P>-->
-<!--              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in est sagittis, vestibulum nisl sit amet,-->
-<!--              ultrices lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus luctus luctus pharetra.-->
-<!--              Nullam malesuada elit sed est consectetur, lobortis placerat sem blandit. Etiam lacinia tempus felis,-->
-<!--              vitae maximus augue pulvinar porttitor. Nam.-->
-<!--            <div class="divider"></div>-->
-<!--            </P>-->
-<!--            <b>-->
+		{% for s in edu %}
+		<p>{{s.institute_name}} <span><img src=" {% static 'images/skills-btn.png' %} "></span></p>
+<!--		<p>Arizona State University <span><img src="images/skills-btn.png"></span></p>-->
 
-<!--              <h8 class="left-align">Top 5 Key Skills-->
-<!--          </span> </h8> </b>-->
-<!--          <p> AWS DOCKER Jfrog Pipelines </p>-->
-<!--          <p> <b> DevOps Engineer </b> <i class="  tiny material-icons 2x"> input</i> </p>-->
+		{% endfor %}
+	</div>
 
-<!--          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in est sagittis, vestibulum nisl sit amet,-->
-<!--          ultrices lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus luctus luctus pharetra.-->
-<!--          Nullam malesuada elit sed est consectetur, lobortis placerat sem blandit. Etiam lacinia tempus felis, vitae-->
-<!--          maximus augue pulvinar porttitor. Nam.-->
-<!--          <p> <b> DevOps Engineer </b> <i class="  tiny material-icons 2x"> input</i> </p>-->
-<!--          <div class="divider"></div>-->
-<!--          <P>-->
-<!--            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in est sagittis, vestibulum nisl sit amet,-->
-<!--            ultrices lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus luctus luctus pharetra.-->
-<!--            Nullam malesuada elit sed est consectetur, lobortis placerat sem blandit. Etiam lacinia tempus felis, vitae-->
-<!--            maximus augue pulvinar porttitor. Nam.-->
+</div>
 
-<!--          </P>-->
-<!--          <b>-->
-<!--            <h8 class="left-align">Top 5 Key Skills </span> </h8>-->
-<!--          </b>-->
-<!--          <p> AWS DOCKER Jfrog Pipelines </p>-->
+</div>
 
-<!--          <div class="divider"></div>-->
-          </span>
-        </div>
-      </div>
+</div>
+	</div>
 
-
-      <div class="col s12 m12 l12">
-        <div class="card-panel ">
-          <h5 class="left-align">Career Profile </h5>
-
-        </div>
-
-
-      </div>
-            <div class="col s12 m12 l12">
-        <div class="card-panel ">
-          <h5 class="left-align">Personal Detail </h5>
-
-<!--              <p> Birthday/birthmonth/birthyear :08/10/2000 </p>-->
-
-
-<!--   <p> gender:Male</p>-->
-<!--   <p> address:7,kardhani</p>-->
-<!--   <p> city:Jaipur</p>-->
-<!--    <p>state:302012</p>-->
-<!--   <p> marital status:single</p>-->
-
-<!--          <div class="row">-->
-
-<!--            <div class="col s6">-->
-<!--              <b>-->
-<!--                <h5 class="left-align">Education </h5>-->
-<!--              </b>-->
-<!--              <p> UX / UI Designer</p>-->
-<!--              <p> UX / UI Designer</p>-->
-<!--              <p> UX / UI Designer</p>-->
-<!--            </div>-->
-
-<!--            <div class="col s6 ">-->
-<!--              <b>-->
-<!--                <h5 class="left-align">Education </h5>-->
-<!--              </b>-->
-
-<!--              <table class="responsive-table">-->
-<!--                <tr>-->
-<!--                  <th>Company</th>-->
-<!--                  <th>Contact</th>-->
-<!--                  <th>Country</th>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>Alfreds Futterkiste</td>-->
-<!--                  <td>Maria Anders</td>-->
-<!--                  <td>Germany</td>-->
-<!--                </tr>-->
-<!--                <tr>-->
-<!--                  <td>Centro comercial Moctezuma</td>-->
-<!--                  <td>Francisco Chang</td>-->
-<!--                  <td>Mexico</td>-->
-<!--                </tr>-->
-<!--              </table>-->
-<!--            </div>-->
-<!--          </div>-->
-
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-
-
-  <div class="container center" >
-
-
-      <!-- Modal Structure -->
-      <div id="demo-modal-fixed-footer" class="modal modal-fixed-footer"  >
-
-        <div class="modal-content">
-          <div class="row">
-           {{form3}}
-          </div>
-
-
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-action modal-close btn green darken-1"> SAVE   </a>
-
-
-          <a href="#!" class="modal-action modal-close btn red darken-1">  Exit</a>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-      <!-- Modal Structure1 for skills -->
-
-
-      <div class="container center" >
-
-
-        <!-- Modal Structure -->
-        <div id="demo-modal1-fixed-footer" class="modal modal-fixed-footer"  >
-
-          <div class="modal-content">
-            <caption> SKILL FORM</caption>
-            <div class="row">
-              <form class="col s12">
-                <div class="row">
-                  <div class="input-field col s6">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input id="icon_prefix" type="text" class="validate">
-                    <label for="icon_prefix">First Name</label>
-                  </div>
-                  <div class="input-field col s6">
-                    <i class="material-icons prefix">phone</i>
-                    <input id="icon_telephone" type="tel" class="validate">
-                    <label for="icon_telephone">Telephone</label>
-                  </div>
-                </div>
-              </form>
-            </div>
-
-
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close btn green darken-1"> SAVE   </a>
-
-
-            <a href="#!" class="modal-action modal-close btn red darken-1">  Exit</a>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-      <!-- Modal Structure1 for skills2 -->
-
-
-      <div class="container center" >
-
-
-        <!-- Modal Structure -->
-        <div id="demo-modal2-fixed-footer" class="modal modal-fixed-footer"  >
-
-          <div class="modal-content">
-            <caption> Education</caption>
-            <div class="row">
-              <form class="col s12">
-                <div class="row">
-                    {{form6}}
-
-                </div>
-              </form>
-            </div>
-
-
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close btn green darken-1"> SAVE   </a>
-
-
-            <a href="#!" class="modal-action modal-close btn red darken-1">  Exit</a>
-
-          </div>
-        </div>
-      </div>
-
-
-
-
-      <!-- Modal add Structure -->
-
-
-      <div class="container center" >
-
-
-        <div id="demo-modal3-fixed-footer" class="modal modal-fixed-footer"  >
-
-          <div class="modal-content">
-            <caption>  Add Education</caption>
-            <form role="form" action="/wohoo" method="POST">
-
-                <div class="multi-field-wrapper">
-                  <div class="multi-fields">
-                    <div class="multi-field">
-                      <input type="text" name="stuff[]">
-                      <button style = 'width:50%'  type="button" class="remove-field waves-effect waves-light btn">Remove </button> <br>
-                    </div>
-                     <br>
-                  </div>
-                <button  style = 'width:50%' type="button" class="add-field waves-effect waves-light btn">Add More</button>
-              </div>
-            </form>
-
-          </div>
-          <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close btn green darken-1"> SAVE   </a>
-
-
-            <a href="#!" class="modal-action modal-close btn red darken-1">  Exit</a>
-
-          </div>
-        </div>
-      </div>
-      <div class="container center" >
-
-
-        <div id="demo-modal5-fixed-footer" class="modal modal-fixed-footer"  >
-
-          <div class="modal-content">
-            <caption>  Add Skill </caption>
-            <form class="form-horizontal" method="POST" action="">
-              {% csrf_token %}
-              {{ form5.management_form }}
-              {% for form in form5 %}
-          <div class="row form-row spacer">
-              <div class="col-8">
-
-
-
-                  <div class="input-group">
-                    <div class="row">
-                      <div class="input-field col s6">
-                        <i class="material-icons prefix">account_circle</i>
-                        {{form.skill}}
-                        <label style="font-size: 20px;">{{form.skill.label}}</label>
-                      </div>
-                      <div class="input-field col s6">
-                        <i class="material-icons prefix">star</i>
-                        {{form.rating}}
-                        <label style="font-size: 20px;">{{form.rating.label}}</label>
-                      </div>
-
-                      <div class="input-group-append">
-                          <button class="btn btn-success add-form-row btn-small">+</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          {% endfor %}
-          <br>
-          <div class="row spacer">
-              <div class="col-4 offset-2">
-                  <button type="submit" class="btn btn-block btn-success btn-small">Create</button>
-              </div>
-          </div>
-          </form>
-
-          </div>
-
-
-        </div>
-      </div>
-
+</section>
       <div class="container">
-        
-        <!-- Trigger the modal with a button -->
-      
-        <!-- Modal -->
-        <div class="modal fade" id="educationmodel" role="dialog">
-          <div class="modal-dialog modal-lg">
-            
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
-              </div>
-              <div class="row">
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="educationmodel" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+              <div class="modelstyle">
               <div class="col-md-10 col-12">
                <form class="form-horizontal" method="post" action="">
     {% csrf_token %}
-               {% comment %} <label style="font-size: 20px;">Designation</label> {% endcomment %}
+
+
+
+        <div class="input-group ">
+<label style="font-size: 20px;">{{form2.institute_name.label}}</label>
+
+            {{form2.institute_name}}
+        </div>
+                   <div class="input-group ">
+
+            {{form2.start_date.label}}
+            {{form2.start_date}}
+        </div>
+                   <div class="input-group ">
+
+            {{form2.start_month.label}}
+            {{form2.start_month}}
+        </div>
+                   <div class="input-group ">
+
+            {{form2.start_year.label}}
+            {{form2.start_year}}
+        </div>
+                      <div class="input-group ">
+
+            {{form2.end_date.label}}
+            {{form2.end_date}}
+        </div>
+                      <div class="input-group ">
+
+            {{form2.end_month.label}}
+            {{form2.end_month}}
+        </div>
+                    <div class="input-group ">
+
+            {{form2.end_year.label}}
+            {{form2.end_year}}
+        </div>
+                      <div class="input-group ">
+
+            {{form2.course_type.label}}
+            {{form2.course_type}}
+        </div>   <div class="input-group ">
+
+            {{form2.degree.label}}
+            {{form2.degree}}
+        </div>
+
+    <input type="submit" value="Submit">
+</form>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+ </div>
+            </div>
+
+<!-- employment modal-->
+<div class="container">
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="employmentmodel" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+              <div class="modelstyle">
+              <div class="col-md-10 col-12">
+               <form class="form-horizontal" method="post" action="">
+    {% csrf_token %}
+               <label style="font-size: 20px;">Designation</label>
 
 
         <div class="input-group ">
 
-            {{form3.designation.label}}
+
             {{form3.designation}}
         </div>
                    <div class="input-group ">
@@ -580,12 +624,6 @@
             {{form3.end_year}}
         </div>
 
-
-
-
-
-
-              
     <input type="submit" value="Submit">
 </form>
               </div>
@@ -594,10 +632,201 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
             </div>
-          
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+
         </div>
       </div>
-      
+
+<!--skills -->
+<div class="container">
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="skillsmodel" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+              <div class="modelstyle">
+              <div class="col-md-10 col-12">
+               <form class="form-horizontal" method="post" action="">
+    {% csrf_token %}
+
+
+        <div class="input-group ">
+               <label style="font-size: 20px;"> {{form5.skill.label}}</label>
+
+
+            {{form5.skill}}
+        </div>
+                   <div class="input-group ">
+
+            {{form5.rating.label}}
+            {{form5.rating}}
+        </div>
+
+    <input type="submit" value="Submit">
+</form>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+
+        </div>
+      </div>
+<!-- Career-->
+
+<div class="container">
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="careermodel" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+              <div class="modelstyle">
+              <div class="col-md-10 col-12">
+               <form class="form-horizontal" method="post" action="">
+    {% csrf_token %}
+
+
+        <div class="input-group ">
+               <label style="font-size: 20px;"> {{form6.department.label}}</label>
+
+
+            {{form6.department}}
+        </div>
+                   <div class="input-group ">
+
+            {{form6.role.label}}
+            {{form6.role}}
+        </div>
+
+        {{form6.job_type.label}}
+                    <div class="input100">
+
+
+
+            {{form6.job_type}}
+        </div>
+              <div class="input-group ">
+
+            {{form6.exp_salary.label}}
+            {{form6.exp_salary}}
+        </div>
+
+    <input type="submit" value="Submit">
+</form>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+
+        </div>
+      </div>
+
+<!--personal-->
+
+<div class="container">
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="personalmodel" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+              <div class="modelstyle">
+              <div class="col-md-10 col-12">
+               <form class="form-horizontal" method="post" action="">
+    {% csrf_token %}
+
+
+        <div class="input-group ">
+               <label style="font-size: 20px;"> {{form1.birth_date.label}}</label>
+
+
+            {{form1.birth_date}}
+        </div>
+                   <div class="input-group ">
+
+            {{form1.birth_month.label}}
+            {{form1.birth_month}}
+        </div>
+                    <div class="input-group ">
+
+            {{form1.birth_year.label}}
+            {{form1.birth_year}}
+        </div>
+              <div class="input-group ">
+
+            {{form1.gender.label}}
+            {{form1.gender}}
+        </div>
+         <div class="input-group ">
+
+            {{form1.address.label}}
+            {{form1.address}}
+        </div>
+ <div class="input-group ">
+
+            {{form1.city.label}}
+            {{form1.city}}
+        </div>
+         <div class="input-group ">
+
+            {{form1.state.label}}
+            {{form1.state}}
+        </div>
+         <div class="input-group ">
+
+            {{form1.marital_status.label}}
+            {{form1.marital_status}}
+        </div>
+    <input type="submit" value="Submit">
+</form>
+              </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+
+        </div>
+      </div>
+
+<!---->
 
 
 
@@ -606,104 +835,30 @@
 
 
 
+<footer>
+<p>Footer section</p>
+</footer>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
 
 
 
-
-
-
-
-      
-  <!--JavaScript at end of body for optimized loading-->
-  <script type="text/javascript" src="js/materialize.min.js"></script>
-
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js">
-  </script>
-</body>
-
-<script>
-  $('.multi-field-wrapper').each(function() {
-    var $wrapper = $('.multi-fields', this);
-    $(".add-field", $(this)).click(function(e) {
-        $('.multi-field:first-child', $wrapper).clone(true).appendTo($wrapper).find('input').val('').focus();
-    });
-    $('.multi-field .remove-field', $wrapper).click(function() {
-        if ($('.multi-field', $wrapper).length > 1)
-            $(this).parent('.multi-field').remove();
-    });
-});
-</script>
-
-<script type="text/javascript">
-function updateElementIndex(el, prefix, ndx) {
-    var id_regex = new RegExp('(' + prefix + '-\\d+)');
-    var replacement = prefix + '-' + ndx;
-    if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
-    if (el.id) el.id = el.id.replace(id_regex, replacement);
-    if (el.name) el.name = el.name.replace(id_regex, replacement);
-}
-function cloneMore(selector, prefix) {
-    var newElement = $(selector).clone(true);
-    var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
-    newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
-        var name = $(this).attr('name')
-        if(name) {
-            name = name.replace('-' + (total-1) + '-', '-' + total + '-');
-            var id = 'id_' + name;
-            $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
-        }
-    });
-    newElement.find('label').each(function() {
-        var forValue = $(this).attr('for');
-        if (forValue) {
-          forValue = forValue.replace('-' + (total-1) + '-', '-' + total + '-');
-          $(this).attr({'for': forValue});
-        }
-    });
-    total++;
-    $('#id_' + prefix + '-TOTAL_FORMS').val(total);
-    $(selector).after(newElement);
-    var conditionRow = $('.form-row:not(:last)');
-    conditionRow.find('.btn.add-form-row')
-    .removeClass('btn-success').addClass('btn-danger')
-    .removeClass('add-form-row').addClass('remove-form-row')
-    .html('-');
-    return false;
-}
-function deleteForm(prefix, btn) {
-    var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
-    if (total > 1){
-        btn.closest('.form-row').remove();
-        var forms = $('.form-row');
-        $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
-        for (var i=0, formCount=forms.length; i<formCount; i++) {
-            $(forms.get(i)).find(':input').each(function() {
-                updateElementIndex(this, prefix, i);
-            });
-        }
-    }
-    return false;
-}
-$(document).on('click', '.add-form-row', function(e){
-    e.preventDefault();
-    cloneMore('.form-row:last', 'form');
-    return false;
-});
-$(document).on('click', '.remove-form-row', function(e){
-    e.preventDefault();
-    deleteForm('form', $(this));
-    return false;
-});
-
-</script>
 <style>
+.input100{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+        }
   #mf {
     width: 50%;
   }

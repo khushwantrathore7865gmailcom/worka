@@ -1,5 +1,5 @@
 from datetime import datetime
-from django.core.paginator import Paginator,EmptyPage
+from django.core.paginator import Paginator, EmptyPage
 from django.db.models import Q
 from django.http import HttpResponse
 from django.utils.http import urlsafe_base64_decode
@@ -448,7 +448,7 @@ def jobseeker_Home(request):
                         objects = zip(pj_objects, pc_objects, pjs_objects, pjq_objects, pcp_objects)
 
                         return render(request, 'jobseeker/home.html',
-                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr,'pjs':pjt_objects})
+                                      {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr, 'pjs': pjt_objects})
                     else:
                         job = Employer_job.objects.all()
                         print("len job")
@@ -799,46 +799,70 @@ def ProfileView(request):
 def ProfileEdit(request):
     profile = Candidate.objects.get(user=request.user)
     if request.method == 'POST':
-        form1 = ProfileRegisterForm(request.POST)
-        form2 = ProfileRegisterForm_edu(request.POST)
-        form3 = ProfileRegisterForm_profdetail(request.POST)
-        form4 = ProfileRegisterForm_resume(request.POST)
-        form5 = ProfileRegistration_skills(request.POST)
-        form6 = ProfileRegistration_expdetail(request.POST)
-        if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid() and form5.is_valid() and form6.is_valid():
-            f1 = form1.save(commit=False)
-            f1.user_id = profile
-            f1.save()
+        form1 = ProfileRegisterForm(request.POST or None)
+        form2 = ProfileRegisterForm_edu(request.POST or None)
+        form3 = ProfileRegisterForm_profdetail(request.POST or None)
+        form4 = ProfileRegisterForm_resume(request.POST or None)
+        form5 = ProfileRegistration_skills(request.POST or None)
+        form6 = ProfileRegistration_expdetail(request.POST or None)
+        # print(form1)
+        if form1.is_valid():
+            if form1.cleaned_data.get('birth_date'):
+                f1 = form1.save(commit=False)
+                try:
+                    c = Candidate_profile.objects.get(user_id=profile)
+                except Candidate_profile.DoesNotExist:
+                    c = None
+                if c:
+                    c.delete()
 
+                f1.user_id = profile
+                f1.save()
+
+        if form2.is_valid():
             f2 = form2.save(commit=False)
-            if f2.cleaned_data.get('institute_name'):
+            print(form2.cleaned_data)
+            if form2.cleaned_data.get('institute_name'):
                 f2.user_id = profile
                 f2.save()
-
+        if form3.is_valid():
             f3 = form3.save(commit=False)
-            if f2.cleaned_data.get('designation'):
+            if form3.cleaned_data.get('designation'):
                 f3.user_id = profile
                 f3.save()
-
-            f4 = form4.save(commit=False)
-            f4.user_id = profile
-            f4.save()
+        if form4.is_valid():
+            if form4.cleaned_data.get('coverletter_text'):
+                f4 = form4.save(commit=False)
+                f4.user_id = profile
+                f4.save()
 
             # f5 = form5.save(commit=False)
             # f5.user_id = profile
             # f5.save()
-            for form in form5:
-                # extract name from each form and save
-                skill = form.cleaned_data.get('skill')
-                rating = form.cleaned_data.get('rating')
-                # save book instance
-                if skill:
-                    Candidate_skills(user_id=profile, skil=skill, rating=rating).save()
-
-            f6 = form6.save(commit=False)
-            f6.user_id = profile
-            f6.save()
-            return redirect('jobseeker:jobseeker_home')
+        if form5.is_valid():
+            if form5.cleaned_data.get('skill'):
+                f4 = form4.save(commit=False)
+                f4.user_id = profile
+                f4.save()
+            # for form in form5:
+            #     # extract name from each form and save
+            #     skill = form.cleaned_data.get('skill')
+            #     rating = form.cleaned_data.get('rating')
+            #     # save book instance
+            #     if skill:
+            #         Candidate_skills(user_id=profile, skil=skill, rating=rating).save()
+        if form6.is_valid():
+            if form6.cleaned_data.get('department'):
+                try:
+                    cep = Candidate_expdetail.objects.get(user_id=profile)
+                except Candidate_profile.DoesNotExist:
+                    cep = None
+                if cep:
+                    cep.delete()
+                f6 = form6.save(commit=False)
+                f6.user_id = profile
+                f6.save()
+        return redirect('jobseeker:ProfileEdit')
 
     form1 = ProfileRegisterForm()
     form2 = ProfileRegisterForm_edu()
@@ -1090,7 +1114,6 @@ def SavedJobs(request):
                                 # print(userS)
                                 continue
                             relevant_jobs.append(jo)
-
 
                             common.append(len(common_skill))
                             job_skills.append(len(skills))
@@ -1475,7 +1498,7 @@ def AppliedJobs(request):
                 objects = zip(pj_objects, pc_objects)
 
                 return render(request, 'jobseeker/applied.html',
-                              {'jobs': objects, 'c': c, 'cp': cp,'pjs': pjt_objects})
+                              {'jobs': objects, 'c': c, 'cp': cp, 'pjs': pjt_objects})
                 # objects = zip(applied, companyprofile)
                 # return render(request, 'jobseeker/applied.html', {'jobs': objects, 'cp': cp})
             else:

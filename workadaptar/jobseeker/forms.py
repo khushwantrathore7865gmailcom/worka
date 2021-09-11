@@ -45,13 +45,15 @@ Martial_Status = [
     ('Single', 'Single'),
     ('Married ', 'Married'),
 ]
+date = [
 
+]
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, widget=forms.TextInput(
         attrs={'placeholder': 'Enter your first name', 'class': "input100"}))
     last_name = forms.CharField(max_length=30, required=False, widget=forms.TextInput(
-        attrs={'placeholder': 'Enter your first name', 'class': "input100"}))
+        attrs={'placeholder': 'Enter your last name', 'class': "input100"}))
     email = forms.EmailField(max_length=254,
                              widget=forms.TextInput(attrs={'placeholder': 'Enter email address', 'class': "input100"}))
     password1 = forms.CharField(max_length=16, widget=forms.PasswordInput(
@@ -85,7 +87,7 @@ class ProfileRegisterForm(forms.ModelForm):
         attrs={'class': "input100"}))
     birth_year = forms.CharField(max_length=30, required=False, label='Birth year', widget=forms.TextInput(
         attrs={'class': "input100"}))
-    gender = forms.CharField(max_length=30, required=False, label='Gender', widget=forms.TextInput(
+    gender = forms.ChoiceField(choices=Gender, required=False, label='Gender', widget=forms.Select(
         attrs={'class': "input100"}))
     address = forms.CharField(max_length=30, required=False, label='Address', widget=forms.TextInput(
         attrs={'class': "input100"}))
