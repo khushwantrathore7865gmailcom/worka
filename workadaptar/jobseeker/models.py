@@ -56,7 +56,7 @@ class Candidate_profile(models.Model):
     city = models.CharField(max_length=50, blank=True)
     state = models.CharField(choices=state_choices, max_length=255, null=True, blank=True)
     marital_status = models.CharField(choices=Martial_Status, max_length=255, null=True, blank=True)
-    profile_pic = models.ImageField(upload_to=f"profile/", default='profile/avatar.png')
+    profile_pic = models.ImageField(upload_to="profile/users/%Y/%m/%d/", default='profile/avatar.png')
 
 
 class Candidate_edu(models.Model):

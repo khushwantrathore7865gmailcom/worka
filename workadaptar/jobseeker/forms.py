@@ -188,7 +188,7 @@ class ProfileRegisterForm(forms.ModelForm):
     marital_status = forms.ChoiceField(choices=Martial_Status, required=False, label='Marital Status',
                                        widget=forms.Select(
                                            attrs={'class': "input100"}))
-    profile_pic = forms.ImageField(max_length=30, required=False, label='Profile picture', widget=forms.FileInput(
+    profile_pic = forms.ImageField( required=False, label='Profile picture', widget=forms.FileInput(
         attrs={'class': "input100"}))
 
     class Meta:

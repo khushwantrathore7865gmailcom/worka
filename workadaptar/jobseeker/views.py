@@ -797,104 +797,110 @@ def ProfileView(request):
 # @login_required(login_url='/login/')
 @login_required(login_url='/jobseeker/login')
 def ProfileEdit(request):
-    profile = Candidate.objects.get(user=request.user)
+    try:
+        profile = Candidate.objects.get(user=request.user)
+    except Candidate.DoesNotExist:
+        profile =None
     print(profile)
-    if request.method == 'POST':
-        form1 = ProfileRegisterForm(request.POST or None)
-        form2 = ProfileRegisterForm_edu(request.POST or None)
-        form3 = ProfileRegisterForm_profdetail(request.POST or None)
-        form4 = ProfileRegisterForm_resume(request.POST or None)
-        form5 = ProfileRegistration_skills(request.POST or None)
-        form6 = ProfileRegistration_expdetail(request.POST or None)
-        # print(form1)
-        if form1.is_valid():
-            if form1.cleaned_data.get('birth_date'):
-                f1 = form1.save(commit=False)
-                try:
-                    c = Candidate_profile.objects.get(user_id=profile)
-                except Candidate_profile.DoesNotExist:
-                    c = None
-                if c:
-                    c.delete()
+    if profile is not None:
+        if request.method == 'POST':
+            form1 = ProfileRegisterForm(data=request.POST or None,files=request.FILES or None)
+            form2 = ProfileRegisterForm_edu(request.POST or None)
+            form3 = ProfileRegisterForm_profdetail(request.POST or None)
+            form4 = ProfileRegisterForm_resume(request.POST or None)
+            form5 = ProfileRegistration_skills(request.POST or None)
+            form6 = ProfileRegistration_expdetail(request.POST or None)
+            # print(form1)
+            if form1.is_valid():
+                print(form1.cleaned_data.get('profile_pic'))
+                if form1.cleaned_data.get('birth_date'):
+                    f1 = form1.save(commit=False)
+                    try:
+                        c = Candidate_profile.objects.get(user_id=profile)
+                    except Candidate_profile.DoesNotExist:
+                        c = None
+                    if c:
+                        c.delete()
 
-                f1.user_id = profile
-                f1.save()
+                    f1.user_id = profile
 
-        if form2.is_valid():
-            f2 = form2.save(commit=False)
-            print(form2.cleaned_data)
-            if form2.cleaned_data.get('institute_name'):
-                f2.user_id = profile
-                f2.save()
-        if form3.is_valid():
-            f3 = form3.save(commit=False)
-            if form3.cleaned_data.get('designation'):
-                f3.user_id = profile
-                f3.save()
-        if form4.is_valid():
-            if form4.cleaned_data.get('coverletter_text'):
-                f4 = form4.save(commit=False)
-                f4.user_id = profile
-                f4.save()
+                    f1.save()
 
-            # f5 = form5.save(commit=False)
-            # f5.user_id = profile
-            # f5.save()
-        if form5.is_valid():
-            if form5.cleaned_data.get('skill'):
-                f4 = form4.save(commit=False)
-                f4.user_id = profile
-                f4.save()
-            # for form in form5:
-            #     # extract name from each form and save
-            #     skill = form.cleaned_data.get('skill')
-            #     rating = form.cleaned_data.get('rating')
-            #     # save book instance
-            #     if skill:
-            #         Candidate_skills(user_id=profile, skil=skill, rating=rating).save()
-        if form6.is_valid():
-            if form6.cleaned_data.get('department'):
-                try:
-                    cep = Candidate_expdetail.objects.get(user_id=profile)
-                except Candidate_profile.DoesNotExist:
-                    cep = None
-                if cep:
-                    cep.delete()
-                f6 = form6.save(commit=False)
-                f6.user_id = profile
-                f6.save()
-        return redirect('jobseeker:ProfileEdit')
-    print(request.method)
-    try:
-        c = Candidate_profile.objects.get(user_id=profile)
-        print(c)
-    except Candidate_profile.DoesNotExist:
-        c = None
-        print(c)
-    try:
-        cr = Candidate_resume.objects.get(user_id=profile)
-    except Candidate_resume.DoesNotExist:
-        cr = None
-    try:
-        cep = Candidate_expdetail.objects.get(user_id=profile)
-    except Candidate_profile.DoesNotExist:
-        cep = None
+            if form2.is_valid():
+                f2 = form2.save(commit=False)
+                if form2.cleaned_data.get('institute_name'):
+                    f2.user_id = profile
+                    f2.save()
+            if form3.is_valid():
+                f3 = form3.save(commit=False)
+                if form3.cleaned_data.get('designation'):
+                    f3.user_id = profile
+                    f3.save()
+            if form4.is_valid():
+                if form4.cleaned_data.get('coverletter_text'):
+                    f4 = form4.save(commit=False)
+                    f4.user_id = profile
+                    f4.save()
 
-    form1 = ProfileRegisterForm(instance=c)
-    form2 = ProfileRegisterForm_edu()
-    form3 = ProfileRegisterForm_profdetail()
-    form4 = ProfileRegisterForm_resume(instance=cr)
-    form5 = ProfileRegistration_skills()
-    form6 = ProfileRegistration_expdetail(instance=cep)
-    skills = Candidate_skills.objects.filter(user_id=profile)
-    print(skills)
-    edu = Candidate_edu.objects.filter(user_id=profile)
-    professional = Candidate_profdetail.objects.filter(user_id=profile)
-    return render(request, 'jobseeker/Profile.html',
-                  {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, "form5": form5, 'form6': form6,
-                   'skills': skills, 'edu': edu, 'professional': professional,'c':c})
+                # f5 = form5.save(commit=False)
+                # f5.user_id = profile
+                # f5.save()
+            if form5.is_valid():
+                if form5.cleaned_data.get('skill'):
+                    f4 = form4.save(commit=False)
+                    f4.user_id = profile
+                    f4.save()
+                # for form in form5:
+                #     # extract name from each form and save
+                #     skill = form.cleaned_data.get('skill')
+                #     rating = form.cleaned_data.get('rating')
+                #     # save book instance
+                #     if skill:
+                #         Candidate_skills(user_id=profile, skil=skill, rating=rating).save()
+            if form6.is_valid():
+                if form6.cleaned_data.get('department'):
+                    try:
+                        cep = Candidate_expdetail.objects.get(user_id=profile)
+                    except Candidate_profile.DoesNotExist:
+                        cep = None
+                    if cep:
+                        cep.delete()
+                    f6 = form6.save(commit=False)
+                    f6.user_id = profile
+                    f6.save()
+            return redirect('jobseeker:ProfileEdit')
+        print(request.method)
+        try:
+            c = Candidate_profile.objects.get(user_id=profile)
+            print(c)
+        except Candidate_profile.DoesNotExist:
+            c = None
+            print(c)
+        try:
+            cr = Candidate_resume.objects.get(user_id=profile)
+        except Candidate_resume.DoesNotExist:
+            cr = None
+        try:
+            cep = Candidate_expdetail.objects.get(user_id=profile)
+        except Candidate_expdetail.DoesNotExist:
+            cep = None
 
+        form1 = ProfileRegisterForm(instance=c)
+        form2 = ProfileRegisterForm_edu()
+        form3 = ProfileRegisterForm_profdetail()
+        form4 = ProfileRegisterForm_resume(instance=cr)
+        form5 = ProfileRegistration_skills()
+        form6 = ProfileRegistration_expdetail(instance=cep)
+        skills = Candidate_skills.objects.filter(user_id=profile)
+        print(skills)
+        edu = Candidate_edu.objects.filter(user_id=profile)
+        professional = Candidate_profdetail.objects.filter(user_id=profile)
+        return render(request, 'jobseeker/Profile.html',
+                      {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, "form5": form5, 'form6': form6,
+                       'skills': skills, 'edu': edu, 'professional': professional,'c':c})
 
+    else:
+        return  redirect('jobseeker:jobseeker/login')
 @login_required(login_url='/jobseeker/login')
 def create_profile(request):
     profile = Candidate.objects.get(user=request.user)
