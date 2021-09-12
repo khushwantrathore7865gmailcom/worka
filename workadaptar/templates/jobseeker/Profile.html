@@ -224,6 +224,7 @@ u
 	</header>
 
 <section class="job-portal">
+    <a class="btn btn-success" href="{% url 'jobseeker:jobseeker_home' %}">skip</a>
 	<div class="container">
   <div class="alert">
   <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
@@ -234,7 +235,7 @@ u
 			<div class="col-md-3 col-12">
 				<div class="job-left">
 						<img src={{profile.profile_pic.url}}>
-            <br>
+
             <center>
               <div class='file file--uploading'>
                 <label for='input-file'>
@@ -244,7 +245,7 @@ u
                 <input id='input-file' type='file' />
               </div>
             </center>
-            <br>
+
 
 
 						<div class="job-left-desc">
@@ -260,11 +261,11 @@ u
 								<h6>{{p.start_year}}</h6>
 							{% endif %}
 							{% endfor %}
-              <br>
+
               <div  class="center-align" >
 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 
-              <a href="#" data-toggle="modal" data-target="#personalmodel"><b><u>Edit Details</u></b></a> <Br>
+              <a href="#" data-toggle="modal" data-target="#personalmodel"><b><u>Edit Details</u></b></a>
             </div>
 								{% comment %} <div class="download_btn">
 									<a class="btn btn-primary" href={{resume.resume_link.url}} role="button"><img src=" {% static 'images/download3.png' %} ">Download Resume</a>
@@ -286,7 +287,7 @@ u
 								<h5><b>Skills</b> </h5>
 								<div class="skill-list">
 									 <div class="skill-list-left">
-										<h3>Skills</h3>
+										<h6>Skills</h6>
 
 												{% for s in skills %}
 										<div>{{s.skill}}</div>
@@ -294,7 +295,7 @@ u
 									</div>
 
 									<div class="skill-list-right">
-										<h3>Rating</h3>
+										<h6>Rating</h6>
 										{% for s in skills %}
 										<div>{{s.rating}}</div>
 										{% endfor %}
@@ -427,7 +428,7 @@ u
 					{% for s in professional %}
 
 
-							<h4>{{s.designation}} <img src=" {% static 'images/skills-btn.png' %} "></h4>
+							<h4>{{s.designation}}</h4>
 							<p class="small">{{s.organization}}</p>
 					{% if p.is_current %}
 					<p class="small">{{s.start_month}} {{s.start_year}} to present</p>
@@ -471,7 +472,7 @@ experience, and leading up to building a continuous integration system for all o
 </span>
 
 		{% for s in edu %}
-		<p>{{s.institute_name}} <span><img src=" {% static 'images/skills-btn.png' %} "></span></p>
+		<p>{{s.institute_name}} <span></span></p>
 <!--		<p>Arizona State University <span><img src="images/skills-btn.png"></span></p>-->
 
 		{% endfor %}
