@@ -284,8 +284,9 @@ u
             </div>
 								<h5><b>Skills</b> </h5>
 								<div class="skill-list">
-									{% comment %} <div class="skill-list-left">
+									 <div class="skill-list-left">
 										<h3>Skills</h3>
+
 												{% for s in skills %}
 										<div>{{s.skill}}</div>
 										{% endfor %}
@@ -296,7 +297,7 @@ u
 										{% for s in skills %}
 										<div>{{s.rating}}</div>
 										{% endfor %}
-									</div> {% endcomment %}
+									</div>
 
 								</div>
                 <br>
@@ -352,8 +353,8 @@ u
 							  <h5><b>Contact Details</b></h5>
                 <br>
 								<p><img src=" {% static 'images/mail.png' %}"> <span><b>Email ID</b> : {{user.email}}</span></p>
-<!--								<p><img src="images/phone.png"> <span><b>Phone no.</b> : (252) 555-0126</span></p>-->
-								<p><img src=" {% static 'images/location.png' %}"> <span><b>Address</b> : 1901 Thornridge Cir. Shiloh, Hawaii 81063</span></p>
+								<p><img src="{% static 'images/phone.png' %}"> <span><b>Phone no.</b> : {{c.phone}}</span></p>
+								<p><img src=" {% static 'images/location.png' %}"> <span><b>Address</b> : {{c.address}},{{c.city}},{{c.state}}</span></p>
 
 <!--								<hr>-->
 <!--								<div class="contact-btn">-->
@@ -765,10 +766,16 @@ experience, and leading up to building a continuous integration system for all o
               <div class="col-md-10 col-12">
                <form class="form-horizontal" method="post" action="">
     {% csrf_token %}
+{{form1.profile_pic}}
+<div class="input-group ">
+
+               <label style="font-size: 20px;"> {{form1.phone.label}}</label>
 
 
+            {{form1.phone}}
+        </div>
         <div class="input-group ">
-            {{form1.profile_pic}}
+
                <label style="font-size: 20px;"> {{form1.birth_date.label}}</label>
 
 

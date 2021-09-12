@@ -798,6 +798,7 @@ def ProfileView(request):
 @login_required(login_url='/jobseeker/login')
 def ProfileEdit(request):
     profile = Candidate.objects.get(user=request.user)
+    print(profile)
     if request.method == 'POST':
         form1 = ProfileRegisterForm(request.POST or None)
         form2 = ProfileRegisterForm_edu(request.POST or None)
@@ -863,16 +864,35 @@ def ProfileEdit(request):
                 f6.user_id = profile
                 f6.save()
         return redirect('jobseeker:ProfileEdit')
+    print(request.method)
+    try:
+        c = Candidate_profile.objects.get(user_id=profile)
+        print(c)
+    except Candidate_profile.DoesNotExist:
+        c = None
+        print(c)
+    try:
+        cr = Candidate_resume.objects.get(user_id=profile)
+    except Candidate_resume.DoesNotExist:
+        cr = None
+    try:
+        cep = Candidate_expdetail.objects.get(user_id=profile)
+    except Candidate_profile.DoesNotExist:
+        cep = None
 
-    form1 = ProfileRegisterForm()
+    form1 = ProfileRegisterForm(instance=c)
     form2 = ProfileRegisterForm_edu()
     form3 = ProfileRegisterForm_profdetail()
-    form4 = ProfileRegisterForm_resume()
+    form4 = ProfileRegisterForm_resume(instance=cr)
     form5 = ProfileRegistration_skills()
-    form6 = ProfileRegistration_expdetail()
-
+    form6 = ProfileRegistration_expdetail(instance=cep)
+    skills = Candidate_skills.objects.filter(user_id=profile)
+    print(skills)
+    edu = Candidate_edu.objects.filter(user_id=profile)
+    professional = Candidate_profdetail.objects.filter(user_id=profile)
     return render(request, 'jobseeker/Profile.html',
-                  {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, "form5": form5, 'form6': form6})
+                  {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, "form5": form5, 'form6': form6,
+                   'skills': skills, 'edu': edu, 'professional': professional,'c':c})
 
 
 @login_required(login_url='/jobseeker/login')

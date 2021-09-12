@@ -26,7 +26,7 @@ urlpatterns = [
         template_name='account/password_reset_complete.html'), name='password_reset_complete'),
     path('viewprofile/', ProfileView, name='profile'),
     path('profile_edit/', ProfileEdit, name='ProfileEdit'),
-    path('profile_edit/', create_profile, name='create_profile'),
+    path('create_profile/', ProfileEdit, name='create_profile'),
     # path('create_profile/',create_profile, name='create_profile'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
     path('resume/', ResumeCreation, name='resume'),
