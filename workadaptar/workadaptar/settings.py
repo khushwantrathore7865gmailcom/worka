@@ -15,6 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -25,6 +26,7 @@ SECRET_KEY = 'django-insecure-#zd9%%(5k*5@k_2n+^9l64#=-6q00@q4lv(hn(%yw_9q**^sge
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'workadaptar.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
+        'DIRS': [os.path.join(BASE_DIR,'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +73,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'workadaptar.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -80,6 +83,7 @@ DATABASES = {
         'NAME': str(BASE_DIR / 'db.sqlite3'),
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -99,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -112,18 +117,20 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 # LOGIN_REDIRECT_URL = "/dashboard"
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-
+    
 ]
 # STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -131,12 +138,12 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user_custom.User_custom'
 
-EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 465
+EMAIL_BACKEND='django_smtp_ssl.SSLEmailBackend'
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT= 465
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "workadaptar@gmail.com"
-EMAIL_HOST_PASSWORD = "Wor12345@"
+DEFAULT_FROM_EMAIL="workadaptar@gmail.com"
+EMAIL_HOST_PASSWORD="Wor12345@"
 DJANGO_TABLES2_TEMPLATE = "django_tables2/semantic.html"
 RECAPTCHA_SITE_KEY = "6LdI20kaAAAAAGwmzHCfyonzLr5blCL0LQGgmOfJ"
 RECAPTCHA_SECRET_KEY = "6LdI20kaAAAAALHuggfJT_ly4WtvT0CGZxaQLYWF"

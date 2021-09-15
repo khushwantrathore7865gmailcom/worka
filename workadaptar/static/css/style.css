@@ -323,28 +323,29 @@ section.fifth-section .heading button {
     letter-spacing: 0em;
     color: rgba(255, 255, 255, 0.8);
 }
+
 .handpicked-desc {
     height: 230px;
     width: 210px;
     border-radius: 10px;
-}
-.handpicked-desc {
+    margin-right: 18px;
     position: relative;
-}
-.handpicked-desc {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/141f4c69c48f6297c2a1992d81996489.jpg");
 	box-shadow: 10px 10px 50px 0px rgba(0, 0, 0, 0.090);
+}
+.handpicked-desc:last-child {
+    margin-right: 0;
 }
 .handpicked-desc-main {
     display: flex;
 	margin-bottom: 30px;
 }
 
-.handpicked-desc-main .handpicked-desc {
+.handpicked-desc-main {
     margin-right: 18px;
 }
 
-.handpicked-desc-main .handpicked-desc:last-child {
+.handpicked-desc-main {
     margin-right: 0;
 }
 .handpicked-main .heading {
