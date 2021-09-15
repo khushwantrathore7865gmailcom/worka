@@ -129,10 +129,10 @@ def login_candidate(request):
                 messages.info(request, 'Username OR password is incorrect')
 
         context = {}
-        return render(request, 'jobseeker/login.html', context)
+        return render(request, 'index.html', context)
 
 
-@login_required(login_url='/jobseeker/login')
+@login_required(login_url='/')
 def jobseeker_Home(request):
     if request.method == 'GET':
         val = request.GET.get('search_box', None)
@@ -553,7 +553,7 @@ def jobseeker_Home(request):
                     u.save()
                     return redirect('jobseeker:create_profile')
             else:
-                return redirect('jobseeker:jobseeker/login')
+                return redirect('/')
 
     if request.method == 'POST':
         print(request.POST)
@@ -571,7 +571,7 @@ def jobseeker_Home(request):
         Employer_job_Applied.objects.create(candidate_id=c, job_id=job).save()
 
 
-@login_required(login_url='/jobseeker/login')
+@login_required(login_url='/')
 def save_later(request, pk):
     c = Candidate.objects.get(user=request.user)
     if c is not None:
@@ -581,7 +581,7 @@ def save_later(request, pk):
         Employer_job_Saved.objects.create(job_id=job, candidate_id=c).save()
         return redirect('jobseeker:jobseeker_home')
     else:
-        return redirect('jobseeker:jobseeker/login')
+        return redirect('/')
 
 
 # class ProfileRegister(View):
@@ -598,7 +598,7 @@ def save_later(request, pk):
 #             f.save()
 #
 #         return redirect('dashboard_home')
-@login_required(login_url='/jobseeker/login')
+@login_required(login_url='/')
 def ProfileView(request):
     if request.method == 'GET':
         val = request.GET.get('search_box', None)
@@ -804,8 +804,7 @@ def ProfileView(request):
             })
 
 
-# @login_required(login_url='/login/')
-@login_required(login_url='/jobseeker/login')
+@login_required(login_url='/')
 def ProfileEdit(request):
     try:
         profile = Candidate.objects.get(user=request.user)
@@ -913,8 +912,8 @@ def ProfileEdit(request):
                        'skills': skills, 'edu': edu, 'professional': professional,'c':c})
 
     else:
-        return  redirect('jobseeker:jobseeker/login')
-@login_required(login_url='/jobseeker/login')
+        return  redirect('/')
+@login_required(login_url='/')
 def create_profile(request):
     profile = Candidate.objects.get(user=request.user)
     if request.method == 'POST':
@@ -970,7 +969,7 @@ def create_profile(request):
                   {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, "form5": form5, 'form6': form6})
 
 
-@login_required(login_url='/jobseeker/login')
+@login_required(login_url='/')
 def SavedJobs(request):
     if request.method == 'GET':
         val = request.GET.get('search_box', None)
@@ -1270,7 +1269,7 @@ def SavedJobs(request):
                 else:
                     return render(request, 'jobseeker/savedjobs.html', {'cp': cp})
             else:
-                return redirect('jobseeker:jobseeker/login')
+                return redirect('/')
     if request.method == 'POST':
         print(request.POST)
         pk = request.POST.get('pk')
@@ -1288,7 +1287,7 @@ def SavedJobs(request):
         Employer_job_Applied.objects.create(candidate_id=c, job_id=job).save()
 
 
-@login_required(login_url='/jobseeker/login')
+@login_required(login_url='/')
 def AppliedJobs(request):
     if request.method == 'GET':
         val = request.GET.get('search_box', None)
@@ -1541,17 +1540,17 @@ def AppliedJobs(request):
                 # objects = zip(applied, companyprofile)
                 # return render(request, 'jobseeker/applied.html', {'jobs': objects, 'cp': cp})
             else:
-                return redirect('jobseeker:jobseeker/login')
+                return redirect('/')
 
 
-@login_required(login_url='/jobseeker/login')
+@login_required(login_url='/')
 def remove_applied(request, pk):
     Employer_job_Applied.objects.get(pk=pk).delete()
 
     return redirect('jobseeker:AppliedJobs')
 
 
-@login_required(login_url='/jobseeker/login')
+@login_required(login_url='/')
 def remove_saved(request, pk):
     c = Candidate.objects.get(user=request.user)
     job = Employer_job.objects.get(pk=pk)
@@ -1563,7 +1562,7 @@ def remove_saved(request, pk):
     return redirect('jobseeker:SavedJobs')
 
 
-@login_required(login_url='/jobseeker/login')
+@login_required(login_url='/')
 def ResumeCreation(request):
     c = Candidate.objects.get(user=request.user)
     if request.method == 'GET':
@@ -1589,7 +1588,7 @@ def ResumeCreation(request):
     return render(request, 'jobseeker/resume.html', {'form': form})
 
 
-@login_required(login_url='/jobseeker/login')
+@login_required(login_url='/')
 def payment(request, pk):
     r = Resume_order.objects.get(pk=pk)
     a = r.amount * 100

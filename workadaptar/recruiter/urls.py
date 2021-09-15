@@ -24,7 +24,7 @@ urlpatterns = [
     path('removeunpublish/<int:pk>', remove_unpublish, name='remove_unpublish'),
     path('viewprofile/', ProfileView, name='profile'),
     path('login', login_employer, name='employer/login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='/recruiter/login'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('signup', SignUpView.as_view(), name='employer/register'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
 

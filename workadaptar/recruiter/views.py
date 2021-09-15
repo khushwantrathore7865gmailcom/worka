@@ -121,10 +121,10 @@ def login_employer(request):
                 messages.info(request, 'Username OR password is incorrect')
 
         context = {}
-        return render(request, 'employer/login.html', context)
+        return render(request, 'index.html', context)
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def Home(request):
     jobs = []
     expired_job = []
@@ -175,12 +175,12 @@ def Home(request):
             context = {'jobs': jobs, 'expired': expired_job, 'ep': ep}
             return render(request, 'employer/job-post.html', context)
         else:
-            return redirect('recruiter:employer/login')
+            return redirect('/')
     else:
-        return redirect('recruiter:employer/login')
+        return redirect('/')
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def unpublish(request, pk):
     user = request.user
     job = Employer_job.objects.get(pk=pk)
@@ -190,7 +190,7 @@ def unpublish(request, pk):
     return redirect('recruiter:employer_home')
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def remove_unpublish(request, pk):
     job = Employer_job.objects.get(pk=pk)
     unpub_job = Employer_expired_job.objects.get(job_id=job)
@@ -201,7 +201,7 @@ def remove_unpublish(request, pk):
     return redirect('recruiter:employer_home')
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def edit_job(request, pk):
     user = request.user
     if user is not None and user.is_employeer:
@@ -221,10 +221,10 @@ def edit_job(request, pk):
         }
         return render(request, 'employer/edit_job.html', context)
     else:
-        return redirect('recruiter:employer/login')
+        return redirect('/')
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def job_detail(request, pk):
     user = request.user
     if user is not None and user.is_employeer:
@@ -235,10 +235,10 @@ def job_detail(request, pk):
         # objects = zip(job,candidate_Applied)
         return render(request, 'employer/job_details.html', {'job': job, 'c': company})
     else:
-        return redirect('recruiter:employer/login')
+        return redirect('/')
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def view_applied_candidate(request, pk):
     user = request.user
     if user is not None and user.is_employeer:
@@ -394,10 +394,10 @@ def view_applied_candidate(request, pk):
         # return render(request, 'employer/job_candidate.html',
         #               {'candidate': objects, 'job': job, 'quest': quest})
     else:
-        return redirect('recruiter:employer/login')
+        return redirect('/')
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def shortlistview_applied_candidate(request, pk):
     user = request.user
     if user is not None and user.is_employeer:
@@ -434,10 +434,10 @@ def shortlistview_applied_candidate(request, pk):
         return render(request, 'employer/shortlisted_view.html',
                       {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer, 'cp': cp})
     else:
-        return redirect('recruiter:employer/login')
+        return redirect('/')
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def disqualifyview_applied_candidate(request, pk):
     user = request.user
     if user is not None and user.is_employeer:
@@ -474,10 +474,10 @@ def disqualifyview_applied_candidate(request, pk):
         return render(request, 'employer/disqualified.html',
                       {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer, 'cp': cp})
     else:
-        return redirect('recruiter:employer/login')
+        return redirect('/')
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def shortlist(request, pk):
     e = Employer_job_Applied.objects.get(pk=pk)
     e.is_shortlisted = True
@@ -487,7 +487,7 @@ def shortlist(request, pk):
     return redirect('recruiter:view_applied_candidate', e.job_id.pk)
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def disqualify(request, pk):
     e = Employer_job_Applied.objects.get(pk=pk)
     e.is_shortlisted = False
@@ -497,23 +497,21 @@ def disqualify(request, pk):
     return redirect('recruiter:view_applied_candidate', e.job_id.pk)
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def delete_job(request, pk):
     Employer_job.objects.get(pk=pk).delete()
 
     return redirect('recruiter:employer_home')
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def publish_job(request, pk):
     e = Employer_job.objects.get(pk=pk)
     e.is_save_later = False
     e.save()
     return redirect('recruiter:job_detail', pk)
 
-
-# @login_required(login_url='/login/')
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def ProfileView(request):
     u = request.user
     e = Employer.objects.get(user=u)
@@ -526,7 +524,7 @@ def ProfileView(request):
     })
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def job_post(request):
     user = request.user
     if user is not None and user.is_employeer:
@@ -566,10 +564,10 @@ def job_post(request):
         # form2 = JobsQuestionForm(request.POST)
         return render(request, 'employer/addjob.html', {"form1": form1, "form2": formset})
     else:
-        return redirect('recruiter:employer/login')
+        return redirect('/')
 
 
-@login_required(login_url='/recruiter/login')
+@login_required(login_url='/')
 def job_Response(request, pk):
     user = request.user
     if user is not None and user.is_employeer:
@@ -577,7 +575,7 @@ def job_Response(request, pk):
         response = Employer_job_Applied.objects.filter(job_id=job)
         return render(request, 'dashboard/jobresponse.html', {'response': response})
     else:
-        return redirect('recruiter:employer/login')
+        return redirect('/')
 
 
 # @login_required(login_url='/recruiter/login')
