@@ -12,7 +12,26 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
+    <!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}">
+	<link rel="stylesheet" type="text/css" href=" {% static 'css/main.css' %}">
+
   </head>
   <style>
 	  .mobile-main-section h3 {
@@ -28,6 +47,21 @@
 .mobile-main-images img {
     margin-bottom: 40px;
     margin-left: 28px;
+}
+.wrap-login100 {
+    width: 600px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 3px 20px 0px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 3px 20px 0px rgb(0 0 0 / 10%);
+    -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+}
+
+.p-t-80 {
+    padding-top: 30px;
 }
 	  </style>
   <body>
@@ -49,7 +83,7 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">How it works</a>
+        <a class="nav-link" href="#work-main">How it works</a>
       </li>
 <!--	  <li class="nav-item">-->
 <!--        <a class="nav-link" href="#">Testimonial</a>-->
@@ -63,10 +97,10 @@
         <a class="nav-link" href="#">Resume</a>
       </li>
 	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'recruiter:employer/login' %}">Recruiter Login</a>
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#recruitermodal">Recruiter Login</a>
       </li>
 	  <li class="nav-item button">
-        <a class="nav-link" href="{% url 'jobseeker:jobseeker/login' %}">Jobseeker Login</a>
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#jobseekermodal">Jobseeker Login</a>
       </li>
 	 </ul> 
     
@@ -104,27 +138,27 @@
 			<div class="col-12 col-md-12">
 				<div class="mobile-main-section">
 					<div class="mobile-main-images">
-						<img src="{% static 'images/mobile-app.png' %} " width="100" height="100">
+						<img src="{% static 'images/home/app.jpg' %} " width="150" height="150">
 						<h3>Mobile Application</h3>
 					</div>
 					
 					<div class="mobile-main-images">
-					<img src="{% static 'images/web-design.png' %}" width="100" height="100">
+					<img src="{% static 'images/home/frontend.jpg' %}" width="150" height="150">
 						<h3>Frontend Developer</h3>
 					</div>
 					
 					<div class="mobile-main-images">
-					<img src="{% static 'images/backend.png' %}" width="100" height="100">
+					<img src="{% static 'images/home/backend.jpg' %}" width="150" height="150">
 						<h3>Backend Developer</h3>
 					</div>
 					
 					<div class="mobile-main-images">
-					<img src="{% static 'images/devops.png' %}" width="100" height="100">
+					<img src="{% static 'images/home/devops.jpg' %}" width="150" height="150">
 						<h3>Dev Ops Engineer</h3>
 					</div>
 					
 					<div class="mobile-main-images">
-					<img src="{% static 'images/innovation.png' %}" width="100" height="100">
+					<img src="{% static 'images/home/emerging.jpg' %}" width="150" height="150">
 						<h3>Emerging Technologies And Roles</h3>
 					</div>
 					
@@ -137,7 +171,7 @@
 
 
 <section class="third-section">
-<div class="work-main">
+<div class="work-main" id="work-main">
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-12">
@@ -147,7 +181,7 @@
 				</div>
 			</div>
 				
-				<div class="work-main-section">
+				<div class="work-main-section" id="work-main-section">
 					<div class="col-md-10 col-12 mx-auto">
 					  <div class="row">
 					
@@ -160,7 +194,7 @@
 								
 								<div class="work-desc">
 									<h3>Create An Account</h3>
-									<p>Post A Job To Tell Us About Your Project. We'll Quickly Match You With The Right Freelancers Find Place Best.</p>
+									<p>Sign Up and tell us about your projects, expertise and past experience.</p>
 								</div>
 							</div>
 						</div>
@@ -174,8 +208,8 @@
 								</div>
 								
 								<div class="work-desc">
-									<h3>Create An Account</h3>
-									<p>Post A Job To Tell Us About Your Project. We'll Quickly Match You With The Right Freelancers Find Place Best.</p>
+									<h3>Search Jobs</h3>
+									<p>Search Jobs on Workadapter, India's most trusted Job site for Tech Jobs.</p>
 								</div>
 							</div>
 						</div>
@@ -188,8 +222,8 @@
 								</div>
 								
 								<div class="work-desc">
-									<h3>Create An Account</h3>
-									<p>Post A Job To Tell Us About Your Project. We'll Quickly Match You With The Right Freelancers Find Place Best.</p>
+									<h3>Save and apply</h3>
+									<p>Apply to multiple job opportunities across top companies,industries and locations.</p>
 								</div>
 							</div>
 						</div>
@@ -260,35 +294,35 @@
 				<div class="row">
 					<div class="col-md-12 col-12">
 					  <div class="handpicked-desc-main">
-						<div class="handpicked-desc">
+						<div class="handpicked-desc" style="background:  url({% static 'images/home/11.jpg' %});">
 						<div class="handpicked-inner-desc">
 							<h2>Cognizant</h2>
-							<p>Senior- Associate-SAS Programmer</p>
+							<p>Senior Backend Developer</p>
 							<ul class="list-inline">
-								<li>Mumbai</li>
-								<li>7-10 years</li>
+								<li>Hyderabad</li>
+								<li>5-7 years</li>
 							</ul>
 							</div>
 						</div>
 						
-						<div class="handpicked-desc display-one">
+						<div class="handpicked-desc display-one" style="background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url({% static 'images/home/2.jpg' %});">
 							<div class="handpicked-inner-desc">
-							<h2>Cognizant</h2>
-							<p>Senior- Associate-SAS Programmer</p>
+							<h2>Facebook</h2>
+							<p>Front-End Engineer</p>
 							<ul class="list-inline">
-								<li>Mumbai</li>
-								<li>7-10 years</li>
+								<li>Banglore</li>
+								<li>3-7 years</li>
 							</ul>
 							</div>
 						</div>
 						
-						<div class="handpicked-desc">
+						<div class="handpicked-desc" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url({% static 'images/home/3.jpg' %});">
 									<div class="handpicked-inner-desc">
-							<h2>Cognizant</h2>
-							<p>Senior- Associate-SAS Programmer</p>
+							<h2>Gitlab</h2>
+							<p>Test Automation Engineer</p>
 							<ul class="list-inline">
-								<li>Mumbai</li>
-								<li>7-10 years</li>
+								<li>Remote</li>
+								<li>2-5 years</li>
 							</ul>
 							</div>
 						</div>
@@ -298,35 +332,35 @@
 			
 				<div class="col-md-12 col-12">
 					  <div class="handpicked-desc-main">
-						<div class="handpicked-desc display-two">
+						<div class="handpicked-desc display-two" style="background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url({% static 'images/home/4.jpg' %});">
 							<div class="handpicked-inner-desc">
-							<h2>Cognizant</h2>
-							<p>Senior- Associate-SAS Programmer</p>
+							<h2>Netflix</h2>
+							<p>Senior Business Analyst</p>
 							<ul class="list-inline">
-								<li>Mumbai</li>
-								<li>7-10 years</li>
+								<li>Banglore</li>
+								<li>3-7 years</li>
 							</ul>
 							</div>
 						</div>
 						
-						<div class="handpicked-desc">
+						<div class="handpicked-desc" style="background:   url({% static 'images/home/5.jpg' %});">
 							<div class="handpicked-inner-desc">
-							<h2>Cognizant</h2>
-							<p>Senior- Associate-SAS Programmer</p>
+							<h2>PwC</h2>
+							<p>Senior Consultant - Database</p>
 							<ul class="list-inline">
 								<li>Mumbai</li>
-								<li>7-10 years</li>
+								<li>2-5 years</li>
 							</ul>
 							</div>
 						</div>
 						
-						<div class="handpicked-desc display-two">
+						<div class="handpicked-desc display-two" style="background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url({% static 'images/home/6.jpg' %});">
 							<div class="handpicked-inner-desc">
-							<h2>Cognizant</h2>
-							<p>Senior- Associate-SAS Programmer</p>
+							<h2>Startup</h2>
+							<p>Full Stack Engineer</p>
 							<ul class="list-inline">
-								<li>Mumbai</li>
-								<li>7-10 years</li>
+								<li>Remote</li>
+								<li>3-10 years</li>
 							</ul>
 							</div>
 						</div>
@@ -348,106 +382,7 @@
 		</div>
 	</div>
 </div>
-<!--</section>-->
-<!--	-->
-<!--<section class="fifth-section">-->
-<!--<div class="handpicked-main">-->
-<!--	<div class="container">-->
-<!--		<div class="row">-->
-<!--			-->
-<!--			<div class="col-12 col-md-8">-->
-<!--				<div class="row">-->
-<!--					<div class="col-md-12 col-12">-->
-<!--					  <div class="handpicked-desc-main">-->
-<!--						<div class="handpicked-desc">-->
-<!--						<div class="handpicked-inner-desc">-->
-<!--							<h2>Cognizant</h2>-->
-<!--							<p>Senior- Associate-SAS Programmer</p>-->
-<!--							<ul class="list-inline">-->
-<!--								<li>Mumbai</li>-->
-<!--								<li>7-10 years</li>-->
-<!--							</ul>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						-->
-<!--						<div class="handpicked-desc display-one">-->
-<!--							<div class="handpicked-inner-desc">-->
-<!--							<h2>Cognizant</h2>-->
-<!--							<p>Senior- Associate-SAS Programmer</p>-->
-<!--							<ul class="list-inline">-->
-<!--								<li>Mumbai</li>-->
-<!--								<li>7-10 years</li>-->
-<!--							</ul>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						-->
-<!--						<div class="handpicked-desc">-->
-<!--									<div class="handpicked-inner-desc">-->
-<!--							<h2>Cognizant</h2>-->
-<!--							<p>Senior- Associate-SAS Programmer</p>-->
-<!--							<ul class="list-inline">-->
-<!--								<li>Mumbai</li>-->
-<!--								<li>7-10 years</li>-->
-<!--							</ul>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--			</div>-->
-<!--			-->
-<!--			-->
-<!--				<div class="col-md-12 col-12">-->
-<!--					  <div class="handpicked-desc-main">-->
-<!--						<div class="handpicked-desc display-two">-->
-<!--							<div class="handpicked-inner-desc">-->
-<!--							<h2>Cognizant</h2>-->
-<!--							<p>Senior- Associate-SAS Programmer</p>-->
-<!--							<ul class="list-inline">-->
-<!--								<li>Mumbai</li>-->
-<!--								<li>7-10 years</li>-->
-<!--							</ul>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						-->
-<!--						<div class="handpicked-desc">-->
-<!--							<div class="handpicked-inner-desc">-->
-<!--							<h2>Cognizant</h2>-->
-<!--							<p>Senior- Associate-SAS Programmer</p>-->
-<!--							<ul class="list-inline">-->
-<!--								<li>Mumbai</li>-->
-<!--								<li>7-10 years</li>-->
-<!--							</ul>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--						-->
-<!--						<div class="handpicked-desc display-two">-->
-<!--							<div class="handpicked-inner-desc">-->
-<!--							<h2>Cognizant</h2>-->
-<!--							<p>Senior- Associate-SAS Programmer</p>-->
-<!--							<ul class="list-inline">-->
-<!--								<li>Mumbai</li>-->
-<!--								<li>7-10 years</li>-->
-<!--							</ul>-->
-<!--							</div>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--						-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--			-->
-<!--			<div class="col-12 col-md-4">-->
-<!--				<div class="heading">-->
-<!--					<h3>Best Handpicked <span>Jobs</span></h3>-->
-<!--					<h4>Just For You!!</h4>-->
-<!--					<button>Explore</button>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--			-->
-<!--			-->
-<!--		</div>-->
-<!--	</div>-->
-<!--</div>-->
-<!--</section>-->
+
 
 <section class="sixth-section">
 <div class="signup-main">
@@ -475,6 +410,156 @@
 </div>
 </section>
 
+<!--  Jobseeker modal -->
+
+<div class="container">
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="jobseekermodal" role="dialog">
+    <div class="modal-dialog" style="max-width: 800px;">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+              <div class="modelstyle">
+              <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="POST" action="">
+					{% csrf_token %}
+					<span class="login100-form-title">
+						Job Seeker Sign In
+					</span>
+
+
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+						<i class="bi bi-envelope"></i><input class="input100" type="text" name="username" placeholder="Username">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Please enter password">
+						<input class="input100" type="password" name="pass" placeholder="Password">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="text-right p-t-13 p-b-23">
+						<span class="txt1">
+							Forgot
+						</span>
+
+
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit">
+							Sign in
+						</button>
+					</div>
+
+					<div class="flex-col-c p-t-80 p-b-40">
+						<span class="txt1 p-b-9">
+							Don’t have an account?
+						</span>
+
+						<a href="{% url 'jobseeker:jobseeker/register' %}" class="txt3">
+							Sign up now
+						</a>
+					</div>
+				</form>
+				{% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+	
+              </div>
+            </div>
+
+
+        </div>
+      </div>
+<!--  end jobseeker-->
+
+
+
+<!--  recruiter modal -->
+
+<div class="container">
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="recruitermodal" role="dialog">
+    <div class="modal-dialog" style="max-width: 800px;">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+
+              <div class="modelstyle">
+              <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="POST" action="">
+					{% csrf_token %}
+					<span class="login100-form-title">
+						Employer Sign In
+					</span>
+
+
+					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+						<input class="input100" type="text" name="username" placeholder="Username">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Please enter password">
+						<input class="input100" type="password" name="pass" placeholder="Password">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="text-right p-t-13 p-b-23">
+						<span class="txt1">
+							Forgot
+						</span>
+
+<!--						<a href="#" class="txt2">-->
+<!--							Username / Password?-->
+<!--						</a>-->
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit">
+							Sign in
+						</button>
+					</div>
+
+					<div class="flex-col-c p-t-80 p-b-40">
+						<span class="txt1 p-b-9">
+							Don’t have an account?
+						</span>
+
+						<a href="{% url 'recruiter:employer/register' %}" class="txt3">
+							Sign up now
+						</a>
+					</div>
+				</form>
+				{% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+	
+	
+              </div>
+            </div>
+
+
+        </div>
+      </div>
+<!--  end recruiter-->
 <footer>
 <p>Footer section</p>
 </footer>
@@ -485,6 +570,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
   </body>
 
 <!-- Mirrored from grocbees.com/job-portal/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Jun 2021 12:19:06 GMT -->
