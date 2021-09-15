@@ -24,7 +24,7 @@ class SignUpForm(UserCreationForm):
     password1 = forms.CharField(max_length=16, widget=forms.PasswordInput(
         attrs={'placeholder': 'Enter Password ', 'class': "input100"}))
     password2 = forms.CharField(max_length=16, widget=forms.PasswordInput(
-        attrs={'placeholder': 'cConfirm Password ', 'class': "input100"}))
+        attrs={'placeholder': 'Confirm Password ', 'class': "input100"}))
 
     class Meta:
         model = User_custom
