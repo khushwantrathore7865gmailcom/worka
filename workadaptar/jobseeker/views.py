@@ -63,9 +63,19 @@ class SignUpView(View):
                 #     'token': account_activation_token.make_token(user),
                 # })
                 # user.email_user(subject, message)
-                messages.success(
-                    request, ('Please check your mail for complete registration.'))
-                return redirect('jobseeker:jobseeker/login')
+                # messages.success(
+                #     request, ('Please check your mail for complete registration.'))
+                # return redirect('jobseeker:jobseeker/login')
+                username = form.cleaned_data['email']
+                password = form.cleaned_data['password1']
+
+                # print(username)
+                # print(password)
+                user = authenticate(request, username=username, password=password)
+
+                if user is not None and user.is_candidate:
+                    login(request, user)
+                    return redirect('jobseeker:jobseeker_home')
                 # return render(request, self.template_name, {'form': form})
         else:
             return render(request, self.template_name, {'form': form})
@@ -858,7 +868,10 @@ def ProfileEdit(request):
                 #     if skill:
                 #         Candidate_skills(user_id=profile, skil=skill, rating=rating).save()
             if form6.is_valid():
-                if form6.cleaned_data.get('department'):
+                d = form6.cleaned_data.get('department')
+                print(d)
+                if d != "":
+                    print("after d is not none")
                     try:
                         cep = Candidate_expdetail.objects.get(user_id=profile)
                     except Candidate_profile.DoesNotExist:
