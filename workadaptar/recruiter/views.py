@@ -59,9 +59,19 @@ class SignUpView(View):
                 #     'token': account_activation_token.make_token(new_employe),
                 # })
                 # user.email_user(subject, message)
-                messages.success(
-                    request, ('Please check your mail for complete registration.'))
-                return redirect('recruiter:employer/login')
+                # messages.success(
+                #     request, ('Please check your mail for complete registration.'))
+                # return redirect('recruiter:employer/login')
+                username = form.cleaned_data['email']
+                password = form.cleaned_data['password1']
+
+                # print(username)
+                # print(password)
+                user = authenticate(request, username=username, password=password)
+
+                if user is not None and user.is_employeer:
+                    login(request, user)
+                    return redirect('recruiter:employer_home')
                 # return render(request, self.template_name, {'form': form})
         else:
             return render(request, self.template_name, {'form': form})

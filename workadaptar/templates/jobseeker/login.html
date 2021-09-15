@@ -72,6 +72,7 @@
 							Sign up now
 						</a>
 					</div>
+					<a href="{% url 'jobseeker:reset_password' %}">forgot password</a>
 				</form>
 				{% for message in messages %}
 					<p id="messages">{{message}}</p>
