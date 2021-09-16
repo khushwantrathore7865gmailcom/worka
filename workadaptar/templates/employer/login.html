@@ -37,6 +37,9 @@
 					<span class="login100-form-title">
 						Employer Sign In
 					</span>
+					{% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}
 
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
@@ -75,9 +78,7 @@
 						</a>
 					</div>
 				</form>
-				{% for message in messages %}
-					<p id="messages">{{message}}</p>
-				{% endfor %}
+
 
 			</div>
 		</div>

@@ -121,7 +121,7 @@ def login_employer(request):
                 messages.info(request, 'Username OR password is incorrect')
 
         context = {}
-        return render(request, 'index.html', context)
+        return render(request, 'employer/login.html', context)
 
 
 @login_required(login_url='/')
