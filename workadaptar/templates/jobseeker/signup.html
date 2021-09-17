@@ -73,6 +73,39 @@ input:focus::placeholder {
     color: #57b846;
     line-height: 1.4;
 }
+.modal-content {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 0%;
+    pointer-events: auto;
+    background-color: #808080;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+}
+.p-t-178 {
+    padding-top: 60px;
+}
+.txt10 {
+    font-family: Ubuntu-Regular;
+    font-size: 11px;
+    color: #999999;
+    line-height: 0.4;
+}
+.txt11 {
+    font-family: Ubuntu-Bold;
+    font-size: 11px;
+    color: #57b846;
+    line-height: 1.4;
+    
+}
 	  </style>
   
     
@@ -157,7 +190,18 @@ input:focus::placeholder {
         {% endfor %}
       </p>
     {% endfor %}
-					<br>
+					
+					<div class="flex-col-c p-t-80">
+						<span class="txt10 p-b-9">
+							By hitting the "Register" button, you agree to the
+							<a href="#" class="txt11">
+							Terms conditions and Privacy Policy
+						</a>
+						</span>
+
+						
+					</div>
+					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn">
 							Register
@@ -167,11 +211,12 @@ input:focus::placeholder {
 					<div class="flex-col-c p-t-80 p-b-40">
 						<span class="txt1 p-b-9">
 							Already have an account?
-						</span>
-
-						<a href="{% url 'jobseeker:jobseeker/login' %}" class="txt3">
+							<a href="{% url 'jobseeker:jobseeker/login' %}" class="txt3">
 							Login now
 						</a>
+						</span>
+
+						
 					</div>
 				</form>
 			</div>
@@ -194,7 +239,7 @@ input:focus::placeholder {
 
               <div class="modelstyle">
               <div class="limiter">
-		<div class="container-login100">
+		<div class="">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="POST" action="{% url 'jobseeker:jobseeker/login' %}">
 					{% csrf_token %}
@@ -228,11 +273,12 @@ input:focus::placeholder {
 						<br>
 						<span class="txt1 p-b-9">
 							Don’t have an account?
-						</span>
-
+							
 						<a href="{% url 'jobseeker:jobseeker/register' %}" class="txt3">
 							Register
 						</a>
+						</span>
+
 					</div>
 				</form>
 				{% for message in messages %}
@@ -267,7 +313,7 @@ input:focus::placeholder {
 
               <div class="modelstyle">
               <div class="limiter">
-		<div class="container-login100">
+		<div class="">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="POST" action="{% url 'recruiter:employer/login' %}">
 					{% csrf_token %}
@@ -301,11 +347,12 @@ input:focus::placeholder {
 						<br>
 						<span class="txt1 p-b-9">
 							Don’t have an account?
-						</span>
-
-						<a href="{% url 'recruiter:employer/register' %}" class="txt3">
+							<a href="{% url 'recruiter:employer/register' %}" class="txt3">
 							Register
 						</a>
+						</span>
+
+						
 					</div>
 				</form>
 				{% for message in messages %}

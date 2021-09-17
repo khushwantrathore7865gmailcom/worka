@@ -73,6 +73,24 @@ input:focus::placeholder {
     color: #57b846;
     line-height: 1.4;
 }
+
+.modal-content {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 0%;
+    pointer-events: auto;
+    background-color: #808080;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+}
 	  </style>
   
     
@@ -435,7 +453,7 @@ input:focus::placeholder {
 
               <div class="modelstyle">
               <div class="limiter">
-		<div class="container-login100">
+		<div class="">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="POST" action="{% url 'jobseeker:jobseeker/login' %}">
 					{% csrf_token %}
@@ -466,14 +484,15 @@ input:focus::placeholder {
 						<a href="" class="txt0">
 							Forgot Password?
 						</a>
-						<br>
+						
 						<span class="txt1 p-b-9">
 							Don’t have an account?
-						</span>
-
-						<a href="{% url 'jobseeker:jobseeker/register' %}" class="txt3">
+							<a href="{% url 'jobseeker:jobseeker/register' %}" class="txt3">
 							Register
 						</a>
+						</span>
+
+						
 					</div>
 				</form>
 				{% for message in messages %}
@@ -508,7 +527,7 @@ input:focus::placeholder {
 
               <div class="modelstyle">
               <div class="limiter">
-		<div class="container-login100">
+		<div class="">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="POST" action="{% url 'recruiter:employer/login' %}">
 					{% csrf_token %}
@@ -539,14 +558,15 @@ input:focus::placeholder {
 					<a href="" class="txt0">
 							Forgot Password?
 						</a>
-						<br>
+						
 						<span class="txt1 p-b-9">
 							Don’t have an account?
-						</span>
-
-						<a href="{% url 'recruiter:employer/register' %}" class="txt3">
+							<a href="{% url 'recruiter:employer/register' %}" class="txt3">
 							Register
 						</a>
+						</span>
+
+						
 					</div>
 				</form>
 				{% for message in messages %}
