@@ -153,6 +153,9 @@ input:focus::placeholder {
 				<div class="hero-section">
 					<p>100+ Jobs Available</p>
 					<h1>Find Your Next Best <span>Job!</span></h1>
+					{% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}
 					
 					
 				</div>

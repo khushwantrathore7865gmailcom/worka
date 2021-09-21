@@ -129,7 +129,8 @@ def login_candidate(request):
                 messages.info(request, 'Username OR password is incorrect')
 
         context = {}
-        return render(request, 'jobseeker/login.html', context)
+        return render(request, 'index.html', context)
+        # return render(request, 'jobseeker/login.html', context)
 
 
 @login_required(login_url='/')
