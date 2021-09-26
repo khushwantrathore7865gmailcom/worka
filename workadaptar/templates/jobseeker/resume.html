@@ -12,6 +12,7 @@
 <!--<button type="submit">Create Resume</button> </form>-->
 <!--</body>-->
 <!--</html>-->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,10 +89,10 @@
                 </h2>
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button id='b1' type="button" class="btn btn-light" onclick="openCity('London'); gfg_Run()">ENTRY-LEVEL<br><span>(Exp: 0 to 3 years)</span></button>
-                <button id='b2' type="button" class="btn btn-light" onclick="openCity('Paris'); gfg_Run()">MID-LEVEL<br><span>(Exp: 3 to 8 years)</span></button>
-                <button id='b3' type="button" class="btn btn-light" onclick="openCity('Tokyo'); gfg_Run()"> SENIOR-LEVEL<br><span>(Exp: 8 to 15 years)</span></button>
-                <button id='b4' type="button" class="btn btn-light" onclick="openCity('Maxico'); gfg_Run()"> EXECUTIVE-LEVEL<br><span>(Exp: 15 years and above)</span></button>
+                <button id='b1' name="b1" value="2,500" type="button" class="btn btn-light" onclick="openCity('London'); gfg_Run()">ENTRY-LEVEL<br><span>(Exp: 0 to 3 years)</span></button>
+                <button id='b2' name="b2" value="1,500" type="button" class="btn btn-light" onclick="openCity('Paris'); gfg_Run()">MID-LEVEL<br><span>(Exp: 3 to 8 years)</span></button>
+                <button id='b3' name="b3" value="3,500" type="button" class="btn btn-light" onclick="openCity('Tokyo'); gfg_Run()"> SENIOR-LEVEL<br><span>(Exp: 8 to 15 years)</span></button>
+                <button id='b4' name="b4" value="4,500" type="button" class="btn btn-light" onclick="openCity('Maxico'); gfg_Run()"> EXECUTIVE-LEVEL<br><span>(Exp: 15 years and above)</span></button>
 
             </div>
         </div>
@@ -177,34 +178,95 @@
                             <div class="cartPriceTot" id="cost1"><span class='rupee28 rupeeGrey'></span><span id="cost"></span>
                                 <div id="London" class="w3-container city">
                                     <h3>&#x20B9; 2,500*</h3>
+                                    <p class="inclTxt">(Inclusive of all taxes)</p>
+                                <span class="pd dspB">Delivery Options:</span>
+                                    <form method="POST" action="">
+                                        {% csrf_token %}
+                                        {{form1.delivery_type}}
+                                        <button type="submit">Buy Now...</button>
+                                    </form>
+<!--                                <p><input type="radio" name="delivry" value="regular" onclick="ffSrvHdl.changeRWService();" checked='checked' /><span class="txtBlue">Regular</span> 8 working days</p>-->
+<!--                                <p><input type="radio" name="delivry" value="exprs" onclick="ffSrvHdl.changeRWService();" /><span class="txtBlue">Express</span> 4 working days(-->
+<!--                                    <span class='rupee13'></span><span id="exprsPrc">1250</span>)-->
+<!--                                </p>-->
+<!--                                <p><input type="radio" name="delivry" onclick="ffSrvHdl.changeRWService();" value="sexprs" /><span class="txtBlue">Super Express</span> 2 working days(-->
+<!--                                    <span class='rupee13'></span><span id="sexprsPrc">2300</span>)-->
+<!--                                </p>-->
+
+<!--                                <div class="txtCentr mTop"><a href="javascript:void(0);" id="cartstatus" class="red_btnBig">Buy Now</a><a id="alreadyincart" href="https://resume.naukri.com/payment" class="red_btnBig" style="display:none">Buy Now</a></div>-->
+                                <div class="tncText" id="showTnc">By clicking on Buy Now, I authorize Naukri to call me regarding its services</div>
+
                                 </div>
 
                                 <div id="Paris" class="w3-container city" style="display:none">
                                     <h3>&#x20B9; 1,500*</h3>
+                                     <p class="inclTxt">(Inclusive of all taxes)</p>
+                                <span class="pd dspB">Delivery Options:</span>
+                                    <form method="POST" action="">
+                                        {% csrf_token %}
+                                        {{form2.delivery_type_Mid}}
+                                        <button type="submit">Buy Now...</button>
+                                    </form>
+<!--                                <p><input type="radio" name="delivry" value="regular" onclick="ffSrvHdl.changeRWService();" checked='checked' /><span class="txtBlue">Regular</span> 8 working days</p>-->
+<!--                                <p><input type="radio" name="delivry" value="exprs" onclick="ffSrvHdl.changeRWService();" /><span class="txtBlue">Express</span> 4 working days(-->
+<!--                                    <span class='rupee13'></span><span id="exprsPrc">1250</span>)-->
+<!--                                </p>-->
+<!--                                <p><input type="radio" name="delivry" onclick="ffSrvHdl.changeRWService();" value="sexprs" /><span class="txtBlue">Super Express</span> 2 working days(-->
+<!--                                    <span class='rupee13'></span><span id="sexprsPrc">2300</span>)-->
+<!--                                </p>-->
+
+<!--                                <div class="txtCentr mTop"><a href="javascript:void(0);" id="cartstatus" class="red_btnBig">Buy Now</a><a id="alreadyincart" href="https://resume.naukri.com/payment" class="red_btnBig" style="display:none">Buy Now</a></div>-->
+                                <div class="tncText" id="showTnc">By clicking on Buy Now, I authorize Naukri to call me regarding its services</div>
+
                                 </div>
 
                                 <div id="Tokyo" class="w3-container city" style="display:none">
                                     <h3>&#x20B9; 3,500*</h3>
+                                    <p class="inclTxt">(Inclusive of all taxes)</p>
+                                <span class="pd dspB">Delivery Options:</span>
+                                    <form method="POST" action="">
+                                        {% csrf_token %}
+                                        {{form3.delivery_type_senior}}
+                                        <button type="submit">Buy Now...</button>
+                                    </form>
+<!--                                <p><input type="radio" name="delivry" value="regular" onclick="ffSrvHdl.changeRWService();" checked='checked' /><span class="txtBlue">Regular</span> 8 working days</p>-->
+<!--                                <p><input type="radio" name="delivry" value="exprs" onclick="ffSrvHdl.changeRWService();" /><span class="txtBlue">Express</span> 4 working days(-->
+<!--                                    <span class='rupee13'></span><span id="exprsPrc">1250</span>)-->
+<!--                                </p>-->
+<!--                                <p><input type="radio" name="delivry" onclick="ffSrvHdl.changeRWService();" value="sexprs" /><span class="txtBlue">Super Express</span> 2 working days(-->
+<!--                                    <span class='rupee13'></span><span id="sexprsPrc">2300</span>)-->
+<!--                                </p>-->
+
+<!--                                <div class="txtCentr mTop"><a href="javascript:void(0);" id="cartstatus" class="red_btnBig">Buy Now</a><a id="alreadyincart" href="https://resume.naukri.com/payment" class="red_btnBig" style="display:none">Buy Now</a></div>-->
+                                <div class="tncText" id="showTnc">By clicking on Buy Now, I authorize Naukri to call me regarding its services</div>
+
                                 </div>
 
                                 <div id="Maxico" class="w3-container city" style="display:none">
                                     <h3>&#x20B9; 4,500*</h3>
+                                     <p class="inclTxt">(Inclusive of all taxes)</p>
+                                <span class="pd dspB">Delivery Options:</span>
+                                    <form method="POST" action="">
+                                        {% csrf_token %}
+                                        {{form4.delivery_type_Executive}}
+                                        <button type="submit">Buy Now...</button>
+                                    </form>
+<!--                                <p><input type="radio" name="delivry" value="regular" onclick="ffSrvHdl.changeRWService();" checked='checked' /><span class="txtBlue">Regular</span> 8 working days</p>-->
+<!--                                <p><input type="radio" name="delivry" value="exprs" onclick="ffSrvHdl.changeRWService();" /><span class="txtBlue">Express</span> 4 working days(-->
+<!--                                    <span class='rupee13'></span><span id="exprsPrc">1250</span>)-->
+<!--                                </p>-->
+<!--                                <p><input type="radio" name="delivry" onclick="ffSrvHdl.changeRWService();" value="sexprs" /><span class="txtBlue">Super Express</span> 2 working days(-->
+<!--                                    <span class='rupee13'></span><span id="sexprsPrc">2300</span>)-->
+<!--                                </p>-->
+
+<!--                                <div class="txtCentr mTop"><a href="javascript:void(0);" id="cartstatus" class="red_btnBig">Buy Now</a><a id="alreadyincart" href="https://resume.naukri.com/payment" class="red_btnBig" style="display:none">Buy Now</a></div>-->
+                                <div class="tncText" id="showTnc">By clicking on Buy Now, I authorize Naukri to call me regarding its services</div>
+
                                 </div>
 
-                                <p class="inclTxt">(Inclusive of all taxes)</p>
+
                             </div>
-                            <div class="cartSlectWhite"><input type="checkbox" id="coverletter" onclick="ffSrvHdl.changeRWService();" /> Including cover letter
-                                <span class="pd dspB">Delivery Options:</span>
-                                <p><input type="radio" name="delivry" value="regular" onclick="ffSrvHdl.changeRWService();" checked='checked' /><span class="txtBlue">Regular</span> 8 working days</p>
-                                <p><input type="radio" name="delivry" value="exprs" onclick="ffSrvHdl.changeRWService();" /><span class="txtBlue">Express</span> 4 working days(
-                                    <span class='rupee13'></span><span id="exprsPrc">1250</span>)
-                                </p>
-                                <p><input type="radio" name="delivry" onclick="ffSrvHdl.changeRWService();" value="sexprs" /><span class="txtBlue">Super Express</span> 2 working days(
-                                    <span class='rupee13'></span><span id="sexprsPrc">2300</span>)
-                                </p>
-                                <div class="txtCentr mTop"><a href="javascript:void(0);" id="cartstatus" class="red_btnBig">Buy Now</a><a id="alreadyincart" href="https://resume.naukri.com/payment" class="red_btnBig" style="display:none">Buy Now</a></div>
-                                <div class="tncText" id="showTnc">By clicking on Buy Now, I authorize Naukri to call me regarding its services</div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -220,12 +282,14 @@
                 }
                 document.getElementById(cityName).style.display = "block";
             }
+
         </script>
         <script>
             let btnb1 = document.querySelector("#b1")
             let btnb2 = document.querySelector("#b2")
             let btnb3 = document.querySelector("#b3")
             let btnb4 = document.querySelector("#b4")
+
 
             btnb1.addEventListener('click', () => btnb1.style.color = "blue")
 

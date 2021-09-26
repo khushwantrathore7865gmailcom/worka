@@ -116,5 +116,5 @@ class Resume_order(models.Model):
     candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
     is_payment_Done = models.BooleanField(default=False)
     year_experience = models.CharField(max_length=1024, null=True)
-    resume_type = models.CharField(max_length=1024, default='A')
+    delivery_type = models.CharField(max_length=1024, default='Regular 8 working days')
     amount = models.IntegerField(default=250, blank=True)

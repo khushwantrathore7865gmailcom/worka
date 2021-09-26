@@ -17,6 +17,12 @@ resume = [
     ('B', 'B'),
     ('C', 'C'),
 ]
+delivery = [
+    ("Regular 8 working days", "Regular 8 working days"),
+    ("Express 4 working days(1250/-)", "Express 4 working days(1250/-)"),
+    ("Super Express 2 working days(2300)", "Super Express 2 working days(2300)"),
+]
+
 job_Type = [
     ('Part time', 'Part time'),
     ('Full time', 'Full time'),
@@ -188,7 +194,7 @@ class ProfileRegisterForm(forms.ModelForm):
     marital_status = forms.ChoiceField(choices=Martial_Status, required=False, label='Marital Status',
                                        widget=forms.Select(
                                            attrs={'class': "input100"}))
-    profile_pic = forms.ImageField( required=False, label='Profile picture', widget=forms.FileInput(
+    profile_pic = forms.ImageField(required=False, label='Profile picture', widget=forms.FileInput(
         attrs={'class': "input100"}))
 
     class Meta:
@@ -463,13 +469,50 @@ class ProfileRegistration_expdetail(forms.ModelForm):
         ]
 
 
-class Resumeforming(forms.ModelForm):
-    year_experience = forms.CharField(widget=forms.RadioSelect(choices=experience, ))
-    resume_type = forms.CharField(widget=forms.RadioSelect(choices=resume, ))
+class Resumeforming_Entery(forms.Form):
+    delivery_type = forms.CharField(widget=forms.RadioSelect(choices=delivery,attrs={
 
-    class Meta:
-        model = Resume_order
-        fields = [
-            'year_experience',
-            'resume_type',
-        ]
+    } ))
+
+    # class Meta:
+    #     model = Resume_order
+    #     fields = [
+    #         'delivery_type',
+    #     ]
+
+
+class Resumeforming_Mid(forms.Form):
+    delivery_type_Mid = forms.CharField(widget=forms.RadioSelect(choices=delivery,attrs={
+
+    } ))
+
+    # class Meta:
+    #     model = Resume_order
+    #     fields = [
+    #         'delivery_type',
+    #     ]
+
+
+class Resumeforming_senior(forms.Form):
+    delivery_type_senior = forms.CharField(widget=forms.RadioSelect(choices=delivery,attrs={
+        'name':'Resumeforming_senior',
+    } ))
+
+    # class Meta:
+    #     model = Resume_order
+    #     fields = [
+    #         'delivery_type',
+    #     ]
+
+
+class Resumeforming_Executive(forms.Form):
+    delivery_type_Executive = forms.CharField(widget=forms.RadioSelect(choices=delivery,attrs={
+        'name':'Resumeforming_Executive',
+    } ))
+
+    # class Meta:
+    #     model = Resume_order
+    #     fields = [
+    #
+    #         'delivery_type',
+    #     ]

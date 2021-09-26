@@ -8,7 +8,8 @@ from django.utils.encoding import force_text
 from .models import Candidate, Candidate_profile, Candidate_edu, Candidate_skills, Candidate_profdetail, \
     Candidate_resume, Resume_order, Candidate_expdetail
 from .forms import SignUpForm, ProfileRegisterForm, ProfileRegisterForm_edu, ProfileRegisterForm_profdetail, \
-    ProfileRegisterForm_resume, ProfileRegistration_expdetail, ProfileRegistration_skills, Resumeforming
+    ProfileRegisterForm_resume, ProfileRegistration_expdetail, ProfileRegistration_skills, Resumeforming_Entery, \
+    Resumeforming_Executive, Resumeforming_Mid, Resumeforming_senior
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -1563,37 +1564,166 @@ def remove_saved(request, pk):
     return redirect('jobseeker:SavedJobs')
 
 
-@login_required(login_url='/')
 def ResumeCreation(request):
-    c = Candidate.objects.get(user=request.user)
     if request.method == 'GET':
-        form = Resumeforming(request.GET or None)
+        form1 = Resumeforming_Entery(request.GET or None)
+        form2 = Resumeforming_Mid(request.GET or None)
+        form3 = Resumeforming_senior(request.GET or None)
+        form4 = Resumeforming_Executive(request.GET or None)
+
     elif request.method == 'POST':
-        form = Resumeforming(request.POST)
-        if form.is_valid():
+        print(request.POST)
+        form1 = Resumeforming_Entery(request.POST)
+        form2 = Resumeforming_Mid(request.POST)
+        form3 = Resumeforming_senior(request.POST)
+        form4 = Resumeforming_Executive(request.POST)
 
-            f = form.save(commit=False)
-            print(f)
-            f.candidate = c
-            if f.resume_type == 'A':
-                f.amount = 250
-            elif f.resume_type == 'B':
-                f.amount = 250
-            elif f.resume_type == 'C':
-                f.amount = 250
+        if form1.is_valid():
 
-            f.save()
-            pk = f.pk
-            return redirect('jobseeker:resume_payment', pk)
+            # f = form1.save(commit=False)
+            selected = form1.cleaned_data.get("delivery_type")
+            print(selected)
+            if selected:
+                Experience = "a"
+                if selected == "Regular 8 working days":
+                    add = 0
+                elif selected == "Express 4 working days(1250/-)":
+                    add = 1250
+                elif selected == "Super Express 2 working days(2300)":
+                    add = 2300
 
-    return render(request, 'jobseeker/resume.html', {'form': form})
+                return redirect('jobseeker:resume_payment', Experience, add)
+                #
+                # f.candidate = c
+                # if f.resume_type == 'A':
+                #     f.amount = 250
+                # elif f.resume_type == 'B':
+                #     f.amount = 250
+                # elif f.resume_type == 'C':
+                #     f.amount = 250
+                #
+                # f.save()
+                # pk = f.pk
+
+                # return redirect('jobseeker:resume_payment', pk)
+        elif form2.is_valid():
+
+            # f = form2.save(commit=False)
+            selected = form2.cleaned_data.get("delivery_type_Mid")
+            print(selected)
+            if selected:
+                Experience = "b"
+                if selected == "Regular 8 working days":
+                    add = 0
+                elif selected == "Express 4 working days(1250/-)":
+                    add = 1250
+                elif selected == "Super Express 2 working days(2300)":
+                    add = 2300
+
+                return redirect('jobseeker:resume_payment', Experience, add)
+                # f.candidate = c
+                # if f.resume_type == 'A':
+                #     f.amount = 250
+                # elif f.resume_type == 'B':
+                #     f.amount = 250
+                # elif f.resume_type == 'C':
+                #     f.amount = 250
+                #
+                # f.save()
+                # pk = f.pk
+                #
+                # return redirect('jobseeker:resume_payment', pk)
+        elif form3.is_valid():
+
+            # f = form3.save(commit=False)
+            selected = form3.cleaned_data.get("delivery_type_senior")
+            print(selected)
+            if selected:
+                Experience = "c"
+                if selected == "Regular 8 working days":
+                    add = 0
+                elif selected == "Express 4 working days(1250/-)":
+                    add = 1250
+                elif selected == "Super Express 2 working days(2300)":
+                    add = 2300
+
+                return redirect('jobseeker:resume_payment', Experience, add)
+                # f.candidate = c
+                #
+                # if f.resume_type == 'A':
+                #     f.amount = 250
+                # elif f.resume_type == 'B':
+                #     f.amount = 250
+                # elif f.resume_type == 'C':
+                #     f.amount = 250
+                #
+                # f.save()
+                # pk = f.pk
+                #
+                # return redirect('jobseeker:resume_payment', pk)
+        elif form4.is_valid():
+
+            # f = form4.save(commit=False)
+            selected = form4.cleaned_data.get("delivery_type_Executive")
+            print(selected)
+            if selected:
+                # print("form4:")
+                # print(form4)
+                # f.candidate = c
+                # if f.resume_type == 'A':
+                #     f.amount = 250
+                # elif f.resume_type == 'B':
+                #     f.amount = 250
+                # elif f.resume_type == 'C':
+                #     f.amount = 250
+                #
+                # f.save()
+                # pk = f.pk
+                #
+                Experience = "d"
+                if selected == "Regular 8 working days":
+                    add = 0
+                elif selected == "Express 4 working days(1250/-)":
+                    add = 1250
+                elif selected == "Super Express 2 working days(2300)":
+                    add = 2300
+
+                return redirect('jobseeker:resume_payment', Experience, add)
+
+    return render(request, 'jobseeker/resume.html', {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4})
 
 
 @login_required(login_url='/')
-def payment(request, pk):
-    r = Resume_order.objects.get(pk=pk)
-    a = r.amount * 100
+def payment(request, Experience, add):
+    c = Candidate.objects.get(user=request.user)
+    print("paymentgateway:")
+    print(Experience)
+    print(add)
+    if add == 0:
+        delivery_type = "Regular 8 working days"
+    if add == 1250:
+        delivery_type = "Express 4 working days(1250/-)"
+    if add == 2300:
+        delivery_type = "Super Express 2 working days(2300)"
+
+    if Experience == "a":
+        exp = "0-3"
+        Payment = 2500 + add
+    if Experience == "b":
+        exp = "3-8"
+        Payment = 1500 + add
+    if Experience == "c":
+        exp = "8-15"
+        Payment = 3500 + add
+    if Experience == "d":
+        exp = "15+"
+        Payment = 4500 + add
+    r = Resume_order.objects.create(candidate=c, year_experience=exp, delivery_type=delivery_type, amount=Payment)
+    # r = Resume_order.objects.get(pk=pk)
+    a = Payment * 100
+    print(a)
     name = r.candidate.user
+    print(r)
     if request.method == 'POST':
         order_amount = a
         order_currency = 'INR'
@@ -1601,5 +1731,6 @@ def payment(request, pk):
         payment = client.order.create(amount=order_amount, currency=order_currency)
         r.is_payment_Done = True
         r.save()
+        print(r)
         return redirect('jobseeker:jobseeker_home')
     return render(request, 'jobseeker/payment.html', {'amount': a, 'user': name})

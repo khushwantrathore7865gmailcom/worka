@@ -30,6 +30,5 @@ urlpatterns = [
     # path('create_profile/',create_profile, name='create_profile'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
     path('resume/', ResumeCreation, name='resume'),
-    path('resume_payment/<int:pk>', payment, name='resume_payment'),
-
+    path('resume_payment/<Experience>/<int:add>/', payment, name='resume_payment'),
 ]
