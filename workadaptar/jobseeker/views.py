@@ -1,7 +1,8 @@
+import re
 from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage
 from django.db.models import Q
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
@@ -119,13 +120,20 @@ def login_candidate(request):
         if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('pass')
+            Pattern = re.compile("(0|91)?[0-9]{10}")
+            if Pattern.match(username):
+                c = Candidate_profile.objects.get(phone=username)
+                username = c.employer.user.username
             # print(username)
             # print(password)
             user = authenticate(request, username=username, password=password)
 
             if user is not None and user.is_candidate:
                 login(request, user)
-                return redirect('jobseeker:jobseeker_home')
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
+                else:
+                    return redirect('jobseeker:jobseeker_home')
             else:
                 messages.info(request, 'Username OR password is incorrect')
 
@@ -811,11 +819,11 @@ def ProfileEdit(request):
     try:
         profile = Candidate.objects.get(user=request.user)
     except Candidate.DoesNotExist:
-        profile =None
+        profile = None
     print(profile)
     if profile is not None:
         if request.method == 'POST':
-            form1 = ProfileRegisterForm(data=request.POST or None,files=request.FILES or None)
+            form1 = ProfileRegisterForm(data=request.POST or None, files=request.FILES or None)
             form2 = ProfileRegisterForm_edu(request.POST or None)
             form3 = ProfileRegisterForm_profdetail(request.POST or None)
             form4 = ProfileRegisterForm_resume(request.POST or None)
@@ -911,10 +919,12 @@ def ProfileEdit(request):
         professional = Candidate_profdetail.objects.filter(user_id=profile)
         return render(request, 'jobseeker/Profile.html',
                       {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, "form5": form5, 'form6': form6,
-                       'skills': skills, 'edu': edu, 'professional': professional,'c':c})
+                       'skills': skills, 'edu': edu, 'professional': professional, 'c': c})
 
     else:
-        return  redirect('/')
+        return redirect('/')
+
+
 @login_required(login_url='/')
 def create_profile(request):
     profile = Candidate.objects.get(user=request.user)

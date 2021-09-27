@@ -47,7 +47,7 @@ class Candidate_profile(models.Model):
     user_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='user_profile')
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                  message="Please enter valid phone number. Correct format is 91XXXXXXXX")
-    phone = models.CharField(validators=[phone_regex], max_length=20, blank=True)
+    phone = models.CharField(validators=[phone_regex], max_length=20, blank=True,unique=True)
     birth_date = models.IntegerField(null=True)
     birth_month = models.IntegerField(null=True)
     birth_year = models.IntegerField(null=True)
