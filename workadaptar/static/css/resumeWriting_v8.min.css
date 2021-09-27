@@ -1,1 +1,179 @@
-.arrDownWhite{width:0;height:0;border-style:solid}.jobsCategry li em{background:url(../i/ffrevampSpriteNew.png) no-repeat}.bannerPos img{position:absolute;margin:0 0 0 10px;display:inline-block;bottom:0;right:12px}.bannerPos img.vis{top:50px;margin-left:14px}.bannerTxt{height:210px;width:100%}.bannerTxt .pd{padding:24px 0;font-size:26px;line-height:24px;width:625px}.subscription{float:none;background-color:#fff}.cartSlectWhite{text-align:left;font-size:14px!important;padding:13px 25px}.cartSlectWhite p{font-size:13px;padding-bottom:8px;color:#666}.cartSlectWhite .pd,.cartSlectWhite .prodDelv{padding:12px 0}.cartSlectWhite .mTop{margin-top:15px}.jobsCategry li{overflow:hidden}.jobsCategry li em{height:27px;width:23px;display:inline-block;float:left}.jobsCategry li .txt1{background-position:-2px -255px}.jobsCategry li .txt2{background-position:-1px -288px;width:25px;margin:5px 0 0}.jobsCategry li .txt3{background-position:-2px -317px;width:31px;height:26px;margin:3px 0 0}.jobsCategry li .txt4{background-position:-1px -347px;width:27px}.jobsCategry li .txt5{background-position:-2px -377px;width:25px;height:11px;margin:7px 0 0}.jobsCategry li .vis1{background-position:1px -576px;width:26px;height:30px;margin:7px 0 0}.jobsCategry li .vis2{background-position:0 -609px;width:25px;height:23px;margin:3px 0 0}.jobsCategry li .vis3{background-position:0 -634px;width:20px;height:25px}.jobsCategry li h3,.jobsCategry li p{font-size:18px;padding:0 0 35px 50px;line-height:25px}.arrDownWhite{border-width:35px 32px 0;border-color:#fff transparent transparent;position:absolute;bottom:-35px;left:15%}.whiteLabl{background:#fff;padding:3px 10px;display:inline-block;margin:10px 0 0}.txtTab{border-bottom:1px solid #e2e2e2;height:56px}.txtTab a{padding:10px 20px;float:left;background:#fff;font-size:16px;font-weight:600;box-shadow:-1px -5px 8px -2px rgba(0,0,0,.6);height:36px;margin:0 15px 0 0}.txtTab a span{font-size:11px;display:block;color:#666}.txtTab a.sel{border-top:4px solid #2e3339;margin-top:-7px;padding:13px 20px 11px;color:#002c42}.rArrw{top:78px}.textResume{bottom:11px!important}
+.arrDownWhite {
+    width: 0;
+    height: 0;
+    border-style: solid
+}
+
+.jobsCategry li em {
+    background: url(../i/ffrevampSpriteNew.png) no-repeat
+}
+
+.bannerPos img {
+    position: absolute;
+    margin: 0 0 0 10px;
+    display: inline-block;
+    bottom: 0;
+    right: 12px
+}
+
+.bannerPos img.vis {
+    top: 50px;
+    margin-left: 14px
+}
+
+.bannerTxt {
+    height: 210px;
+    width: 100%
+}
+
+.bannerTxt .pd {
+    padding: 24px 0;
+    font-size: 26px;
+    line-height: 24px;
+    /* width: 325px */
+}
+
+.subscription {
+    float: none;
+    background-color: #fff
+}
+
+.cartSlectWhite {
+    text-align: left;
+    font-size: 14px!important;
+    padding: 13px 25px
+}
+
+.cartSlectWhite p {
+    font-size: 13px;
+    padding-bottom: 8px;
+    color: #666
+}
+
+.cartSlectWhite .pd,
+.cartSlectWhite .prodDelv {
+    padding: 12px 0
+}
+
+.cartSlectWhite .mTop {
+    margin-top: 15px
+}
+
+.jobsCategry li {
+    overflow: hidden
+}
+
+.jobsCategry li em {
+    height: 27px;
+    width: 23px;
+    display: inline-block;
+    float: left
+}
+
+.jobsCategry li .txt1 {
+    background-position: -2px -255px
+}
+
+.jobsCategry li .txt2 {
+    background-position: -1px -288px;
+    width: 25px;
+    margin: 5px 0 0
+}
+
+.jobsCategry li .txt3 {
+    background-position: -2px -317px;
+    width: 31px;
+    height: 26px;
+    margin: 3px 0 0
+}
+
+.jobsCategry li .txt4 {
+    background-position: -1px -347px;
+    width: 27px
+}
+
+.jobsCategry li .txt5 {
+    background-position: -2px -377px;
+    width: 25px;
+    height: 11px;
+    margin: 7px 0 0
+}
+
+.jobsCategry li .vis1 {
+    background-position: 1px -576px;
+    width: 26px;
+    height: 30px;
+    margin: 7px 0 0
+}
+
+.jobsCategry li .vis2 {
+    background-position: 0 -609px;
+    width: 25px;
+    height: 23px;
+    margin: 3px 0 0
+}
+
+.jobsCategry li .vis3 {
+    background-position: 0 -634px;
+    width: 20px;
+    height: 25px
+}
+
+.jobsCategry li h3,
+.jobsCategry li p {
+    font-size: 18px;
+    padding: 0 0 35px 50px;
+    line-height: 25px
+}
+
+.arrDownWhite {
+    border-width: 35px 32px 0;
+    border-color: #fff transparent transparent;
+    position: absolute;
+    bottom: -35px;
+    left: 15%
+}
+
+.whiteLabl {
+    background: #fff;
+    padding: 3px 10px;
+    display: inline-block;
+    margin: 10px 0 0
+}
+
+.txtTab {
+    border-bottom: 1px solid #e2e2e2;
+    height: 56px
+}
+
+.txtTab a {
+    padding: 10px 20px;
+    float: left;
+    background: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: -1px -5px 8px -2px rgba(0, 0, 0, .6);
+    height: 36px;
+    margin: 0 15px 0 0
+}
+
+.txtTab a span {
+    font-size: 11px;
+    display: block;
+    color: #666
+}
+
+.txtTab a.sel {
+    border-top: 4px solid #2e3339;
+    margin-top: -7px;
+    padding: 13px 20px 11px;
+    color: #002c42
+}
+
+.rArrw {
+    top: 78px
+}
+
+.textResume {
+    bottom: 11px!important
+}
