@@ -40,7 +40,7 @@
 </head>
 
 <body style="background-color: grey;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    {% comment %} <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +77,7 @@
                 </form>
             </div>
         </div>
-    </nav>
+    </nav> {% endcomment %}
     <div class="bannerTxt banr">
 
         <div class="wrap bannerPos bannerPosRW">
@@ -89,16 +89,16 @@
                 </h2>
             </div>
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button id='b1' name="b1" value="2,500" type="button" class="btn btn-light" onclick="openCity('London'); gfg_Run()">ENTRY-LEVEL<br><span>(Exp: 0 to 3 years)</span></button>
-                <button id='b2' name="b2" value="1,500" type="button" class="btn btn-light" onclick="openCity('Paris'); gfg_Run()">MID-LEVEL<br><span>(Exp: 3 to 8 years)</span></button>
-                <button id='b3' name="b3" value="3,500" type="button" class="btn btn-light" onclick="openCity('Tokyo'); gfg_Run()"> SENIOR-LEVEL<br><span>(Exp: 8 to 15 years)</span></button>
+                <button id='b1' name="b1" value="2,500" type="button" class="btn btn-light" onclick="openCity('London'); gfg_Run()">ENTRY-LEVEL<br><span>(Exp: 0-4 years)</span></button>
+                <button id='b2' name="b2" value="1,500" type="button" class="btn btn-light" onclick="openCity('Paris'); gfg_Run()">MID-LEVEL<br><span>(Exp:  4-7 years)</span></button>
+                <button id='b3' name="b3" value="3,500" type="button" class="btn btn-light" onclick="openCity('Tokyo'); gfg_Run()"> SENIOR-LEVEL<br><span>(Exp: 7 + years)</span></button>
                 <button id='b4' name="b4" value="4,500" type="button" class="btn btn-light" onclick="openCity('Maxico'); gfg_Run()"> EXECUTIVE-LEVEL<br><span>(Exp: 15 years and above)</span></button>
 
             </div>
         </div>
         <section class="promoMessage">
             <div class="wrap promoCont">
-                Kindly log in to check if you are eligible for Exclusive Naukri Discount
+                Payment structure and features for Jobseeker resume service as well as employer
             </div>
         </section>
 
@@ -112,56 +112,56 @@
                             <p class="introTxt">We customise your resume to highlight your accomplishments and experience. Relevant keywords are included in an effective structure to help advance your job search.</p>
                         </div>
                         <div id="benefitChart">
-                            <div class="bluContntHd">Benefits of buying Text Resume service from Naukri</div>
+                            <div class="bluContntHd">Benefits of buying Text Resume service</div>
                         </div>
                         <table cellspacing="0" cellpadding="0" class="benefitChartTable">
                             <tr>
-                                <th> Benefits on Naukri </th>
-                                <th> Free Resume </th>
+                                <th> Benefits/Advantage </th>
+                                <th> Free User </th>
                                 <th class="premiumBenefit">
-                                    <p class="premiumBenefitTxt">
-                                        Naukri Text Resume </p>
+                                    <p class="premiumBenefitTxt" style="padding:8px">
+                                        Paid User </p>
                                 </th>
                             </tr>
                             <tr>
-                                <td>CV visible to all recruiters</td>
-                                <td class="benefitGiven"><i class="tickIc"></i></td>
-                                <td class="benefitGiven"><i class="tickIc"></i></td>
+                                <td>Apply to Jobs on Workadapter with resume</td>
+                                <td class="benefitGiven"><i class="tickIc">yes</i></td>
+                                <td class="benefitGiven"><i class="tickIc">yes</i></td>
                             </tr>
                             <tr>
-                                <td>Impress recruiters with professionally written resume</td>
-                                <td class="noBenefits"><i class="crossIc"></i></td>
-                                <td class="benefitGiven"><i class="tickIc"></i></td>
+                                <td>Handwritten resume from our professional writers</td>
+                                <td class="noBenefits"><i class="crossIc">No</i></td>
+                                <td class="benefitGiven"><i class="tickIc">yes</i></td>
                             </tr>
                             <tr>
-                                <td>Stand out as the right candidate for the job</td>
-                                <td class="noBenefits"><i class="crossIc"></i></td>
-                                <td class="benefitGiven"><i class="tickIc"></i></td>
+                                <td>Detailed resume analysis</td>
+                                <td class="noBenefits"><i class="crossIc">No</i></td>
+                                <td class="benefitGiven"><i class="tickIc">yes</i></td>
                             </tr>
                             <tr>
-                                <td>Highlight skills valued by recruiters in your domain</td>
-                                <td class="noBenefits"><i class="crossIc"></i></td>
-                                <td class="benefitGiven"><i class="tickIc"></i></td>
+                                <td>Know your strengths and weaknesses from Workadapter experts</td>
+                                <td class="noBenefits"><i class="crossIc">No</i></td>
+                                <td class="benefitGiven"><i class="tickIc">yes</i></td>
                             </tr>
                             <tr>
-                                <td>Attractive & Recruiter-friendly resume format </td>
-                                <td class="noBenefits"><i class="crossIc"></i></td>
-                                <td class="benefitGiven"><i class="tickIc"></i></td>
+                                <td>Custom resume description which will improve visual appeal of resume </td>
+                                <td class="noBenefits"><i class="crossIc">No</i></td>
+                                <td class="benefitGiven"><i class="tickIc">yes</i></td>
                             </tr>
                             <tr>
-                                <td>Error-free resume through 65+ quality checks*</td>
-                                <td class="noBenefits"><i class="crossIc"></i></td>
-                                <td class="benefitGiven"><i class="tickIc"></i></td>
+                                <td>Verified Stamp </td>
+                                <td class="noBenefits"><i class="crossIc">No</i></td>
+                                <td class="benefitGiven"><i class="tickIc">yes</i></td>
                             </tr>
                             <tr>
-                                <td>Get active customer support</td>
-                                <td class="noBenefits"><i class="crossIc"></i></td>
-                                <td class="benefitGiven"><i class="tickIc"></i></td>
+                                <td>Resume Highlighte</td>
+                                <td class="noBenefits"><i class="crossIc">No</i></td>
+                                <td class="benefitGiven"><i class="tickIc">Yes</i></td>
                             </tr>
                             <tr>
-                                <td>Guaranteed Interview call from Recruiters</td>
-                                <td class="noBenefits"><i class="crossIc"></i></td>
-                                <td class="noBenefits"><i class="crossIc"></i></td>
+                                <td>Guaranteed Interview and Job from Recruiter</td>
+                                <td class="noBenefits"><i class="crossIc">No</i></td>
+                                <td class="noBenefits"><i class="crossIc">No</i></td>
                             </tr>
                         </table>
                     </div>
@@ -177,9 +177,9 @@
                             </div>
                             <div class="cartPriceTot" id="cost1"><span class='rupee28 rupeeGrey'></span><span id="cost"></span>
                                 <div id="London" class="w3-container city">
-                                    <h3>&#x20B9; 2,500*</h3>
+                                    <h3>&#x20B9; 1,000*</h3>
                                     <p class="inclTxt">(Inclusive of all taxes)</p>
-                                <span class="pd dspB">Delivery Options:</span>
+                                <span class="pd dspB" style="">Delivery Options:</span>
                                     <form method="POST" action="">
                                         {% csrf_token %}
                                         {{form1.delivery_type}}
@@ -199,7 +199,7 @@
                                 </div>
 
                                 <div id="Paris" class="w3-container city" style="display:none">
-                                    <h3>&#x20B9; 1,500*</h3>
+                                    <h3>&#x20B9; 1,800*</h3>
                                      <p class="inclTxt">(Inclusive of all taxes)</p>
                                 <span class="pd dspB">Delivery Options:</span>
                                     <form method="POST" action="">
@@ -221,7 +221,7 @@
                                 </div>
 
                                 <div id="Tokyo" class="w3-container city" style="display:none">
-                                    <h3>&#x20B9; 3,500*</h3>
+                                    <h3>&#x20B9; 2,500*</h3>
                                     <p class="inclTxt">(Inclusive of all taxes)</p>
                                 <span class="pd dspB">Delivery Options:</span>
                                     <form method="POST" action="">
