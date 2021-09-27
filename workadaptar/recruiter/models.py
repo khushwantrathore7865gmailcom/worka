@@ -27,7 +27,7 @@ class Employer_profile(models.Model):
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                  message="Please enter valid phone number. Correct format is 91XXXXXXXX")
-    phone = models.CharField(validators=[phone_regex], max_length=20, blank=True)
+    phone = models.CharField(validators=[phone_regex], max_length=20, blank=True,unique=True)
     company_type = models.CharField(max_length=250, blank=True, )
     company_name = models.CharField(max_length=250, blank=True, )
     company_logo = models.ImageField(blank=True, )

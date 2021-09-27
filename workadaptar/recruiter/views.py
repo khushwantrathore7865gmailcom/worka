@@ -1,3 +1,5 @@
+import re
+
 from django.http import HttpResponse
 from django.db.models import Q
 from django.utils.http import urlsafe_base64_decode
@@ -110,13 +112,18 @@ def login_employer(request):
         if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('pass')
-            print(username)
-            print(password)
+            Pattern = re.compile("(0|91)?[0-9]{10}")
+            if Pattern.match(username):
+                c = Employer_profile.objects.get(phone=username)
+                username = c.user_id.user.username
             user = authenticate(request, username=username, password=password)
-            print(user)
+
             if user is not None and user.is_employeer:
                 login(request, user)
-                return redirect('recruiter:employer_home')
+                if 'next' in request.POST:
+                    return redirect(request.POST.get('next'))
+                else:
+                    return redirect('recruiter:employer_home')
             else:
                 messages.info(request, 'Username OR password is incorrect')
 
