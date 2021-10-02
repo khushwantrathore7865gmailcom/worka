@@ -154,6 +154,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
+
 				<div class="heading">
 					<h3>Jobs <span>Page</span></h3>
 					<h4>100+ Handpicked Jobs Just For You</h4>
@@ -170,7 +171,7 @@
                             {% if c.is_email_verified %}
                             <span>{{c.user}}  <i>verified</i></span>
                             {% else %}
-                            <span>{{c.user}}  <a href="#"><i>verify</i></a></span>
+                            <span>{{c.user}}  <a href="{% url 'jobseeker:sendVerificationMail' %}"><i>verify</i></a></span>
                             {% endif %}
                                     </h5>
                                 <h5>Resume Headline:

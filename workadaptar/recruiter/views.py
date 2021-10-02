@@ -47,33 +47,33 @@ class SignUpView(View):
                 user = form.save(commit=False)
                 user.username = user.email
                 user.user_name = user.email
-                user.is_active = True  # change this to False after testing
+                user.is_active = False
                 user.is_employeer = True
                 user.save()
                 new_employe = Employer(user=user, is_email_verified=False)
                 new_employe.save()
-                # current_site = get_current_site(request)
-                # subject = 'Activate Your WorkAdaptar Account'
-                # message = render_to_string('emails/account_activation_email.html', {
-                #     'user': user,
-                #     'domain': current_site.domain,
-                #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                #     'token': account_activation_token.make_token(new_employe),
-                # })
-                # user.email_user(subject, message)
-                # messages.success(
-                #     request, ('Please check your mail for complete registration.'))
-                # return redirect('recruiter:employer/login')
-                username = form.cleaned_data['email']
-                password = form.cleaned_data['password1']
+                current_site = get_current_site(request)
+                subject = 'Activate Your WorkAdaptar Account'
+                message = render_to_string('emails/account_activation_email.html', {
+                    'user': user,
+                    'domain': current_site.domain,
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token': account_activation_token.make_token(new_employe),
+                })
+                user.email_user(subject, message)
+                messages.success(
+                    request, ('Please check your mail for complete registration.'))
+                return redirect('recruiter:employer/login')
+                # username = form.cleaned_data['email']
+                # password = form.cleaned_data['password1']
+                #
+                # # print(username)
+                # # print(password)
+                # user = authenticate(request, username=username, password=password)
 
-                # print(username)
-                # print(password)
-                user = authenticate(request, username=username, password=password)
-
-                if user is not None and user.is_employeer:
-                    login(request, user)
-                    return redirect('recruiter:employer_home')
+                # if user is not None and user.is_employeer:
+                #     login(request, user)
+                #     return redirect('recruiter:employer_home')
                 # return render(request, self.template_name, {'form': form})
         else:
             return render(request, self.template_name, {'form': form})

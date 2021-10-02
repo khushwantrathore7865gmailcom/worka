@@ -1,6 +1,6 @@
 from django.urls import include, path, reverse_lazy
 from .views import SignUpView, ActivateAccount, jobseeker_Home, ProfileView, save_later, SavedJobs, AppliedJobs, \
-    remove_applied, remove_saved, ProfileEdit, ResumeCreation,payment,create_profile
+    remove_applied, remove_saved, ProfileEdit, ResumeCreation,payment,create_profile,sendVerificationMail
 from . import views
 from django.contrib.auth import views as auth_views  # import this
 
@@ -30,6 +30,7 @@ urlpatterns = [
     path('create_profile/', ProfileEdit, name='create_profile'),
     # path('create_profile/',create_profile, name='create_profile'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
+    path('send_verification_mail',sendVerificationMail,name='sendVerificationMail'),
     path('resume/', ResumeCreation, name='resume'),
     path('resume_payment/<Experience>/<int:add>/', payment, name='resume_payment'),
 ]

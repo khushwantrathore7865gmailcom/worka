@@ -56,18 +56,7 @@ class SignUpView(View):
                 user.save()
                 new_candidate = Candidate(user=user, is_email_verified=False)  # change is email to False after testing
                 new_candidate.save()
-                current_site = get_current_site(request)
-                # subject = 'Activate Your WorkAdaptar Account'
-                # message = render_to_string('emails/account_activation_email.html', {
-                #     'user': user,
-                #     'domain': current_site.domain,
-                #     'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                #     'token': account_activation_token.make_token(user),
-                # })
-                # user.email_user(subject, message)
-                # messages.success(
-                #     request, ('Please check your mail for complete registration.'))
-                # return redirect('jobseeker:jobseeker/login')
+
                 username = form.cleaned_data['email']
                 password = form.cleaned_data['password1']
 
@@ -81,6 +70,22 @@ class SignUpView(View):
                 # return render(request, self.template_name, {'form': form})
         else:
             return render(request, self.template_name, {'form': form})
+
+
+def sendVerificationMail(request):
+    user = request.user
+    current_site = get_current_site(request)
+    subject = 'Activate Your WorkAdaptar Account'
+    message = render_to_string('emails/account_activation_email.html', {
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': account_activation_token.make_token(user),
+    })
+    user.email_user(subject, message)
+    messages.success(
+        request, ('Please check your mail for complete registration.'))
+    return redirect('jobseeker:jobseeker_home')
 
 
 class ActivateAccount(View):
@@ -101,11 +106,11 @@ class ActivateAccount(View):
             user.save()
             login(request, user)
             messages.success(request, ('Your account have been confirmed.'))
-            return redirect('jobseeker:home')
+            return redirect('jobseeker:jobseeker_home')
         else:
             messages.warning(
                 request, ('The confirmation link was invalid, possibly because it has already been used.'))
-            return redirect('jobseeker:home')
+            return redirect('jobseeker:jobseeker_home')
 
 
 def index(request):
