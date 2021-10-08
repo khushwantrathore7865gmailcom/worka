@@ -18,7 +18,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from .tokens import account_activation_token
 from jobseeker.models import Candidate_profile, Candidate_edu, Candidate_profdetail, Candidate_resume, Candidate_skills, \
-    Candidate_expdetail
+    Candidate_expdetail,Candidate
 from datetime import datetime
 from django.forms import modelformset_factory
 from django.db import transaction, IntegrityError
@@ -519,6 +519,7 @@ def publish_job(request, pk):
     e.save()
     return redirect('recruiter:job_detail', pk)
 
+
 @login_required(login_url='/')
 def ProfileView(request):
     u = request.user
@@ -586,11 +587,73 @@ def job_Response(request, pk):
         return redirect('/')
 
 
-# @login_required(login_url='/recruiter/login')
-# def advance_Search(request):
-#     user = request.user
-#     if user is not None and user.is_employeer:
-#         if request.method == 'GET':
-#             return render(request, 'dashboard/jobresponse.html', {'response': response})
-#     else:
-#         return redirect('recruiter:employer/login')
+@login_required(login_url='/recruiter/login')
+def advance_Search(request):
+    user = request.user
+    if user is not None and user.is_employeer:
+        candidate_user = []
+        candidate_profile = []
+        education_profile = []
+        professional_profile = []
+
+        c_jobtitle =[]
+        c_location=[]
+        c_exp =[]
+        c_jobtype=[]
+        if request.method == 'GET':
+            job_title = request.GET.get('job_title', None)
+            location = request.GET.get('location', None)
+            experience = request.GET.get('experience', None)
+            job_type = request.GET.get('job_type', None)
+            print(job_title)
+            print(location)
+            print(experience)
+            print(job_type)
+
+            if job_type == 'Job Type':
+                job_type=None
+            if experience == 'Experience':
+                experience=None
+            if location == 'Location':
+                location=None
+            print(job_type)
+            print(experience)
+            print(location)
+            candidates = Candidate.objects.all()
+
+            for c in candidates:
+                if (job_title is not None):
+                    a=Candidate_expdetail.objects.filter(department=job_title)
+                    c_jobtitle.append(a.user_id)
+                else:
+                    a=Candidate_expdetail.objects.all()
+                    c_jobtitle.append(a.user_id)
+                if (job_type is not None):
+                    a=Candidate_expdetail.objects.filter(job_type=job_type)
+                    c_jobtype.append(a.user_id)
+                else:
+                    a=Candidate_expdetail.objects.all()
+                    c_jobtitle.append(a.user_id)
+                if (experience is not None):
+                    a=Candidate_expdetail.objects.filter(Total_Working=experience)
+                    c_jobtitle.append(a.user_id)
+                else:
+                    a=Candidate_expdetail.objects.all()
+                    c_jobtitle.append(a.user_id)
+                if (location is not None):
+                    a=Candidate_expdetail.objects.filter(prefer_location=location)
+                    c_jobtitle.append(a.user_id)
+                else:
+                    a=Candidate_expdetail.objects.all()
+                    c_jobtitle.append(a.user_id)
+            s1 = set(c_jobtype)
+            s2= set(c_location)
+            s3= set(c_exp)
+            s4= set(c_jobtype)
+            set1= s1.intersection(s2)
+            set2 = set1.intersection(s3)
+            candidate_list_Set = set2.intersection(s4)
+            candidate_list = list(candidate_list_Set)
+            return render(request, 'employer/advance-search.html')
+    else:
+        return redirect('recruiter:employer/login')

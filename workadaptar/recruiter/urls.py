@@ -1,7 +1,7 @@
 from django.urls import include, path, reverse_lazy
 from .views import SignUpView, ActivateAccount, Home, login_employer, edit_job, delete_job, job_detail, publish_job, \
     view_applied_candidate, disqualify, shortlist, job_post, shortlistview_applied_candidate, \
-    disqualifyview_applied_candidate,ProfileView,unpublish,remove_unpublish
+    disqualifyview_applied_candidate,ProfileView,unpublish,remove_unpublish,advance_Search
 from . import views
 from django.contrib.auth import views as auth_views  # import this
 
@@ -36,5 +36,5 @@ urlpatterns = [
     path('account/reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='account/password_reset_complete.html'), name='password_reset_complete'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
-
+    path('advance-search/',advance_Search,name='advance-search')
 ]

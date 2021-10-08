@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -88,23 +89,23 @@
 					<form>
 					<div class="search-form">
 						<div class="form-group">
-							<input type="text" placeholder="job title">
+							<input type="text" placeholder="job title" id="job_title" name="job_title" >
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</div>
 						<div class="form-group">
-							<select>
+							<select id="location" name="location" >
 								<option>Location</option>
 								<option>Delhi</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select>
+							<select id="experience" name="experience" >
 								<option>Experience</option>
 								<option>1 Year</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select>
+							<select id="job_type" name="job_type" >
 								<option>Job Type</option>
 								<option>1 Year</option>
 							</select>
