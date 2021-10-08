@@ -144,13 +144,15 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'user_custom.User_custom'
-
 EMAIL_BACKEND='django_smtp_ssl.SSLEmailBackend'
-EMAIL_HOST="smtp.gmail.com"
-EMAIL_PORT= 465
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL="workadaptar@gmail.com"
-EMAIL_HOST_PASSWORD="Wor12345@"
+EMAIL_HOST="smtppro.zoho.in"
+EMAIL_PORT=465
+EMAIL_USE_SSL=False
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER="connect@workadapter.com"
+DEFAULT_FROM_EMAIL="connect@workadapter.com"
+#EMAIL_HOST_PASSWORD="SL@Top1Day"
+EMAIL_HOST_PASSWORD="Work@123"
 DJANGO_TABLES2_TEMPLATE = "django_tables2/semantic.html"
 RECAPTCHA_SITE_KEY = "6LdI20kaAAAAAGwmzHCfyonzLr5blCL0LQGgmOfJ"
 RECAPTCHA_SECRET_KEY = "6LdI20kaAAAAALHuggfJT_ly4WtvT0CGZxaQLYWF"

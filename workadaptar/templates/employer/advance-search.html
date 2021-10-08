@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,10 +10,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
       <link rel="stylesheet" href=" {% static 'css/style12.css'%}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
-    
+
   </head>
   <body>
-    
+
 	<header>
 		<div class="container">
 			<div class="row">
@@ -36,8 +37,8 @@
     </div>
   </form>
 </nav>
-	
-	
+
+
 	<ul class="navbar-nav ml-auto">
 	<li class="nav-item ">
     <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
@@ -64,22 +65,22 @@
     <a class="nav-link" href="#"><i class="fa fa-bell" aria-hidden="true"></i> </a>
     <span class="menu-text">Notification</span>
   </li>
-	  
+
 	  <li class="nav-item">
         <a class="nav-link" href="#"><img src="images/job-portal/78a389427595e07efd8a3870fe50c28c.jpg"></a>
       </li>
-	  
-	 </ul> 
-    
+
+	 </ul>
+
   </div>
 </nav>
 					</div>
 				</div>
 			</div>
 		</div>
-				
+
 	</header>
-	
+
 <section class="advance-search">
 	<div class="container">
 		<div class="row">
@@ -88,23 +89,23 @@
 					<form>
 					<div class="search-form">
 						<div class="form-group">
-							<input type="text" placeholder="job title">
+							<input type="text" placeholder="job title" id="job_title" name="job_title" >
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</div>
 						<div class="form-group">
-							<select>
+							<select id="location" name="location" >
 								<option>Location</option>
 								<option>Delhi</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select>
+							<select id="experience" name="experience" >
 								<option>Experience</option>
 								<option>1 Year</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<select>
+							<select id="job_type" name="job_type" >
 								<option>Job Type</option>
 								<option>1 Year</option>
 							</select>

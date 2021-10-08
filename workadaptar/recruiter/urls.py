@@ -1,7 +1,7 @@
-from django.urls import include, path
+from django.urls import include, path, reverse_lazy
 from .views import SignUpView, ActivateAccount, Home, login_employer, edit_job, delete_job, job_detail, publish_job, \
     view_applied_candidate, disqualify, shortlist, job_post, shortlistview_applied_candidate, \
-    disqualifyview_applied_candidate,ProfileView,unpublish,remove_unpublish
+    disqualifyview_applied_candidate,ProfileView,unpublish,remove_unpublish,advance_Search
 from . import views
 from django.contrib.auth import views as auth_views  # import this
 
@@ -26,6 +26,15 @@ urlpatterns = [
     path('login', login_employer, name='employer/login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('signup', SignUpView.as_view(), name='employer/register'),
+    path('reset_password/', auth_views.PasswordResetView.as_view(
+        template_name='account/password_reset.html', email_template_name='account/password_reset_emailre.html',success_url = reverse_lazy('recruiter:password_reset_done')),
+         name='reset_password'),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(
+        template_name='account/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+        template_name="account/password_reset_confirm.html",success_url=reverse_lazy('recruiter:password_reset_complete')), name='password_reset_confirm'),
+    path('account/reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(
+        template_name='account/password_reset_complete.html'), name='password_reset_complete'),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
-
+    path('advance-search/',advance_Search,name='advance-search')
 ]
