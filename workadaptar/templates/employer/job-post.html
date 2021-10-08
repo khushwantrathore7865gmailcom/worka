@@ -1,8 +1,9 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  
+
 <!-- Mirrored from grocbees.com/job-portal/job-post.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Jun 2021 09:39:28 GMT -->
+
 <head>
     <!-- Required meta tags -->
 
@@ -12,300 +13,308 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/style12.css'%}">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
-<script src="https://kit.fontawesome.com/5a2b925216.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <script src="https://kit.fontawesome.com/5a2b925216.js" crossorigin="anonymous"></script>
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">    {% block mycss %}
-<style>
-.dropbtn {
-  background-color: #FFFFFF;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> {% block mycss %}
+    <style>
+        .dropbtn {
+            background-color: #FFFFFF;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown:hover .dropbtn {
+            background-color: #03A84E;
+        }
+        
+        .button1 {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 0px auto;
+            cursor: pointer;
+            float: right;
+            overflow: auto;
+            white-space: nowrap;
+        }
+        
+        <!--.button1 {
+            background-color: #4CAF50;
+        }
+        /* Green */
+        
+        -->
+    </style>
+    {% endblock mycss %}
+</head>
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
+<body>
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-content a:hover {background-color: #ddd;}
-
-.dropdown:hover .dropdown-content {display: block;}
-
-.dropdown:hover .dropbtn {background-color: #03A84E;}
-
-
-  .button1 {
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin:0px auto;
-  cursor: pointer;
-  float: right;
-  overflow: auto;
-
-  white-space: nowrap;
-}
-
-<!--.button1 {background-color: #4CAF50;} /* Green */-->
-</style>
-{% endblock mycss %}
-  </head>
-
-  <body>
-
-	<header>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 col-12">
-					<div class="top-navbar">
-						<nav class="navbar navbar-expand-lg ">
-  <a class="" href="{% url 'recruiter:employer_home' %}"> <img src="{% static 'images/green.png' %} " width="60" height="60"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a class="" href="{% url 'recruiter:employer_home' %}"> <img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <nav class="navbar mr-auto">
-  <form class="form-inline new-form">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
-      </div>
-      <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
-	  <button class="search">Search</button>
-    </div>
-  </form>
-</nav>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <nav class="navbar mr-auto" >
+                                    <form class="form-inline new-form" style="padding:inline">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1" ><i class="fa fa-search" aria-hidden="true" ></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1" >
+                                            <button class="search">Search</button>
+                                        </div>
+                                    </form>
+                                </nav>
 
 
-	<ul class="navbar-nav ml-auto">
-	<li class="nav-item ">
-    <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
-    <span class="menu-text">Home</span>
-  </li>
-<li class="nav-item ">
-    <a class="nav-link" href="{% url 'recruiter:job_post' %}"><i class="fas fa-briefcase"></i></a>
-    <span class="menu-text">Add job </span>
-  </li>
-<!--	  <li class="nav-item">-->
-<!--        <a class="nav-link" href="#">Resume</a>-->
-<!--      </li>-->
-<li class="nav-item ">
-    <a class="nav-link " href="#"><i class="fas fa-phone-square-alt fa-xs"></i></a>
-    <span class="menu-text">Contact Us </span>
-  </li>
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+                                        <span class="menu-text">Home</span>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{% url 'recruiter:job_post' %}"><i class="fas fa-briefcase"></i></a>
+                                        <span class="menu-text">Add job </span>
+                                    </li>
+                                    <!--	  <li class="nav-item">-->
+                                    <!--        <a class="nav-link" href="#">Resume</a>-->
+                                    <!--      </li>-->
+                                    <li class="nav-item ">
+                                        <a class="nav-link " href="#"><i class="fas fa-phone-square-alt fa-xs"></i></a>
+                                        <span class="menu-text">Contact Us </span>
+                                    </li>
 
-<li class="nav-item">
-    <a class="nav-link" href="#"><i class="fas fa-address-card fa-2x"></i></a>
-    <span class="menu-text">About Us </span>
-  </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fas fa-address-card fa-2x"></i></a>
+                                        <span class="menu-text">About Us </span>
+                                    </li>
 
-<li class="nav-item bell-icon ">
-    <a class="nav-link" href="#"><i class="fa fa-bell" aria-hidden="true"></i> </a>
-    <span class="menu-text">Notification</span>
-  </li>
+                                    <li class="nav-item bell-icon ">
+                                        <a class="nav-link" href="#"><i class="fa fa-bell" aria-hidden="true"></i> </a>
+                                        <span class="menu-text">Notification</span>
+                                    </li>
 
-<li class="nav-item">
-<div class="dropdown">
-  <button class="dropbtn"><img src={{ep.company_logo.url}}></button>
-  <div class="dropdown-content">
-      <a href="#">My Profile</a>
-    <a href="#">Edit Profile</a>
-    <a href="{% url 'recruiter:logout' %}">Log Out</a>
-  </div>
-</div>  </li>
+                                    <li class="nav-item">
+                                        <div class="dropdown">
+                                            <button class="dropbtn"><img src={{ep.company_logo.url}}></button>
+                                            <div class="dropdown-content">
+                                                <a href="#">My Profile</a>
+                                                <a href="#">Edit Profile</a>
+                                                <a href="{% url 'recruiter:logout' %}">Log Out</a>
+                                            </div>
+                                        </div>
+                                    </li>
 
-	 </ul>
+                                </ul>
 
-  </div>
-</nav>
-					</div>
-				</div>
-			</div>
-		</div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	</header>
+    </header>
 
-<section class="job-portal">
-	<div class="container">
-		<div class="row">
+    <section class="job-portal">
+        <div class="container">
+            <div class="row">
 
-			<div class="col-md-10 mx-auto col-12">
+                <div class="col-md-10 mx-auto col-12">
 
-				<div class="heading">
-					<h2>Project & Job <span>Posted</span></h2>
+                    <div class="heading" style="margin-bottom:20px;margin-top:-50px">
+                        <h2>Project & Job <span>Posted</span></h2>
 
-				</div>
-					<a class="button1 btn btn-success" href="{% url 'recruiter:job_post' %} ">Add Job</a>
+                    </div>
+                    <!--<a class="button1 btn btn-success" href="{% url 'recruiter:job_post' %} ">Add Job</a>-->
 
-			</div>
-
-
-
-			<div class="col-md-10 col-12 mx-auto">
-
-				<div class="job-posted">
-					<ul class="nav nav-tabs">
-    <li><a data-toggle="tab" href="#home">Past Job </a></li>
-    <li class="active"><a data-toggle="tab" href="#menu1">Currrent Jobs </a></li>
-    <li><a data-toggle="tab" href="#menu2">Saved job</a></li>
-  </ul>
+                </div>
 
 
 
+                <div class="col-md-10 col-12 mx-auto">
 
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade">
-      <div class="table-main">
-		<table class="w-100">
-			<thead>
-				<tr>
-					<th>Posted Job</th>
-<!--					<th>Share by</th>-->
-					<th>Shared date</th>
-					<th>Candinate applied </th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			{% for job in expired %}
-			{% if job.is_save_later %}
-			{% else %}
-			<tbody>
-				<tr>
-					<td><input type="checkbox"><label></label><a href="{% url 'recruiter:job_detail' job.pk %}"> <span>{{ job.job_title }}</span></a></td>
-<!--					<td></td>-->
-					<td>{{ job.created_on.date }}</td>
-					<td style="text-align: center"><a href="{% url 'recruiter:view_applied_candidate' job.pk %}">{{ job.get_applied_no }}</a></td>
-					<td class="dropdown"><span class="dropdown-toggle" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-									<a class="dropdown-item" href="{% url 'recruiter:delete_job' job.pk %}"><img src="{% static 'images/btn-icon/delete.png' %}"> Delete Job</a>
-									<a class="dropdown-item" href="{% url 'recruiter:edit_job' job.pk %}"><img src="{% static 'images/btn-icon/edit.png' %}"> Edit Job</a>
-									<a class="dropdown-item" href="{% url 'recruiter:job_detail' job.pk %}"><img src="https://img.icons8.com/ios/32/FFFFFF/visible--v2.png"/>View Job</a>
-									<a class="dropdown-item" href="{% url 'recruiter:remove_unpublish' job.pk %}"><img src="{% static 'images/btn-icon/1.png' %}"> Publish Job</a>
-								  </div>
-					</td>
-				</tr>
+                    <div class="job-posted">
+                        <ul class="nav nav-tabs">
+                            <li class="none"><a data-toggle="tab" href="#home">Past Job </a></li>
+                            <li class="active"><a data-toggle="tab" href="#menu1">Currrent Jobs </a></li>
+                            <li class="none"><a data-toggle="tab" href="#menu2">Saved job</a></li>
+                        </ul>
 
-			</tbody>
-			{% endif %}
-			{% endfor %}
-		</table>
-	  </div>
 
-    </div>
-    <div id="menu1" class="tab-pane fade in active">
-      <div class="table-main">
-		<table class="w-100">
-			<thead>
-				<tr>
-					<th>Posted Job</th>
-<!--					<th>Share by</th>-->
-					<th>Shared date</th>
-					<th>Candinate Application </th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			{% for job in jobs %}
-			{% if job.is_save_later %}
-			{% else %}
-			<tbody>
-				<tr>
-					<td><input type="checkbox"><label></label><a href="{% url 'recruiter:job_detail' job.pk %}"> <span>{{ job.job_title }}</span></a></td>
-<!--					<td></td>-->
-					<td>{{ job.created_on.date }}</td>
-					<td style="text-align: center"><a href="{% url 'recruiter:view_applied_candidate' job.pk %}">{{ job.get_applied_no }}</a></td>
-					<td class="dropdown"><span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="{% url 'recruiter:delete_job' job.pk %}"><img src="{% static 'images/btn-icon/delete.png' %}"> Delete Job</a>
-									<a class="dropdown-item" href="{% url 'recruiter:edit_job' job.pk %}"><img src="{% static 'images/btn-icon/edit.png' %}"> Edit Job</a>
-									<a class="dropdown-item" href="{% url 'recruiter:job_detail' job.pk %}"><img src="https://img.icons8.com/ios/32/FFFFFF/visible--v2.png"/>View Job</a>
-									<a class="dropdown-item" href="{% url 'recruiter:unpublish' job.pk %}"><img src="{% static 'images/btn-icon/1.png' %}"> Unpublish Job</a>
-								  </div>
-					</td>
 
-				</tr>
 
-			</tbody>
-			{% endif %}
-			{% endfor %}
-		</table>
-	  </div>
+                        <div class="tab-content">
+                            <div id="home" class="tab-pane fade">
+                                <div class="table-main">
+                                    <table class="w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>Posted Job</th>
+                                                <!--					<th>Share by</th>-->
+                                                <th>Shared date</th>
+                                                <th>Candinate applied </th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        {% for job in expired %} {% if job.is_save_later %} {% else %}
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="checkbox"><label></label>
+                                                    <a href="{% url 'recruiter:job_detail' job.pk %}"> <span>{{ job.job_title }}</span></a>
+                                                </td>
+                                                <!--					<td></td>-->
+                                                <td>{{ job.created_on.date }}</td>
+                                                <td style="text-align: center"><a href="{% url 'recruiter:view_applied_candidate' job.pk %}">{{ job.get_applied_no }}</a></td>
+                                                <td class="dropdown"><span class="dropdown-toggle" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                        <a class="dropdown-item" href="{% url 'recruiter:delete_job' job.pk %}"><img src="{% static 'images/btn-icon/delete.png' %}"> Delete Job</a>
+                                                        <a class="dropdown-item" href="{% url 'recruiter:edit_job' job.pk %}"><img src="{% static 'images/btn-icon/edit.png' %}"> Edit Job</a>
+                                                        <a class="dropdown-item" href="{% url 'recruiter:job_detail' job.pk %}"><img src="https://img.icons8.com/ios/32/FFFFFF/visible--v2.png" />View Job</a>
+                                                        <a class="dropdown-item" href="{% url 'recruiter:remove_unpublish' job.pk %}"><img src="{% static 'images/btn-icon/1.png' %}"> Publish Job</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
 
-    </div>
-    <div id="menu2" class="tab-pane fade">
-      <div class="table-main">
-		<table class="w-100">
-			<thead>
-				<tr>
-					<th>Posted Job</th>
-<!--					<th>Share by</th>-->
-					<th>Shared date</th>
-					<th>Candinate Application </th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			{% for job in jobs %}
-			{% if job.is_save_later %}
+                                        </tbody>
+                                        {% endif %} {% endfor %}
+                                    </table>
+                                </div>
 
-			<tbody>
-				<tr>
-					<td><input type="checkbox"><label></label><a href="{% url 'recruiter:job_detail' job.pk %}"> <span>{{ job.job_title }}</span></a></td>
-<!--					<td></td>-->
-					<td>{{ job.created_on.date }}</td>
-					<td style="text-align: center"><a href="{% url 'recruiter:view_applied_candidate' job.pk %}">{{ job.get_applied_no }}</a></td>
-					<td class="dropdown"><span class="dropdown-toggle" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-									<a class="dropdown-item" href="{% url 'recruiter:delete_job' job.pk %}"><img src="{% static 'images/btn-icon/delete.png' %}"> Delete Job</a>
-									<a class="dropdown-item" href="{% url 'recruiter:edit_job' job.pk %}"><img src="{% static 'images/btn-icon/edit.png' %}"> Edit Job</a>
-									<a class="dropdown-item" href="{% url 'recruiter:job_detail' job.pk %}"><img src="https://img.icons8.com/ios/32/FFFFFF/visible--v2.png"/>View Job</a>
-									<a class="dropdown-item" href="#"><img src="{% static 'images/btn-icon/1.png' %}"> Unpublish Job</a>
-								  </div>
-					</td>
-				</tr>
+                            </div>
+                            <div id="menu1" class="tab-pane fade in active">
+                                <div class="table-main">
+                                    <table class="w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>Posted Job</th>
+                                                <!--					<th>Share by</th>-->
+                                                <th>Shared date</th>
+                                                <th>Candinate Application </th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        {% for job in jobs %} {% if job.is_save_later %} {% else %}
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="checkbox"><label></label>
+                                                    <a href="{% url 'recruiter:job_detail' job.pk %}"> <span>{{ job.job_title }}</span></a>
+                                                </td>
+                                                <!--					<td></td>-->
+                                                <td>{{ job.created_on.date }}</td>
+                                                <td style="text-align: center"><a href="{% url 'recruiter:view_applied_candidate' job.pk %}">{{ job.get_applied_no }}</a></td>
+                                                <td class="dropdown"><span class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a class="dropdown-item" href="{% url 'recruiter:delete_job' job.pk %}"><img src="{% static 'images/btn-icon/delete.png' %}"> Delete Job</a>
+                                                        <a class="dropdown-item" href="{% url 'recruiter:edit_job' job.pk %}"><img src="{% static 'images/btn-icon/edit.png' %}"> Edit Job</a>
+                                                        <a class="dropdown-item" href="{% url 'recruiter:job_detail' job.pk %}"><img src="https://img.icons8.com/ios/32/FFFFFF/visible--v2.png" />View Job</a>
+                                                        <a class="dropdown-item" href="{% url 'recruiter:unpublish' job.pk %}"><img src="{% static 'images/btn-icon/1.png' %}"> Unpublish Job</a>
+                                                    </div>
+                                                </td>
 
-			</tbody>
-			{% endif %}
-			{% endfor %}
-		</table>
-	  </div>
-  </div>
-  
-				</div>
-				
-			</div>
+                                            </tr>
 
-			</div>
-			
-</div>
-	</div>
-</section>
+                                        </tbody>
+                                        {% endif %} {% endfor %}
+                                    </table>
+                                </div>
 
-<footer>
-<p>Footer section</p>
-</footer>
+                            </div>
+                            <div id="menu2" class="tab-pane fade">
+                                <div class="table-main">
+                                    <table class="w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>Posted Job</th>
+                                                <!--					<th>Share by</th>-->
+                                                <th>Shared date</th>
+                                                <th>Candinate Application </th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        {% for job in jobs %} {% if job.is_save_later %}
+
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="checkbox"><label></label>
+                                                    <a href="{% url 'recruiter:job_detail' job.pk %}"> <span>{{ job.job_title }}</span></a>
+                                                </td>
+                                                <!--					<td></td>-->
+                                                <td>{{ job.created_on.date }}</td>
+                                                <td style="text-align: center"><a href="{% url 'recruiter:view_applied_candidate' job.pk %}">{{ job.get_applied_no }}</a></td>
+                                                <td class="dropdown"><span class="dropdown-toggle" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</span>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                                        <a class="dropdown-item" href="{% url 'recruiter:delete_job' job.pk %}"><img src="{% static 'images/btn-icon/delete.png' %}"> Delete Job</a>
+                                                        <a class="dropdown-item" href="{% url 'recruiter:edit_job' job.pk %}"><img src="{% static 'images/btn-icon/edit.png' %}"> Edit Job</a>
+                                                        <a class="dropdown-item" href="{% url 'recruiter:job_detail' job.pk %}"><img src="https://img.icons8.com/ios/32/FFFFFF/visible--v2.png" />View Job</a>
+                                                        <a class="dropdown-item" href="#"><img src="{% static 'images/btn-icon/1.png' %}"> Unpublish Job</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                        {% endif %} {% endfor %}
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Footer section</p>
+    </footer>
 
 
     <!-- Optional JavaScript -->
@@ -313,7 +322,8 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+</body>
 
 <!-- Mirrored from grocbees.com/job-portal/job-post.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 27 Jun 2021 09:39:29 GMT -->
+
 </html>

@@ -8,392 +8,900 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<link rel="stylesheet" type="text/css" href=" {% static 'css/style_Addjob.css' %}">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/style_Addjob.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
- <style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 
-.right-align {
-    text-align: right;
-}
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/common_v23.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/nLoggerJB_v3.0.min.js' %}"></script>
 
-.dropbtn {
-  background-color: #FFFFFF;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
+    <script type="text/javascript">
+        nLogger.init({
+            "tag": "profile",
+            "nLogger": {
+                "beaconUrl": "https:\/\/lg.naukri.com\/uba",
+                "eventName": "newMonkError",
+                "deviceType": "SERVER"
+            },
+            "boomerang": {
+                "logBW": false,
+                "beaconUrl": "https:\/\/lg.naukri.com\/uba",
+                "imageURL": "\/\/static.naukri.com\/s\/0\/0\/i\/",
+                "eventName": "newMonkPerformance",
+                "deviceType": "SERVER"
+            },
+            "tenantId": 1,
+            "appId": 105,
+            "userIP": ""
+        });
+    </script>
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
+    <style>
+        .right-align {
+            text-align: right;
+        }
+        
+        .dropbtn {
+            background-color: #FFFFFF;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown:hover .dropbtn {
+            background-color: #03A84E;
+        }
+        
+        .job-left.job-left-images-new img {
+            width: 270px;
+            height: 270px;
+            border-radius: 50%;
+        }
+        
+        .modal-dialog {
+            max-width: 800px;
+            margin: 1.75rem auto;
+        }
+        
+        .modelstyle {
+            padding: 50px;
+        }
+        
+        .employment,
+        .employment-section {
+            box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
+            box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
+            background: #fff;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        
+        .skills-left {
+            box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
+            box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .skills-right {
+            box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
+            box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        u {
+            color: blue;
+        }
+        
+        .custom-select {
+            position: relative;
+            font-family: Arial;
+        }
+        
+        .custom-select select {
+            display: none;
+            /*hide original SELECT element:*/
+        }
+        
+        .select-selected {
+            background-color: DodgerBlue;
+        }
+        /*style the arrow inside the select element:*/
+        
+        .select-selected:after {
+            position: absolute;
+            content: "";
+            top: 14px;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-color: #fff transparent transparent transparent;
+        }
+        /*point the arrow upwards when the select box is open (active):*/
+        
+        .select-selected.select-arrow-active:after {
+            border-color: transparent transparent #fff transparent;
+            top: 7px;
+        }
+        /*style the items (options), including the selected item:*/
+        
+        .select-items div,
+        .select-selected {
+            color: #ffffff;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+            cursor: pointer;
+            user-select: none;
+        }
+        /*style items (options):*/
+        
+        .select-items {
+            position: absolute;
+            background-color: DodgerBlue;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+        }
+        /*hide the items when the select box is closed:*/
+        
+        .select-hide {
+            display: none;
+        }
+        
+        .select-items div:hover,
+        .same-as-selected {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
 
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
+<body>
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
+    <header>
+        <div class="container">
 
-.dropdown-content a:hover {background-color: #ddd;}
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a class="" href="{% url 'jobseeker:jobseeker_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                            </button>
 
-.dropdown:hover .dropdown-content {display: block;}
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <nav class="navbar mr-auto" style="box-shadow: 0px 0px 14px 3px lightgrey;padding: inherit;border-radius: 10px;margin: 15px;padding: 2px;">
+                                    <form class="form-inline">
+                                        <div class="input-group" style="width: 456px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+                                        </div>
+                                    </form>
+                                </nav>
 
-.dropdown:hover .dropbtn {background-color: #03A84E;}
-		.job-left.job-left-images-new img {
-    width: 270px;
-    height: 270px;
-    border-radius: 50%;
-}
-.modal-dialog {
-    max-width: 800px;
-    margin: 1.75rem auto;
-}
-.modelstyle{
-  padding:50px;
-}
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
+                                    </li>
 
-.employment, .employment-section {
-    box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
-    box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
-    background: #fff;
-    padding: 10px;
-    margin-top: 20px;
-    border-radius: 10px;
-}
-.skills-left {
-    box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
-    box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-}
-.skills-right {
-    box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
-    box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
-    background: #fff;
-    padding: 15px;
-    border-radius: 10px;
-}
-u
-{
-  color: blue;
-}
-.custom-select {
-  position: relative;
-  font-family: Arial;
-}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:resume' %}">Resume</a>
+                                    </li>
 
-.custom-select select {
-  display: none; /*hide original SELECT element:*/
-}
-
-.select-selected {
-  background-color: DodgerBlue;
-}
-
-/*style the arrow inside the select element:*/
-.select-selected:after {
-  position: absolute;
-  content: "";
-  top: 14px;
-  right: 10px;
-  width: 0;
-  height: 0;
-  border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
-}
-
-/*point the arrow upwards when the select box is open (active):*/
-.select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
-  top: 7px;
-}
-
-/*style the items (options), including the selected item:*/
-.select-items div,.select-selected {
-  color: #ffffff;
-  padding: 8px 16px;
-  border: 1px solid transparent;
-  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  cursor: pointer;
-  user-select: none;
-}
-
-/*style items (options):*/
-.select-items {
-  position: absolute;
-  background-color: DodgerBlue;
-  top: 100%;
-  left: 0;
-  right: 0;
-  z-index: 99;
-}
-
-/*hide the items when the select box is closed:*/
-.select-hide {
-  display: none;
-}
-
-.select-items div:hover, .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-		</style>
-  </head>
-  <body>
-
-	<header>
-		<div class="container">
-
-			<div class="row">
-				<div class="col-md-12 col-12">
-					<div class="top-navbar">
-						<nav class="navbar navbar-expand-lg ">
-  <a class="" href="{% url 'jobseeker:jobseeker_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <nav class="navbar mr-auto">
-  <form class="form-inline">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
-      </div>
-      <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
-    </div>
-  </form>
-</nav>
+                                    <li class="nav-item bell-icon">
+                                        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="dropdown">
+                                            <button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
+                                            <div class="dropdown-content">
+                                                <a href="{% url 'jobseeker:profile' %}">My Profile</a>
+                                                <a href="#">Edit Profile</a>
+                                                <a href="#">Log Out</a>
+                                            </div>
+                                        </div>
+                                    </li>
 
 
+                                </ul>
 
-	<ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-        <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
-      </li>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'jobseeker:resume' %}">Resume</a>
-      </li>
+    </header>
 
-	  <li class="nav-item bell-icon">
-        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
-      </li>
-         <li class="nav-item">
-<div class="dropdown">
-  <button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
-  <div class="dropdown-content">
-    <a href="{% url 'jobseeker:profile' %}">My Profile</a>
-    <a href="#">Edit Profile</a>
-    <a href="#">Log Out</a>
-  </div>
-</div>
-         </li>
+    <section class="job-portal">
 
+        <div class="container">
 
-	 </ul>
-
-  </div>
-</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	</header>
-
-<section class="job-portal">
-   
-	<div class="container">
-    
-    <a class="btn btn-success"  href="{% url 'jobseeker:jobseeker_home' %}">
+            <a class="btn btn-success" href="{% url 'jobseeker:jobseeker_home' %}">
             Skip and Continue
     </a>
-  <div class="alert">
-  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-  <strong>Please fill your profile in order to get jobs results</strong>
-</div>
-		<div class="row">
+            <div class="alert-danger" style="margin: 10px; padding: 10px;">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>Please fill your profile in order to get jobs results</strong>
+            </div>
+            <!-- New Udate page -->
+            <div class="row">
+                <!-- <div class="col s12 pad0">
+                    <div class="col s6 pad0 fs13">
+                        <div><span class="">Profile Last updated</span>
+                            <!-- react-text: 617 -->-
+                <!-- /react-text <span class="fw700">today</span></div>
+        </div>
+        </div> -->
+                <div class="col s3 widgets p10" style="padding-right: 55px;margin-right: -462px;">
+                    <div style="padding-right: 344px;margin-right: 91px">
+                        <div class="card mt15 quickLink ">
+                            <ul class="collection" style="border: none;">
+                                <li class="collection-header" style="text-align: center;">
+                                    <h5>Quick Links</h5>
+                                </li>
+                                <li class="collection-item"><span class="text">Attach Resume</span><a href="javascript:;" class="secondary-content">Update</a></li>
+                                <li class="collection-item"><span class="text">Resume Headline</span></li>
+                                <li class="collection-item"><span class="text">Key Skills</span></li>
+                                <li class="collection-item"><span class="text">Employment</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                                <li class="collection-item"><span class="text">Education</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                                <li class="collection-item"><span class="text">IT Skills</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                                <li class="collection-item"><span class="text">Projects</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                                <li class="collection-item"><span class="text">Profile Summary</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                                <li class="collection-item"><span class="text">Accomplishments</span></li>
+                                <li class="collection-item"><span class="text">Career Profile</span></li>
+                                <li class="collection-item"><span class="text">Personal Details</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s9 widgets pr0">
+                    <div class="mt15">
+                        <div id="profile-middle-section-widgets" class="naukri-wdgt-section">
+                            <div id="profile-middle-section-widgets.inventory-1"></div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload" id="lazyAttachCV" data-loaded="true">
+                        <div class="card mt15"><span id="attachCVMsgBox" tabindex="-1"><!-- react-empty: 124 --></span>
+                            <div class="attachCV" style="padding: 20px;">
+                                <div class="heading row">
+                                    <div class="row main">
+                                        <div class="col s12" style="margin: 23px;font-size: x-large;">
+                                            <!-- react-text: 129 -->Attach Resume
+                                            <!-- /react-text -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col s12 subHeadinfo">Resume is the most important document recruiters look for. Recruiters generally do not look at profiles without resumes.</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="cvPreview">
+                                        <div class="row">
+                                            <div class="col s9">
+                                                <div class="left"><b title="Newone Resume.pdf" class="truncate exten"><!-- react-text: 624 -->Newone Resume.pdf<!-- /react-text --><!-- react-text: 625 -->&nbsp;-&nbsp;<!-- /react-text --><!-- react-text: 626 -->&nbsp;<!-- /react-text --></b>
+                                                    <span class="updateOn">
+                                                  <!-- react-text: 628 -->Uploaded on
+                                                  <!-- /react-text -->
+                                                  <!-- react-text: 629 -->Oct 04, 2021
+                                                  <!-- /react-text -->
+                                                  </span>
+                                                </div>
+                                            </div>
+                                            <div class="col s3">
+                                                <div class="right download"><i class="icon" title="Click here to download your resume">Download</i></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s12"><a href="javascript:;" class="link right fs14 fw500">DELETE RESUME</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="cvUpload col s12">
+                                            <div class="uploadCont">
+                                                <div class="uploadBtn">
+                                                    <div>
+                                                        <form class="download" method="get" action="/Profile/download" style="display: none;">
+                                                            <div class="icon-wrap center">
+                                                                <div class="lig-wrap"><button class="blue-text waves-effect waves-teal btn-flat" data-ga-track="spa-event|EditProfile|DownloadResume|Download" type="submit"><i class="ligature-icons">Download</i></button></div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <section>
+                                                        <div class="action">
+                                                            <div class="uploadContainer" style="text-align: -webkit-center;margin: 10px;"><input type="file" id="attachCV" style="background-color: gray;" class="fileUpload waves-effect waves-light btn-large"></div>
+                                                            <div>
+                                                                <div id="result"></div><input type="button" value="Update Resume" class="btn btn-block dummyUpload fs14"></div>
+                                                        </div>
+                                                    </section>
+                                                    <ul id="results_resumeParser"></ul>
+                                                </div>
+                                                <div class="format">Supported Formats: doc, docx, rtf, pdf, upto 2 MB</div>
+                                            </div>
+                                            <div class="center-align"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload" id="lazyResumeHead" data-loaded="true">
+                        <div class="resumeHeadline">
+                            <div class="card mt15" style="padding: 20px;">
+                                <!-- react-empty: 184 -->
+                                <div class="cardPad">
+                                    <div class="widgetHead" style="margin: 20px;font-size: larger;"><span class="widgetTitle">Resume Headline</span><span class="edit icon" style="margin-left: 20px;">Edit</span></div>
+                                    <div class="widgetCont" style="margin: 20px;">
+                                        <div class="prefill">
+                                            <div>Customer Care Executive with B.Sc in Computers skilled in Hindi,Marathi,Customer Service,Software Development,Android Development,Business Development,Web Development</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload" id="lazyKeySkills" data-loaded="true">
+                        <div class="keySkills">
+                            <div class="card" style="padding: 20px;">
+                                <!-- react-empty: 199 -->
+                                <div class="cardPad">
+                                    <div class="widgetHead" style="margin:20px;font-size:larger"><span class="widgetTitle">Key Skills</span><span class="edit icon" style="margin-left: 20px;">Edit</span></div>
+                                    <div class="widgetCont" style="margin: 20px;">
+                                        <div class="prefill"><span class="chip" title="Hindi">Hindi</span><span class="chip" title="Marathi">Marathi</span><span class="chip" title="Customer Service">Customer Service</span><span class="chip" title="Software Development">Software Development</span>
+                                            <span class="chip" title="Android Development">Android Development</span><span class="chip" title="Business Development">Business Development</span><span class="chip" title="Web Development">Web Development</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-			<div class="col-md-3 col-12">
-				<div class="job-left">
-						<img src={{profile.profile_pic.url}}>
 
-            <center>
-                <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
-              <div class='file file--uploading'>
-                <label for='input-file'>
-                  <i class="fa fa-paperclip" aria-hidden="true"> </i>Add Profile Photo
+                    <div class="card">
+                        <!-- react-empty: 214 -->
+                        <div class="cardPad">
+                            <div class="widgetHead" style=" font-size: larger;margin: 20px;"><span class="widgetTitle">Employment</span><span class="add no-outline" tabindex="0">ADD EMPLOYMENT</span></div>
+                            <div class="widgetCont" style="margin: 29px;">
+                                <div class="row emp-list">
+                                    <div class="col s12 item title"><span class="truncate ln15" title="Customer Care Executive">Customer Care Executive</span><span class="edit icon" tabindex="0">Edit</span></div>
+                                    <div class="col s12 item"><span class="truncate ln15 fs13" title="Datamatics Global Services">Global Services</span></div>
+                                    <div class="col s12 item fs13">Feb 2021 to Aug 2021 (7 months)</div>
+                                    <!-- react-text: 658 -->
+                                    <!-- /react-text -->
+                                    <div class="col s12 item prefill fs13"><a href="javascript:void(0);" class="no-outline" tabindex="0"><strong>Add Job Profile</strong></a></div>
+                                </div>
+                                <div class="row emp-list">
+                                    <div class="col s12 item title"><span class="truncate ln15" title="Customer Care Executive">Customer Care Executive</span><span class="edit icon" tabindex="0">Edit</span></div>
+                                    <div class="col s12 item"><span class="truncate ln15 fs13" title="Datamatics Global Services">Global Services</span></div>
+                                    <div class="col s12 item fs13">Feb 2020 to May 2021 (1 year 4 months)</div>
+                                    <!-- react-text: 669 -->
+                                    <!-- /react-text -->
+                                    <div class="col s12 item prefill fs13"><a href="javascript:void(0);" class="no-outline" tabindex="0"><strong>Add Job Profile</strong></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-plugin="lazyload" id="lazyEducation" data-loaded="true">
+                        <div class="education">
+                            <div class="card">
+                                <!-- react-empty: 226 -->
+                                <div class="cardPad" style="margin: 20px;">
+                                    <div class="widgetHead" style="font-size: larger; margin:20px"><span class="widgetTitle">Education</span><span tabindex="0" class="add no-outline">ADD EDUCATION</span></div>
+                                    <div class="widgetCont" style="margin: 20px;">
+                                        <div class="prefill">
+                                            <div class="row edu-list" data-prefillid="b6c169d44a02160ffab61f41b217111c36f4283618a2e04411e56d4c06f64435">
+                                                <div class="col s12 item"><span class="col title elps" title="MCA">MCA</span><span class="col title">-</span><span class="col title elps" title="Computers">Computers</span><span tabindex="0" class="col s2 icon edit" data-prefillid="b6c169d44a02160ffab61f41b217111c36f4283618a2e04411e56d4c06f64435">Edit</span></div>
+                                                <div class="col s12 item ins">institute of management and computer studies</div>
+                                                <div class="col s12 item">
+                                                    <!-- react-text: 682 -->2021
+                                                    <!-- /react-text -->
+                                                </div>
+                                            </div>
+                                            <div class="row edu-list" data-prefillid="385f76a15e8a7f3d65956690337cee24f780905f3df05a2ab679862093b973de">
+                                                <div class="col s12 item"><span class="col title elps" title="B.Sc">B.Sc</span><span class="col title">-</span><span class="col title elps" title="Computers">Computers</span><span tabindex="0" class="col s2 icon edit" data-prefillid="385f76a15e8a7f3d65956690337cee24f780905f3df05a2ab679862093b973de">Edit</span></div>
+                                                <div class="col s12 item ins">nmu</div>
+                                                <div class="col s12 item">
+                                                    <!-- react-text: 691 -->2020
+                                                    <!-- /react-text -->
+                                                    <!-- react-text: 692 -->(Full Time)
+                                                    <!-- /react-text -->
+                                                </div>
+                                            </div>
+                                        </div><span tabindex="0" class="add no-outline eduDetailsBtn" style="display: block;"><!-- react-text: 238 -->Add <!-- /react-text --><!-- react-text: 239 -->Doctorate/PhD<!-- /react-text --><!-- react-text: 240 --> <!-- /react-text --></span>
+                                        <span tabindex="0" class="add no-outline eduDetailsBtn" style="display: block;">
+                                          <!-- react-text: 242 -->Add
+                                          <!-- /react-text -->
+                                          <!-- react-text: 243 -->12th
+                                          <!-- /react-text -->
+                                          <!-- react-text: 244 -->
+                                          <!-- /react-text -->
+                                          </span><span tabindex=" 0 " class="add no-outline eduDetailsBtn " style="display: block; ">
+                                        <!-- react-text: 246 -->Add
+                                        <!-- /react-text -->
+                                        <!-- react-text: 247 -->10th
+                                        <!-- /react-text -->
+                                        <!-- react-text: 248 -->
+                                        <!-- /react-text -->
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lightbox profileEditDrawer educationEdit ">
+                                <div class="crossLayer "><span class="icon ">CrossLayer</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload " id="lazyITSkills " data-loaded="true ">
+                        <div class="itSkills ">
+                            <div class="card ">
+                                <!-- react-empty: 266 -->
+                                <div class="cardPad " style="margin: 20px;">
+                                    <div class="widgetHead " style="margin: 20px;font-size: larger;"><span class="widgetTitle ">IT Skills</span><span class="profileComScore "><!-- react-text: 271 -->Add <!-- /react-text --><!-- react-text: 272 -->5<!-- /react-text --><!-- react-text: 273 -->%<!-- /react-text --></span>
+                                        <span tabindex="0 " class="add no-outline ">ADD DETAILS</span>
+                                    </div>
+                                    <div class="widgetCont " style="margin: 20px;"><span class="empty ">Specify details about programming languages (such as Java, Python, C/C++, Oracle, SQL etc), softwares (Microsoft Word, Excel, Tally etc) or any other software related knowledge.</span></div>
+                                </div>
+                            </div>
+                            <div class="lightbox profileEditDrawer itSkillsEdit ">
+                                <div class="crossLayer "><span class="icon ">CrossLayer</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload " id="lazyProject " data-loaded="true ">
+                        <div class="project-section ">
+                            <div class="card ">
+                                <!-- react-empty: 282 -->
+                                <div class="cardPad " style="margin: 20px;">
+                                    <div class="widgetHead " style="margin: 20px;font-size:larger;"><span class="widgetTitle ">Projects</span><span class="add no-outline " tabindex="0 ">ADD PROJECT</span></div>
+                                    <div class="widgetCont " style="margin: 20px;"><span class="empty ">Add details about projects you have done in college, internship or at work.</span></div>
+                                </div>
+                            </div>
+                            <div class="lightbox lbWrapper profileEditDrawer ">
+                                <div class="crossLayer "><span class="icon ">CrossLayer</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload " id="lazyProfileSummary " data-loaded="true ">
+                        <div class="profileSummary ">
+                            <div class="card ">
+                                <!-- react-empty: 294 -->
+                                <div class="cardPad " style="margin: 20px;">
+                                    <div class="widgetHead " style="margin: 20px; font-size:larger"><span class="widgetTitle ">Profile Summary</span><span class="profileComScore "><!-- react-text: 453 -->Add <!-- /react-text --><!-- react-text: 454 -->8<!-- /react-text --><!-- react-text: 455 -->%<!-- /react-text --></span>
+                                        <span class="add ">ADD PROFILE SUMMARY</span>
+                                    </div>
+                                    <div class="widgetCont " style="margin: 20px;"><span class="empty ">Your Profile Summary should mention the highlights of your career and education, what your professional interests are, and what kind of a career you are looking for. Write a meaningful summary of more than 50 characters.</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload " id="lazyAccomplishment " data-loaded="true ">
+                        <div>
+                            <div class="accomplishments card ">
+                                <!-- react-empty: 306 -->
+                                <div class="cardPad " style="margin: 20px;">
+                                    <div class="widgetHead mb20 " style="margin: 20px; font-size:larger;"><span class="widgetTitle ">Accomplishments</span></div>
+                                    <div class="widgetCont " style="margin: 20px;">
+                                        <div class="acm-list ">
+                                            <div class="acm-list-item onlineProfile-wrapper ">
+                                                <div class="mb10 ln20 "><span class="hide ">ADD</span><a class="right add " tabindex="0 " href="javascript:void(0) ">ADD</a>
+                                                    <div class="hdn2 grey-text-dark ">Online Profile</div>
+                                                    <div class="grey-text fs13 ">Add link to Online profiles (e.g. Linkedin, Facebook etc.).</div>
+                                                </div>
+                                            </div>
+                                            <div class="acm-list-item workSample-wrapper ">
+                                                <div class="mb10 ln20 "><a class="right add " tabindex="0 " href="javascript:void(0) ">ADD</a>
+                                                    <div class="hdn2 grey-text-dark ">Work Sample</div>
+                                                    <div class="grey-text fs13 ">Add link to your Projects (e.g. Github links etc.).</div>
+                                                </div>
+                                            </div>
+                                            <div class="acm-list-item publication-wrapper ">
+                                                <div class="mb10 ln20 "><a class="right add " tabindex="0 " href="javascript:void(0) ">ADD</a>
+                                                    <div class="hdn2 grey-text-dark ">White Paper / Research Publication / Journal Entry</div>
+                                                    <div class="grey-text fs13 ">Add links to your Online publications.</div>
+                                                </div>
+                                            </div>
+                                            <div class="acm-list-item presentation-wrapper ">
+                                                <div class="mb10 ln20 "><a class="right add " tabindex="0 " href="javascript:void(0) ">ADD</a>
+                                                    <div class="hdn2 grey-text-dark ">Presentation</div>
+                                                    <div class="grey-text fs13 ">Add links to your Online presentations (e.g. Slideshare presentation links etc.).</div>
+                                                </div>
+                                            </div>
+                                            <div class="acm-list-item patent-wrapper ">
+                                                <div class="mb10 ln20 "><a class="right add " tabindex="0 " href="javascript:void(0) ">ADD</a>
+                                                    <div class="hdn2 grey-text-dark ">Patent</div>
+                                                    <div class="grey-text fs13 ">Add details of Patents you have filed.</div>
+                                                </div>
+                                            </div>
+                                            <div class="acm-list-item certifications-wrapper ">
+                                                <div class="mb10 ln20 "><a class="right add " tabindex="0 " href="javascript:void(0) ">ADD</a>
+                                                    <div class="hdn2 grey-text-dark ">Certification</div>
+                                                    <div class="grey-text ">Add details of Certifications you have achieved/completed</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lightbox profileEditDrawer acm-lightbox ">
+                                        <div class="crossLayer " data-ga-track="spa-event|EditProfile||Cancel "><span class="icon ">CrossLayer</span></div>
+                                        <div class="drawer-content "></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload " id="lazyDesiredProfile " data-loaded="true ">
+                        <div class="desiredProfile ">
+                            <div class="card ">
+                                <!-- react-empty: 349 -->
+                                <div class="cardPad " style="margin: 20px;">
+                                    <div class="widgetHead " style="margin: 20px; font-size:larger"><span class="widgetTitle ">Career Profile</span><span class="edit icon " tabindex="0 " style="margin-left: 10px;">Edit</span></div>
+                                    <div class="widgetCont m0 " style="margin: 20px;">
+                                        <div class="row hori-list ">
+                                            <div class="col s6 ">
+                                                <div class="title ">Current Industry</div>
+                                                <div class="desc ">IT Services &amp; Consulting</div>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Department</div>
+                                                <div class="desc ">Other</div>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Role Category</div>
+                                                <div class="desc ">Other</div>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Job Role</div>
+                                                <div class="desc ">Other</div>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Desired Job Type</div>
+                                                <div class="desc "><a href="javascript:; " tabindex="0 " class="no-outline fs13 fw500 ">Add Desired Job Type</a></div>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Desired Employment Type</div>
+                                                <div class="desc "><a href="javascript:; " tabindex="0 " class="no-outline fs13 fw500 ">Add Desired Employment Type</a></div>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Desired Shift</div>
+                                                <div class="desc "><a href="javascript:; " tabindex="0 " class="no-outline fs13 fw500 ">Add Desired Shift</a></div>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Preferred Work Location</div>
+                                                <div class="desc ">Mumbai, Bangalore/Bengaluru, Pune</div>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Expected Salary</div>
+                                                <div class="grey-text ">INR 4 Lakh(s)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lightbox desiredProfile profileEditDrawer ">
+                                <div class="crossLayer "><span class="icon ">CrossLayer</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload " id="lazyPersonalDetail " data-loaded="true ">
+                        <div>
+                            <div class="personalDetails card ">
+                                <!-- react-empty: 389 -->
+                                <div class="cardPad " style="margin: 20px;">
+                                    <div class="widgetHead " style="margin: 20px; font-size:larger"><span class="widgetTitle ">Personal Details</span><span class="hide ">ADD</span><span class="icon edit " style="margin-left: 10px;">Edit</span></div>
+                                    <div class="widgetCont " style="margin: 20px;">
+                                        <div class="row hori-list ">
+                                            <div class="col s6 ">
+                                                <div class="title ">Date of Birth</div>
+                                                <a class="fs13 fw500 " href="javascript:void(0) ">
+                                                    <!-- react-text: 400 -->Add
+                                                    <!-- /react-text -->
+                                                    <!-- react-text: 401 -->Date of Birth
+                                                    <!-- /react-text -->
+                                                </a>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Permanent Address</div>
+                                                <a class="fs13 fw500 " href="javascript:void(0) ">
+                                                    <!-- react-text: 405 -->Add
+                                                    <!-- /react-text -->
+                                                    <!-- react-text: 406 -->Permanent Address
+                                                    <!-- /react-text -->
+                                                </a>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Gender</div>
+                                                <a class="fs13 fw500 " href="javascript:void(0) ">
+                                                    <!-- react-text: 410 -->Add
+                                                    <!-- /react-text -->
+                                                    <!-- react-text: 411 -->Gender
+                                                    <!-- /react-text -->
+                                                </a>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Area Pin Code</div>
+                                                <a class="fs13 fw500 " href="javascript:void(0) ">
+                                                    <!-- react-text: 415 -->Add
+                                                    <!-- /react-text -->
+                                                    <!-- react-text: 416 -->Area Pin Code
+                                                    <!-- /react-text -->
+                                                </a>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Marital Status</div>
+                                                <a class="fs13 fw500 " href="javascript:void(0) ">
+                                                    <!-- react-text: 420 -->Add
+                                                    <!-- /react-text -->
+                                                    <!-- react-text: 421 -->Marital Status
+                                                    <!-- /react-text -->
+                                                </a>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Hometown</div>
+                                                <a class="fs13 fw500 " href="javascript:void(0) ">
+                                                    <!-- react-text: 425 -->Add
+                                                    <!-- /react-text -->
+                                                    <!-- react-text: 426 -->Hometown
+                                                    <!-- /react-text -->
+                                                </a>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Category</div>
+                                                <a class="fs13 fw500 " href="javascript:void(0) ">
+                                                    <!-- react-text: 430 -->Add
+                                                    <!-- /react-text -->
+                                                    <!-- react-text: 431 -->Category
+                                                    <!-- /react-text -->
+                                                </a>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Work permit for USA</div>
+                                                <a class="fs13 fw500 " href="javascript:void(0) ">
+                                                    <!-- react-text: 435 -->Add
+                                                    <!-- /react-text -->
+                                                    <!-- react-text: 436 -->Work permit for USA
+                                                    <!-- /react-text -->
+                                                </a>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Work permit of other country</div>
+                                                <a class="fs13 fw500 " href="javascript:void(0) ">
+                                                    <!-- react-text: 440 -->Add
+                                                    <!-- /react-text -->
+                                                    <!-- react-text: 441 -->Work permit of other country
+                                                    <!-- /react-text -->
+                                                </a>
+                                            </div>
+                                            <div class="col s12 ">
+                                                <div class="title ">Differently Abled</div>
+                                                <div class="desc ">None</div>
+                                            </div>
+                                            <div class="col s12 ">
+                                                <div class="fs13 ">Languages</div><a class="fw500 " href="javascript:void(0) ">Add Languages</a></div>
+                                        </div>
+                                    </div>
+                                    <div class="lightbox profileEditDrawer ">
+                                        <div class="crossLayer " data-ga-track="spa-event|EditProfile|PersonalDetails|Cancel "><span class="icon ">CrossLayer</span></div>
+                                        <div class="drawer-content "></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- New page update -->
+            <!-- <div class="row ">
+
+                <div class="col-md-3 col-12 ">
+                    <div class="job-left ">
+                        <img src={{profile.profile_pic.url}}>
+
+                        <center>
+                            <form class="form-horizontal " method="post " action=" " enctype="multipart/form-data ">
+                                <div class='file file--uploading'>
+                                    <label for='input-file'>
+                  <i class="fa fa-paperclip " aria-hidden="true "> </i>Add Profile Photo
                 </label>
 
-                <input id='input-file' type='file' />
-              </div>
-                </form>
-            </center>
+                                    <input id='input-file' type='file' />
+                                </div>
+                            </form>
+                        </center>
 
 
 
-						<div class="job-left-desc">
-							<h2>{{user.first_name}} {{user.last_name}}</h2>
-							{% for p in professional %}
-<!--								<h4>UX/ UI Designer</h4>-->
-							{% if p.is_current %}
-								<h5>Current Compant</h5>
-								<h6>{{p.organization}}</h6>
-								<h5>Current Job position</h5>
-								<h6>{{p.designation}}</h6>
-								<h5>Working from </h5>
-								<h6>{{p.start_year}}</h6>
-							{% endif %}
-							{% endfor %}
+                        <div class="job-left-desc ">
+                            <h2>{{user.first_name}} {{user.last_name}}</h2>
+                            {% for p in professional %}
+                            <!--								<h4>UX/ UI Designer</h4>
+            {% if p.is_current %}
+            <h5>Current Compant</h5>
+            <h6>{{p.organization}}</h6>
+            <h5>Current Job position</h5>
+            <h6>{{p.designation}}</h6>
+            <h5>Working from </h5>
+            <h6>{{p.start_year}}</h6>
+            {% endif %} {% endfor %}
+                            -->
+            <div class="center-align ">
+                <i class="fa fa-pencil-square-o " aria-hidden="true "></i>
 
-              <div  class="center-align" >
-<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-
-              <a href="#" data-toggle="modal" data-target="#personalmodel"><b><u>Edit Details</u></b></a>
+                <a href="# " data-toggle="modal " data-target="#personalmodel "><b><u>Edit Details</u></b></a>
             </div>
-								{% comment %} <div class="download_btn">
-									<a class="btn btn-primary" href={{resume.resume_link.url}} role="button"><img src=" {% static 'images/download3.png' %} ">Download Resume</a>
-								</div> {% endcomment %}
-							</div>
+            <!--
+            {% comment %}
+            <div class="download_btn ">
+                <a class="btn btn-primary " href={{resume.resume_link.url}} role="button "><img src=" {% static 'images/download3.png' %} ">Download Resume</a>
+            </div> {% endcomment %}
+        </div>
 
-				</div>
-			</div>
+        </div>
+        </div>
 
-			<div class="col-md-9 col-12">
-				<div class="row">
-						<div class="col-md-7 col-12">
-							<div class="skills-left">
-              <div  class="right-align" >
-            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+        <div class="col-md-9 col-12 ">
+            <div class="row ">
+                <div class="col-md-7 col-12 ">
+                    <div class="skills-left ">
+                        <div class="right-align ">
+                            <i class="fa fa-plus-square-o " aria-hidden="true "></i>
 
-              <a href="#" data-toggle="modal" data-target="#skillsmodel"><b><u>Add Skills</u></b></a> <Br>
-            </div>
-								<h5><b>Skills</b> </h5>
-								<div class="skill-list">
-									 <div class="skill-list-left">
-										<h6>Skills</h6>
+                            <a href="# " data-toggle="modal " data-target="#skillsmodel "><b><u>Add Skills</u></b></a>
+                            <Br>
+                        </div>
+                        <h5><b>Skills</b> </h5>
+                        <div class="skill-list ">
+                            <div class="skill-list-left ">
+                                <h6>Skills</h6>
 
-												{% for s in skills %}
-										<div>{{s.skill}}</div>
-										{% endfor %}
-									</div>
+                                {% for s in skills %}
+                                <div>{{s.skill}}</div>
+                                {% endfor %}
+                            </div>
 
-									<div class="skill-list-right">
-										<h6>Rating</h6>
-										{% for s in skills %}
-										<div>{{s.rating}}</div>
-										{% endfor %}
-									</div>
+                            <div class="skill-list-right ">
+                                <h6>Rating</h6>
+                                {% for s in skills %}
+                                <div>{{s.rating}}</div>
+                                {% endfor %}
+                            </div>
 
-								</div>
-                <br>
-                <br>
-                 <div  class="right-align" >
-            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="right-align ">
+                            <i class="fa fa-plus-square-o " aria-hidden="true "></i>
 
-              <a href="#" data-toggle="modal" data-target="#educationmodel"><b><u>Add Education</u></b></a> <Br>
-            </div>
-          <h5><b>Education </b> </h5> <br>
-          <span>
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-<a href="#" data-toggle="modal" data-target="#educationmodel"><b><u> Add Post Graduation </u></b></a></small></b> <br>
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-<a href="#" data-toggle="modal" data-target="#educationmodel"><b><u>Add Under Graduation </u></b></a></small> </b> <br>
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-<a href="#" data-toggle="modal" data-target="#educationmodel"><b><u> Add 12th </u></b></a> </small> </b> <br>
+                            <a href="# " data-toggle="modal " data-target="#educationmodel "><b><u>Add Education</u></b></a>
+                            <Br>
+                        </div>
+                        <h5><b>Education </b> </h5> <br>
+                        <span>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#educationmodel "><b><u> Add Post Graduation </u></b></a></small></b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#educationmodel "><b><u>Add Under Graduation </u></b></a></small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#educationmodel "><b><u> Add 12th </u></b></a> </small> </b> <br>
 
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
- <a href="#" data-toggle="modal" data-target="#educationmodel"><b><u>Add 10th</u></b></a> </small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+ <a href="# " data-toggle="modal " data-target="#educationmodel "><b><u>Add 10th</u></b></a> </small> </b> <br>
 
 </span>
-								<div class="skill-list second">
-									<div class="skill-list-left">
-												{% for s in edu %}
-												<div>{{s.institute_name}}</div>
-												{% endfor %}
-									</div>
+                        <div class="skill-list second ">
+                            <div class="skill-list-left ">
+                                {% for s in edu %}
+                                <div>{{s.institute_name}}</div>
+                                {% endfor %}
+                            </div>
 
-									<div class="skill-list-right">
+                            <div class="skill-list-right ">
 
-												{% for s in edu %}
-												<div>{{s.start_year}}-{{s.end_year}}</div>
-												{% endfor %}
-									</div>
+                                {% for s in edu %}
+                                <div>{{s.start_year}}-{{s.end_year}}</div>
+                                {% endfor %}
+                            </div>
 
-								</div>
-
-
-
-							</div>
-						</div>
+                        </div>
 
 
-						<div class="col-md-5 col-12">
-							<div class="skills-right">
-               <div  class="right-align" >
-<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 
-              <a href="#" data-toggle="modal" data-target="#personalmodel"><b><u>Edit Details</u></b></a> <Br>
+                    </div>
+                </div>
+
+
+                <div class="col-md-5 col-12 ">
+                    <div class="skills-right ">
+                        <div class="right-align ">
+                            <i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+
+                            <a href="# " data-toggle="modal " data-target="#personalmodel "><b><u>Edit Details</u></b></a>
+                            <Br>
+                        </div>
+
+                        <h5><b>Contact Details</b></h5>
+                        <br>
+                        <p><img src=" {% static 'images/mail.png' %} "> <span><b>Email ID</b> : {{user.email}}</span></p>
+                        <p><img src="{% static 'images/phone.png' %} "> <span><b>Phone no.</b> : {{c.phone}}</span></p>
+                        <p><img src=" {% static 'images/location.png' %} "> <span><b>Address</b> : {{c.address}},{{c.city}},{{c.state}}</span></p>
+
+                        <!--								<hr>-->
+            <!--								<div class="contact-btn ">-->
+            <!--									<button>Shorlist </button>-->
+            <!--									<button>Save for later</button>-->
+            <!--									<button><span><i class="fa fa-exclamation-triangle " aria-hidden="true "></i> Report user</span></button>-->
+            <!--								-->
+            <!--								</div>
+
+        </div>
+
+        </div>
+
+        </div>
+
+
+        <div class="employment ">
+
+            <div class="card-panel ">
+                <div class="right-align ">
+
+                    <i class="fa fa-arrow-circle-down " aria-hidden="true "></i>
+
+
+                    <a href="# " data-toggle="modal " data-target="#educationmodel "><b><u>Download Resume</u></b></a>
+                    <Br>
+                </div>
             </div>
-
-							  <h5><b>Contact Details</b></h5>
-                <br>
-								<p><img src=" {% static 'images/mail.png' %}"> <span><b>Email ID</b> : {{user.email}}</span></p>
-								<p><img src="{% static 'images/phone.png' %}"> <span><b>Phone no.</b> : {{c.phone}}</span></p>
-								<p><img src=" {% static 'images/location.png' %}"> <span><b>Address</b> : {{c.address}},{{c.city}},{{c.state}}</span></p>
-
-<!--								<hr>-->
-<!--								<div class="contact-btn">-->
-<!--									<button>Shorlist </button>-->
-<!--									<button>Save for later</button>-->
-<!--									<button><span><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Report user</span></button>-->
-<!--								-->
-<!--								</div>-->
-
-							</div>
-
-						</div>
-
-				</div>
-
-
-				<div class="employment">
-
-        <div class="card-panel ">
-                 <div  class="right-align" >
-
-       <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
-
-
-              <a href="#" data-toggle="modal" data-target="#educationmodel"><b><u>Download Resume</u></b></a> <Br>
-            </div>
-            </div>
-          <span>
+            <span>
             <b>
-              <h5 class="left-align">Attach Resume/CV</h5>
+              <h5 class="left-align ">Attach Resume/CV</h5>
             </b>
             <small>
               <p> please upload in pdf format only</p>
@@ -401,7 +909,7 @@ u
             <center>
               <div class='file file--uploading'>
                 <label for='input-file'>
-                  <i class="fa fa-paperclip" aria-hidden="true"> </i>Attach Resume
+                  <i class="fa fa-paperclip " aria-hidden="true "> </i>Attach Resume
                 </label>
                 <input id='input-file' type='file' />
               </div>
@@ -409,441 +917,405 @@ u
             </form>
           </span>
         </div>
-      </div>
-</div>
+        </div>
+        </div> -->
 
-				<div class="employment">
-         <div  class="right-align" >
-            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+            <!-- <div class="employment ">
+                <div class="right-align ">
+                    <i class="fa fa-plus-square-o " aria-hidden="true "></i>
 
-              <a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u>Add Employment</u></b></a> <Br>
-            </div>
+                    <a href="# " data-toggle="modal " data-target="#employmentmodel "><b><u>Add Employment</u></b></a>
+                    <Br>
+                </div>
 
-						<h5><b>Employment</b></h5>
-            <br>
-                          <span>
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u> Add Current Company </u></b></a></small></b> <br>
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u>Add previous Company </u></b></a> </small> </b> <br>
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-<a href="#" data-toggle="modal" data-target="#employmentmodel"><b><u> Add Internship</u></b></a> </small> </b> <br>
-
-
-
-</span>
-					{% for s in professional %}
+                <h5><b>Employment</b></h5>
+                <br>
+                <span>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#employmentmodel "><b><u> Add Current Company </u></b></a></small></b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#employmentmodel "><b><u>Add previous Company </u></b></a> </small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#employmentmodel "><b><u> Add Internship</u></b></a> </small> </b> <br>
 
 
-							<h4>{{s.designation}}</h4>
-							<p class="small">{{s.organization}}</p>
-					{% if p.is_current %}
-					<p class="small">{{s.start_month}} {{s.start_year}} to present</p>
-					{% else %}
-					<p class="small">{{s.start_month}} {{s.start_year}} to {{s.end_month}} {{s.end_year}}</p>
-					{% endif %}
 
-	<p>Available to join in 1 Months</p>
-<p>Created and automated build and deployment process for the application re-engineering setup for better user
-experience, and leading up to building a continuous integration system for all our products. Experience with container based deployments using Docker, working with Docker images... <span>Read More</span></p>
-	<p class="skills active"><span>Top 5 Key Skills:</span> {% for sk in skills %}{{sk.skill}} {% endfor %}</p>
+</span> {% for s in professional %}
 
-<hr>
-{% endfor %}
 
-		</div>
+                <h4>{{s.designation}}</h4>
+                <p class="small ">{{s.organization}}</p>
+                {% if p.is_current %}
+                <p class="small ">{{s.start_month}} {{s.start_year}} to present</p>
+                {% else %}
+                <p class="small ">{{s.start_month}} {{s.start_year}} to {{s.end_month}} {{s.end_year}}</p>
+                {% endif %}
 
-<div class="employment">
-         <div  class="right-align" >
-            <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                <p>Available to join in 1 Months</p>
+                <p>Created and automated build and deployment process for the application re-engineering setup for better user experience, and leading up to building a continuous integration system for all our products. Experience with container based deployments
+                    using Docker, working with Docker images... <span>Read More</span></p>
+                <p class="skills active "><span>Top 5 Key Skills:</span> {% for sk in skills %}{{sk.skill}} {% endfor %}</p>
 
-              <a href="#" data-toggle="modal" data-target="#careermodel"><b><u>Add Career</u></b></a> <Br>
-            </div>
+                <hr> {% endfor %}
 
-						<h5><b>Career Profile</b></h5>
-            <br>
-                          <span>
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-<a href="#" data-toggle="modal" data-target="#careermodel"><b><u> Add Expected Role </u></b></a></small></b> <br>
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-<a href="#" data-toggle="modal" data-target="#careermodel"><b><u>Add Expected Salary </u></b></a> </small> </b> <br>
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-<a href="#" data-toggle="modal" data-target="#careermodel"><b><u> Add Expected Employment Type</u></b></a> </small> </b>
+            </div> -->
+
+            <!-- <div class="employment ">
+                <div class="right-align ">
+                    <i class="fa fa-plus-square-o " aria-hidden="true "></i>
+
+                    <a href="# " data-toggle="modal " data-target="#careermodel "><b><u>Add Career</u></b></a>
+                    <Br>
+                </div>
+
+                <h5><b>Career Profile</b></h5>
+                <br>
+                <span>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#careermodel "><b><u> Add Expected Role </u></b></a></small></b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#careermodel "><b><u>Add Expected Salary </u></b></a> </small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#careermodel "><b><u> Add Expected Employment Type</u></b></a> </small> </b>
 <br>
-<small><b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-<a href="#" data-toggle="modal" data-target="#careermodel"><b><u> Add Preffered Location</u></b></a> </small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#careermodel "><b><u> Add Preffered Location</u></b></a> </small> </b> <br>
 
 
 
 
-</span>
+</span> {% for s in edu %}
+                <p>{{s.institute_name}} <span></span></p>
+                <!--		<p>Arizona State University <span><img src="images/skills-btn.png "></span></p>-->
 
-		{% for s in edu %}
-		<p>{{s.institute_name}} <span></span></p>
-<!--		<p>Arizona State University <span><img src="images/skills-btn.png"></span></p>-->
+            {% endfor %}
+        </div> -->
 
-		{% endfor %}
-	</div>
-
-</div>
-
-</div>
-
-</div>
-	</div>
-
-</section>
-      <div class="container">
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="educationmodel" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-
-              <div class="modelstyle">
-              <div class="col-md-10 col-12">
-               <form class="form-horizontal" method="post" action="">
-    {% csrf_token %}
-
-
-
-        <div class="input-group ">
-<label style="font-size: 20px;">{{form2.institute_name.label}}</label>
-
-            {{form2.institute_name}}
-        </div>
-                   <div class="input-group ">
-
-            {{form2.start_date.label}}
-            {{form2.start_date}}
-        </div>
-                   <div class="input-group ">
-
-            {{form2.start_month.label}}
-            {{form2.start_month}}
-        </div>
-                   <div class="input-group ">
-
-            {{form2.start_year.label}}
-            {{form2.start_year}}
-        </div>
-                      <div class="input-group ">
-
-            {{form2.end_date.label}}
-            {{form2.end_date}}
-        </div>
-                      <div class="input-group ">
-
-            {{form2.end_month.label}}
-            {{form2.end_month}}
-        </div>
-                    <div class="input-group ">
-
-            {{form2.end_year.label}}
-            {{form2.end_year}}
-        </div>
-                      <div class="input-group ">
-
-            {{form2.course_type.label}}
-            {{form2.course_type}}
-        </div>   <div class="input-group ">
-
-            {{form2.degree.label}}
-            {{form2.degree}}
         </div>
 
-    <input type="submit" value="Submit">
-</form>
-              </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
+        </div>
+
+        </div>
+        </div>
+
+    </section>
+    <div class="container ">
+
+
+        <!-- Modal -->
+        <div class="modal fade " id="educationmodel " role="dialog ">
+            <div class="modal-dialog ">
+
+                <!-- Modal content-->
+                <div class="modal-content ">
+
+                    <div class="modelstyle ">
+                        <div class="col-md-10 col-12 ">
+                            <form class="form-horizontal " method="post " action=" ">
+                                {% csrf_token %}
+
+
+
+                                <div class="input-group ">
+                                    <label style="font-size: 20px; ">{{form2.institute_name.label}}</label> {{form2.institute_name}}
+                                </div>
+                                <div class="input-group ">
+
+                                    {{form2.start_date.label}} {{form2.start_date}}
+                                </div>
+                                <div class="input-group ">
+
+                                    {{form2.start_month.label}} {{form2.start_month}}
+                                </div>
+                                <div class="input-group ">
+
+                                    {{form2.start_year.label}} {{form2.start_year}}
+                                </div>
+                                <div class="input-group ">
+
+                                    {{form2.end_date.label}} {{form2.end_date}}
+                                </div>
+                                <div class="input-group ">
+
+                                    {{form2.end_month.label}} {{form2.end_month}}
+                                </div>
+                                <div class="input-group ">
+
+                                    {{form2.end_year.label}} {{form2.end_year}}
+                                </div>
+                                <div class="input-group ">
+
+                                    {{form2.course_type.label}} {{form2.course_type}}
+                                </div>
+                                <div class="input-group ">
+
+                                    {{form2.degree.label}} {{form2.degree}}
+                                </div>
+
+                                <input type="submit " value="Submit ">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                    </div>
+                </div>
             </div>
- </div>
+        </div>
+
+        <!-- employment modal-->
+        <div class="container ">
+
+
+            <!-- Modal -->
+            <div class="modal fade " id="employmentmodel " role="dialog ">
+                <div class="modal-dialog ">
+
+                    <!-- Modal content-->
+                    <div class="modal-content ">
+
+                        <div class="modelstyle ">
+                            <div class="col-md-10 col-12 ">
+                                <form class="form-horizontal " method="post " action=" ">
+                                    {% csrf_token %}
+                                    <label style="font-size: 20px; ">Designation</label>
+
+
+                                    <div class="input-group ">
+
+
+                                        {{form3.designation}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form3.organization.label}} {{form3.organization}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form3.salary.label}} {{form3.salary}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form3.start_date.label}} {{form3.start_date}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form3.start_month.label}} {{form3.start_month}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form3.start_year.label}} {{form3.start_year}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form3.is_current.label}} {{form3.is_current}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form3.end_date.label}} {{form3.end_date}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form3.end_month.label}} {{form3.end_month}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form3.end_year.label}} {{form3.end_year}}
+                                    </div>
+
+                                    <input type="submit " value="Submit ">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                    </div>
+                </div>
+
+
             </div>
-
-<!-- employment modal-->
-<div class="container">
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="employmentmodel" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-
-              <div class="modelstyle">
-              <div class="col-md-10 col-12">
-               <form class="form-horizontal" method="post" action="">
-    {% csrf_token %}
-               <label style="font-size: 20px;">Designation</label>
-
-
-        <div class="input-group ">
-
-
-            {{form3.designation}}
-        </div>
-                   <div class="input-group ">
-
-            {{form3.organization.label}}
-            {{form3.organization}}
-        </div>
-                   <div class="input-group ">
-
-            {{form3.salary.label}}
-            {{form3.salary}}
-        </div>
-                   <div class="input-group ">
-
-            {{form3.start_date.label}}
-            {{form3.start_date}}
-        </div>
-                      <div class="input-group ">
-
-            {{form3.start_month.label}}
-            {{form3.start_month}}
-        </div>
-                      <div class="input-group ">
-
-            {{form3.start_year.label}}
-            {{form3.start_year}}
-        </div>
-                    <div class="input-group ">
-
-            {{form3.is_current.label}}
-            {{form3.is_current}}
-        </div>
-                      <div class="input-group ">
-
-            {{form3.end_date.label}}
-            {{form3.end_date}}
-        </div>   <div class="input-group ">
-
-            {{form3.end_month.label}}
-            {{form3.end_month}}
-        </div>
-                      <div class="input-group ">
-
-            {{form3.end_year.label}}
-            {{form3.end_year}}
         </div>
 
-    <input type="submit" value="Submit">
-</form>
-              </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
+        <!--skills -->
+        <div class="container ">
+
+
+            <!-- Modal -->
+            <div class="modal fade " id="skillsmodel " role="dialog ">
+                <div class="modal-dialog ">
+
+                    <!-- Modal content-->
+                    <div class="modal-content ">
+
+                        <div class="modelstyle ">
+                            <div class="col-md-10 col-12 ">
+                                <form class="form-horizontal " method="post " action=" ">
+                                    {% csrf_token %}
+
+
+                                    <div class="input-group ">
+                                        <label style="font-size: 20px; "> {{form5.skill.label}}</label> {{form5.skill}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form5.rating.label}} {{form5.rating}}
+                                    </div>
+
+                                    <input type="submit " value="Submit ">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                    </div>
+                </div>
+
+
             </div>
+        </div>
+        <!-- Career-->
 
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
+        <div class="container ">
+
+
+            <!-- Modal -->
+            <div class="modal fade " id="careermodel " role="dialog ">
+                <div class="modal-dialog ">
+
+                    <!-- Modal content-->
+                    <div class="modal-content ">
+
+                        <div class="modelstyle ">
+                            <div class="col-md-10 col-12 ">
+                                <form class="form-horizontal " method="post " action=" ">
+                                    {% csrf_token %}
+
+
+                                    <div class="input-group ">
+                                        <label style="font-size: 20px; "> {{form6.department.label}}</label> {{form6.department}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form6.role.label}} {{form6.role}}
+                                    </div>
+
+                                    {{form6.job_type.label}}
+                                    <div class="input100 ">
+
+
+
+                                        {{form6.job_type}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form6.exp_salary.label}} {{form6.exp_salary}}
+                                    </div>
+
+                                    <input type="submit " value="Submit ">
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                        </div>
+                    </div>
+
+                    {% comment %}
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                    </div>
+                </div> {% endcomment %}
+
+
             </div>
-
-
-        </div>
-      </div>
-
-<!--skills -->
-<div class="container">
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="skillsmodel" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-
-              <div class="modelstyle">
-              <div class="col-md-10 col-12">
-               <form class="form-horizontal" method="post" action="">
-    {% csrf_token %}
-
-
-        <div class="input-group ">
-               <label style="font-size: 20px;"> {{form5.skill.label}}</label>
-
-
-            {{form5.skill}}
-        </div>
-                   <div class="input-group ">
-
-            {{form5.rating.label}}
-            {{form5.rating}}
         </div>
 
-    <input type="submit" value="Submit">
-</form>
-              </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
+        <!--personal-->
+
+        <div class="container ">
+
+
+            <!-- Modal -->
+            <div class="modal fade " id="personalmodel " role="dialog ">
+                <div class="modal-dialog " style="max-width:721px; ">
+
+                    <!-- Modal content-->
+                    <div class="modal-content " style="border-radius:15px; ">
+
+                        <div class="modelstyle ">
+                            <div class="col-md-10 col-12 ">
+                                <form class="form-horizontal " method="post " action=" " enctype="multipart/form-data ">
+                                    {% csrf_token %} {{form1.profile_pic}}
+                                    <div class="input-group ">
+
+                                        <label style="font-size: 20px; "> {{form1.phone.label}}</label> {{form1.phone}}
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-3 input-group ">
+
+                                            <label style="font-size: 20px; "> {{form1.birth_date.label}}</label> {{form1.birth_date}}
+                                        </div>
+                                        <div class="col-3 input-group ">
+
+                                            {{form1.birth_month.label}} {{form1.birth_month}}
+                                        </div>
+                                        <div class="col-3 input-group ">
+
+                                            {{form1.birth_year.label}} {{form1.birth_year}}
+                                        </div>
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form1.gender.label}} {{form1.gender}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form1.address.label}} {{form1.address}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form1.city.label}} {{form1.city}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form1.state.label}} {{form1.state}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form1.marital_status.label}} {{form1.marital_status}}
+                                    </div>
+
+                                    <div class="modal-footer " style=" ">
+                                        <input type="submit " value="Submit ">
+                                        <button type="button " class="btn btn-default " data-dismiss="modal " style="color:#fff ">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {% comment %}
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                    </div>
+                </div> {% endcomment %}
+
+
             </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-
-
-        </div>
-      </div>
-<!-- Career-->
-
-<div class="container">
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="careermodel" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-
-              <div class="modelstyle">
-              <div class="col-md-10 col-12">
-               <form class="form-horizontal" method="post" action="">
-    {% csrf_token %}
-
-
-        <div class="input-group ">
-               <label style="font-size: 20px;"> {{form6.department.label}}</label>
-
-
-            {{form6.department}}
-        </div>
-                   <div class="input-group ">
-
-            {{form6.role.label}}
-            {{form6.role}}
         </div>
 
-        {{form6.job_type.label}}
-                    <div class="input100">
-
-
-
-            {{form6.job_type}}
-        </div>
-              <div class="input-group ">
-
-            {{form6.exp_salary.label}}
-            {{form6.exp_salary}}
-        </div>
-
-    <input type="submit" value="Submit">
-</form>
-              </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-
-
-        </div>
-      </div>
-
-<!--personal-->
-
-<div class="container">
-
-
-  <!-- Modal -->
-  <div class="modal fade" id="personalmodel" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-
-              <div class="modelstyle">
-              <div class="col-md-10 col-12">
-               <form class="form-horizontal" method="post" action="" enctype="multipart/form-data">
-    {% csrf_token %}
-{{form1.profile_pic}}
-<div class="input-group ">
-
-               <label style="font-size: 20px;"> {{form1.phone.label}}</label>
-
-
-            {{form1.phone}}
-        </div>
-        <div class="input-group ">
-
-               <label style="font-size: 20px;"> {{form1.birth_date.label}}</label>
-
-
-            {{form1.birth_date}}
-        </div>
-                   <div class="input-group ">
-
-            {{form1.birth_month.label}}
-            {{form1.birth_month}}
-        </div>
-                    <div class="input-group ">
-
-            {{form1.birth_year.label}}
-            {{form1.birth_year}}
-        </div>
-              <div class="input-group ">
-
-            {{form1.gender.label}}
-            {{form1.gender}}
-        </div>
-         <div class="input-group ">
-
-            {{form1.address.label}}
-            {{form1.address}}
-        </div>
- <div class="input-group ">
-
-            {{form1.city.label}}
-            {{form1.city}}
-        </div>
-         <div class="input-group ">
-
-            {{form1.state.label}}
-            {{form1.state}}
-        </div>
-         <div class="input-group ">
-
-            {{form1.marital_status.label}}
-            {{form1.marital_status}}
-        </div>
-    <input type="submit" value="Submit">
-</form>
-              </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              </div>
-            </div>
-
-
-        </div>
-      </div>
-
-<!---->
+        <!---->
 
 
 
@@ -852,149 +1324,141 @@ experience, and leading up to building a continuous integration system for all o
 
 
 
-<footer>
-<p>Footer section</p>
-</footer>
+        <footer>
+            <p>Footer section</p>
+        </footer>
 
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+</body>
 
 
 
 <style>
-.input100{
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+    .input100 {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    #mf {
+        width: 50%;
+    }
+    
+    .btn {
+        font-size: 10px;
+    }
+    
+    h6,
+    h5,
+    h8 {
+        color: rgb(15, 165, 23);
+    }
+    
+    .btn {
+        background-color: rgb(15, 165, 23);
+    }
+    
+    .file {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .file>input[type='file'] {
+        display: none
+    }
+    
+    .file>label {
+        font-size: 1rem;
+        font-weight: 300;
+        cursor: pointer;
+        outline: 0;
+        user-select: none;
+        border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+        border-style: solid;
+        border-radius: 4px;
+        border-width: 1px;
+        background-color: rgb(15, 165, 23);
+        color: hsl(0, 0%, 29%);
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .file--upload>label:active {
+        background-color: rgb(15, 165, 23);
+    }
+    
+    .file--uploading>label {
+        color: hsl(127, 57%, 97%);
+        border-color: rgb(15, 165, 23);
+    }
+    
+    .file--uploading>label>i {
+        animation: pulse 5s infinite;
+    }
+    
+    .file--uploading>label:hover {
+        border-color: hsl(101, 93%, 45%);
+        background-color: hsl(115, 100%, 45%);
+    }
+    
+    .file--uploading>label:active {
+        background-color: hsl(48, 100%, 91%);
+    }
+    
+    @keyframes pulse {
+        0% {
+            color: hsl(0, 0%, 85%);
         }
-  #mf {
-    width: 50%;
-  }
-  .btn {
-
-    font-size: 10px;
-
-  }
-
-  h6,
-  h5,
-  h8 {
-    color: rgb(15, 165, 23);
-  }
-
-  .btn {
-    background-color: rgb(15, 165, 23);
-  }
-
-  .file {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .file>input[type='file'] {
-    display: none
-  }
-
-  .file>label {
-
-    font-size: 1rem;
-    font-weight: 300;
-    cursor: pointer;
-    outline: 0;
-    user-select: none;
-    border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
-    border-style: solid;
-    border-radius: 4px;
-    border-width: 1px;
-    background-color: rgb(15, 165, 23);
-    color: hsl(0, 0%, 29%);
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-
-  .file--upload>label:active {
-    background-color: rgb(15, 165, 23);
-  }
-
-  .file--uploading>label {
-    color: hsl(127, 57%, 97%);
-    border-color: rgb(15, 165, 23);
-  }
-
-  .file--uploading>label>i {
-    animation: pulse 5s infinite;
-  }
-
-  .file--uploading>label:hover {
-    border-color: hsl(101, 93%, 45%);
-    background-color: hsl(115, 100%, 45%);
-  }
-
-  .file--uploading>label:active {
-    background-color: hsl(48, 100%, 91%);
-  }
-
-
-
-  @keyframes pulse {
-    0% {
-      color: hsl(0, 0%, 85%);
+        50% {
+            color: hsl(0, 0%, 100%);
+        }
+        100% {
+            color: hsl(0, 0%, 100%);
+        }
     }
-
-    50% {
-      color: hsl(0, 0%, 100%);
+    
+    table,
+    th,
+    td {
+        border: 0px solid rgb(255, 255, 255);
     }
-
-    100% {
-      color: hsl(0, 0%, 100%);
+    
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
     }
-  }
-
-  table,
-  th,
-  td {
-    border: 0px solid rgb(255, 255, 255);
-  }
-
-
-  .alert {
-  padding: 20px;
-  background-color: #f44336;
-  color: white;
-}
-
-.closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
-  float: right;
-  font-size: 22px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.closebtn:hover {
-  color: black;
-}
-
+    
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+        color: black;
+    }
 </style>
 
 </html>
