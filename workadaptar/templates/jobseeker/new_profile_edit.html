@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="./nLoggerJB_v3.0.min.js"></script>
+    <link type="text/css" href="./common_v23.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/common_v23.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/nLoggerJB_v3.0.min.js' %}"></script>
+
+    <script type="text/javascript">
+        nLogger.init({
+            "tag": "profile",
+            "nLogger": {
+                "beaconUrl": "https:\/\/lg.naukri.com\/uba",
+                "eventName": "newMonkError",
+                "deviceType": "SERVER"
+            },
+            "boomerang": {
+                "logBW": false,
+                "beaconUrl": "https:\/\/lg.naukri.com\/uba",
+                "imageURL": "\/\/static.naukri.com\/s\/0\/0\/i\/",
+                "eventName": "newMonkPerformance",
+                "deviceType": "SERVER"
+            },
+            "tenantId": 1,
+            "appId": 105,
+            "userIP": ""
+        });
+    </script>
+
+</head>
+
+<body>
+
+
+    <div class="row">
+        <div class="col s12 pad0">
+            <div class="col s6 pad0 fs13">
+                <div><span class="">Profile Last updated</span>
+                    <!-- react-text: 617 -->-
+                    <!-- /react-text --><span class="fw700">today</span></div>
+            </div>
+        </div>
+        <div class="col s3 widgets pl0">
+            <div>
+                <div class="card mt15 quickLink ">
+                    <ul class="collection">
+                        <li class="collection-header">
+                            <h5>Quick Links</h5>
+                        </li>
+                        <li class="collection-item"><span class="text">Attach Resume</span><a href="javascript:;" class="secondary-content">Update</a></li>
+                        <li class="collection-item"><span class="text">Resume Headline</span></li>
+                        <li class="collection-item"><span class="text">Key Skills</span></li>
+                        <li class="collection-item"><span class="text">Employment</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                        <li class="collection-item"><span class="text">Education</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                        <li class="collection-item"><span class="text">IT Skills</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                        <li class="collection-item"><span class="text">Projects</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                        <li class="collection-item"><span class="text">Profile Summary</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                        <li class="collection-item"><span class="text">Accomplishments</span></li>
+                        <li class="collection-item"><span class="text">Career Profile</span></li>
+                        <li class="collection-item"><span class="text">Personal Details</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col s9 widgets pr0">
+            <div class="mt15">
+                <div id="profile-middle-section-widgets" class="naukri-wdgt-section">
+                    <div id="profile-middle-section-widgets.inventory-1"></div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyAttachCV" data-loaded="true">
+                <div class="card mt15"><span id="attachCVMsgBox" tabindex="-1"><!-- react-empty: 124 --></span>
+                    <div class="attachCV">
+                        <div class="heading row">
+                            <div class="row main">
+                                <div class="col s12">
+                                    <!-- react-text: 129 -->Attach Resume
+                                    <!-- /react-text -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 subHeadinfo">Resume is the most important document recruiters look for. Recruiters generally do not look at profiles without resumes.</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="cvPreview">
+                                <div class="row">
+                                    <div class="col s9">
+                                        <div class="left"><b title="Newone Resume.pdf" class="truncate exten"><!-- react-text: 624 -->Newone Resume.pdf<!-- /react-text --><!-- react-text: 625 -->&nbsp;-&nbsp;<!-- /react-text --><!-- react-text: 626 -->&nbsp;<!-- /react-text --></b>
+                                            <span class="updateOn">
+                                            <!-- react-text: 628 -->Uploaded on
+                                            <!-- /react-text -->
+                                            <!-- react-text: 629 -->Oct 04, 2021
+                                            <!-- /react-text -->
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col s3">
+                                        <div class="right download"><i class="icon" title="Click here to download your resume">Download</i></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12"><a href="javascript:;" class="link right fs14 fw500">DELETE RESUME</a></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="cvUpload col s12">
+                                    <div class="uploadCont">
+                                        <div class="uploadBtn">
+                                            <div>
+                                                <form class="download" method="get" action="/Profile/download" style="display: none;">
+                                                    <div class="icon-wrap center">
+                                                        <div class="lig-wrap"><button class="blue-text waves-effect waves-teal btn-flat" data-ga-track="spa-event|EditProfile|DownloadResume|Download" type="submit"><i class="ligature-icons">Download</i></button></div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <section>
+                                                <div class="action">
+                                                    <div class="uploadContainer"><input type="file" id="attachCV" class="fileUpload waves-effect waves-light btn-large"></div>
+                                                    <div>
+                                                        <div id="result"></div><input type="button" value="Update Resume" class="btn btn-block dummyUpload fs14"></div>
+                                                </div>
+                                            </section>
+                                            <ul id="results_resumeParser"></ul>
+                                        </div>
+                                        <div class="format">Supported Formats: doc, docx, rtf, pdf, upto 2 MB</div>
+                                    </div>
+                                    <div class="center-align"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyResumeHead" data-loaded="true">
+                <div class="resumeHeadline">
+                    <div class="card mt15">
+                        <!-- react-empty: 184 -->
+                        <div class="cardPad">
+                            <div class="widgetHead"><span class="widgetTitle">Resume Headline</span><span class="edit icon">Edit</span></div>
+                            <div class="widgetCont">
+                                <div class="prefill">
+                                    <div>Customer Care Executive with B.Sc in Computers skilled in Hindi,Marathi,Customer Service,Software Development,Android Development,Business Development,Web Development</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyKeySkills" data-loaded="true">
+                <div class="keySkills">
+                    <div class="card">
+                        <!-- react-empty: 199 -->
+                        <div class="cardPad">
+                            <div class="widgetHead"><span class="widgetTitle">Key Skills</span><span class="edit icon">Edit</span></div>
+                            <div class="widgetCont">
+                                <div class="prefill"><span class="chip" title="Hindi">Hindi</span><span class="chip" title="Marathi">Marathi</span><span class="chip" title="Customer Service">Customer Service</span><span class="chip" title="Software Development">Software Development</span>
+                                    <span class="chip" title="Android Development">Android Development</span><span class="chip" title="Business Development">Business Development</span><span class="chip" title="Web Development">Web Development</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyEmployment" data-loaded="true">
+                <div class="employment-section">
+                    <div class="card">
+                        <!-- react-empty: 214 -->
+                        <div class="cardPad">
+                            <div class="widgetHead"><span class="widgetTitle">Employment</span><span class="add no-outline" tabindex="0">ADD EMPLOYMENT</span></div>
+                            <div class="widgetCont">
+                                <div class="row emp-list">
+                                    <div class="col s12 item title"><span class="truncate ln15" title="Customer Care Executive">Customer Care Executive</span><span class="edit icon" tabindex="0">Edit</span></div>
+                                    <div class="col s12 item"><span class="truncate ln15 fs13" title="Datamatics Global Services">Datamatics Global Services</span></div>
+                                    <div class="col s12 item fs13">Feb 2021 to Aug 2021 (7 months)</div>
+                                    <!-- react-text: 658 -->
+                                    <!-- /react-text -->
+                                    <div class="col s12 item prefill fs13"><a href="javascript:void(0);" class="no-outline" tabindex="0"><strong>Add Job Profile</strong></a></div>
+                                </div>
+                                <div class="row emp-list">
+                                    <div class="col s12 item title"><span class="truncate ln15" title="Customer Care Executive">Customer Care Executive</span><span class="edit icon" tabindex="0">Edit</span></div>
+                                    <div class="col s12 item"><span class="truncate ln15 fs13" title="Datamatics Global Services">Datamatics Global Services</span></div>
+                                    <div class="col s12 item fs13">Feb 2020 to May 2021 (1 year 4 months)</div>
+                                    <!-- react-text: 669 -->
+                                    <!-- /react-text -->
+                                    <div class="col s12 item prefill fs13"><a href="javascript:void(0);" class="no-outline" tabindex="0"><strong>Add Job Profile</strong></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lightbox employmentLayer profileEditDrawer">
+                        <div class="crossLayer"><span class="icon">CrossLayer</span></div>
+                    </div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyEducation" data-loaded="true">
+                <div class="education">
+                    <div class="card">
+                        <!-- react-empty: 226 -->
+                        <div class="cardPad">
+                            <div class="widgetHead"><span class="widgetTitle">Education</span><span tabindex="0" class="add no-outline">ADD EDUCATION</span></div>
+                            <div class="widgetCont">
+                                <div class="prefill">
+                                    <div class="row edu-list" data-prefillid="b6c169d44a02160ffab61f41b217111c36f4283618a2e04411e56d4c06f64435">
+                                        <div class="col s12 item"><span class="col title elps" title="MCA">MCA</span><span class="col title">-</span><span class="col title elps" title="Computers">Computers</span><span tabindex="0" class="col s2 icon edit" data-prefillid="b6c169d44a02160ffab61f41b217111c36f4283618a2e04411e56d4c06f64435">Edit</span></div>
+                                        <div class="col s12 item ins">Moonje institute of management and computer studies</div>
+                                        <div class="col s12 item">
+                                            <!-- react-text: 682 -->2021
+                                            <!-- /react-text -->
+                                        </div>
+                                    </div>
+                                    <div class="row edu-list" data-prefillid="385f76a15e8a7f3d65956690337cee24f780905f3df05a2ab679862093b973de">
+                                        <div class="col s12 item"><span class="col title elps" title="B.Sc">B.Sc</span><span class="col title">-</span><span class="col title elps" title="Computers">Computers</span><span tabindex="0" class="col s2 icon edit" data-prefillid="385f76a15e8a7f3d65956690337cee24f780905f3df05a2ab679862093b973de">Edit</span></div>
+                                        <div class="col s12 item ins">kbcnmu</div>
+                                        <div class="col s12 item">
+                                            <!-- react-text: 691 -->2020
+                                            <!-- /react-text -->
+                                            <!-- react-text: 692 -->(Full Time)
+                                            <!-- /react-text -->
+                                        </div>
+                                    </div>
+                                </div><span tabindex="0" class="add no-outline eduDetailsBtn"><!-- react-text: 238 -->Add <!-- /react-text --><!-- react-text: 239 -->Doctorate/PhD<!-- /react-text --><!-- react-text: 240 --> <!-- /react-text --></span>
+                                <span tabindex="0" class="add no-outline eduDetailsBtn">
+                                    <!-- react-text: 242 -->Add
+                                    <!-- /react-text -->
+                                    <!-- react-text: 243 -->12th
+                                    <!-- /react-text -->
+                                    <!-- react-text: 244 -->
+                                    <!-- /react-text -->
+                                    </span><span tabindex="0" class="add no-outline eduDetailsBtn"><!-- react-text: 246 -->Add <!-- /react-text --><!-- react-text: 247 -->10th<!-- /react-text --><!-- react-text: 248 --> <!-- /react-text --></span></div>
+                        </div>
+                    </div>
+                    <div class="lightbox profileEditDrawer educationEdit ">
+                        <div class="crossLayer"><span class="icon">CrossLayer</span></div>
+                    </div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyITSkills" data-loaded="true">
+                <div class="itSkills">
+                    <div class="card">
+                        <!-- react-empty: 266 -->
+                        <div class="cardPad">
+                            <div class="widgetHead"><span class="widgetTitle">IT Skills</span><span class="profileComScore"><!-- react-text: 271 -->Add <!-- /react-text --><!-- react-text: 272 -->5<!-- /react-text --><!-- react-text: 273 -->%<!-- /react-text --></span>
+                                <span tabindex="0" class="add no-outline">ADD DETAILS</span>
+                            </div>
+                            <div class="widgetCont"><span class="empty">Specify details about programming languages (such as Java, Python, C/C++, Oracle, SQL etc), softwares (Microsoft Word, Excel, Tally etc) or any other software related knowledge.</span></div>
+                        </div>
+                    </div>
+                    <div class="lightbox profileEditDrawer itSkillsEdit">
+                        <div class="crossLayer"><span class="icon">CrossLayer</span></div>
+                    </div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyProject" data-loaded="true">
+                <div class="project-section">
+                    <div class="card">
+                        <!-- react-empty: 282 -->
+                        <div class="cardPad">
+                            <div class="widgetHead"><span class="widgetTitle">Projects</span><span class="add no-outline" tabindex="0">ADD PROJECT</span></div>
+                            <div class="widgetCont"><span class="empty">Add details about projects you have done in college, internship or at work.</span></div>
+                        </div>
+                    </div>
+                    <div class="lightbox lbWrapper profileEditDrawer">
+                        <div class="crossLayer"><span class="icon">CrossLayer</span></div>
+                    </div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyProfileSummary" data-loaded="true">
+                <div class="profileSummary">
+                    <div class="card">
+                        <!-- react-empty: 294 -->
+                        <div class="cardPad">
+                            <div class="widgetHead"><span class="widgetTitle">Profile Summary</span><span class="profileComScore"><!-- react-text: 453 -->Add <!-- /react-text --><!-- react-text: 454 -->8<!-- /react-text --><!-- react-text: 455 -->%<!-- /react-text --></span>
+                                <span class="add">ADD PROFILE SUMMARY</span>
+                            </div>
+                            <div class="widgetCont"><span class="empty">Your Profile Summary should mention the highlights of your career and education, what your professional interests are, and what kind of a career you are looking for. Write a meaningful summary of more than 50 characters.</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyAccomplishment" data-loaded="true">
+                <div>
+                    <div class="accomplishments card">
+                        <!-- react-empty: 306 -->
+                        <div class="cardPad">
+                            <div class="widgetHead mb20"><span class="widgetTitle">Accomplishments</span></div>
+                            <div class="widgetCont">
+                                <div class="acm-list">
+                                    <div class="acm-list-item onlineProfile-wrapper">
+                                        <div class="mb10 ln20"><span class="hide">ADD</span><a class="right add" tabindex="0" href="javascript:void(0)">ADD</a>
+                                            <div class="hdn2 grey-text-dark">Online Profile</div>
+                                            <div class="grey-text fs13">Add link to Online profiles (e.g. Linkedin, Facebook etc.).</div>
+                                        </div>
+                                    </div>
+                                    <div class="acm-list-item workSample-wrapper">
+                                        <div class="mb10 ln20"><a class="right add" tabindex="0" href="javascript:void(0)">ADD</a>
+                                            <div class="hdn2 grey-text-dark">Work Sample</div>
+                                            <div class="grey-text fs13">Add link to your Projects (e.g. Github links etc.).</div>
+                                        </div>
+                                    </div>
+                                    <div class="acm-list-item publication-wrapper">
+                                        <div class="mb10 ln20"><a class="right add" tabindex="0" href="javascript:void(0)">ADD</a>
+                                            <div class="hdn2 grey-text-dark">White Paper / Research Publication / Journal Entry</div>
+                                            <div class="grey-text fs13">Add links to your Online publications.</div>
+                                        </div>
+                                    </div>
+                                    <div class="acm-list-item presentation-wrapper">
+                                        <div class="mb10 ln20"><a class="right add" tabindex="0" href="javascript:void(0)">ADD</a>
+                                            <div class="hdn2 grey-text-dark">Presentation</div>
+                                            <div class="grey-text fs13">Add links to your Online presentations (e.g. Slideshare presentation links etc.).</div>
+                                        </div>
+                                    </div>
+                                    <div class="acm-list-item patent-wrapper">
+                                        <div class="mb10 ln20"><a class="right add" tabindex="0" href="javascript:void(0)">ADD</a>
+                                            <div class="hdn2 grey-text-dark">Patent</div>
+                                            <div class="grey-text fs13">Add details of Patents you have filed.</div>
+                                        </div>
+                                    </div>
+                                    <div class="acm-list-item certifications-wrapper">
+                                        <div class="mb10 ln20"><a class="right add" tabindex="0" href="javascript:void(0)">ADD</a>
+                                            <div class="hdn2 grey-text-dark">Certification</div>
+                                            <div class="grey-text">Add details of Certifications you have achieved/completed</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lightbox profileEditDrawer acm-lightbox">
+                                <div class="crossLayer" data-ga-track="spa-event|EditProfile||Cancel"><span class="icon">CrossLayer</span></div>
+                                <div class="drawer-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyDesiredProfile" data-loaded="true">
+                <div class="desiredProfile">
+                    <div class="card">
+                        <!-- react-empty: 349 -->
+                        <div class="cardPad">
+                            <div class="widgetHead"><span class="widgetTitle">Career Profile</span><span class="edit icon" tabindex="0">Edit</span></div>
+                            <div class="widgetCont m0">
+                                <div class="row hori-list">
+                                    <div class="col s6">
+                                        <div class="title">Current Industry</div>
+                                        <div class="desc">IT Services &amp; Consulting</div>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Department</div>
+                                        <div class="desc">Other</div>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Role Category</div>
+                                        <div class="desc">Other</div>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Job Role</div>
+                                        <div class="desc">Other</div>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Desired Job Type</div>
+                                        <div class="desc"><a href="javascript:;" tabindex="0" class="no-outline fs13 fw500">Add Desired Job Type</a></div>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Desired Employment Type</div>
+                                        <div class="desc"><a href="javascript:;" tabindex="0" class="no-outline fs13 fw500">Add Desired Employment Type</a></div>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Desired Shift</div>
+                                        <div class="desc"><a href="javascript:;" tabindex="0" class="no-outline fs13 fw500">Add Desired Shift</a></div>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Preferred Work Location</div>
+                                        <div class="desc">Mumbai, Bangalore/Bengaluru, Pune</div>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Expected Salary</div>
+                                        <div class="grey-text">INR 4 Lakh(s)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lightbox desiredProfile profileEditDrawer">
+                        <div class="crossLayer"><span class="icon">CrossLayer</span></div>
+                    </div>
+                </div>
+            </div>
+            <div data-plugin="lazyload" id="lazyPersonalDetail" data-loaded="true">
+                <div>
+                    <div class="personalDetails card">
+                        <!-- react-empty: 389 -->
+                        <div class="cardPad">
+                            <div class="widgetHead"><span class="widgetTitle">Personal Details</span><span class="hide">ADD</span><span class="icon edit">Edit</span></div>
+                            <div class="widgetCont">
+                                <div class="row hori-list">
+                                    <div class="col s6">
+                                        <div class="title">Date of Birth</div>
+                                        <a class="fs13 fw500" href="javascript:void(0)">
+                                            <!-- react-text: 400 -->Add
+                                            <!-- /react-text -->
+                                            <!-- react-text: 401 -->Date of Birth
+                                            <!-- /react-text -->
+                                        </a>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Permanent Address</div>
+                                        <a class="fs13 fw500" href="javascript:void(0)">
+                                            <!-- react-text: 405 -->Add
+                                            <!-- /react-text -->
+                                            <!-- react-text: 406 -->Permanent Address
+                                            <!-- /react-text -->
+                                        </a>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Gender</div>
+                                        <a class="fs13 fw500" href="javascript:void(0)">
+                                            <!-- react-text: 410 -->Add
+                                            <!-- /react-text -->
+                                            <!-- react-text: 411 -->Gender
+                                            <!-- /react-text -->
+                                        </a>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Area Pin Code</div>
+                                        <a class="fs13 fw500" href="javascript:void(0)">
+                                            <!-- react-text: 415 -->Add
+                                            <!-- /react-text -->
+                                            <!-- react-text: 416 -->Area Pin Code
+                                            <!-- /react-text -->
+                                        </a>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Marital Status</div>
+                                        <a class="fs13 fw500" href="javascript:void(0)">
+                                            <!-- react-text: 420 -->Add
+                                            <!-- /react-text -->
+                                            <!-- react-text: 421 -->Marital Status
+                                            <!-- /react-text -->
+                                        </a>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Hometown</div>
+                                        <a class="fs13 fw500" href="javascript:void(0)">
+                                            <!-- react-text: 425 -->Add
+                                            <!-- /react-text -->
+                                            <!-- react-text: 426 -->Hometown
+                                            <!-- /react-text -->
+                                        </a>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Category</div>
+                                        <a class="fs13 fw500" href="javascript:void(0)">
+                                            <!-- react-text: 430 -->Add
+                                            <!-- /react-text -->
+                                            <!-- react-text: 431 -->Category
+                                            <!-- /react-text -->
+                                        </a>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Work permit for USA</div>
+                                        <a class="fs13 fw500" href="javascript:void(0)">
+                                            <!-- react-text: 435 -->Add
+                                            <!-- /react-text -->
+                                            <!-- react-text: 436 -->Work permit for USA
+                                            <!-- /react-text -->
+                                        </a>
+                                    </div>
+                                    <div class="col s6">
+                                        <div class="title">Work permit of other country</div>
+                                        <a class="fs13 fw500" href="javascript:void(0)">
+                                            <!-- react-text: 440 -->Add
+                                            <!-- /react-text -->
+                                            <!-- react-text: 441 -->Work permit of other country
+                                            <!-- /react-text -->
+                                        </a>
+                                    </div>
+                                    <div class="col s12">
+                                        <div class="title">Differently Abled</div>
+                                        <div class="desc">None</div>
+                                    </div>
+                                    <div class="col s12">
+                                        <div class="fs13">Languages</div><a class="fw500" href="javascript:void(0)">Add Languages</a></div>
+                                </div>
+                            </div>
+                            <div class="lightbox profileEditDrawer">
+                                <div class="crossLayer" data-ga-track="spa-event|EditProfile|PersonalDetails|Cancel"><span class="icon">CrossLayer</span></div>
+                                <div class="drawer-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
