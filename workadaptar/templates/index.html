@@ -106,12 +106,128 @@
     .p-t-178 {
         padding-top: 110px;
     }
+
+    .customer-logos {
+        background-color: rgb(29, 31, 29);
+    }
+    /* Slider */
+
+    .slick-slide {
+        margin: 0px 20px;
+    }
+
+    .slick-slide img {
+        width: 100%;
+    }
+
+    .slick-slider {
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -khtml-user-select: none;
+        -ms-touch-action: pan-y;
+        touch-action: pan-y;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .slick-list {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    .slick-list:focus {
+        outline: none;
+    }
+
+    .slick-list.dragging {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+    .slick-slider .slick-track,
+    .slick-slider .slick-list {
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    .slick-track {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: block;
+    }
+
+    .slick-track:before,
+    .slick-track:after {
+        display: table;
+        content: '';
+    }
+
+    .slick-track:after {
+        clear: both;
+    }
+
+    .slick-loading .slick-track {
+        visibility: hidden;
+    }
+
+    .slick-slide {
+        display: none;
+        float: left;
+        height: 100%;
+        min-height: 1px;
+    }
+
+    [dir='rtl'] .slick-slide {
+        float: right;
+    }
+
+    .slick-slide img {
+        display: block;
+    }
+
+    .slick-slide.slick-loading img {
+        display: none;
+    }
+
+    .slick-slide.dragging img {
+        pointer-events: none;
+    }
+
+    .slick-initialized .slick-slide {
+        display: block;
+    }
+
+    .slick-loading .slick-slide {
+        visibility: hidden;
+    }
+
+    .slick-vertical .slick-slide {
+        display: block;
+        height: auto;
+        border: 1px solid transparent;
+    }
+
+    .slick-arrow.slick-hidden {
+        display: none;
+    }
 </style>
 
 
 <header>
     <div class="container">
-        <div class="row" style="margin-bottom:-20px">
+        <div class="row" style="margin-bottom:-25px">
             <div class="col-md-12 col-12">
                 <div class="top-navbar">
                     <nav class="navbar navbar-expand-lg ">
@@ -185,27 +301,27 @@
                     <div class="col-12 col-md-12">
                         <div class="mobile-main-section">
                             <div class="mobile-main-images">
-                                <img src="{% static 'images/home/app.jpg' %} " width="150" height="150">
+                                <img src="{% static 'images/home/app.jpg' %} " style="border-radius: 75px;" width="150" height="150">
                                 <h3>Mobile Application Developer</h3>
                             </div>
 
                             <div class="mobile-main-images">
-                                <img src="{% static 'images/home/frontend.jpg' %}" width="150" height="150">
+                                <img src="{% static 'images/home/frontend.jpg' %}" width="150" style="border-radius: 75px;" height="150">
                                 <h3>Frontend Developer</h3>
                             </div>
 
                             <div class="mobile-main-images">
-                                <img src="{% static 'images/home/backend.jpg' %}" width="150" height="150">
+                                <img src="{% static 'images/home/backend.jpg' %}" width="150" style="border-radius: 75px;" height="150">
                                 <h3>Backend Developer</h3>
                             </div>
 
                             <div class="mobile-main-images">
-                                <img src="{% static 'images/home/devops.jpg' %}" width="150" height="150">
+                                <img src="{% static 'images/home/devops.jpg' %}" width="150" style="border-radius: 75px;" height="150">
                                 <h3>DevOps Engineer</h3>
                             </div>
 
                             <div class="mobile-main-images">
-                                <img src="{% static 'images/home/emerging.jpg' %}" width="150" height="150">
+                                <img src="{% static 'images/home/emerging.jpg' %}" width="150" style="border-radius: 75px;" height="150">
                                 <h3>Emerging Technologies And Roles</h3>
                             </div>
 
@@ -289,74 +405,19 @@
         <div class="heading">
             <h3 style="text-align:center; margin:10px"><span>Brand</span> Names</h3>
         </div>
+        <div class="row customer-logos">
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image1.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image2.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image3.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image4.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image5.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image6.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image7.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image8.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image5.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image6.png"></div>
+        </div>
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div id="Carousel" class="carousel slide">
-
-                    <ol class="carousel-indicators">
-                        <li data-target="#Carousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#Carousel" data-slide-to="1"></li>
-                        <li data-target="#Carousel" data-slide-to="2"></li>
-                    </ol>
-
-                    <!-- Carousel items -->
-                    <div class="carousel-inner">
-
-                        <div class="item active">
-                            <div class="row">
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/1.jpg" alt="Image" style="height:80px;"></a>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/2.jpg" alt="Image" style="height:80px;"></a>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/3.png" alt="Image" style="height:80px;"></a>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/4.jpg" alt="Image" style="height:80px;"></a>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/5.jpg" alt="Image" style="height:80px;"></a>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/6.jpg" alt="Image" style="height:80px;"></a>
-                                </div>
-                            </div>
-                            <!--.row-->
-                        </div>
-                        <!--.item-->
-
-
-
-                        <div class="item">
-                            <div class="row">
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/13.png" alt="Image" style="max-height:80px;"></a>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/14.jpg" alt="Image" style="max-height:80px;"></a>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/15.png" alt="Image" style="max-height:80px;"></a>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/16.png" alt="Image" style="max-height:80px;"></a>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/1.jpg" alt="Image" style="max-height:80px;"></a>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <a class="thumbnail"><img src="https://tmaxtech.co.th/images/Partner/2.jpg" alt="Image" style="height:80px;"></a>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-                </div>
-            </div>
 
 
             <section class="fourth-section">
@@ -550,12 +611,12 @@
                                                 <form class="login100-form validate-form p-l-55 p-r-55 p-t-180 p-b-120" method="POST" action="{% url 'jobseeker:jobseeker/login' %}">
                                                     {% csrf_token %}
                                                     <span class="login100-form-title">
-						Jobseeker Login
-					</span>
-
-
+                                                        Jobseeker Login
+                                                    </span> {% for message in messages %}
+                                                    <p id="messages" class="alert alert-danger">{{message}}</p>
+                                                    {% endfor %}
                                                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-                                                        <i class="bi bi-envelope"></i><input class="input100" type="text" name="username" placeholder="Username" required>
+                                                        <i class="bi bi-envelope"></i><input class="input100" type="text" name="username" placeholder="Email/MobileNo." required>
                                                         <span class="focus-input100"></span>
                                                     </div>
 
@@ -569,37 +630,29 @@
 
                                                     <div class="container-login100-form-btn">
                                                         <button class="login100-form-btn" type="submit">
-							Login
-						</button>
+                                                            Login
+                                                        </button>
                                                     </div>
 
                                                     <div class="flex-col-c p-t-80 p-b-40">
                                                         <a href="{% url 'jobseeker:reset_password' %}" class="txt0">
-							Forgot Password?
-						</a>
+                                                            Forgot Password?
+                                                        </a>
 
                                                         <span class="txt1 p-b-9">
-							Don’t have an account?
-							<a href="{% url 'jobseeker:jobseeker/register' %}" class="txt3">
-							Register
-						</a>
-						</span>
-
-
+                                                            Don’t have an account?
+                                                            <a href="{% url 'jobseeker:jobseeker/register' %}" class="txt3">
+                                                            Register
+                                                            </a>
+                                                        </span>
                                                     </div>
                                                 </form>
-                                                {% for message in messages %}
-                                                <p id="messages">{{message}}</p>
-                                                {% endfor %}
-
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                     <!--  end jobseeker-->
@@ -626,11 +679,11 @@
                                                         {% csrf_token %}
                                                         <span class="login100-form-title">
 						Recruiter Login
-					</span>
-
-
+					</span> {% for message in messages %}
+                                                        <p id="messages" class="alert alert-danger">{{message}}</p>
+                                                        {% endfor %}
                                                         <div class="wrap-input100 validate-input m-b-20" data-validate="Please enter username">
-                                                            <input class="input100" type="text" name="username" placeholder="Username" required>
+                                                            <input class="input100" type="text" name="username" placeholder="Email/MobileNo." required>
                                                             <span class="focus-input100"></span>
                                                         </div>
 
@@ -663,9 +716,7 @@
 
                                                         </div>
                                                     </form>
-                                                    {% for message in messages %}
-                                                    <p id="messages">{{message}}</p>
-                                                    {% endfor %}
+
 
                                                 </div>
                                             </div>
@@ -691,11 +742,35 @@
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
                         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-                        <script>
+                        <!-- <script>
                             $(document).ready(function() {
                                 $('#Carousel').carousel({
                                     interval: 2000
                                 })
+                            });
+                        </script> -->
+                        <script>
+                            $(document).ready(function() {
+                                $('.customer-logos').slick({
+                                    slidesToShow: 4,
+                                    slidesToScroll: 1,
+                                    autoplay: true,
+                                    autoplaySpeed: 1000,
+                                    arrows: false,
+                                    dots: false,
+                                    pauseOnHover: false,
+                                    responsive: [{
+                                        breakpoint: 768,
+                                        settings: {
+                                            slidesToShow: 3
+                                        }
+                                    }, {
+                                        breakpoint: 520,
+                                        settings: {
+                                            slidesToShow: 2
+                                        }
+                                    }]
+                                });
                             });
                         </script>
 </body>
