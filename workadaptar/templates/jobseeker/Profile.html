@@ -197,6 +197,7 @@
 
 <body>
 
+    {% comment %}
     <header>
         <div class="container">
 
@@ -260,6 +261,52 @@
             </div>
         </div>
 
+    </header> {% endcomment %}
+    <header>
+        <div class="container">
+            <div class="row" style="margin-bottom:-25px">
+                <div class="col-md-12 col-12">
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mx-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#work-main">How it works</a>
+                                    </li>
+                                    <!--	  <li class="nav-item">-->
+                                    <!--        <a class="nav-link" href="#">Testimonial</a>-->
+                                    <!--      </li>-->
+
+                                </ul>
+
+
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:resume' %}"> Build Resume</a>
+                                    </li>
+                                    <li class="nav-item button" style="border-start-end-radius: 0px; border-end-start-radius: 1px; height:50px;background-color: #8cdd87;">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#recruitermodal" style="margin-top: 5px;">Recruiter Login</a>
+                                    </li>
+                                    <li class="nav-item button" style="border-start-end-radius: 0px; border-end-start-radius: 0px;height:50px;background-color: #8cdd87; ">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#jobseekermodal" style="margin-top: 5px;">Jobseeker Login</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </header>
 
     <section class="job-portal">
@@ -278,7 +325,7 @@
                 <!-- <div class="col s12 pad0">
                     <div class="col s6 pad0 fs13">
                         <div><span class="">Profile Last updated</span>
-                            <!-- react-text: 617 -->-
+                             react-text: 617 -->
                 <!-- /react-text <span class="fw700">today</span></div>
         </div>
         </div> -->
