@@ -13,6 +13,11 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/wysihtml5-0.3.0.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.min1.js"></script>
+    <script type="text/javascript" src="/static/js/tcc_l.combined.1.0.6.min.js"></script>
+    <!-- <link type="text/css" rel="stylesheet" href="{% static 'css/style1.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'plugins.css' %}"> -->
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -40,6 +45,9 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}">
     <link rel="stylesheet" type="text/css" href=" {% static 'css/main.css' %}">
+
+    <!-- <link type="text/css" rel="stylesheet" href="magicscroll/magicscroll.css" />
+    <script type="text/javascript" src="magicscroll/magicscroll.js"></script> -->
 
 </head>
 <style>
@@ -106,20 +114,20 @@
     .p-t-178 {
         padding-top: 110px;
     }
-
+    
     .customer-logos {
         background-color: rgb(29, 31, 29);
     }
     /* Slider */
-
+    
     .slick-slide {
         margin: 0px 20px;
     }
-
+    
     .slick-slide img {
         width: 100%;
     }
-
+    
     .slick-slider {
         position: relative;
         display: block;
@@ -134,7 +142,7 @@
         touch-action: pan-y;
         -webkit-tap-highlight-color: transparent;
     }
-
+    
     .slick-list {
         position: relative;
         display: block;
@@ -142,16 +150,16 @@
         margin: 0;
         padding: 0;
     }
-
+    
     .slick-list:focus {
         outline: none;
     }
-
+    
     .slick-list.dragging {
         cursor: pointer;
         cursor: hand;
     }
-
+    
     .slick-slider .slick-track,
     .slick-slider .slick-list {
         -webkit-transform: translate3d(0, 0, 0);
@@ -160,65 +168,65 @@
         -o-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
     }
-
+    
     .slick-track {
         position: relative;
         top: 0;
         left: 0;
         display: block;
     }
-
+    
     .slick-track:before,
     .slick-track:after {
         display: table;
         content: '';
     }
-
+    
     .slick-track:after {
         clear: both;
     }
-
+    
     .slick-loading .slick-track {
         visibility: hidden;
     }
-
+    
     .slick-slide {
         display: none;
         float: left;
         height: 100%;
         min-height: 1px;
     }
-
+    
     [dir='rtl'] .slick-slide {
         float: right;
     }
-
+    
     .slick-slide img {
         display: block;
     }
-
+    
     .slick-slide.slick-loading img {
         display: none;
     }
-
+    
     .slick-slide.dragging img {
         pointer-events: none;
     }
-
+    
     .slick-initialized .slick-slide {
         display: block;
     }
-
+    
     .slick-loading .slick-slide {
         visibility: hidden;
     }
-
+    
     .slick-vertical .slick-slide {
         display: block;
         height: auto;
         border: 1px solid transparent;
     }
-
+    
     .slick-arrow.slick-hidden {
         display: none;
     }
@@ -279,11 +287,12 @@
                 <div class="col-md-1 mob-none"></div>
                 <div class="col-md-9 col-12">
                     <div class="hero-section">
+                        {% for message in messages %}
+                        <p id="messages" class="alert alert-danger" style="color:rgb(153, 9, 9);">{{message}}</p>
+                        {% endfor %}
                         <p>100+ Jobs Available</p>
                         <h1>Find Your Next Best <span>Job!</span></h1>
-                        {% for message in messages %}
-                        <p id="messages">{{message}}</p>
-                        {% endfor %}
+
 
 
                     </div>
@@ -401,25 +410,38 @@
         </div>
     </section>
 
+    <!-- <div class="MagicScroll" data-options="speed: 2400; autoplay: 1000; items: 5;">
+        <img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image1.png">
+        <img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image2.png">
+        <img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image3.png">
+        <img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image4.png">
+        <img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image5.png">
+        <img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image6.png">
+        <img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image7.png">
+        <img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image8.png">
+        <img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image5.png">
+        <img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image6.png">
+    </div> -->
     <div class="container" style="margin-top:30px ">
         <div class="heading">
             <h3 style="text-align:center; margin:10px"><span>Brand</span> Names</h3>
         </div>
-        <div class="row customer-logos">
+        <div class="row customer-logos" style="">
             <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image1.png"></div>
             <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image2.png"></div>
             <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image3.png"></div>
             <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image4.png"></div>
             <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image5.png"></div>
-            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image6.png"></div>
+            <!-- <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image6.png"></div>
             <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image7.png"></div>
             <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image8.png"></div>
             <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image5.png"></div>
-            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image6.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image6.png"></div> -->
         </div>
+
+
+
         <div class="row">
-
-
             <section class="fourth-section">
                 <div class="work-main">
                     <div class="container">
@@ -590,6 +612,36 @@
                             </div>
                         </div>
                     </div>
+                    <!-- <div class="company-brand" style="background-color:red">
+                            <div class="container">
+                                <div id="company-brands" class="owl-carousel">
+                                    <div class="brand-img">
+                                        <img src="/static/images/microsoft-home-dark.png" class="img-responsive" alt="" />
+                                    </div>
+                                    <div class="brand-img">
+                                        <img src="/static/images/img-home-dark.png" class="img-responsive" alt="" />
+                                    </div>
+                                    <div class="brand-img">
+                                        <img src="/static/images/mothercare-hom-darke.png" class="img-responsive" alt="" />
+                                    </div>
+                                    <div class="brand-img">
+                                        <img src="/static/images/paypal-home-dark.png" class="img-responsive" alt="" />
+                                    </div>
+                                    <div class="brand-img">
+                                        <img src="/static/images/serv-home-dark.png" class="img-responsive" alt="" />
+                                    </div>
+                                    <div class="brand-img">
+                                        <img src="/static/images/xerox-home-dark.png" class="img-responsive" alt="" />
+                                    </div>
+                                    <div class="brand-img">
+                                        <img src="/static/images/yahoo-home-dark.png" class="img-responsive" alt="" />
+                                    </div>
+                                    <div class="brand-img">
+                                        <img src="/static/images/mothercare-hom-darke.png" class="img-responsive" alt="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
                 </section>
 
                 <!--  Jobseeker modal -->
@@ -730,6 +782,7 @@
                             </div>
                         </div>
                         <!--  end recruiter-->
+
                         {% comment %}
                         <footer>
                             <p>Footer section</p>
@@ -744,7 +797,7 @@
 
                         <!-- <script>
                             $(document).ready(function() {
-                                $('#Carousel').carousel({
+                                $('.customer-logos').carousel({
                                     interval: 2000
                                 })
                             });
@@ -752,7 +805,7 @@
                         <script>
                             $(document).ready(function() {
                                 $('.customer-logos').slick({
-                                    slidesToShow: 4,
+                                    slidesToShow: 5,
                                     slidesToScroll: 1,
                                     autoplay: true,
                                     autoplaySpeed: 1000,
