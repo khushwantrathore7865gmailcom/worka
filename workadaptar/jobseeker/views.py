@@ -118,6 +118,7 @@ def index(request):
 
 
 def login_candidate(request):
+    j = False
     if request.user.is_authenticated and request.user.is_candidate:
         print(request.user)
         return redirect('jobseeker:jobseeker_home')
@@ -140,9 +141,10 @@ def login_candidate(request):
                 else:
                     return redirect('jobseeker:jobseeker_home')
             else:
+                j = True
                 messages.info(request, 'Username OR password is incorrect')
 
-        context = {}
+        context = {'j': j}
         return render(request, 'index.html', context)
         # return render(request, 'jobseeker/login.html', context)
 
