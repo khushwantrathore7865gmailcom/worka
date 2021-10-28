@@ -18,7 +18,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from .tokens import account_activation_token
 from jobseeker.models import Candidate_profile, Candidate_edu, Candidate_profdetail, Candidate_resume, Candidate_skills, \
-    Candidate_expdetail,Candidate
+    Candidate_expdetail, Candidate
 from datetime import datetime
 from django.forms import modelformset_factory
 from django.db import transaction, IntegrityError
@@ -596,10 +596,10 @@ def advance_Search(request):
         education_profile = []
         professional_profile = []
 
-        c_jobtitle =[]
-        c_location=[]
-        c_exp =[]
-        c_jobtype=[]
+        c_jobtitle = []
+        c_location = []
+        c_exp = []
+        c_jobtype = []
         if request.method == 'GET':
             job_title = request.GET.get('job_title', None)
             location = request.GET.get('location', None)
@@ -611,11 +611,11 @@ def advance_Search(request):
             print(job_type)
 
             if job_type == 'Job Type':
-                job_type=None
+                job_type = None
             if experience == 'Experience':
-                experience=None
+                experience = None
             if location == 'Location':
-                location=None
+                location = None
             print(job_type)
             print(experience)
             print(location)
@@ -623,34 +623,42 @@ def advance_Search(request):
 
             for c in candidates:
                 if (job_title is not None):
-                    a=Candidate_expdetail.objects.filter(department=job_title)
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.filter(department=job_title)
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 else:
-                    a=Candidate_expdetail.objects.all()
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.all()
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 if (job_type is not None):
-                    a=Candidate_expdetail.objects.filter(job_type=job_type)
-                    c_jobtype.append(a.user_id)
+                    a = Candidate_expdetail.objects.filter(job_type=job_type)
+                    for ab in a:
+                        c_jobtype.append(ab.user_id)
                 else:
-                    a=Candidate_expdetail.objects.all()
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.all()
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 if (experience is not None):
-                    a=Candidate_expdetail.objects.filter(Total_Working=experience)
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.filter(Total_Working=experience)
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 else:
-                    a=Candidate_expdetail.objects.all()
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.all()
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 if (location is not None):
-                    a=Candidate_expdetail.objects.filter(prefer_location=location)
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.filter(prefer_location=location)
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 else:
-                    a=Candidate_expdetail.objects.all()
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.all()
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
             s1 = set(c_jobtype)
-            s2= set(c_location)
-            s3= set(c_exp)
-            s4= set(c_jobtype)
-            set1= s1.intersection(s2)
+            s2 = set(c_location)
+            s3 = set(c_exp)
+            s4 = set(c_jobtype)
+            set1 = s1.intersection(s2)
             set2 = set1.intersection(s3)
             candidate_list_Set = set2.intersection(s4)
             candidate_list = list(candidate_list_Set)
