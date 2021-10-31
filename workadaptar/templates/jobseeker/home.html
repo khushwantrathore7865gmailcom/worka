@@ -215,8 +215,8 @@
                                 <span>{{c.user}}  <i style="color: #03A84E; "class="fa fa-check">verified</i></span> {% else %}
                                 <span>{{c.user}}  <a href="{% url 'jobseeker:sendVerificationMail' %}"><i style="color: #03A84E;">verify</i></a></span> {% endif %}
                             </h5>
-                            <h5 style="text-align: initial;margin-left: 22px;">Resume Headline:
-                                <span>{{cep.Profile_Summary}}</span></h5>
+                            {% comment %} <h5 style="text-align: initial;margin-left: 22px;">Resume Headline:
+                                <span>{{cep.Profile_Summary}}</span></h5> {% endcomment %}
 
                         </div>
                     </div>

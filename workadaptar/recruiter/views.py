@@ -605,10 +605,9 @@ def advance_Search(request):
             location = request.GET.get('location', None)
             experience = request.GET.get('experience', None)
             job_type = request.GET.get('job_type', None)
-            print(job_title)
-            print(location)
-            print(experience)
-            print(job_type)
+            sk = request.GET.get('demo',None)
+            print(sk)
+
 
             if job_type == 'Job Type':
                 job_type = None
