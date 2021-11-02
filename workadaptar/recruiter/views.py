@@ -87,6 +87,7 @@ class ActivateAccount(View):
             user = User_custom.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User_custom.DoesNotExist):
             user = None
+            print(user)
 
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
@@ -97,11 +98,11 @@ class ActivateAccount(View):
             user.save()
             login(request, user)
             messages.success(request, ('Your account have been confirmed.'))
-            return redirect('recruiter:dashboard_home')
+            return redirect('recruiter:employer_home')
         else:
             messages.warning(
                 request, ('The confirmation link was invalid, possibly because it has already been used.'))
-            return redirect('recruiter:dashboard_home')
+            return redirect('recruiter:employer_home')
 
 
 def login_employer(request):
