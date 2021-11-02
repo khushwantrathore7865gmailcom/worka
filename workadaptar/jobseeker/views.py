@@ -363,6 +363,7 @@ def jobseeker_Home(request):
                         return render(request, 'jobseeker/home.html',
                                       {'jobs': objects, 'c': c, 'cp': cp, 'cep': cep, 'cr': cr, 'pjs': pjt_objects})
 
+
         else:
             jobs = []
             job_ques = []
