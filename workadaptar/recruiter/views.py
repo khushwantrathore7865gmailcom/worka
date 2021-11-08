@@ -1,5 +1,6 @@
 import re
 
+import requests
 from django.http import HttpResponse
 from django.db.models import Q
 from django.utils.http import urlsafe_base64_decode
@@ -23,7 +24,8 @@ from datetime import datetime
 from django.forms import modelformset_factory
 from django.db import transaction, IntegrityError
 from django.contrib.auth.decorators import login_required
-
+from bs4 import BeautifulSoup
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
 
 class SignUpView(View):
     form_class = SignUpForm
@@ -612,15 +614,11 @@ def advance_Search(request):
             experience = request.GET.get('experience', None)
             job_type = request.GET.get('job_type', None)
             sk = request.GET.get('demo',None)
-            if request.method == 'POST':
-                if 'l' in request.POST:
-                    key = request.POST['l']
-                    print(key)
-                    return HttpResponse('success')
-                else:
-                    return HttpResponse('error')
-
-
+            url = 'http://127.0.0.1:8000/recruiter/advance-search/'
+            html = requests.get(url, headers=headers).text
+            soup = BeautifulSoup(html, 'lxml')
+            section = soup.find_all("ul")
+            print(soup)
             if job_type == 'Job Type':
                 job_type = None
             if experience == 'Experience':
