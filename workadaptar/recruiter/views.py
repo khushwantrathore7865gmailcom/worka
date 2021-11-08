@@ -612,7 +612,13 @@ def advance_Search(request):
             experience = request.GET.get('experience', None)
             job_type = request.GET.get('job_type', None)
             sk = request.GET.get('demo',None)
-            print(sk)
+            if request.method == 'POST':
+                if 'l' in request.POST:
+                    key = request.POST['l']
+                    print(key)
+                    return HttpResponse('success')
+                else:
+                    return HttpResponse('error')
 
 
             if job_type == 'Job Type':
