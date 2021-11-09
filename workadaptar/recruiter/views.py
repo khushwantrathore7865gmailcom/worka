@@ -1,14 +1,14 @@
 import re
 
 import requests
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
 from .models import Employer, Employer_profile, Employer_candidate_jobanswer, Employer_job, Employer_job_Applied, \
     Employer_jobquestion, Employer_expired_job
-from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm, QuestionFormset
+from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm, QuestionFormset,keyWordFormset
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -608,17 +608,30 @@ def advance_Search(request):
         c_location = []
         c_exp = []
         c_jobtype = []
+        print(request.method)
         if request.method == 'GET':
-            job_title = request.GET.get('job_title', None)
-            location = request.GET.get('location', None)
-            experience = request.GET.get('experience', None)
-            job_type = request.GET.get('job_type', None)
-            sk = request.GET.get('demo',None)
-            url = 'http://127.0.0.1:8000/recruiter/advance-search/'
-            html = requests.get(url, headers=headers).text
-            soup = BeautifulSoup(html, 'lxml')
-            section = soup.find_all("ul")
-            print(soup)
+            formset = keyWordFormset(request.GET or None)
+        elif request.method == 'POST':
+            print(request.POST)
+            job_title = request.POST.get('job_title', None)
+            location = request.POST.get('location', None)
+            experience = request.POST.get('experience', None)
+            job_type = request.POST.get('job_type', None)
+            minExp = request.POST.get('minExp', None)
+            maxExp = request.POST.get('maxExp', None)
+            minlakh = request.POST.get('minlakh', None)
+            minthousand = request.POST.get('minthousand', None)
+            maxlakh = request.POST.get('maxlakh', None)
+            maxthousand = request.POST.get('maxthousand', None)
+            active = request.POST.get('active', None)
+
+            formset = keyWordFormset(request.POST)
+            if formset.is_valid():
+
+                for form in formset:
+
+                    keyword = form.cleaned_data.get('keyword')
+                    print(keyword)
             if job_type == 'Job Type':
                 job_type = None
             if experience == 'Experience':
@@ -671,6 +684,8 @@ def advance_Search(request):
             set2 = set1.intersection(s3)
             candidate_list_Set = set2.intersection(s4)
             candidate_list = list(candidate_list_Set)
-            return render(request, 'employer/advance-search.html')
+            return JsonResponse({"msg":"done"})
+
+        return render(request, 'employer/advance-search.html',{'form2':formset})
     else:
         return redirect('recruiter:employer/login')

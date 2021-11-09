@@ -99,3 +99,20 @@ class JobsQuestionForm(forms.Form):
 
 
 QuestionFormset = formset_factory(JobsQuestionForm, extra=1)
+
+class keyWordForm(forms.Form):
+    keyword = forms.CharField(
+        label='keyword',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Type your key word '
+        })
+    )
+    # answer_size =forms.IntegerField(label='size of answer',
+    #     widget=forms.TextInput(attrs={
+    #         'class': 'form-control',
+    #         'placeholder': 'Enter maxlength of answer by the candidate'
+    #     }))
+
+
+keyWordFormset = formset_factory(keyWordForm, extra=1)
