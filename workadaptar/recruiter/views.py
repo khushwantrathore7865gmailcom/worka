@@ -638,6 +638,18 @@ def advance_Search(request):
                 experience = None
             if location == 'Location':
                 location = None
+            if minExp =='Minimum':
+                minExp = None
+            if maxExp == 'To Maximum':
+                maxExp = None
+            if minlakh =='Lacs':
+                minlakh = None
+            if maxlakh =='Lacs':
+                maxlakh = None
+            if minthousand == 'Thousand':
+                minthousand = None
+            if maxthousand =='Thousand':
+                maxthousand = None
             print(job_type)
             print(experience)
             print(location)
