@@ -3,14 +3,15 @@ from datetime import datetime
 from django.core.paginator import Paginator, EmptyPage
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils.datastructures import MultiValueDictKeyError
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
 from .models import Candidate, Candidate_profile, Candidate_edu, Candidate_skills, Candidate_profdetail, \
-    Candidate_resume, Resume_order, Candidate_expdetail
+    Candidate_resume, Resume_order, Candidate_expdetail,Resume_headline
 from .forms import SignUpForm, ProfileRegisterForm, ProfileRegisterForm_edu, ProfileRegisterForm_profdetail, \
     ProfileRegisterForm_resume, ProfileRegistration_expdetail, ProfileRegistration_skills, Resumeforming_Entery, \
-    Resumeforming_Executive, Resumeforming_Mid, Resumeforming_senior
+    Resumeforming_Executive, Resumeforming_Mid, Resumeforming_senior,Resume_headlineForm
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -22,6 +23,7 @@ from django.shortcuts import render, redirect
 from jobseeker.tokens import account_activation_token
 from recruiter.models import Employer_job, Employer_jobquestion, Employer_job_Applied, Employer_job_Like, \
     Employer_job_Saved, Employer_candidate_jobanswer, Employer_expired_job, Employer_profile
+
 import razorpay
 from django.contrib.auth.decorators import login_required
 
@@ -835,6 +837,8 @@ def ProfileEdit(request):
             form4 = ProfileRegisterForm_resume(request.POST or None)
             form5 = ProfileRegistration_skills(request.POST or None)
             form6 = ProfileRegistration_expdetail(request.POST or None)
+            form7 = Resume_headlineForm(request.POST)
+            form8 = ProfileRegistration_skills(request.POST)
             # print(form1)
             if form1.is_valid():
                 print(form1.cleaned_data.get('profile_pic'))
@@ -862,19 +866,20 @@ def ProfileEdit(request):
                     f3.user_id = profile
                     f3.save()
             if form4.is_valid():
-                if form4.cleaned_data.get('coverletter_text'):
-                    f4 = form4.save(commit=False)
-                    f4.user_id = profile
+                f4 = form4.save(commit=False)
+                f4.user_id = profile
+                try:
+                    f=request.FILES['resume_link']
+                except MultiValueDictKeyError:
+                    f = False
+                if f is not False:
+                    f4.resume_link=f
                     f4.save()
 
                 # f5 = form5.save(commit=False)
                 # f5.user_id = profile
                 # f5.save()
-            if form5.is_valid():
-                if form5.cleaned_data.get('skill'):
-                    f4 = form4.save(commit=False)
-                    f4.user_id = profile
-                    f4.save()
+
                 # for form in form5:
                 #     # extract name from each form and save
                 #     skill = form.cleaned_data.get('skill')
@@ -896,6 +901,18 @@ def ProfileEdit(request):
                     f6 = form6.save(commit=False)
                     f6.user_id = profile
                     f6.save()
+            if form7.is_valid():
+                f7 = form7.save(commit=False)
+                f7.user_id = profile
+                f7.save()
+            if form8.is_valid():
+                for form in form8:
+
+                    skill = form.cleaned_data.get('skill')
+                    rating =form.cleaned_data.get('rating')
+
+                    if skill:
+                        Candidate_skills(user_id=profile, skill=skill,rating=rating).save()
             return redirect('jobseeker:ProfileEdit')
         print(request.method)
         try:
@@ -908,24 +925,34 @@ def ProfileEdit(request):
             cr = Candidate_resume.objects.get(user_id=profile)
         except Candidate_resume.DoesNotExist:
             cr = None
+        if cr is not None:
+            re = True
+        else:
+            re = False
         try:
             cep = Candidate_expdetail.objects.get(user_id=profile)
         except Candidate_expdetail.DoesNotExist:
             cep = None
+        try:
+            Resume = Resume_headline.objects.get(user_id = profile)
+        except Resume_headline.DoesNotExist:
+            Resume = None
 
         form1 = ProfileRegisterForm(instance=c)
         form2 = ProfileRegisterForm_edu()
         form3 = ProfileRegisterForm_profdetail()
         form4 = ProfileRegisterForm_resume(instance=cr)
-        form5 = ProfileRegistration_skills()
+
         form6 = ProfileRegistration_expdetail(instance=cep)
+        form7 = Resume_headlineForm(instance=Resume)
+        form8=ProfileRegistration_skills()
         skills = Candidate_skills.objects.filter(user_id=profile)
         print(skills)
         edu = Candidate_edu.objects.filter(user_id=profile)
         professional = Candidate_profdetail.objects.filter(user_id=profile)
         return render(request, 'jobseeker/Profile.html',
-                      {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, "form5": form5, 'form6': form6,
-                       'skills': skills, 'edu': edu, 'professional': professional, 'c': c})
+                      {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, 'form6': form6,'form7':form7,'form8':form8,
+                       'skills': skills, 'edu': edu, 'professional': professional, 'c': c,'cr':cr,'re':re,'rh':Resume})
 
     else:
         return redirect('/')
@@ -1750,3 +1777,7 @@ def payment(request, Experience, add):
         print(r)
         return redirect('jobseeker:jobseeker_home')
     return render(request, 'jobseeker/payment.html', {'amount': a, 'user': name})
+
+
+def BuiltResume(request):
+    return render(request, 'jobseeker/BuiltResume.html')
