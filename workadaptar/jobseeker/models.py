@@ -144,6 +144,8 @@ class Candidate_profile(models.Model):
     gender = models.CharField(choices=Gender, max_length=255, null=True, blank=True)
     address = models.CharField(max_length=250, blank=True)
     city = models.CharField(max_length=50, blank=True)
+    pin = models.IntegerField(null=True)
+    url = models.URLField(null=True)
     state = models.CharField(choices=state_choices, max_length=255, null=True, blank=True)
     marital_status = models.CharField(choices=Martial_Status, max_length=255, null=True, blank=True)
     profile_pic = models.ImageField(upload_to="profile/users/%Y/%m/%d/", default='profile/avatar.png')

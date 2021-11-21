@@ -1,14 +1,725 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href=" {% static 'css/style12.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="shortcut icon" href="/static/images/green.png">
+
+    <style>
+        #progressbar {
+            margin-bottom: 30px;
+            overflow: hidden;
+            color: lightgrey
+        }
+        
+        #progressbar .active {
+            color: #2F8D46
+        }
+        
+        #progressbar li {
+            list-style-type: none;
+            font-size: 15px;
+            width: 25%;
+            float: left;
+            position: relative;
+            font-weight: 400
+        }
+        
+        #progressbar #step1:before {
+            content: " 1"
+        }
+        
+        #progressbar #step2:before {
+            content: " 2"
+        }
+        
+        #progressbar #step3:before {
+            content: " 3"
+        }
+        
+        #progressbar #step4:before {
+            content: "4"
+        }
+        
+        #progressbar li:before {
+            width: 50px;
+            height: 50px;
+            line-height: 45px;
+            display: block;
+            font-size: 20px;
+            color: #ffffff;
+            background: lightgray;
+            border-radius: 50%;
+            margin: 0 auto 10px auto;
+            padding: 2px
+        }
+        
+        #progressbar li:after {
+            content: '';
+            width: 100%;
+            height: 2px;
+            background: lightgray;
+            position: absolute;
+            left: 0;
+            top: 25px;
+            z-index: -1
+        }
+        
+        #progressbar li.active:before,
+        #progressbar li.active:after {
+            background: #2F8D46
+        }
+        
+        .progress {
+            height: 20px
+        }
+        
+        .progress-bar {
+            background-color: #2F8D46
+        }
+    </style>
 </head>
+
 <body>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-    {{form4}}
-    <button type="submit">submit</button>
-</form>
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a class="" href="#"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <nav class="navbar mr-auto">
+                                    <form class="form-inline new-form">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+                                            <button class="search">Search</button>
+                                        </div>
+                                    </form>
+                                </nav>
+
+
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{% url 'recruiter:employer_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true" style="font-size: 27px;"></i></a>
+                                        <span class="menu-text">Home</span>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{% url 'recruiter:job_post' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-briefcase"></i></a>
+                                        <span class="menu-text">Add job </span>
+                                    </li>
+                                    <!--	  <li class="nav-item">-->
+                                    <!--        <a class="nav-link" href="#">Resume</a>-->
+                                    <!--      </li>-->
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'recruiter:advance-search' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-search"></i></a>
+                                        <span class="menu-text">Adv Search</span>
+                                    </li>
+
+                                    <li class="nav-item ">
+                                        <a class="nav-link " href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-phone-square"></i></a>
+                                        <span class="menu-text">Contact Us </span>
+                                    </li>
+
+                                    {% comment %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-address-card fa-2x"></i></a>
+                                        <span class="menu-text">About Us </span>
+                                    </li> {% endcomment %}
+
+
+                                    <li class="nav-item bell-icon ">
+                                        <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-bell" aria-hidden="true"></i> </a>
+                                        <span class="menu-text">Notification</span>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><img src="images/job-portal/78a389427595e07efd8a3870fe50c28c.jpg"></a>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <section class="advance-search" style="padding-top: initial;    margin-bottom: 50px;">
+        <div class="container">
+            <!-- <ul id="progressbar">
+                <li class="active" id="step1">
+                    <strong>Step 1</strong>
+                </li>
+                <li class="active" id="step2"><strong>Step 2</strong></li>
+                <li id="step3"><strong>Step 3</strong></li>
+                <li id="step4"><strong>Step 4</strong></li>
+            </ul> -->
+            <div class="row" style="display: block;">
+
+                <div class="advanced-search-body">
+
+                    <div class="search-body">
+                        <div class="search-body-header">
+                            <h2>Resume Details
+                                <!-- <button type="button" class="close" style="line-height: normal;padding-top: 23px;font-size: x-large;padding-right: 24px;"><span aria-hidden="true" style="color:white">&times;</span></button> -->
+                            </h2>
+                        </div>
+                        <form method="POST" style="margin-top: 20px;">
+                            {% csrf_token %}
+
+                            <div class="search-search-body">
+                                <h3>Personal Details</h3>
+                                <ul>
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom01" class="is-valid">First name *</label>
+                                            <input type="text" placeholder="" class="form-control is-valid" id="name" name="name" value="" required>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom02" class="is-valid">Middle name</label>
+                                            <input type="text" class="form-control is-valid" id="middlename" name="middlename" value="">
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom02" class="is-valid">Last name *</label>
+                                            <input type="text" class="form-control is-valid" id="lastname" name="lastname" value="" required>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom02" class="is-valid">Date Of Birth *</label>
+                                            <input type="date" class="form-control is-valid" id="dob" name="dob" value="" required>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom02" class="is-valid">Gender *</label>
+                                            <select class="custom-select is-valid" id="gender" name="gender">
+                                    <option selected="">Select</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Other</option>
+                                    </select>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom02" class="is-valid">Marital Status *</label>
+                                            <select class="custom-select is-valid" id="marital_status" name="marital_status">
+                                    <option selected="">Select</option>
+                                    <option value="1">Unmarried</option>
+                                    <option value="2">Married</option>
+                                    <option value="3">Devorced</option>
+                                    </select>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom11" class="is-invalid">Email *</label>
+                                            <input type="email" class="form-control is-valid" aria-label="Email" id="email" name="email" required>
+                                            <div class="invalid-feedback"> Please provide a valid Email. </div>
+                                        </div>
+
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom11" class="is-invalid">Mobile *</label>
+                                            <input type="mobile" class="form-control is-valid" aria-label="MobileNo" id="mobile" name="mobile" required>
+                                            <div class="invalid-feedback"> Please provide a valid mobile No. </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom02" class="is-valid">Address *</label>
+                                            <textarea type="text" class="form-control is-valid" id="address" name="address" value="" required></textarea>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom03" class="is-invalid">City *</label>
+                                            <select class="custom-select is-valid" id="city" name="city">
+                                    <option selected="">Select</option>
+                                    <option value="1">Nashik</option>
+                                    <option value="2">Delhi</option>
+                                    <option value="3">Mumbai</option>
+                                    </select>
+                                            <div class="invalid-feedback"> Please provide a valid city. </div>
+                                        </div>
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label class="is-invalid">State *</label>
+                                            <select class="form-control is-valid" id="state" name="state">
+                                    <option selected="">Select</option>
+                                    <option value="1">Gujarat</option>
+                                    <option value="2">Maharashtra</option>
+                                    <option value="3">Jammu and Kashmir</option>
+                                    </select>
+                                            <div class="invalid-feedback"> Please provide a valid state. </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- <div class="form-row">
+                                        <div class="col-md-12 mb-4">
+                                            <div class="custom-file pmd-custom-file-outline">
+                                                <input type="file" class="custom-file-input is-valid" id="outlineValidatedCustomFile" required>
+                                                <label class="custom-file-label is-invalid" for="outlineValidatedCustomFile">Choose file...</label>
+                                                <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="form-row">
+                                    <div class="mb-4 col-md-12">
+                                        <div class="custom-control custom-checkbox pmd-checkbox">
+                                            <input type="checkbox" class="custom-control-input is-invalid" id="outlineCustomControlValidation1" required>
+                                            <label class="custom-control-label is-invalid" for="outlineCustomControlValidation1">Agree to Terms and Conditions</label>
+                                            <div class="invalid-feedback">Example invalid feedback text</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                    <div class="form-row">
+                                        <div class="col-md-4 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom05" class="is-invalid">Pin Code *</label>
+                                            <input type="text" class="form-control is-valid" id="pin" name="pin" required>
+                                            <div class="invalid-feedback"> Please provide a valid zip. </div>
+                                        </div>
+                                        <div class="col-md-8 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom11" class="is-invalid">Portfolio Website Url</label>
+                                            <input type="url" placeholder="Optional" class="form-control is-valid" id="url" name="url" aria-label="url">
+                                            <div class="invalid-feedback"> Please provide a valid Url. </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 ">
+                                            <label for="outlineValidationCustom11" class="is-invalid">Image</label>
+                                            <div class="custom-file pmd-custom-file-outline">
+                                                <input type="file" class="custom-file-input is-valid" id="image" name="image">
+                                                <label class="custom-file-label is-invalid" for="outlineValidatedCustomFile">Choose file...</label>
+                                                <div class="invalid-feedback">Example invalid custom file feedback</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                <label for="outlineValidationCustom02" class="is-valid">Skills *</label>
+                                                <textarea type="text" class="form-control is-valid" placeholder="Java,Python,etc." id="skills" name="skills" value="" required></textarea>
+                                                <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom02" class="is-valid">Personal goal/interest *</label>
+                                            <textarea type="text" class="form-control is-valid" id="personalinterest" name="personalinterest" value="" required></textarea>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+                                    </div>
+                                </ul>
+
+                                <h3>Acadmic History</h3>
+
+                                <ul class="was-validated">
+                                    <div class="form-row">
+                                        <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom01" class="is-valid">School/College Name *</label>
+                                            <input type="text" placeholder="" class="form-control is-valid" id="scname" name="scname" value="" required>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label class="is-invalid">Degree *</label>
+                                            <select class="form-control is-valid" id="degree" name="degree">
+                                                    <option selected="">Select</option>
+                                                    <option value="1">10th</option>
+                                                    <option value="2">12th</option>
+                                                    <option value="3">Graduation</option>
+                                                    <option value="4">Post Graduation</option>
+                                                    <option value="5">Phd</option>
+                                            </select>
+                                            <div class="invalid-feedback"> Please provide a valid state. </div>
+                                        </div>
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label class="is-invalid">Specialization *</label>
+                                            <select class="form-control is-valid" id="specialization" name="specialization">
+                                                    <option selected="">Select</option>
+                                                    <option value="1">Agriculture</option>
+                                                    <option value="2">BioChemistry</option>
+                                                    <option value="3">Computer Science</option>
+                                                    <option value="4">Electronics</option>
+                                                    <option value="5">Mathematics</option>
+                                            </select>
+                                            <div class="invalid-feedback"> Please provide a valid state. </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row" style='display: contents;'>
+                                        <div class="custom-control custom-checkbox mb-3">
+                                            <input type="checkbox" class="custom-control-input" id="studding" name="studding" required>
+                                            <label class="custom-control-label" for="customControlValidation1" style="color: black;">Currently Studding</label>
+                                            <div class="invalid-feedback">
+                                                <div class="form-row">
+                                                    <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                        <label for="outlineValidationCustom01" class="is-valid" style="color: black;">Start Year *</label>
+                                                        <input type="date" placeholder="" class="form-control is-valid" id="startyr" name="startyr" value="" required>
+                                                    </div>
+                                                    <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                        <label for="outlineValidationCustom01" class="is-valid" style="color: black;">End Year *</label>
+                                                        <input type="date" placeholder="" class="form-control is-valid" id="endyr" name="endyr" value="" required>
+                                                    </div>
+                                                </div>
+                                                <div class="form-row">
+                                                    <div class="col-md-3 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                        <label for="outlineValidationCustom01" class="is-valid">Mark/Percentage *</label>
+                                                        <input type="number" placeholder="" class="form-control is-valid" id="per" name="per" value="" required>
+                                                        <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row" style="display: grid;margin-bottom: 20px;">
+                                        <button class="btn btn-outline-success" onclick="">+</button>
+                                    </div>
+                                </ul>
+
+                                <h3>Work Experience</h3>
+                                <ul class="was-validated">
+                                    <div class="form-row">
+                                        <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom01" class="is-valid">Company/Orgnization Name *</label>
+                                            <input type="text" placeholder="" class="form-control is-valid" id="orgname" name="orgname" value="" required>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom01" class="is-valid">Designation *</label>
+                                            <input type="text" placeholder="" class="form-control is-valid" id="designation" name="designation" value="" required>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+                                        <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom01" class="is-valid">Salary *</label>
+                                            <input type="text" placeholder="2 LPA" class="form-control is-valid" id="salary" name="salary" value="" required>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="form-row" style='display: contents;'>
+                                        <div class="custom-control custom-checkbox mb-3">
+                                            <input type="checkbox" class="custom-control-input" id="working" name="working" required>
+                                            <label class="custom-control-label" for="customControlValidation1" style="color: black;">Currently Working</label>
+                                            <div class="invalid-feedback">
+                                                <div class="form-row">
+                                                    <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                        <label for="outlineValidationCustom01" class="is-valid" style="color: black;">Start Year *</label>
+                                                        <input type="date" placeholder="" class="form-control is-valid" id="startyear" name="startyear" value="" required>
+                                                    </div>
+                                                    <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                        <label for="outlineValidationCustom01" class="is-valid" style="color: black;">End Year *</label>
+                                                        <input type="date" placeholder="" class="form-control is-valid" id="endyear" name="endyear" value="" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                            <label for="outlineValidationCustom01" class="is-valid">Details *</label>
+                                            <textarea type="text" placeholder="" class="form-control is-valid" id="workdetails" name="workdetails" value="" required></textarea>
+                                            <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                        </div>
+
+                                    </div>
+                                    <div class="form-row" style="display: grid;margin-bottom: 20px;">
+                                        <button class="btn btn-outline-success" onclick="">+</button>
+                                    </div>
+
+                                </ul>
+
+                                <h3>Certification</h3>
+
+                                <ul class="was-validated">
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input type="checkbox" class="custom-control-input" id="certi" name="certi" required>
+                                        <label class="custom-control-label" for="customControlValidation1" style="color: black;">Doesn't Have Certificate</label>
+                                        <div class="invalid-feedback">
+
+                                            <div class="form-row">
+                                                <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                    <label for="outlineValidationCustom01" class="is-valid" style="color: black;">Organization Name *</label>
+                                                    <input type="text" placeholder="" class="form-control is-valid" id="certiorg" name="certiorg" value="" required>
+                                                    <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                    <label for="outlineValidationCustom01" class="is-valid" style="color: black;">Certificate Title *</label>
+                                                    <input type="text" placeholder="" class="form-control is-valid" id="certititle" name="certititle" value="" required>
+                                                    <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+
+                                                <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                    <label for="outlineValidationCustom01" class="is-valid" style="color: black;">Start Year *</label>
+                                                    <input type="date" placeholder="" class="form-control is-valid" id="startcerti" name="startcerti" value="" required>
+                                                </div>
+                                                <div class="col-md-6 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                    <label for="outlineValidationCustom01" class="is-valid" style="color: black;">End Year *</label>
+                                                    <input type="date" placeholder="" class="form-control is-valid" id="endcerti" name="endcerti" value="" required>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
+                                                    <label for="outlineValidationCustom02" class="is-valid" style="color: black;">Details *</label>
+                                                    <textarea type="text" class="form-control is-valid" id="certidetails" name="certidetails" value="" required></textarea>
+                                                    <!-- <div class="valid-feedback"> Looks good! </div> -->
+                                                </div>
+                                            </div>
+                                            <div class="form-row" style="display: grid;">
+                                                <button class="btn btn-outline-success" onclick="">+</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </ul>
+                                <!-- <h3>Enter Any Keyword</h3>
+                                <ul id="demo">
+
+
+                                    <li>Software</li>
+                                    <li>CEO</li>
+                                    <li>director, manager</li>
+                                    <li>Software Developer</li>
+                                    <li>Front -end Developer</li>
+                                    <li>Front -end Developer</li>
+                                    <li>Webflow</li>
+                                    <li>Back -end Developer</li>
+                                    <li>Wordpress</li>
+                                    <li>Manager Director</li>
+
+
+                                    <li class="desk" style="float:right;    "><input style="border: ridge;margin-top:5px" type="text" id="textLi" placeholder="Type your key word  +">
+                                        <button class="btn btn-outline-success" onclick="myKeys()">+</button>
+                                    </li>
+                                    <li class="mob"><input type="text" id="textL" placeholder="Type your key word ">
+                                        <button class="btn btn-outline-success" onclick="myKeys()">+</button>
+                                    </li>
+
+                                </ul> -->
+                                <!-- {{ form2.management_form }} {% for form in form2 %}
+                                <div class="row form-row spacer">
+                                    <div class="col-8">
+                                        <div class="input-group">
+                                            {{form.keyword}}
+                                            <div class="input-group-append">
+                                                <button class="btn btn-success add-form-row">+</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %} -->
+
+                                <!-- <h3>Total Experience</h3> -->
+
+                                <!-- <div class="select-option-experience">
+                                    <div class="select-option-experience-first">
+                                        <select>
+									<option>Minimum</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+								<select>
+								</div>
+								<span class="to">to</span>
+								<div class="select-option-experience-first">
+								<select>
+									<option>To Maximum</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+								<select>
+							</div>
+						</div> -->
+
+                                <!-- <h3>Annual Salery <span class="usd">USD <select></select></span>
+                                </h3> -->
+
+                                <!-- <div class="select-option-salery">
+                                    <div class="select-option-experience-first">
+                                        <select>
+									<option>Lacs</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+								<select>
+								</div>
+								<div class="select-option-experience-first">
+								<select>
+									<option>Thousand</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+								<select>
+								</div>
+								<span class="to">to</span>
+							<div class="select-option-experience-first">
+								<select>
+									<option>Lacs</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+								<select>
+								</div>
+								<div class="select-option-experience-first">
+								<select>
+									<option>Thousand</option>
+									<option>1</option>
+									<option>2</option>
+									<option>3</option>
+								<select>
+								</div>
+							</div> -->
+
+
+                            </div>
+
+                            <div class="search-body-footer">
+                                <div class="search-body-footer-left">
+                                    <button class="btn btn-outline-success"><i class="fa fa-save" aria-hidden="true"></i> Submit</button>
+                                    <span>Clear x</span>
+                                </div>
+
+                                <!-- <div class="search-body-footer-right">
+                                    <p><span>Active in:</span>
+                                        <select>
+								<option>30 days</option>
+								<option>30 days</option>
+							</select>
+
+                                        <span class="question"><i class="fa fa-question-circle" aria-hidden="true"></i></span>
+                                    </p>
+                                </div> -->
+
+
+                            </div>
+
+                    </div>
+
+                </div>
+
+
+                </form>
+            </div>
+        </div>
+
+    </section>
+
+
+    {% comment %}
+    <footer>
+        <p>Footer section</p>
+    </footer> {% endcomment %}
+
+    <!-- Footer -->
+
+    <footer class="bg-dark " style="margin-top: 10px;">
+        <div class="container" style="    max-inline-size: inherit;padding-top: 20px;">
+            <div class="row">
+                <div class="" style="    margin-left: auto;"><img src="/static/images/" style=" " alt="" width="50" class="mb-3">
+                    <p class="font-italic" style="color: white;">Get Personalised Jobs !!<br> Tell us what kind of a job you are looking out for and stay updated with latest opportunities.</p>
+                    <ul class="list-inline mt-4">
+                        <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i style="font-size: xx-large;    color: #00ddf3;" class="fa fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i style="font-size: xx-large;color: #007eff;" class="fa fa-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i style="font-size: xx-large;color: #f704d9;" class="fa fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i style="font-size: xx-large;color: #f70404;" class="fa fa-pinterest"></i></a></li>
+                        <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i style="font-size: xx-large;color: #1e04f7;" class="fa fa-vimeo"></i></a></li>
+                    </ul>
+                </div>
+                {% comment %}
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                    <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Account</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="#" class="text" style="color: white;">Job Seeker Login</a></li>
+                        <li class="mb-2"><a href="#" class="text" style="color: white;">Job Seeker Register</a></li>
+                        <li class="mb-2"><a href="#" class="text" style="color: white;">Recruiter Login</a></li>
+                        <li class="mb-2"><a href="#" class="text" style="color: white;">Recruiter Register</a></li>
+                    </ul>
+                </div> {% endcomment %}
+                <div class="col-lg-2 col-md-6 mb-4 mb-lg-0" style="align-self: center;">
+                    <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Company</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2"><a href="#" class="text" style="color: white;">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text" style="color: white;">Desclaimer</a></li>
+                        <!-- <li class="mb-2"><a href="#" class="text-muted">Wishlist</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li> -->
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-lg-0" style="align-self: center;">
+                    <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Buy package</h6>
+                    <p class="text mb-4" style="color: white;">Now you can buy resume package</p>
+
+                </div>
+            </div>
+            <!-- Copyrights -->
+            <div class=" py-4" style="display: contents;">
+                <div class="container text-center">
+                    <p class="text mb-0 py-2" style="color: white;">© 2021 Workadapter All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+
+
+    </footer>
+    <!-- End -->
+
+
+    <script>
+        function myKeys() {
+
+            var x = document.getElementById("textLi").value;
+            var l = document.createElement("LI");
+            l.appendChild(document.createTextNode(x));
+            document.getElementById("demo").appendChild(l);
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
+
 </html>

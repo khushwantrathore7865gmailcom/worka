@@ -1780,4 +1780,24 @@ def payment(request, Experience, add):
 
 
 def BuiltResume(request):
+    if request.method=='POST':
+        name = request.GET.get('name', None)
+        mname = request.GET.get('middlename', None)
+        lname = request.GET.get('lastname', None)
+        dob = request.GET.get('dob', None)
+        gender = request.GET.get('gender', None)
+        marital_status = request.GET.get('marital_status', None)
+        email = request.GET.get('email', None)
+        mobile = request.GET.get('mobile', None)
+        address = request.GET.get('address', None)
+        city = request.GET.get('city', None)
+        state = request.GET.get('state', None)
+        pin = request.GET.get('pin', None)
+        url = request.GET.get('search_box', None)
+        img = request.FILES['image']
+
+
+
+
+
     return render(request, 'jobseeker/BuiltResume.html')
