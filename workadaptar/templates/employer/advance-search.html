@@ -1,156 +1,203 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-      <link rel="stylesheet" href=" {% static 'css/style12.css'%}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href=" {% static 'css/style12.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 
-  </head>
-  <body>
+    <style>
+    {% comment %} .list-inline-item{
+        font-family: Lato;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: rgba(0, 0, 0, 1);
+    box-shadow: 0px 8px 11px 0px rgb(199 199 199 / 82%);
+    background: #FCFCFF;
+    display: inline-block;
+    padding:5px;
+    margin:5px;
+    border-radius: 10px;
+    border: 1px solid rgba(222, 221, 221, 1);"
+    } {% endcomment %}
+    </style>
+</head>
 
-	<header>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 col-12">
-					<div class="top-navbar">
-						<nav class="navbar navbar-expand-lg ">
-  <a class="" href="#"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<body>
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a class="" href="#"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <nav class="navbar mr-auto">
-  <form class="form-inline new-form">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
-      </div>
-      <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
-	  <button class="search">Search</button>
-    </div>
-  </form>
-</nav>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <nav class="navbar mr-auto">
+                                    <form class="form-inline new-form">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+                                            <button class="search">Search</button>
+                                        </div>
+                                    </form>
+                                </nav>
 
 
-	<ul class="navbar-nav ml-auto">
-	<li class="nav-item ">
-    <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
-    <span class="menu-text">Home</span>
-  </li>
-     <li class="nav-item ">
-    <a class="nav-link" href="{% url 'recruiter:job_post' %}"><i class="fas fa-briefcase"></i></a>
-    <span class="menu-text">Add job </span>
-  </li>
-<!--	  <li class="nav-item">-->
-<!--        <a class="nav-link" href="#">Resume</a>-->
-<!--      </li>-->
-<li class="nav-item ">
-    <a class="nav-link " href="#"><i class="fas fa-phone-square-alt fa-xs"></i></a>
-    <span class="menu-text">Contact Us </span>
-  </li>
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{% url 'recruiter:employer_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true" style="font-size: 27px;"></i></a>
+                                        <span class="menu-text">Home</span>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{% url 'recruiter:job_post' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-briefcase"></i></a>
+                                        <span class="menu-text">Add job </span>
+                                    </li>
+                                    <!--	  <li class="nav-item">-->
+                                    <!--        <a class="nav-link" href="#">Resume</a>-->
+                                    <!--      </li>-->
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'recruiter:advance-search' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-search"></i></a>
+                                        <span class="menu-text">Adv Search</span>
+                                    </li>
+                                    
+                                    <li class="nav-item ">
+                                        <a class="nav-link " href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-phone-square"></i></a>
+                                        <span class="menu-text">Contact Us </span>
+                                    </li>
 
-<li class="nav-item">
-    <a class="nav-link" href="#"><i class="fas fa-address-card fa-2x"></i></a>
-    <span class="menu-text">About Us </span>
-  </li>
+                                    {% comment %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-address-card fa-2x"></i></a>
+                                        <span class="menu-text">About Us </span>
+                                    </li> {% endcomment %}
+                                    
 
-<li class="nav-item bell-icon ">
-    <a class="nav-link" href="#"><i class="fa fa-bell" aria-hidden="true"></i> </a>
-    <span class="menu-text">Notification</span>
-  </li>
+                                    <li class="nav-item bell-icon ">
+                                        <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-bell" aria-hidden="true"></i> </a>
+                                        <span class="menu-text">Notification</span>
+                                    </li>
 
-	  <li class="nav-item">
-        <a class="nav-link" href="#"><img src="images/job-portal/78a389427595e07efd8a3870fe50c28c.jpg"></a>
-      </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><img src="images/job-portal/78a389427595e07efd8a3870fe50c28c.jpg"></a>
+                                    </li>
 
-	 </ul>
+                                </ul>
 
-  </div>
-</nav>
-					</div>
-				</div>
-			</div>
-		</div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	</header>
+    </header>
 
-<section class="advance-search">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-10 col-12 mx-auto">
-				<div class="adv-search-form">
-					<form>
-					<div class="search-form">
-						<div class="form-group">
-							<input type="text" placeholder="job title" id="job_title" name="job_title" >
-							<i class="fa fa-search" aria-hidden="true"></i>
-						</div>
-						<div class="form-group">
-							<select id="location" name="location" >
-								<option>Location</option>
-								<option>Delhi</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select id="experience" name="experience" >
-								<option>Experience</option>
-								<option>1 Year</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select id="job_type" name="job_type" >
-								<option>Job Type</option>
-								<option>1 Year</option>
-							</select>
-						</div>
+    <section class="advance-search" style="padding-top: initial;    margin-bottom: 50px;">
+        <div class="container">
+            <div class="row">
 
-						</div>
-						<div class="form-btns">
-							<button>Search</button>
-							<button>Advance Search</button>
-						</div>
-						
-					</form>
-				</div>	
-				
-				
-			<div class="advanced-search-body">
-				<div class="search-body">
-					<div class="search-body-header">
-						<h2>Advance Search <span><img src="images/cross.png"></span></h2>
-					</div>
-					
-					<div class="search-search-body">
-						<h3>Enter Any Keyword</h3>
-							<ul>
-								<li>Software</li>
-								<li>CEO</li>
-								<li>director, manager</li>
-								<li>Software Developer</li>
-								<li>Front -end Developer</li>
-								<li>Front -end Developer</li>
-								<li>Webflow</li>
-								<li>Back -end Developer</li>
-								<li>Wordpress</li>
-								<li>Manager Director</li>
-								<li class="desk"><input type="text" placeholder="Type your key word  +"></li>
-								<li class="mob"><input type="text" placeholder="Type your key word "></li>
-								
-							</ul>
-							
-							
-							<h3>Total Experience</h3>
-							
-						<div class="select-option-experience">
-							<div class="select-option-experience-first">
-								<select>
+                <div class="advanced-search-body">
+                    <div class="search-body">
+                        <div class="search-body-header">
+                            <h2>Advance Search <button type="button" class="close" style="line-height: normal;padding-top: 23px;font-size: x-large;padding-right: 24px;"><span aria-hidden="true" style="color:white">&times;</span></button></h2>
+                        </div>
+
+                        <div class="search-search-body">
+                            <div class="adv-search-form">
+                                <form  method="POST" style="margin-top: 20px;">
+                                    {% csrf_token %}
+                                    <div class="search-form">
+                                        <div class="form-group">
+                                            <input type="text" placeholder="job title" id="job_title" name="job_title">
+                                            <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="location" name="location">
+                                            <option>Location</option>
+                                            <option>Delhi</option>
+                                        </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="experience" name="experience">
+                                            <option>Experience</option>
+                                            <option>1 Year</option>
+                                        </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select id="job_type" name="job_type">
+                                            <option>Job Type</option>
+                                            <option>1 Year</option>
+                                        </select>
+                                        </div>
+
+                                    </div>
+                                    <!-- <div class="form-btns">
+                                            <button>Search</button>
+                                            <button>Advance Search</button>
+                                        </div> -->
+
+                                </form>
+                            </div>
+                            <h3>Enter Any Keyword</h3>
+                            <ul id="demo">
+                            
+
+                                <li>Software</li>
+                                <li>CEO</li>
+                                <li>director, manager</li>
+                                <li>Software Developer</li>
+                                <li>Front -end Developer</li>
+                                <li>Front -end Developer</li>
+                                <li>Webflow</li>
+                                <li>Back -end Developer</li>
+                                <li>Wordpress</li>
+                                <li>Manager Director</li>
+                                
+
+                                <li class="desk" style="float:right;    "><input style="border: ridge;margin-top:5px"type="text" id="textLi" placeholder="Type your key word  +">
+                                <button class="btn btn-outline-success"onclick="myKeys()">+</button>
+                                </li>
+                                <li class="mob"><input type="text" id="textL" placeholder="Type your key word ">
+                                <button class="btn btn-outline-success"onclick="myKeys()">+</button>
+                                </li>
+                                
+                            </ul>
+                             {{ form2.management_form }} {% for form in form2 %}
+                            <div class="row form-row spacer">
+                                <div class="col-8">
+                                     <div class="input-group">
+                                        {{form.keyword}}
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success add-form-row">+</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            
+                            <h3>Total Experience</h3>
+
+                            <div class="select-option-experience">
+                                <div class="select-option-experience-first">
+                                    <select>
 									<option>Minimum</option>
 									<option>1</option>
 									<option>2</option>
@@ -168,11 +215,12 @@
 							</div>
 						</div>
 							
-							<h3>Annual Salery <span class="usd">USD <select></select></span></h3>
-							
-						<div class="select-option-salery">
-						<div class="select-option-experience-first">
-								<select>
+							<h3>Annual Salery <span class="usd">USD <select></select></span>
+                                    </h3>
+
+                                    <div class="select-option-salery">
+                                        <div class="select-option-experience-first">
+                                            <select>
 									<option>Lacs</option>
 									<option>1</option>
 									<option>2</option>
@@ -221,35 +269,97 @@
 								<option>30 days</option>
 								<option>30 days</option>
 							</select>
-							
-							<span class="question"><i class="fa fa-question-circle" aria-hidden="true"></i></span>
-							</p>
-						</div>
-						
-						
-					</div>
-					
-				</div>				
-			
-			</div>			
-				
-				
-				
-			</div>	
-		</div>	
-	</div>	
-</section>
+
+                                            <span class="question"><i class="fa fa-question-circle" aria-hidden="true"></i></span>
+                                            </p>
+                                        </div>
 
 
-<footer>
-<p>Footer section</p>
-</footer>
+                                    </div>
 
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+    </section>
+
+
+    {% comment %} <footer>
+        <p>Footer section</p>
+    </footer> {% endcomment %}
+
+    <!-- Footer -->
+
+            <footer class="bg-dark " style="margin-top: 10px;">
+                <div class="container" style="    max-inline-size: inherit;padding-top: 20px;">
+                    <div class="row">
+                        <div class="" style="    margin-left: auto;"><img src="/static/images/" style=" " alt="" width="50" class="mb-3">
+                            <p class="font-italic" style="color: white;">Get Personalised Jobs !!<br> Tell us what kind of a job you are looking out for and stay updated with latest opportunities.</p>
+                            <ul class="list-inline mt-4">
+                                <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i style="font-size: xx-large;    color: #00ddf3;" class="fa fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i style="font-size: xx-large;color: #007eff;" class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i style="font-size: xx-large;color: #f704d9;" class="fa fa-instagram"></i></a></li>
+                                <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i style="font-size: xx-large;color: #f70404;" class="fa fa-pinterest"></i></a></li>
+                                <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i style="font-size: xx-large;color: #1e04f7;" class="fa fa-vimeo"></i></a></li>
+                            </ul>
+                        </div>
+                        {% comment %} <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                            <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Account</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Job Seeker Login</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Job Seeker Register</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Recruiter Login</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Recruiter Register</a></li>
+                            </ul>
+                        </div> {% endcomment %}
+                        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0" style="align-self: center;">
+                            <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Company</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Privacy Policy</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Desclaimer</a></li>
+                                <!-- <li class="mb-2"><a href="#" class="text-muted">Wishlist</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li> -->
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mb-lg-0" style="align-self: center;">
+                            <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Buy package</h6>
+                            <p class="text mb-4" style="color: white;">Now you can buy resume package</p>
+
+                        </div>
+                    </div>
+                    <!-- Copyrights -->
+                    <div class=" py-4" style="display: contents;">
+                        <div class="container text-center">
+                            <p class="text mb-0 py-2" style="color: white;">© 2021 Workadapter All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </footer>
+            <!-- End -->
+
+    
+    <script>
+    function myKeys() {
+                                            
+        var x = document.getElementById("textLi").value;
+        var l = document.createElement("LI");
+        l.appendChild(document.createTextNode(x));
+        document.getElementById("demo").appendChild(l);
+    }
+    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+</body>
+
 </html>

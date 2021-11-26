@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
 
-
+    <link rel="shortcut icon" href="/static/images/green.png">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/static/js/wysihtml5-0.3.0.js"></script>
@@ -18,6 +18,9 @@
     <script type="text/javascript" src="/static/js/tcc_l.combined.1.0.6.min.js"></script>
     <link type="text/css" rel="stylesheet" href="{% static 'css/style13.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'plugins1.css' %}">
+
+
+
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -47,6 +50,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}">
     <link rel="stylesheet" type="text/css" href=" {% static 'css/main.css' %}">
 
+
+    <!-- <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script> -->
 
 </head>
 <style>
@@ -289,57 +294,245 @@
      ::-webkit-scrollbar-thumb:hover {
         background: grey;
     }
+    
+    .loader_bg {
+        position: fixed;
+        z-index: 9999999;
+        background: #fff;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .loader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    /* .loader.display-none {
+        position: fixed;
+        z-index: -10;
+        background: #fff;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        display: none;
+    } */
+    
+    .img1 {
+        width: 280px;
+    }
 </style>
+<script>
+    // // ("#loader").show();
+    // // const splash = document.querySelector('.loader_bg');
+    // // document.addEventListener('DOMContentLoaded', (e) => {
+    setTimeout(() => {
+        // alert("Hello");
+        document.getElementById('loader_bg').style.display = "none";
+        // splash.setAttribute("style", "display:none;");
+        // splash.classList.add('.display-none');
+
+        // $("#loader").fadeOut();
+
+    }, 6000);
+    // })
+</script>
 
 
-<header>
-    <div class="container" style="max-width: inherit;">
-        <div class="row" style="margin-bottom:-25px">
-            <div class="col-md-12 col-12" style="box-shadow: 10px 10px 41px -20px grey;">
-                <div class="top-navbar">
-                    <nav class="navbar navbar-expand-lg " style="margin-bottom: auto;">
-                        <a href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<body>
 
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mx-auto">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/">Home <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#work-main">How it works</a>
-                                </li>
-                                <!--	  <li class="nav-item">-->
-                                <!--        <a class="nav-link" href="#">Testimonial</a>-->
-                                <!--      </li>-->
+    <div id="loader_bg" class="loader_bg">
+        <div class="loader"><img class="img1" src="/static/images/Welcome to Workadaptar.gif" alt="#" />
 
-                            </ul>
-
-
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'jobseeker:resume' %}"> Build Resume</a>
-                                </li>
-                                <li class="nav-item button" style="border-start-start-radius:  20px 20px; border-end-end-radius: 20px; ">
-                                    <a class="nav-link" href="#" data-toggle="modal" data-target="#recruitermodal" style="padding-top: 10px;padding-bottom: 10px;">Recruiter Login</a>
-                                </li>
-                                <li class="nav-item button" style="border-start-start-radius:  20px 20px; border-end-end-radius: 20px; ">
-                                    <a class="nav-link" href="#" data-toggle="modal" data-target="#jobseekermodal" style="padding-top: 10px;padding-bottom: 10px;">Jobseeker Login</a>
-                                </li>
-                            </ul>
-
-                        </div>
-                    </nav>
-                </div>
-            </div>
         </div>
     </div>
 
-</header>
 
-<body>
+
+    <header>
+
+        <div class="container" style="max-width: inherit;">
+            <div class="row" style="margin-bottom:-25px">
+                <div class="col-md-12 col-12" style="box-shadow: 10px 10px 41px -20px grey;">
+                    {% if request.user.is_employeer %}
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a class="" href="{% url 'recruiter:employer_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <nav class="navbar mr-auto">
+                                    <form class="form-inline">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+                                        </div>
+                                    </form>
+                                </nav>
+
+
+
+
+                                <ul class="navbar-nav ml-auto">
+                                    <!--      <li class="nav-item">-->
+                                    <!--       <a class="nav-link" href="{% url 'recruiter:employer_home' %}">Home</a>-->
+                                    <!--      </li>-->
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+                                        <span class="menu-text">Home</span>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{% url 'recruiter:job_post' %}"><i class="fas fa-briefcase"></i></a>
+                                        <span class="menu-text">Add job </span>
+                                    </li>
+                                    <!--	  <li class="nav-item">-->
+                                    <!--        <a class="nav-link" href="#">Resume</a>-->
+                                    <!--      </li>-->
+                                    <li class="nav-item ">
+                                        <a class="nav-link " href="#"><i class="fas fa-phone-square-alt fa-xs"></i></a>
+                                        <span class="menu-text">Contact Us </span>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#"><i class="fas fa-address-card fa-2x"></i></a>
+                                        <span class="menu-text">About Us </span>
+                                    </li>
+
+                                    <li class="nav-item bell-icon ">
+                                        <a class="nav-link" href="#"><i class="fa fa-bell" aria-hidden="true"></i> </a>
+                                        <span class="menu-text">Notification</span>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <div class="dropdown">
+                                            <button class="dropbtn"><img src={{c.company_logo.url}}></button>
+                                            <div class="dropdown-content">
+                                                <a href="#">My Profile</a>
+                                                <a href="#">Edit Profile</a>
+                                                <a href="{% url 'recruiter:logout' %}">Log Out</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    {% elif request.user.is_candidate %}
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a class="" href="{% url 'jobseeker:jobseeker_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <nav class="navbar mr-auto">
+                                    <form class="form-inline" type="get">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" id="search_box" name="search_box" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+                                        </div>
+                                    </form>
+                                </nav>
+
+
+
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:resume' %}">Resume</a>
+                                    </li>
+
+                                    <li class="nav-item bell-icon">
+                                        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="dropdown">
+                                            <button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
+                                            <div class="dropdown-content">
+                                                <a href="{% url 'jobseeker:profile' %}">My Profile</a>
+                                                <a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
+                                                <a href="{% url 'jobseeker:logout' %}">Log Out</a>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+
+                            </div>
+                        </nav>
+                    </div>
+                    {% else %}
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mx-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#work-main">How it works</a>
+                                    </li>
+                                    <!--	  <li class="nav-item">-->
+                                    <!--        <a class="nav-link" href="#">Testimonial</a>-->
+                                    <!--      </li>-->
+
+                                </ul>
+
+
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:resume' %}"> Build Resume</a>
+                                    </li>
+                                    <li class="nav-item button" style="border-start-start-radius:  20px 20px; border-end-end-radius: 20px;">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#recruitermodal">Recruiter Login</a>
+                                    </li>
+                                    <li class="nav-item button" style="border-start-start-radius:  20px 20px; border-end-end-radius: 20px;">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#jobseekermodal">Jobseeker Login</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </nav>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </header>
+
     <section style="padding: 40px 0;padding-top: 80px;padding-bottom: inherit;">
         <div class="container">
             <div class="row">
@@ -496,7 +689,7 @@
             <h4>Brands </h4>
         </div>
         <!-- <div class="row customer-logos" id=customer-logos>  -->
-        <div class="tech-slideshow" style="    max-width: inherit;height: 130px;margin: 17px;background: linear-gradient(55deg, darkgreen 0%, green 5%, lightgreen 100%);">
+        <div class="tech-slideshow" style="    max-width: inherit;height: 130px;margin: 17px;background: rgb(223, 223, 223);">
             <div class="mover-1" style="text-align-last: justify;">
                 <img style="height: inherit;" src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image1.png">
                 <img style="height: inherit;" src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image2.png">
@@ -852,10 +1045,10 @@
             <!-- Footer -->
 
             <footer class="bg-dark " style="margin-top: 10px;">
-                <div class="container py-5" style="max-inline-size: max-conten">
-                    <div class="row py-4">
-                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="img/logo.png" alt="" width="180" class="mb-3">
-                            <p class="font-italic text-muted" style="color:white">Get Personalised Jobs !!<br> Tell us what kind of a job you are looking out for and stay updated with latest opportunities.</p>
+                <div class="container" style="    max-inline-size: inherit;padding-top: 20px;">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="/static/images/" style=" " alt="" width="50" class="mb-3">
+                            <p class="font-italic" style="color: white;">Get Personalised Jobs !!<br> Tell us what kind of a job you are looking out for and stay updated with latest opportunities.</p>
                             <ul class="list-inline mt-4">
                                 <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i style="font-size: xx-large;    color: #00ddf3;" class="fa fa-twitter"></i></a></li>
                                 <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i style="font-size: xx-large;color: #007eff;" class="fa fa-facebook"></i></a></li>
@@ -867,31 +1060,31 @@
                         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
                             <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Account</h6>
                             <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><a href="#" class="text-muted">Job Seeker Login</a></li>
-                                <li class="mb-2"><a href="#" class="text-muted">Job Seeker Register</a></li>
-                                <li class="mb-2"><a href="#" class="text-muted">Recruiter Login</a></li>
-                                <li class="mb-2"><a href="#" class="text-muted">Recruiter Register</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Job Seeker Login</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Job Seeker Register</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Recruiter Login</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Recruiter Register</a></li>
                             </ul>
                         </div>
                         <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
                             <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Company</h6>
                             <ul class="list-unstyled mb-0">
-                                <li class="mb-2"><a href="#" class="text-muted">Privacy Policy</a></li>
-                                <li class="mb-2"><a href="#" class="text-muted">Desclaimer</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Privacy Policy</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Desclaimer</a></li>
                                 <!-- <li class="mb-2"><a href="#" class="text-muted">Wishlist</a></li>
             <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li> -->
                             </ul>
                         </div>
                         <div class="col-lg-4 col-md-6 mb-lg-0">
                             <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Buy package</h6>
-                            <p class="text-muted mb-4">Now you can buy resume package</p>
+                            <p class="text mb-4" style="color: white;">Now you can buy resume package</p>
 
                         </div>
                     </div>
                     <!-- Copyrights -->
                     <div class=" py-4" style="display: contents;">
                         <div class="container text-center">
-                            <p class="text-muted mb-0 py-2">© 2021 Workadapter All rights reserved.</p>
+                            <p class="text mb-0 py-2" style="color: white;">© 2021 Workadapter All rights reserved.</p>
                         </div>
                     </div>
                 </div>

@@ -208,15 +208,17 @@
                             <h5 style="text-align: initial;margin-left: 22px;"><i style="color: #03A84E; font-size: 25px;" class="fa fa-map-marker" aria-hidden="true"></i> :
                                 <span>{{cp.city}},{{cp.state}}</span></h5>
 
-                            <h5 style="text-align: initial;margin-left: 22px;"> <i style="color: #03A84E; font-size: 30px;" class="fa fa-mobile-phone" aria-hidden="true"></i> : <span></span></h5>
+                            <h5 style="text-align: initial;margin-left: 22px;"> <i style="color: #03A84E; font-size: 30px;" class="fa fa-mobile-phone" aria-hidden="true"></i> : <span>
+                            <a href="{% url 'jobseeker:sendVerificationMail' %}"><i style="color: #03A84E;">verify</i></a>
+                            </span></h5>
                             <!--Need Update Here -->
 
                             <h5 style="text-align: initial;margin-left: 22px;"><i style="color: #03A84E; font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> : {% if c.is_email_verified %}
                                 <span>{{c.user}}  <i style="color: #03A84E; "class="fa fa-check">verified</i></span> {% else %}
                                 <span>{{c.user}}  <a href="{% url 'jobseeker:sendVerificationMail' %}"><i style="color: #03A84E;">verify</i></a></span> {% endif %}
                             </h5>
-                            <h5 style="text-align: initial;margin-left: 22px;">Resume Headline:
-                                <span>{{cep.Profile_Summary}}</span></h5>
+                            {% comment %} <h5 style="text-align: initial;margin-left: 22px;">Resume Headline:
+                                <span>{{cep.Profile_Summary}}</span></h5> {% endcomment %}
 
                         </div>
                     </div>
