@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
 
     <style>
-    .input-group{
+
+    {% comment %} .list-inline-item{
+
         font-family: Lato;
     font-size: 14px;
     font-style: normal;
@@ -24,12 +26,16 @@
     color: rgba(0, 0, 0, 1);
     box-shadow: 0px 8px 11px 0px rgb(199 199 199 / 82%);
     background: #FCFCFF;
-    
+
+    display: inline-block;
+
     padding:5px;
     margin:5px;
     border-radius: 10px;
     border: 1px solid rgba(222, 221, 221, 1);"
-    } 
+
+    } {% endcomment %}
+
     </style>
 </head>
 
@@ -62,7 +68,9 @@
 
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item ">
-                                        <a class="nav-link" href="{% url 'recruiter:employer_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true"></i></a>
+
+                                        <a class="nav-link" href="{% url 'recruiter:employer_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true" style="font-size: 27px;"></i></a>
+
                                         <span class="menu-text">Home</span>
                                     </li>
                                     <li class="nav-item ">
@@ -76,6 +84,8 @@
                                         <a class="nav-link" href="{% url 'recruiter:advance-search' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-search"></i></a>
                                         <span class="menu-text">Adv Search</span>
                                     </li>
+
+
                                     <li class="nav-item ">
                                         <a class="nav-link " href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-phone-square"></i></a>
                                         <span class="menu-text">Contact Us </span>
@@ -108,9 +118,11 @@
 
     </header>
 
-    <section class="advance-search" style="padding-top: initial;margin-bottom:50px;">
+
+    <section class="advance-search" style="padding-top: initial;    margin-bottom: 50px;">
         <div class="container">
-            <div class="row" style="display: contents;">
+            <div class="row">
+
 
                 <div class="advanced-search-body">
                     <div class="search-body">
@@ -152,11 +164,37 @@
                                             <button>Advance Search</button>
                                         </div> -->
 
+
+                                </form>
+                            </div>
                             <h3>Enter Any Keyword</h3>
-                            <div class="row" style="margin-top:20px;border: 1px solid rgba(222, 221, 221, 1);">
+                            <ul id="demo">
+                            
+
+                                <li>Software</li>
+                                <li>CEO</li>
+                                <li>director, manager</li>
+                                <li>Software Developer</li>
+                                <li>Front -end Developer</li>
+                                <li>Front -end Developer</li>
+                                <li>Webflow</li>
+                                <li>Back -end Developer</li>
+                                <li>Wordpress</li>
+                                <li>Manager Director</li>
+                                
+
+                                <li class="desk" style="float:right;    "><input style="border: ridge;margin-top:5px"type="text" id="textLi" placeholder="Type your key word  +">
+                                <button class="btn btn-outline-success"onclick="myKeys()">+</button>
+                                </li>
+                                <li class="mob"><input type="text" id="textL" placeholder="Type your key word ">
+                                <button class="btn btn-outline-success"onclick="myKeys()">+</button>
+                                </li>
+                                
+                            </ul>
                              {{ form2.management_form }} {% for form in form2 %}
-                            <div class="form-row spacer" style="margin:5px">
-                                <div class="">
+                            <div class="row form-row spacer">
+                                <div class="col-8">
+
                                      <div class="input-group">
                                         {{form.keyword}}
                                         <div class="input-group-append">
@@ -167,13 +205,16 @@
                                 </div>
                             </div>
                             {% endfor %}
-                            </div>
+
+                            
 
                             <h3>Total Experience</h3>
 
                             <div class="select-option-experience">
                                 <div class="select-option-experience-first">
-                                    <select id = "minExp" name="minExp">
+
+                                    <select>
+
 									<option>Minimum</option>
 									<option>1</option>
 									<option>2</option>
@@ -196,7 +237,9 @@
 
                                     <div class="select-option-salery">
                                         <div class="select-option-experience-first">
-                                            <select id = "minlakh" name="minlakh">
+
+                                            <select>
+
 									<option>Lacs</option>
 									<option>1</option>p
 									<option>2</option>
@@ -253,7 +296,7 @@
 
 
                                     </div>
-                                </form>
+
                                 </div>
 
                             </div>
@@ -262,8 +305,6 @@
 
                         </div>
                     </div>
-            </div>
-        </div>
 
     </section>
 
@@ -272,7 +313,9 @@
         <p>Footer section</p>
     </footer> {% endcomment %}
 
-    <footer class="bg-dark " style="margin-top: 10px;">
+    <!-- Footer -->
+
+            <footer class="bg-dark " style="margin-top: 10px;">
                 <div class="container" style="    max-inline-size: inherit;padding-top: 20px;">
                     <div class="row">
                         <div class="" style="    margin-left: auto;"><img src="/static/images/" style=" " alt="" width="50" class="mb-3">
@@ -320,78 +363,17 @@
 
             </footer>
             <!-- End -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    
     <script>
-    function updateElementIndex(el, prefix, ndx) {
-            var id_regex = new RegExp('(' + prefix + '-\\d+)');
-            var replacement = prefix + '-' + ndx;
-            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
-            if (el.id) el.id = el.id.replace(id_regex, replacement);
-            if (el.name) el.name = el.name.replace(id_regex, replacement);
-        }
-
-        function cloneMore(selector, prefix) {
-            var newElement = $(selector).clone(true);
-            var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
-            newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
-                var name = $(this).attr('name')
-                if (name) {
-                    name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
-                    var id = 'id_' + name;
-                    $(this).attr({
-                        'name': name,
-                        'id': id
-                    }).val('').removeAttr('checked');
-                }
-            });
-            newElement.find('label').each(function() {
-                var forValue = $(this).attr('for');
-                if (forValue) {
-                    forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
-                    $(this).attr({
-                        'for': forValue
-                    });
-                }
-            });
-            total++;
-            $('#id_' + prefix + '-TOTAL_FORMS').val(total);
-            $(selector).after(newElement);
-            var conditionRow = $('.form-row:not(:last)');
-            conditionRow.find('.btn.add-form-row')
-                .removeClass('btn-success').addClass('btn-danger')
-                .removeClass('add-form-row').addClass('remove-form-row')
-                .html('-');
-            return false;
-        }
-
-        function deleteForm(prefix, btn) {
-            var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
-            if (total > 1) {
-                btn.closest('.form-row').remove();
-                var forms = $('.form-row');
-                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
-                for (var i = 0, formCount = forms.length; i < formCount; i++) {
-                    $(forms.get(i)).find(':input').each(function() {
-                        updateElementIndex(this, prefix, i);
-                    });
-                }
-            }
-            return false;
-        }
-        $(document).on('click', '.add-form-row', function(e) {
-            e.preventDefault();
-            cloneMore('.form-row:last', 'form');
-            return false;
-        });
-        $(document).on('click', '.remove-form-row', function(e) {
-            e.preventDefault();
-            deleteForm('form', $(this));
-            return false;
-        });
-
-
+    function myKeys() {
+                                            
+        var x = document.getElementById("textLi").value;
+        var l = document.createElement("LI");
+        l.appendChild(document.createTextNode(x));
+        document.getElementById("demo").appendChild(l);
+    }
     </script>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

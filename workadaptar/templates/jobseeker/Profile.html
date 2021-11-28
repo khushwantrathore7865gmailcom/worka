@@ -1470,98 +1470,93 @@
                             </a>
                         </div> -->
 
-<!--                        <div class="row" id="demo" style="margin: 10px;">-->
-<!--                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">-->
-<!--                                &lt;!&ndash; <img src="img_avatar.jpg" alt="Person" width="96" height="96"> &ndash;&gt;-->
-<!--                                Marathi-->
-<!--                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span> |-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star"></span>-->
-<!--                            </div>-->
-<!--                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">-->
-<!--                                &lt;!&ndash; <img src="img_avatar.jpg" alt="Person" width="96" height="96"> &ndash;&gt;-->
-<!--                                Hindi-->
-<!--                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star"></span>-->
-<!--                            </div>-->
-<!--                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">-->
-<!--                                &lt;!&ndash; <img src="img_avatar.jpg" alt="Person" width="96" height="96"> &ndash;&gt;-->
-<!--                                Customer Service-->
-<!--                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|-->
-<!--                                <span class="fa fa-star checked" style="color:gold"></span>-->
-<!--                                <span class="fa fa-star checked" style="color:gold"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star"></span>-->
-<!--                            </div>-->
-<!--                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">-->
-<!--                                &lt;!&ndash; <img src="img_avatar.jpg" alt="Person" width="96" height="96"> &ndash;&gt;-->
-<!--                                Software Development-->
-<!--                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|-->
-<!--                                <span class="fa fa-star checked" style="color:gold"></span>-->
-<!--                                <span class="fa fa-star checked" style="color:gold"></span>-->
-<!--                                <span class="fa fa-star checked" style="color:gold"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star"></span>-->
-<!--                            </div>-->
-<!--                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">-->
-<!--                                &lt;!&ndash; <img src="img_avatar.jpg" alt="Person" width="96" height="96"> &ndash;&gt;-->
-<!--                                Android Development-->
-<!--                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|-->
-<!--                                <span class="fa fa-star checked" style="color:gold"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star"></span>-->
-<!--                            </div>-->
-<!--                            <div>-->
-<!--                                <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">-->
-<!--                                    &lt;!&ndash; <img src="img_avatar.jpg" alt="Person" width="96" height="96"> &ndash;&gt;-->
-<!--                                    Business Development-->
-<!--                                    <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|-->
-<!--                                    <span class="fa fa-star checked" style="color:gold"></span>-->
-<!--                                    <span class="fa fa-star checked"></span>-->
-<!--                                    <span class="fa fa-star checked"></span>-->
-<!--                                    <span class="fa fa-star checked"></span>-->
-<!--                                    <span class="fa fa-star"></span>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">-->
-<!--                                &lt;!&ndash; <img src="img_avatar.jpg" alt="Person" width="96" height="96"> &ndash;&gt;-->
-<!--                                Web Development-->
-<!--                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|-->
-<!--                                <span class="fa fa-star checked" style="color:gold"></span>-->
-<!--                                <span class="fa fa-star checked" style="color:gold"></span>-->
-<!--                                <span class="fa fa-star checked" style="color:gold"></span>-->
-<!--                                <span class="fa fa-star checked"></span>-->
-<!--                                <span class="fa fa-star"></span>-->
-<!--                            </div>-->
-
-<!--                        </div>-->
-                        <form method="post">
-                            {% csrf_token %}
-                        <div class="row" style="margin-top:20px;border: 1px solid rgba(222, 221, 221, 1);">
-                             {{ form8.management_form }} {% for form in form8 %}
-                            <div class="form-row spacer" style="margin:5px">
-                                <div class="">
-                                     <div class="input-group">
-                                        {{form.skill}}<br>
-                                         {{form.rating}}
-                                        <div class="input-group-append">
-                                            <button class="btn btn-success add-form-row">+</button>
-                                        </div>
-
-                                    </div>
+                        <div class="row" id="demo" style="margin: 10px;">
+                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">
+                                <!-- <img src="img_avatar.jpg" alt="Person" width="96" height="96"> -->
+                                Marathi
+                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span> |
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">
+                                <!-- <img src="img_avatar.jpg" alt="Person" width="96" height="96"> -->
+                                Hindi
+                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">
+                                <!-- <img src="img_avatar.jpg" alt="Person" width="96" height="96"> -->
+                                Customer Service
+                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|
+                                <span class="fa fa-star checked" style="color:gold"></span>
+                                <span class="fa fa-star checked" style="color:gold"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">
+                                <!-- <img src="img_avatar.jpg" alt="Person" width="96" height="96"> -->
+                                Software Development
+                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|
+                                <span class="fa fa-star checked" style="color:gold"></span>
+                                <span class="fa fa-star checked" style="color:gold"></span>
+                                <span class="fa fa-star checked" style="color:gold"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">
+                                <!-- <img src="img_avatar.jpg" alt="Person" width="96" height="96"> -->
+                                Android Development
+                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|
+                                <span class="fa fa-star checked" style="color:gold"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <div>
+                                <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">
+                                    <!-- <img src="img_avatar.jpg" alt="Person" width="96" height="96"> -->
+                                    Business Development
+                                    <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|
+                                    <span class="fa fa-star checked" style="color:gold"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
                                 </div>
                             </div>
-                            {% endfor %}
+                            <div class="chip" style="font-weight:bold;background: rgb(243, 241, 241);border-radius: 2px;width: fit-content;padding: 9px;margin: 10px;">
+                                <!-- <img src="img_avatar.jpg" alt="Person" width="96" height="96"> -->
+                                Web Development
+                                <span class="closebtn" style="color: #000;" onclick="this.parentElement.style.display='none'">&times;</span>|
+                                <span class="fa fa-star checked" style="color:gold"></span>
+                                <span class="fa fa-star checked" style="color:gold"></span>
+                                <span class="fa fa-star checked" style="color:gold"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                        </div>
+                        <div class="dropdown" style="width: fit-content;margin-right: 20px;align-self: center;">
+                            <button style="border-radius: 10px;padding: 5px;" onclick="myFunction()" class="dropbtn">Add +</button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                                <button class="btn btn-outline-success"onclick="myKey()">+</button>
+                                <a href="#about">About </a>
+                                <a href="#base">Base</a>
+                                <a href="#blog">Blog</a>
+                                <a href="#contact">Contact</a>
+                                <a href="#custom">Custom</a>
+                                <a href="#support">Support</a>
+                                <a href="#tools">Tools</a>
+
                             </div>
                             <button type="submit">Submit</button>
                             </form>
@@ -1796,73 +1791,6 @@
         
         document.getElementById("demo").appendChild(l);
     }
-    function updateElementIndex(el, prefix, ndx) {
-            var id_regex = new RegExp('(' + prefix + '-\\d+)');
-            var replacement = prefix + '-' + ndx;
-            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
-            if (el.id) el.id = el.id.replace(id_regex, replacement);
-            if (el.name) el.name = el.name.replace(id_regex, replacement);
-        }
-
-        function cloneMore(selector, prefix) {
-            var newElement = $(selector).clone(true);
-            var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
-            newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
-                var name = $(this).attr('name')
-                if (name) {
-                    name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
-                    var id = 'id_' + name;
-                    $(this).attr({
-                        'name': name,
-                        'id': id
-                    }).val('').removeAttr('checked');
-                }
-            });
-            newElement.find('label').each(function() {
-                var forValue = $(this).attr('for');
-                if (forValue) {
-                    forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
-                    $(this).attr({
-                        'for': forValue
-                    });
-                }
-            });
-            total++;
-            $('#id_' + prefix + '-TOTAL_FORMS').val(total);
-            $(selector).after(newElement);
-            var conditionRow = $('.form-row:not(:last)');
-            conditionRow.find('.btn.add-form-row')
-                .removeClass('btn-success').addClass('btn-danger')
-                .removeClass('add-form-row').addClass('remove-form-row')
-                .html('-');
-            return false;
-        }
-
-        function deleteForm(prefix, btn) {
-            var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
-            if (total > 1) {
-                btn.closest('.form-row').remove();
-                var forms = $('.form-row');
-                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
-                for (var i = 0, formCount = forms.length; i < formCount; i++) {
-                    $(forms.get(i)).find(':input').each(function() {
-                        updateElementIndex(this, prefix, i);
-                    });
-                }
-            }
-            return false;
-        }
-        $(document).on('click', '.add-form-row', function(e) {
-            e.preventDefault();
-            cloneMore('.form-row:last', 'form');
-            return false;
-        });
-        $(document).on('click', '.remove-form-row', function(e) {
-            e.preventDefault();
-            deleteForm('form', $(this));
-            return false;
-        });
-
 
     </script>
         <!-- Optional JavaScript -->
