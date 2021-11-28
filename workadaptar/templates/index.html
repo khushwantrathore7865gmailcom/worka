@@ -1,0 +1,1071 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
+
+
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/wysihtml5-0.3.0.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.min1.js"></script>
+    <script type="text/javascript" src="/static/js/tcc_l.combined.1.0.6.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style13.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'plugins1.css' %}">
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}">
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/main.css' %}">
+
+
+</head>
+<style>
+    .tech-slideshow {
+        height: 200px;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        background-color: #ccc;
+        overflow: hidden;
+        transform: translate3d(0, 0, 0);
+    }
+    
+    .tech-slideshow>div {
+        height: 200px;
+        width: 1800px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform: translate3d(0, 0, 0);
+    }
+    
+    .tech-slideshow .mover-1 {
+        animation: moveSlideshow 30s linear infinite;
+    }
+    
+    .tech-slideshow .mover-2 {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+        background-position: 0 -200px;
+        animation: moveSlideshow 15s linear infinite;
+    }
+    
+    .tech-slideshow:hover .mover-2 {
+        opacity: 1;
+    }
+    
+    @keyframes moveSlideshow {
+        100% {
+            transform: translateX(-66.6666%);
+        }
+    }
+    
+    .mobile-main-section h3 {
+        font-family: Lato;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 29px;
+        letter-spacing: 0em;
+        text-align: left;
+        padding: 0px;
+    }
+    
+    .mobile-main-images img {
+        margin-bottom: 40px;
+        margin-left: 28px;
+    }
+    
+    .wrap-login100 {
+        width: 600px;
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 3px 20px 0px rgb(0 0 0 / 10%);
+        -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: 0 3px 20px 0px rgb(0 0 0 / 10%);
+        -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+        -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    }
+    
+    .p-t-80 {
+        padding-top: 30px;
+    }
+    
+    input:focus::placeholder {
+        color: transparent;
+    }
+    
+    .txt0 {
+        font-size: 13px;
+        color: #57b846;
+        line-height: 1.4;
+    }
+    
+    .modal-content {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        width: 0%;
+        pointer-events: auto;
+        background-color: #808080;
+        background-clip: padding-box;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: .3rem;
+        outline: 0;
+    }
+    
+    .p-t-178 {
+        padding-top: 110px;
+    }
+    
+    .customer-logos {
+        background-color: rgb(29, 31, 29);
+    }
+    /* Slider */
+    
+    .slick-slide {
+        margin: 0px 20px;
+    }
+    
+    .slick-slide img {
+        width: 100%;
+    }
+    
+    .slick-slider {
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -khtml-user-select: none;
+        -ms-touch-action: pan-y;
+        touch-action: pan-y;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .slick-list {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .slick-list:focus {
+        outline: none;
+    }
+    
+    .slick-list.dragging {
+        cursor: pointer;
+        cursor: hand;
+    }
+    
+    .slick-slider .slick-track,
+    .slick-slider .slick-list {
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    
+    .slick-track {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: block;
+    }
+    
+    .slick-track:before,
+    .slick-track:after {
+        display: table;
+        content: '';
+    }
+    
+    .slick-track:after {
+        clear: both;
+    }
+    
+    .slick-loading .slick-track {
+        visibility: hidden;
+    }
+    
+    .slick-slide {
+        display: none;
+        float: left;
+        height: 100%;
+        min-height: 1px;
+    }
+    
+    [dir='rtl'] .slick-slide {
+        float: right;
+    }
+    
+    .slick-slide img {
+        display: block;
+    }
+    
+    .slick-slide.slick-loading img {
+        display: none;
+    }
+    
+    .slick-slide.dragging img {
+        pointer-events: none;
+    }
+    
+    .slick-initialized .slick-slide {
+        display: block;
+    }
+    
+    .slick-loading .slick-slide {
+        visibility: hidden;
+    }
+    
+    .slick-vertical .slick-slide {
+        display: block;
+        height: auto;
+        border: 1px solid transparent;
+    }
+    
+    .slick-arrow.slick-hidden {
+        display: none;
+    }
+    
+     ::-webkit-scrollbar {
+        width: 20px;
+    }
+    /* Track */
+    
+     ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 2px grey;
+    }
+    /* Handle */
+    
+     ::-webkit-scrollbar-thumb {
+        background: lightgrey;
+    }
+    /* Handle on hover */
+    
+     ::-webkit-scrollbar-thumb:hover {
+        background: grey;
+    }
+</style>
+
+
+<header>
+    <div class="container" style="max-width: inherit;">
+        <div class="row" style="margin-bottom:-25px">
+            <div class="col-md-12 col-12" style="box-shadow: 10px 10px 41px -20px grey;">
+                {% if request.user.is_employeer %}
+                <div class="top-navbar">
+                    <nav class="navbar navbar-expand-lg ">
+<a class="" href="{% url 'recruiter:employer_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav class="navbar mr-auto">
+<form class="form-inline">
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+  </div>
+  <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+</form>
+</nav>
+
+
+
+
+<ul class="navbar-nav ml-auto">
+<!--      <li class="nav-item">-->
+<!--       <a class="nav-link" href="{% url 'recruiter:employer_home' %}">Home</a>-->
+<!--      </li>-->
+<li class="nav-item ">
+<a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+<span class="menu-text">Home</span>
+</li>
+  <li class="nav-item ">
+<a class="nav-link" href="{% url 'recruiter:job_post' %}"><i class="fas fa-briefcase"></i></a>
+<span class="menu-text">Add job </span>
+</li>
+<!--	  <li class="nav-item">-->
+<!--        <a class="nav-link" href="#">Resume</a>-->
+<!--      </li>-->
+<li class="nav-item ">
+<a class="nav-link " href="#"><i class="fas fa-phone-square-alt fa-xs"></i></a>
+<span class="menu-text">Contact Us </span>
+</li>
+
+<li class="nav-item">
+<a class="nav-link" href="#"><i class="fas fa-address-card fa-2x"></i></a>
+<span class="menu-text">About Us </span>
+</li>
+
+<li class="nav-item bell-icon ">
+<a class="nav-link" href="#"><i class="fa fa-bell" aria-hidden="true"></i> </a>
+<span class="menu-text">Notification</span>
+</li>
+
+<li class="nav-item">
+<div class="dropdown">
+<button class="dropbtn"><img src={{c.company_logo.url}}></button>
+<div class="dropdown-content">
+<a href="#">My Profile</a>
+<a href="#">Edit Profile</a>
+<a href="{% url 'recruiter:logout' %}">Log Out</a>
+</div>
+</div>
+</li>
+ </ul>
+</div>
+</nav>
+                </div>
+                {% elif request.user.is_candidate %}
+                <div class="top-navbar">
+                    <nav class="navbar navbar-expand-lg ">
+<a class="" href="{% url 'jobseeker:jobseeker_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav class="navbar mr-auto">
+<form class="form-inline" type="get">
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+  </div>
+  <input type="text" class="form-control"  id="search_box" name="search_box" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+</form>
+</nav>
+
+
+
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+    <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'jobseeker:resume' %}">Resume</a>
+  </li>
+
+  <li class="nav-item bell-icon">
+    <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
+  </li>
+     <li class="nav-item">
+<div class="dropdown">
+<button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
+<div class="dropdown-content">
+<a href="{% url 'jobseeker:profile' %}">My Profile</a>
+<a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
+<a href="{% url 'jobseeker:logout' %}">Log Out</a>
+</div>
+</div>
+     </li>
+
+
+ </ul>
+
+</div>
+</nav>
+                </div>
+                {% else %}
+                <div class="top-navbar">
+                    <nav class="navbar navbar-expand-lg ">
+                        <a href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mx-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/">Home <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#work-main">How it works</a>
+                                </li>
+                                <!--	  <li class="nav-item">-->
+                                <!--        <a class="nav-link" href="#">Testimonial</a>-->
+                                <!--      </li>-->
+
+                            </ul>
+
+
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'jobseeker:resume' %}"> Build Resume</a>
+                                </li>
+                                <li class="nav-item button" style="border-start-start-radius:  20px 20px; border-end-end-radius: 20px;">
+                                    <a class="nav-link" href="#" data-toggle="modal" data-target="#recruitermodal">Recruiter Login</a>
+                                </li>
+                                <li class="nav-item button" style="border-start-start-radius:  20px 20px; border-end-end-radius: 20px;">
+                                    <a class="nav-link" href="#" data-toggle="modal" data-target="#jobseekermodal">Jobseeker Login</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </nav>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</header>
+
+<body>
+    <section style="padding: 40px 0;padding-top: 80px;padding-bottom: inherit;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1 mob-none"></div>
+                <div class="col-md-9 col-12">
+                    <div class="hero-section">
+                        <!-- {% for message in messages %}
+                        <p id="messages" class="alert " style="color:rgb(153, 9, 9);">{{message}}</p>
+                        {% endfor %} -->
+                        <p>100+ Jobs Available</p>
+                        <h1>Find Your Next Best <span>Job!</span></h1>
+
+
+
+                    </div>
+                </div>
+                <div class="col-md-2 mob-none"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <svg height="80" width="300" style=" transform:translate(982px,183px);">
+        <g fill="none" stroke="lightgreen" stroke-width="6">
+          <path stroke-linecap="round" d="M5 40 l215 0" />
+          <path stroke-linecap="round" d="M5 60 l100 0" style="transform: translateX(115px);" />
+        </g>
+      </svg>
+    <svg height="80" width="300" style=" transform:translate(-271px,562px);">
+        <g fill="none" stroke="lightgreen" stroke-width="6">
+          <path stroke-linecap="round" d="M5 40 l100 0" />
+          <path stroke-linecap="round" d="M5 60 l215 0" />
+        </g>
+      </svg> -->
+    <!-- <svg height="80" width="600" style=" transform:translate(-233px,340px);">
+        <g fill="none" stroke="palegreen" stroke-width="16">
+          <path stroke-linecap="round" d="M5 40 l500 0" />
+          
+        </g>
+      </svg> -->
+
+
+
+    <section class="second-section" style="padding: 50px 0;">
+        <div class="mobile-main" style="background-color: rgb(243, 242, 242);">
+
+            <div class="container">
+                <div class="row" style="    padding-top: 10px;">
+                    <div class="col-12 col-md-12" style="padding: 20px;">
+                        <div class="mobile-main-section" style="text-align: center;">
+                            <div class="mobile-main-images" style="text-align: inherit;">
+                                <img src="{% static 'images/home/app.jpg' %} " style="border-radius: 75px;" width="150" height="150">
+                                <h3 style="text-align: center;color: black;">Mobile Application Developer</h3>
+                            </div>
+
+                            <div class="mobile-main-images" style="text-align: inherit;">
+                                <img src="{% static 'images/home/frontend.jpg' %}" width="150" style="border-radius: 75px;" height="150">
+                                <h3 style="text-align: center;color: black;">Frontend Developer</h3>
+                            </div>
+
+                            <div class="mobile-main-images" style="text-align: inherit;">
+                                <img src="{% static 'images/home/backend.jpg' %}" width="150" style="border-radius: 75px;" height="150">
+                                <h3 style="text-align: center;color: black;">Backend Developer</h3>
+                            </div>
+
+                            <div class="mobile-main-images" style="text-align: inherit;">
+                                <img src="{% static 'images/home/devops.jpg' %}" width="150" style="border-radius: 75px;" height="150">
+                                <h3 style="text-align: center;color: black;">DevOps Engineer</h3>
+                            </div>
+
+                            <div class="mobile-main-images" style="text-align: inherit;">
+                                <img src="{% static 'images/home/emerging.jpg' %}" width="150" style="border-radius: 75px;" height="150">
+                                <h3 style="text-align: center;color: black;">Emerging Technologies And Roles</h3>
+                            </div>
+
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="third-section">
+        <div class="work-main" id="work-main" style="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="heading">
+                            <h3>How It <span>Works</span></h3>
+                            <h4>Working Process</h4>
+                        </div>
+                    </div>
+
+                    <div class="work-main-section" id="work-main-section" style="display: -webkit-box;">
+                        <div class="col-md-10 col-12 mx-auto" style="padding-right: 0px;">
+                            <div class="row">
+
+                                <div class="col-md-4 col-12">
+                                    <div class="work-number">
+                                        <div class="work-inner-number">
+                                            <h4>01</h4>
+                                            <img src="{% static 'images/a7e77aad938f8b0c37e07d99951004b6.png' %}">
+                                        </div>
+
+                                        <div class="work-desc">
+                                            <h3>Create An Account</h3>
+                                            <p>Sign Up and tell us about your projects, expertise and past experience.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-4 col-12">
+                                    <div class="work-number">
+                                        <div class="work-inner-number">
+                                            <h4>02</h4>
+                                            <img src="{% static 'images/6ee6c16c81e6bc4907502db03ca3c939.png' %}">
+                                        </div>
+
+                                        <div class="work-desc">
+                                            <h3>Search Jobs</h3>
+                                            <p>Search Jobs on Workadapter, India's most trusted Job site for Tech Jobs.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-12">
+                                    <div class="work-number">
+                                        <div class="work-inner-number">
+                                            <h4>03</h4>
+                                            <img src="{% static 'images/28aa624fb334794011bed46a38886966.png' %}">
+                                        </div>
+
+                                        <div class="work-desc">
+                                            <h3>Save and apply</h3>
+                                            <p>Apply to multiple job opportunities across top companies,industries and locations.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <div class="container" style="margin-top:30px;max-width: -webkit-fill-available;">
+        <div class="heading" style="">
+            <h3 style="text-align:center; margin:10px"><span>Brand</span> Names</h3>
+            <h4>Brands </h4>
+        </div>
+        <!-- <div class="row customer-logos" id=customer-logos>  -->
+        <div class="tech-slideshow" style="    max-width: inherit;height: 130px;margin: 17px;background: rgb(223, 223, 223);">
+            <div class="mover-1" style="text-align-last: justify;">
+                <img style="height: inherit;" src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image1.png">
+                <img style="height: inherit;" src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image2.png">
+                <img style="height: inherit;" src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image3.png">
+                <img style="height: inherit;" src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image4.png">
+                <img style="height: inherit;" src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image5.png">
+                <img style="height: inherit;" src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image6.png">
+                <img style="height: inherit;" src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image7.png">
+                <img style="height: inherit;" src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image8.png">
+
+            </div>
+
+            <!--  <div class="mover-2"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image2.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image3.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image4.png"></div>
+            <div class="slide"><img src="https://raw.githubusercontent.com/solodev/infinite-carousel/master/images/image5.png"></div>  -->
+
+        </div>
+    </div>
+
+    <div class="container" style="max-width: -webkit-fill-available;">
+
+
+
+
+        <div class="" style="">
+            <section class="fourth-section">
+                <div class="work-main">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <div class="heading">
+                                    <h3>Our Success <span>Stories</span></h3>
+                                    <h4>What Other People Are Saying</h4>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="story-inner">
+                                    <img src="{% static 'images/2fc7b91df115bf3088e7956ca092e29f.jpg' %}">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu pharetra fames nisi, consectetur. Quis volutpat risus vel ipsum </p>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="story-inner">
+                                    <img src="{% static 'images/1434d62118a327fac3e98ab0e34728bd.png' %}">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu pharetra fames nisi, consectetur. Quis volutpat risus vel ipsum </p>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <div class="story-inner">
+                                    <img src="{% static 'images/8257b13655db37cdda985971ad21c1c4.jpg' %}">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Arcu pharetra fames nisi, consectetur. Quis volutpat risus vel ipsum </p>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="fifth-section" style="padding: inherit;padding-top:100px">
+                <div class="handpicked-main">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-md-5">
+                                <div class="heading">
+                                    <h3>Best Handpicked <span>Jobs</span></h3>
+                                    <h4>Just For You!!</h4>
+                                    <button>Explore</button>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-7">
+                                <div class="row">
+                                    <div class="col-md-12 col-12">
+                                        <div class="handpicked-desc-main">
+                                            <div class="handpicked-desc" style="background:  url({% static 'images/home/11.jpg' %});">
+                                                <div class="handpicked-inner-desc">
+                                                    <h2>Cognizant</h2>
+                                                    <p>Senior Backend Developer</p>
+                                                    <ul class="list-inline">
+                                                        <li>Hyderabad</li>
+                                                        <li>5-7 years</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="handpicked-desc display-one" style="background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url({% static 'images/home/2.jpg' %});">
+                                                <div class="handpicked-inner-desc">
+                                                    <h2>Facebook</h2>
+                                                    <p>Front-End Engineer</p>
+                                                    <ul class="list-inline">
+                                                        <li>Banglore</li>
+                                                        <li>3-7 years</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="handpicked-desc" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url({% static 'images/home/3.jpg' %});">
+                                                <div class="handpicked-inner-desc">
+                                                    <h2>Gitlab</h2>
+                                                    <p>Test Automation Engineer</p>
+                                                    <ul class="list-inline">
+                                                        <li>Remote</li>
+                                                        <li>2-5 years</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12 col-12">
+                                        <div class="handpicked-desc-main">
+                                            <div class="handpicked-desc display-two" style="background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url({% static 'images/home/4.jpg' %});">
+                                                <div class="handpicked-inner-desc">
+                                                    <h2>Netflix</h2>
+                                                    <p>Senior Business Analyst</p>
+                                                    <ul class="list-inline">
+                                                        <li>Banglore</li>
+                                                        <li>3-7 years</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="handpicked-desc" style="background:   url({% static 'images/home/5.jpg' %});">
+                                                <div class="handpicked-inner-desc">
+                                                    <h2>PwC</h2>
+                                                    <p>Senior Consultant - Database</p>
+                                                    <ul class="list-inline">
+                                                        <li>Mumbai</li>
+                                                        <li>2-5 years</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            <div class="handpicked-desc display-two" style="background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),  url({% static 'images/home/6.jpg' %});">
+                                                <div class="handpicked-inner-desc">
+                                                    <h2>Startup</h2>
+                                                    <p>Full Stack Engineer</p>
+                                                    <ul class="list-inline">
+                                                        <li>Remote</li>
+                                                        <li>3-10 years</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sixth-section">
+                <div class="signup-main">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <div class="signup-left">
+                                    <h3>Want to Be Successful In Your Carrer?</h3>
+                                    <p>We’ll help you to grow your career and growth.</p>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6 col-12">
+                                <div class="signup-right">
+                                    <button href="#" data-toggle="modal" data-target="#jobseekermodal">SignUp Today</button>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!--  Jobseeker modal -->
+
+            <div class="container" style="    max-width: initial;">
+
+
+                <div class="modal fade" id="recruitermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width: fit-content;background-color: white;width: auto;">
+                            <div class="modal-header theme-bg full-width" style="padding-left: 33px;min-width: 458px;">
+                                <h5 class="modal-title" id="exampleModalLabel" style="color:white;font-weight: bold;">Recruiter Login</h5>
+                                <button type="button" class="close" data-dismiss="modal" style="line-height: normal;padding-top: 9px;font-size: x-large;padding-right: 40px;" aria-label="Close">
+                                        <span aria-hidden="true" style="color:white">&times;</span>
+                                        </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="new-logwrap" style="width: auto;padding: 36px;">
+                                    <!-- <div class="form-group">
+                                                <label>Username</label>
+                                                <div class="input-with-icon">
+                                                    <input type="text" class="form-control" placeholder="Enter Your Username">
+                                                    <i class="theme-cl ti-user"></i>
+                                                </div>
+                                            </div> -->
+                                    <form class="login-recruiter" action="{% url 'recruiter:employer/login' %}" method="POST">
+                                        {% csrf_token %} {% for message in messages %}
+                                        <p id="messages" style="color:rgb(153, 9, 9);" class="alert ">{{message}}</p>
+                                        {% endfor %}
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <div class="wrap-input100 validate-input m-b-20" data-validate="Please enter username">
+                                                <input class="input100" type="text" style="border-radius: 5px;margin-bottom: -19px;" name="username" placeholder="Email/MobileNo." required>
+                                                <span class="focus-input100"></span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <div class="wrap-input100 validate-input" data-validate="Please enter password">
+                                                <input class="input100" type="password" style="border-radius: 5px;margin-bottom: -19px;" name="pass" placeholder="Password" required>
+                                                <span class="focus-input100"></span>
+                                            </div>
+                                            {% if request.GET.next %}
+                                            <input type="hidden" name="next" value="{{request.GET.next}}"> {% endif %}
+                                            <br>
+                                        </div>
+
+                                        <div class="container-login100-form-btn">
+                                            <button class="login100-form-btn" style="border-radius: 5px;" type="submit">
+                    Login
+                </button>
+                                        </div>
+                                    </form>
+
+
+                                    <div class="flex-col-c p-t-80 p-b-40">
+
+                                        <a href="{% url 'recruiter:reset_password' %}" class="txt0">
+                Forgot Password?
+            </a>
+
+                                        <span class="txt1 ">
+                Don’t have an account?
+                <a href="{% url 'recruiter:employer/register' %}" class="txt3">
+                Register
+            </a>
+            </span>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--New Model For Demo-->
+
+                <div class="modal fade" id="jobseekermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width: fit-content;background-color: white;width: auto;">
+                            <div class="modal-header theme-bg full-width" style="padding-left: 33px;min-width: 458px;">
+                                <h5 class="modal-title" id="exampleModalLabel" style="color:white;font-weight: bold;">Jobseeker Login</h5>
+                                <button type="button" class="close" data-dismiss="modal" style="line-height: normal;padding-top: 9px;font-size: x-large;padding-right: 40px;" aria-label="Close">
+                                        <span aria-hidden="true"style="color:white">&times;</span>
+                                        </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="new-logwrap" style="width: auto;padding: 36px;">
+                                    <!-- <div class="form-group">
+                                                <label>Username</label>
+                                                <div class="input-with-icon">
+                                                    <input type="text" class="form-control" placeholder="Enter Your Username">
+                                                    <i class="theme-cl ti-user"></i>
+                                                </div>
+                                            </div> -->
+                                    <form class="login-recruiter" action="{% url 'jobseeker:jobseeker/login' %}" method="POST">
+                                        {% csrf_token %}{% for message in messages %}
+                                        <p id="messages" style="color:rgb(153, 9, 9);" class="alert ">{{message}}</p>
+                                        {% endfor %}
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+                                                <input class="input100" style="border-radius: 5px;margin-bottom: -19px;" type="text" name="username" placeholder="Email/MobileNo." required>
+                                                <span class="focus-input100"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <div class="wrap-input100 validate-input" data-validate="Please enter password">
+                                                <input class="input100" style="border-radius: 5px;margin-bottom: -19px;" type="password" name="pass" placeholder="Password" required>
+                                                <span class="focus-input100"></span>
+                                            </div>
+                                            {% if request.GET.next %}
+                                            <input type="hidden" name="next" value="{{request.GET.next}}"> {% endif %}
+                                            <br>
+                                        </div>
+
+                                        <!-- <div class="form-groups">
+                                                    <input type="submit" name="recruiter-login" class="btn btn-primary theme-bg full-width" value="Login" role="button">
+                                                </div> -->
+                                        <div class="container-login100-form-btn">
+                                            <button class="login100-form-btn" style="border-radius: 5px;" type="submit">
+                                                        Login
+                                                    </button>
+                                        </div>
+                                    </form>
+
+                                    <!-- <div class="forget-account text-center">
+                                                <a class="theme-cl" href="#">Forget Password?</a>
+                                            </div> -->
+
+                                    <!-- <div class="register-account text-center">
+                                                Don't have an account? <a class="theme-cl" href="register-recruiter.php">Register</a>
+                                            </div> -->
+                                    <div class="flex-col-c p-t-80 p-b-40">
+                                        <a href="{% url 'jobseeker:reset_password' %}" class="txt0">
+                                                    Forgot Password?
+                                                </a>
+
+                                        <span class="txt1 p-b-9">
+                                                    Don’t have an account?
+                                                    <a href="{% url 'jobseeker:jobseeker/register' %}" class="txt3">
+                                                    Register
+                                                    </a>
+                                                </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+
+            <footer class="bg-dark " style="margin-top: 10px;">
+                <div class="container" style="    max-inline-size: inherit;padding-top: 20px;">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 mb-4 mb-lg-0"><img src="/static/images/" style=" " alt="" width="50" class="mb-3">
+                            <p class="font-italic" style="color: white;">Get Personalised Jobs !!<br> Tell us what kind of a job you are looking out for and stay updated with latest opportunities.</p>
+                            <ul class="list-inline mt-4">
+                                <li class="list-inline-item"><a href="#" target="_blank" title="twitter"><i style="font-size: xx-large;    color: #00ddf3;" class="fa fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#" target="_blank" title="facebook"><i style="font-size: xx-large;color: #007eff;" class="fa fa-facebook"></i></a></li>
+                                <li class="list-inline-item"><a href="#" target="_blank" title="instagram"><i style="font-size: xx-large;color: #f704d9;" class="fa fa-instagram"></i></a></li>
+                                <li class="list-inline-item"><a href="#" target="_blank" title="pinterest"><i style="font-size: xx-large;color: #f70404;" class="fa fa-pinterest"></i></a></li>
+                                <li class="list-inline-item"><a href="#" target="_blank" title="vimeo"><i style="font-size: xx-large;color: #1e04f7;" class="fa fa-vimeo"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                            <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Account</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Job Seeker Login</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Job Seeker Register</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Recruiter Login</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Recruiter Register</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+                            <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Company</h6>
+                            <ul class="list-unstyled mb-0">
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Privacy Policy</a></li>
+                                <li class="mb-2"><a href="#" class="text" style="color: white;">Desclaimer</a></li>
+                                <!-- <li class="mb-2"><a href="#" class="text-muted">Wishlist</a></li>
+            <li class="mb-2"><a href="#" class="text-muted">Our Products</a></li> -->
+                            </ul>
+                        </div>
+                        <div class="col-lg-4 col-md-6 mb-lg-0">
+                            <h6 class="text-uppercase font-weight-bold mb-4" style="color:white">Buy package</h6>
+                            <p class="text mb-4" style="color: white;">Now you can buy resume package</p>
+
+                        </div>
+                    </div>
+                    <!-- Copyrights -->
+                    <div class=" py-4" style="display: contents;">
+                        <div class="container text-center">
+                            <p class="text mb-0 py-2" style="color: white;">© 2021 Workadapter All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </footer>
+            <!-- End -->
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+            <!-- <script>
+                            $(document).ready(function() {
+                                $('.customer-logos').carousel({
+                                    interval: 2000
+                                })
+                            });
+                        </script> -->
+            <script>
+                $(document).ready(function() {
+                    $('.customer-logos').slick({
+                        slidesToShow: 5,
+                        slidesToScroll: 1,
+                        autoplay: true,
+                        autoplaySpeed: 1000,
+                        arrows: false,
+                        dots: false,
+                        pauseOnHover: false,
+                        responsive: [{
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 3
+                            }
+                        }, {
+                            breakpoint: 520,
+                            settings: {
+                                slidesToShow: 2
+                            }
+                        }]
+                    });
+                });
+            </script>
+
+</body>
+
+
+<!-- Mirrored from grocbees.com/job-portal/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 26 Jun 2021 12:19:06 GMT -->
+
+</html>
