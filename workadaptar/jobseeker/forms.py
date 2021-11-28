@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from user_custom.models import User_custom
 from .models import Candidate_profile, Candidate_edu, Candidate_profdetail, Candidate_resume, Candidate_skills, \
-    Candidate_expdetail, Resume_order
+    Candidate_expdetail, Resume_order, Resume_headline
 
 from django.forms import modelformset_factory
 from django.forms import formset_factory
@@ -309,8 +309,6 @@ class ProfileRegisterForm_resume(forms.ModelForm):
         model = Candidate_resume
         fields = [
             'resume_link',
-            'coverletter_text',
-            'coverletter_link',
         ]
 
 
@@ -370,6 +368,8 @@ class ProfileRegisterForm_resume(forms.ModelForm):
 #
 #         }),
 #     })
+
+
 
 
 class ProfileRegisterForm_profdetail(forms.ModelForm):
@@ -470,9 +470,9 @@ class ProfileRegistration_expdetail(forms.ModelForm):
 
 
 class Resumeforming_Entery(forms.Form):
-    delivery_type = forms.CharField(widget=forms.RadioSelect(choices=delivery,attrs={
+    delivery_type = forms.CharField(widget=forms.RadioSelect(choices=delivery, attrs={
 
-    } ))
+    }))
 
     # class Meta:
     #     model = Resume_order
@@ -482,9 +482,9 @@ class Resumeforming_Entery(forms.Form):
 
 
 class Resumeforming_Mid(forms.Form):
-    delivery_type_Mid = forms.CharField(widget=forms.RadioSelect(choices=delivery,attrs={
+    delivery_type_Mid = forms.CharField(widget=forms.RadioSelect(choices=delivery, attrs={
 
-    } ))
+    }))
 
     # class Meta:
     #     model = Resume_order
@@ -494,9 +494,9 @@ class Resumeforming_Mid(forms.Form):
 
 
 class Resumeforming_senior(forms.Form):
-    delivery_type_senior = forms.CharField(widget=forms.RadioSelect(choices=delivery,attrs={
-        'name':'Resumeforming_senior',
-    } ))
+    delivery_type_senior = forms.CharField(widget=forms.RadioSelect(choices=delivery, attrs={
+        'name': 'Resumeforming_senior',
+    }))
 
     # class Meta:
     #     model = Resume_order
@@ -506,9 +506,9 @@ class Resumeforming_senior(forms.Form):
 
 
 class Resumeforming_Executive(forms.Form):
-    delivery_type_Executive = forms.CharField(widget=forms.RadioSelect(choices=delivery,attrs={
-        'name':'Resumeforming_Executive',
-    } ))
+    delivery_type_Executive = forms.CharField(widget=forms.RadioSelect(choices=delivery, attrs={
+        'name': 'Resumeforming_Executive',
+    }))
 
     # class Meta:
     #     model = Resume_order
@@ -516,3 +516,11 @@ class Resumeforming_Executive(forms.Form):
     #
     #         'delivery_type',
     #     ]
+
+
+class Resume_headlineForm(forms.ModelForm):
+    class Meta:
+        model = Resume_headline
+        fields = [
+            'resume_headline'
+        ]

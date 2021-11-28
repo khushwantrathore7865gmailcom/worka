@@ -31,6 +31,8 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}">
 	<link rel="stylesheet" type="text/css" href=" {% static 'css/main.css' %}">
+	<link type="text/css" rel="stylesheet" href="{% static 'css/style13.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'plugins1.css' %}">
 
   </head>
   <style>
@@ -111,7 +113,7 @@ input:focus::placeholder {
 	  </style>
   
     
-	<header>
+	<header style="margin-bottom: -68px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 col-12">
@@ -144,7 +146,7 @@ input:focus::placeholder {
 	  {% comment %} <li class="nav-item button">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#recruitermodal">Recruiter Login</a>
       </li> {% endcomment %}
-	  <li class="nav-item button">
+	  <li class="nav-item button" style="border-start-start-radius:  20px 20px; border-end-end-radius: 20px; ">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#jobseekermodal">Jobseeker Login</a>
       </li>
 	 </ul> 
@@ -159,9 +161,9 @@ input:focus::placeholder {
 	</header>
 	<body>
 <section>
-	<div class="limiter">
+	<div class="limiter"style="margin-bottom: -60px;">
 		<div class="container-login100">
-			<div class="wrap-login100">
+			<div class="wrap-login100" style="    border-radius: inherit">
 				<form class="login100-form validate-form p-l-55 p-r-55 p-t-178" method="post">
 					{% csrf_token %}
 					<span class="login100-form-title">
@@ -193,19 +195,20 @@ input:focus::placeholder {
       </p>
     {% endfor %}
 					<div class="flex-col-c p-t-80">
-						<span class="txt10 p-b-9">
+                            <span class="txt10 p-b-9">
 							By hitting the "Register" button, you agree to the
-							<a href="#" class="txt11">
-							Terms conditions and Privacy Policy
+							<a href="#" data-target="#vertically-centered" data-toggle="modal" class="txt11">
+							Terms conditions 
+						</a>
+						and
+						<a href="#" data-target="#vertically-center" data-toggle="modal" class="txt11">
+							 Privacy Policy
 						</a>
 						</span>
-
-						
-					</div>
 				
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" style=""> 
 							Register
 						</button>
 					</div>
@@ -213,7 +216,8 @@ input:focus::placeholder {
 					<div class="flex-col-c p-t-80 p-b-40">
 						<span class="txt1 p-b-9">
 							Already have an account?
-							<a href="{% url 'recruiter:employer/login' %}" class="txt3">
+							<a href="" data-toggle="modal" data-target="#recruitermodal" class="txt3">
+							{% comment %} % url 'recruiter:employer/login' %} {% endcomment %}
 							Login now
 							</a>
 						</span>
@@ -227,17 +231,84 @@ input:focus::placeholder {
 	
 </section>
 
+<!--terms and condition and privacy and policy-->
+<div tabindex="-1" class="modal pmd-modal fade" id="vertically-centered" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="">
+            <div class="modal-content" style="width: auto;background: white;background: padding-box;">
+                <div class="modal-header" style="background: white;">
+                    <h2 class="modal-title" style="">Terms conditions</h2>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button" style="margin: auto;">×</button>
+                </div>
+                <div class="modal-body" style="background:white;text-align:justify;overflow-y: auto;overflow-x: hidden;height: 210px;width: 500px;">
+                    <h3>Terms and conditions</h3>
+                    <p> This report sets out the premise on which we will offer the types of assistance to you, your commitments to us and current realities on which we both depend upon to go into this arrangement.
+                        <br> By joining on our site and platform and applying for a loan through us you concur that you have peruse and consent to be limited by the terms and conditions recorded beneath.</p>
+                    <br>
+                    <h3>
+                        Administrations Offered:
+                    </h3>
+                    <p>We go about as finance brokers on behalf of financial lenders, transcendently for home credit or home loan items. We will furnish you with data with respect to the kind and accessibility of credit contracts, loan & finance products.
+                        We will likewise help you in the application for loan by orchestrating offers to be made to you by banks. We don't prompt you on the legal or monetary implications of going into credit arrangements or specific financial items</p>
+                    <br>
+                    <h3>Our board of moneylenders:</h3>
+                    <p>
+                        We have gone into plans with the loan specialists which permit us to acquire credit for you from these banks subject to you meeting the moneylenders credit measures. The financial lenders with which we have arrangements do not necessarily represent all
+                        the moneylenders who offer credit of the nature that you look for. We may, at any time, consider going into concurrences with moneylenders that are not part of our standard board of lenders, provided new lender deal with our brokers
+                        and agree to our accreditation.
+                    </p>
+                </div>
+                <div class="modal-footer pmd-modal-border text-right" style="background:white">
+                    {% comment %} <button data-dismiss="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-dark" type="button" style="background:lightgrey">Disagree</button> {% endcomment %}
+                    <button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" style="background:green">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div tabindex="-1" class="modal pmd-modal fade" id="vertically-center" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="">
+            <div class="modal-content" style="width: auto;background: white;background: padding-box;">
+                <div class="modal-header" style="background: white;">
+                    <h2 class="modal-title" style="">Privacy Policy</h2>
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button" style="margin: auto;">×</button>
+                </div>
+                <div class="modal-body" style="background:white;text-align:justify;overflow-y: auto;overflow-x: hidden;height: 210px;width: 500px;">
+                    <h3>Privacy Policy</h3>
+                    <p> This report sets out the premise on which we will offer the types of assistance to you, your commitments to us and current realities on which we both depend upon to go into this arrangement.
+                        <br> By joining on our site and platform and applying for a loan through us you concur that you have peruse and consent to be limited by the terms and conditions recorded beneath.</p>
+                    <br>
+                    <h3>
+                        Administrations Offered:
+                    </h3>
+                    <p>We go about as finance brokers on behalf of financial lenders, transcendently for home credit or home loan items. We will furnish you with data with respect to the kind and accessibility of credit contracts, loan & finance products.
+                        We will likewise help you in the application for loan by orchestrating offers to be made to you by banks. We don't prompt you on the legal or monetary implications of going into credit arrangements or specific financial items</p>
+                    <br>
+                    <h3>Our board of moneylenders:</h3>
+                    <p>
+                        We have gone into plans with the loan specialists which permit us to acquire credit for you from these banks subject to you meeting the moneylenders credit measures. The financial lenders with which we have arrangements do not necessarily represent all
+                        the moneylenders who offer credit of the nature that you look for. We may, at any time, consider going into concurrences with moneylenders that are not part of our standard board of lenders, provided new lender deal with our brokers
+                        and agree to our accreditation.
+                    </p>
+                </div>
+                <div class="modal-footer pmd-modal-border text-right" style="background:white">
+                    {% comment %} <button data-dismiss="modal" class="btn pmd-btn-flat pmd-ripple-effect btn-dark" type="button" style="background:lightgrey">Disagree</button> {% endcomment %}
+                    <button data-dismiss="modal" type="button" class="btn pmd-btn-flat pmd-ripple-effect btn-primary" style="background:green">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--end T&C and P&P-->
 <!--  Jobseeker modal -->
 
-<div class="container">
+{% comment %} <div class="container"> {% endcomment %}
 
 
   <!-- Modal -->
-  <div class="modal fade" id="jobseekermodal" role="dialog">
-    <div class="modal-dialog">
+  {% comment %} <div class="modal fade" id="jobseekermodal" role="dialog">
+    <div class="modal-dialog"> {% endcomment %}
 
       <!-- Modal content-->
-      <div class="modal-content">
+      {% comment %} <div class="modal-content">
 
               <div class="modelstyle">
               <div class="limiter">
@@ -296,22 +367,98 @@ input:focus::placeholder {
 
 
         </div>
-      </div>
+      </div> {% endcomment %}
+
+	  <div class="modal fade" id="jobseekermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="width: fit-content;background-color: white;width: auto;">
+                        <div class="modal-header theme-bg full-width" style="padding-left: 33px;min-width: 458px;">
+                            <h5 class="modal-title" id="exampleModalLabel" style="color:white;font-weight: bold;">Jobseeker Login</h5>
+                            <button type="button" class="close" data-dismiss="modal" style="line-height: normal;padding-top: 9px;font-size: x-large;padding-right: 40px;" aria-label="Close">
+                                <span aria-hidden="true"style="color:white">&times;</span>
+                                </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="new-logwrap" style="width: auto;padding: 36px;">
+                                <!-- <div class="form-group">
+                                        <label>Username</label>
+                                        <div class="input-with-icon">
+                                            <input type="text" class="form-control" placeholder="Enter Your Username">
+                                            <i class="theme-cl ti-user"></i>
+                                        </div>
+                                    </div> -->
+                                <form class="login-recruiter" action="{% url 'jobseeker:jobseeker/login' %}" method="POST">
+                                    {% csrf_token %}{% for message in messages %}
+                                    <p id="messages" style="color:rgb(153, 9, 9);" class="alert ">{{message}}</p>
+                                    {% endfor %}
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+                                            <input class="input100" style="border-radius: 5px;margin-bottom: -19px;" type="text" name="username" placeholder="Email/MobileNo." required>
+                                            <span class="focus-input100"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <div class="wrap-input100 validate-input" data-validate="Please enter password">
+                                            <input class="input100" style="border-radius: 5px;margin-bottom: -19px;" type="password" name="pass" placeholder="Password" required>
+                                            <span class="focus-input100"></span>
+                                        </div>
+                                        {% if request.GET.next %}
+                                        <input type="hidden" name="next" value="{{request.GET.next}}"> {% endif %}
+                                        <br>
+                                    </div>
+
+                                    <!-- <div class="form-groups">
+                                            <input type="submit" name="recruiter-login" class="btn btn-primary theme-bg full-width" value="Login" role="button">
+                                        </div> -->
+                                    <div class="container-login100-form-btn">
+                                        <button class="login100-form-btn" style="border-radius: 5px;" type="submit">
+                                                Login
+                                            </button>
+                                    </div>
+                                </form>
+
+                                <!-- <div class="forget-account text-center">
+                                        <a class="theme-cl" href="#">Forget Password?</a>
+                                    </div> -->
+
+                                <!-- <div class="register-account text-center">
+                                        Don't have an account? <a class="theme-cl" href="register-recruiter.php">Register</a>
+                                    </div> -->
+                                <div class="flex-col-c p-t-80 p-b-40">
+                                    <a href="{% url 'jobseeker:reset_password' %}" class="txt0">
+                                            Forgot Password?
+                                        </a>
+
+                                    <span class="txt1 p-b-9">
+                                            Don’t have an account?
+                                            <a href="{% url 'jobseeker:jobseeker/register' %}" class="txt3">
+                                            Register
+                                            </a>
+                                        </span> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 <!--  end jobseeker-->
 
 
 
 <!--  recruiter modal -->
 
-<div class="container">
+{% comment %} <div class="container"> {% endcomment %}
 
 
   <!-- Modal -->
-  <div class="modal fade" id="recruitermodal" role="dialog">
-    <div class="modal-dialog" >
+  {% comment %} <div class="modal fade" id="recruitermodal" role="dialog">
+    <div class="modal-dialog" > {% endcomment %}
 
       <!-- Modal content-->
-      <div class="modal-content">
+      {% comment %} <div class="modal-content">
 
               <div class="modelstyle">
               <div class="limiter">
@@ -371,7 +518,84 @@ input:focus::placeholder {
 
 
         </div>
-      </div>
+      </div> {% endcomment %}
+
+	  <div class="modal fade" id="recruitermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="width: fit-content;background-color: white;width: auto;">
+                        <div class="modal-header theme-bg full-width" style="padding-left: 33px;min-width: 458px;">
+                            <h5 class="modal-title" id="exampleModalLabel" style="color:white;font-weight: bold;">Recruiter Login</h5>
+                            <button type="button" class="close" data-dismiss="modal" style="line-height: normal;padding-top: 9px;font-size: x-large;padding-right: 40px;" aria-label="Close">
+							<span aria-hidden="true" style="color:white">&times;</span>
+							</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="new-logwrap" style="width: auto;padding: 36px;">
+                                <!-- <div class="form-group">
+									<label>Username</label>
+									<div class="input-with-icon">
+										<input type="text" class="form-control" placeholder="Enter Your Username">
+										<i class="theme-cl ti-user"></i>
+									</div>
+								</div> -->
+                                <form class="login-recruiter" action="{% url 'recruiter:employer/login' %}" method="POST">
+                                    {% csrf_token %} {% for message in messages %}
+                                    <p id="messages" style="color:rgb(153, 9, 9);" class="alert ">{{message}}</p>
+                                    {% endfor %}
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <div class="wrap-input100 validate-input m-b-20" data-validate="Please enter username">
+                                            <input class="input100" type="text" style="border-radius: 5px;margin-bottom: -19px;" name="username" placeholder="Email/MobileNo." required>
+                                            <span class="focus-input100"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <div class="wrap-input100 validate-input" data-validate="Please enter password">
+                                            <input class="input100" type="password" style="border-radius: 5px;margin-bottom: -19px;" name="pass" placeholder="Password" required>
+                                            <span class="focus-input100"></span>
+                                        </div>
+                                        {% if request.GET.next %}
+                                        <input type="hidden" name="next" value="{{request.GET.next}}"> {% endif %}
+                                        <br>
+                                    </div>
+
+                                    <div class="container-login100-form-btn">
+                                        <button class="login100-form-btn" style="border-radius: 5px;" type="submit">
+		Login
+	</button>
+                                    </div>
+                                </form>
+
+                                <!-- <div class="forget-account text-center">
+									<a class="theme-cl" href="#">Forget Password?</a>
+								</div> -->
+
+                                <!-- <div class="register-account text-center">
+									Don't have an account? <a class="theme-cl" href="register-recruiter.php">Register</a>
+								</div> -->
+                                <div class="flex-col-c p-t-80 p-b-40">
+
+                                    <a href="{% url 'recruiter:reset_password' %}" class="txt0">
+	Forgot Password?
+</a>
+
+                                    {% comment %} <span class="txt1 ">
+	Don’t have an account?
+	<a href="{% url 'recruiter:employer/register' %}" class="txt3">
+	Register
+</a>
+</span> {% endcomment %}
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 <!--  end recruiter-->
 {% comment %} <footer>
 <p>Footer section</p>

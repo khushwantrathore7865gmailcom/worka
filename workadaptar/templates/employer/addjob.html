@@ -1,291 +1,307 @@
-{% load crispy_forms_tags %}
-{% load static %}
+{% load crispy_forms_tags %} {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
- <!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-<link rel="stylesheet" type="text/css" href=" {% static 'css/style_Addjob.css' %}">
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/style_Addjob.css' %}">
     <link rel="stylesheet" href=" {% static 'css/style.css'%}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <script src="https://kit.fontawesome.com/5a2b925216.js" crossorigin="anonymous"></script>
 
-    
+
 
     <title>Title</title>
     <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
     <style>
-        .input100{
+        .input100 {
             width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
-        .inputdesc{
+
+        .inputdesc {
             width: 100%;
             height: 30%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
+
         .divv {
             float: right;
-
-  background-color: lightgrey;
-  width: 400px;
-  border: 1px solid green;
-  padding: 30px;
-
-  margin: 0px;
-}
+            background-color: lightgrey;
+            width: 400px;
+            border: 1px solid green;
+            padding: 30px;
+            margin: 0px;
+        }
     </style>
 </head>
+
 <body class="skills-page">
 
-	<header>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 col-12">
-					<div class="top-navbar">
-						<nav class="navbar navbar-expand-lg ">
-  <a class="" href="{% url 'recruiter:employer_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a class="" href="{% url 'recruiter:employer_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <nav class="navbar mr-auto" >
-  <form class="form-inline">
-    <div class="input-group" >
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
-      </div>
-      <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
-        <button class="search btn-sm">Search</button>
-    </div>
-  </form>
-</nav>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <nav class="navbar mr-auto">
+                                    <form class="form-inline">
+                                        <div class="input-group" style="flex-wrap: nowrap;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true" style="margin: 10px;"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1" style="width: 350px;">
+                                            <button class="search btn-sm">Search</button>
+                                        </div>
+                                    </form>
+                                </nav>
 
 
-	<ul class="navbar-nav ml-auto">
-<!--      <li class="nav-item">-->
-<!--       <a class="nav-link" href="{% url 'recruiter:employer_home' %}">Home</a>-->
-<!--      </li>-->
-        <li class="nav-item">
-        <a class="nav-link" href="{% url 'recruiter:employer_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
-        <span class="menu-text">Home</span>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="{% url 'recruiter:job_post' %}"><i class="fas fa-briefcase"></i></a>
-        <span class="menu-text">Add job </span>
-      </li>
-<!--	  <li class="nav-item">-->
-<!--        <a class="nav-link" href="#">Resume</a>-->
-<!--      </li>-->
-	  <li class="nav-item">
-        <a class="nav-link " href="#"><i class="fas fa-phone-square-alt fa-xs"></i></a>
-        <span class="menu-text">Contact Us </span>
-      </li>
-	  <li class="nav-item">
-        <a class="nav-link" href="#"><i class="fas fa-address-card fa-2x"></i></a>
-        <span class="menu-text">About Us </span>
-      </li>
-    
-	  <li class="nav-item bell-icon">
-        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
-        <span class="menu-text">Notification</span>
-      </li>
+                                <ul class="navbar-nav ml-auto">
+                                    <!--      <li class="nav-item">-->
+                                    <!--       <a class="nav-link" href="{% url 'recruiter:employer_home' %}">Home</a>-->
+                                    <!--      </li>-->
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'recruiter:employer_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true"></i></a>
+                                        <span class="menu-text">Home</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'recruiter:job_post' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fas fa-briefcase"></i></a>
+                                        <span class="menu-text">Add job </span>
+                                    </li>
+                                    <!--	  <li class="nav-item">-->
+                                    <!--        <a class="nav-link" href="#">Resume</a>-->
+                                    <!--      </li>-->
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-phone-square-alt fa-xs"></i></a>
+                                        <span class="menu-text">Contact Us </span>
+                                    </li>
+                                    {% comment %} <li class="nav-item">
+                                        <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-address-card fa-2x"></i></a>
+                                        <span class="menu-text">About Us </span>
+                                    </li> {% endcomment %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'recruiter:advance-search' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fas fa-search"></i></a>
+                                        <span class="menu-text" >Adv Search</span>
+                                    </li>
 
-	  <li class="nav-item">
-        <a class="nav-link" href="#"><img src={{ep.company_logo.url}}></a>
-      </li>
+                                    <li class="nav-item bell-icon">
+                                        <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><img src="{% static 'images/bell.png' %}"></a>
+                                        <span class="menu-text">Notification</span>
+                                    </li>
 
-	 </ul>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><img src={{ep.company_logo.url}}></a>
+                                    </li>
 
-  </div>
-</nav>
-					</div>
-				</div>
-			</div>
-		</div>
+                                </ul>
 
-	</header>
-
-<section class="job-portal">
-<div class="col-md-12">
-				<div class="heading">
-					<h3>Post <span>Job</span></h3>
-
-                </div></div>
-	<div class="container">
-        <div class="divv">
-
-            <h4>Few guidelines</h4>
-
-                    <ul>
-                        <li>Proper formatting of the text/content of the posting with clear spaces and standard bullets (-) to be used.</li>
-                        <li>No short forms/abbreviations to be used in the text.</li>
-                        <li>Correct mail ID to be included at the end of the posting.</li>
-                        <li>Two skills should be separated by comma.</li>
-                        <li>No spelling mistakes in the content.</li>
-                        <li>JD should be concise and crisp - to the point.</li>
-                    </ul>
-
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
 
-		<div class="row">
+    </header>
 
+    <section class="job-portal">
+        <div class="col-md-12">
+            <div class="heading">
+                <h3>Post <span>Job</span></h3>
 
-  <div class="col-md-10 col-12" >
-				<div class="">
-<form class="form-horizontal" method="POST" action="">
-{% csrf_token %}
-
-    <label style="font-size: 20px;">{{form1.job_title.label}}</label>
-
-
-        <div class="input-group ">
-            {{form1.job_title}}
+            </div>
         </div>
-  <label style="font-size: 20px;">{{form1.job_description.label}}</label>
+        <div class="container">
+            <div class="divv" style="float: inherit;margin: 20px;width:auto;    ">
 
+                <h4>Few guidelines</h4>
 
-        <div class="input-group">
-            {{form1.job_description}}
-        </div>
+                <ul>
+                    <li>Proper formatting of the text/content of the posting with clear spaces and standard bullets (-) to be used.</li>
+                    <li>No short forms/abbreviations to be used in the text.</li>
+                    <li>Correct mail ID to be included at the end of the posting.</li>
+                    <li>Two skills should be separated by comma.</li>
+                    <li>No spelling mistakes in the content.</li>
+                    <li>JD should be concise and crisp - to the point.</li>
+                </ul>
 
-      <label style="font-size: 20px;">{{form1.employment_type.label}}</label>
-
-
-        <div class="input-group">
-            {{form1.employment_type}}
-        </div>
-
-      <label style="font-size: 20px;">{{form1.job_location.label}}</label>
-
-
-        <div class="input-group" style="width: 100%;">
-            {{form1.job_location}}
-        </div>
-  <label style="font-size: 20px;">{{form1.job_experience.label}}</label>
-
-
-        <div class="input-group">
-            {{form1.job_experience}}
-        </div>
-  <label style="font-size: 20px;">{{form1.skill.label}}</label>
-
-
-        <div class="input-group">
-            {{form1.skill}}
-        </div>
-
-
-
-{{ form2.management_form }}
-{% for form in form2 %}
-<div class="row form-row spacer">
-    <div class="col-8">
-        <label style="font-size: 20px;">{{form.question.label}}</label>
-
-
-        <div class="input-group">
-            {{form.question}}
-            <div class="input-group-append">
-                <button class="btn btn-success add-form-row">+</button>
             </div>
 
-        </div>
-    </div>
-</div>
-{% endfor %}
-<br>
-<div class="row spacer">
-    <div class="col-4 offset-2">
-        <button type="submit" class="btn btn-block btn-success">Create</button>
-    </div>
-</div>
-</form>
+            <div class="row">
+
+
+                <div class="col-md-10 col-12" style="min-width: -webkit-fill-available;padding-left: 90px;padding-right: 90px;padding-top:30px">
+                    <div class="">
+                        <form class="form-horizontal" method="POST" action="">
+                            {% csrf_token %}
+
+                            <label style="font-size: 20px;">{{form1.job_title.label}}</label>
+
+
+                            <div class="input-group ">
+                                {{form1.job_title}}
+                            </div>
+
+                            <label style="font-size: 20px;">{{form1.job_location.label}}</label>
+
+
+                            <div class="input-group" style="width: 100%;">
+                                {{form1.job_location}}
+                            </div>
+                            <label style="font-size: 20px;">{{form1.job_experience.label}}</label>
+
+
+                            <div class="input-group">
+                                {{form1.job_experience}}
+                            </div>
+
+                            <label style="font-size: 20px;">{{form1.job_description.label}}</label>
+
+
+                            <div class="input-group">
+                                {{form1.job_description}}
+                            </div>
+
+                            <label style="font-size: 20px;">{{form1.employment_type.label}}</label>
+
+
+                            <div class="input-group" required>
+                                {{form1.employment_type}}
+                            </div>
+
+
+
+                            <label style="font-size: 20px;">{{form1.skill.label}}</label>
+
+
+                            <div class="input-group">
+                                {{form1.skill}}
+                            </div>
+
+
+
+                            {{ form2.management_form }} {% for form in form2 %}
+                            <div class="row form-row spacer">
+                                <div class="col-8">
+                                    <label style="font-size: 20px;">{{form.question.label}}</label>
+
+
+                                    <div class="input-group">
+                                        {{form.question}}
+                                        <div class="input-group-append">
+                                            <button class="btn btn-success add-form-row">+</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <br>
+                            <div class="row spacer">
+                                <div class="col-4 offset-2">
+                                    <button type="submit" class="btn btn-block btn-success">Create</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-  </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-{% block custom_js %}
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script type="text/javascript">
-function updateElementIndex(el, prefix, ndx) {
-    var id_regex = new RegExp('(' + prefix + '-\\d+)');
-    var replacement = prefix + '-' + ndx;
-    if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
-    if (el.id) el.id = el.id.replace(id_regex, replacement);
-    if (el.name) el.name = el.name.replace(id_regex, replacement);
-}
-function cloneMore(selector, prefix) {
-    var newElement = $(selector).clone(true);
-    var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
-    newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
-        var name = $(this).attr('name')
-        if(name) {
-            name = name.replace('-' + (total-1) + '-', '-' + total + '-');
-            var id = 'id_' + name;
-            $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+    {% block custom_js %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function updateElementIndex(el, prefix, ndx) {
+            var id_regex = new RegExp('(' + prefix + '-\\d+)');
+            var replacement = prefix + '-' + ndx;
+            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+            if (el.id) el.id = el.id.replace(id_regex, replacement);
+            if (el.name) el.name = el.name.replace(id_regex, replacement);
         }
-    });
-    newElement.find('label').each(function() {
-        var forValue = $(this).attr('for');
-        if (forValue) {
-          forValue = forValue.replace('-' + (total-1) + '-', '-' + total + '-');
-          $(this).attr({'for': forValue});
-        }
-    });
-    total++;
-    $('#id_' + prefix + '-TOTAL_FORMS').val(total);
-    $(selector).after(newElement);
-    var conditionRow = $('.form-row:not(:last)');
-    conditionRow.find('.btn.add-form-row')
-    .removeClass('btn-success').addClass('btn-danger')
-    .removeClass('add-form-row').addClass('remove-form-row')
-    .html('-');
-    return false;
-}
-function deleteForm(prefix, btn) {
-    var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
-    if (total > 1){
-        btn.closest('.form-row').remove();
-        var forms = $('.form-row');
-        $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
-        for (var i=0, formCount=forms.length; i<formCount; i++) {
-            $(forms.get(i)).find(':input').each(function() {
-                updateElementIndex(this, prefix, i);
+
+        function cloneMore(selector, prefix) {
+            var newElement = $(selector).clone(true);
+            var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+            newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
+                var name = $(this).attr('name')
+                if (name) {
+                    name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                    var id = 'id_' + name;
+                    $(this).attr({
+                        'name': name,
+                        'id': id
+                    }).val('').removeAttr('checked');
+                }
             });
+            newElement.find('label').each(function() {
+                var forValue = $(this).attr('for');
+                if (forValue) {
+                    forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                    $(this).attr({
+                        'for': forValue
+                    });
+                }
+            });
+            total++;
+            $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+            $(selector).after(newElement);
+            var conditionRow = $('.form-row:not(:last)');
+            conditionRow.find('.btn.add-form-row')
+                .removeClass('btn-success').addClass('btn-danger')
+                .removeClass('add-form-row').addClass('remove-form-row')
+                .html('-');
+            return false;
         }
-    }
-    return false;
-}
-$(document).on('click', '.add-form-row', function(e){
-    e.preventDefault();
-    cloneMore('.form-row:last', 'form');
-    return false;
-});
-$(document).on('click', '.remove-form-row', function(e){
-    e.preventDefault();
-    deleteForm('form', $(this));
-    return false;
-});
 
-</script>
-{% endblock %}
+        function deleteForm(prefix, btn) {
+            var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+            if (total > 1) {
+                btn.closest('.form-row').remove();
+                var forms = $('.form-row');
+                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+                for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                    $(forms.get(i)).find(':input').each(function() {
+                        updateElementIndex(this, prefix, i);
+                    });
+                }
+            }
+            return false;
+        }
+        $(document).on('click', '.add-form-row', function(e) {
+            e.preventDefault();
+            cloneMore('.form-row:last', 'form');
+            return false;
+        });
+        $(document).on('click', '.remove-form-row', function(e) {
+            e.preventDefault();
+            deleteForm('form', $(this));
+            return false;
+        });
+    </script>
+    {% endblock %}
 </body>
+
 </html>

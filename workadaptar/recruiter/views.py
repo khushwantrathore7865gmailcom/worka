@@ -1,13 +1,14 @@
 import re
 
-from django.http import HttpResponse
+import requests
+from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
 from .models import Employer, Employer_profile, Employer_candidate_jobanswer, Employer_job, Employer_job_Applied, \
     Employer_jobquestion, Employer_expired_job
-from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm, QuestionFormset
+from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm, QuestionFormset,keyWordFormset
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -18,12 +19,13 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect, get_object_or_404
 from .tokens import account_activation_token
 from jobseeker.models import Candidate_profile, Candidate_edu, Candidate_profdetail, Candidate_resume, Candidate_skills, \
-    Candidate_expdetail,Candidate
+    Candidate_expdetail, Candidate
 from datetime import datetime
 from django.forms import modelformset_factory
 from django.db import transaction, IntegrityError
 from django.contrib.auth.decorators import login_required
-
+from bs4 import BeautifulSoup
+headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
 
 class SignUpView(View):
     form_class = SignUpForm
@@ -87,6 +89,7 @@ class ActivateAccount(View):
             user = User_custom.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User_custom.DoesNotExist):
             user = None
+            print(user)
 
         if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
@@ -97,11 +100,11 @@ class ActivateAccount(View):
             user.save()
             login(request, user)
             messages.success(request, ('Your account have been confirmed.'))
-            return redirect('recruiter:dashboard_home')
+            return redirect('recruiter:employer_home')
         else:
             messages.warning(
                 request, ('The confirmation link was invalid, possibly because it has already been used.'))
-            return redirect('recruiter:dashboard_home')
+            return redirect('recruiter:employer_home')
 
 
 def login_employer(request):
@@ -138,52 +141,57 @@ def Home(request):
     expired_job = []
     user = request.user
     if user is not None and user.is_employeer:
-        try:
-            e = Employer.objects.get(user=user)
-        except Employer.DoesNotExist:
-            e = None
-        # uncomment this after making the profile update correct
-        # if Employer_profile.objects.get(employer=e):
-        if e:
+        if user.first_login:
             try:
-                ep = Employer_profile.objects.get(employer=e)
-            except Employer_profile.DoesNotExist:
-                ep = None
-            job = Employer_job.objects.filter(employer_id=e)
-            for j in job:
-                start_date = j.created_on
-                # print(start_date)
-                today = datetime.now()
-                # print(type(today))
-                stat_date = str(start_date)
-                start_date = stat_date[:19]
-                tday = str(today)
-                today = tday[:19]
-                s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
-                e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
-                # print(s_date)
-                # print(e_date)
-                diff = abs((e_date - s_date).days)
-                print(diff)
+                e = Employer.objects.get(user=user)
+            except Employer.DoesNotExist:
+                e = None
+            # uncomment this after making the profile update correct
+            # if Employer_profile.objects.get(employer=e):
+            if e:
                 try:
-                    e_j = Employer_expired_job.objects.get(job_id=j)
-                except Employer_expired_job.DoesNotExist:
-                    e_j = None
-                if diff > 30:
-                    if e_j:
-                        expired_job.append(j)
+                    ep = Employer_profile.objects.get(employer=e)
+                except Employer_profile.DoesNotExist:
+                    ep = None
+                job = Employer_job.objects.filter(employer_id=e)
+                for j in job:
+                    start_date = j.created_on
+                    # print(start_date)
+                    today = datetime.now()
+                    # print(type(today))
+                    stat_date = str(start_date)
+                    start_date = stat_date[:19]
+                    tday = str(today)
+                    today = tday[:19]
+                    s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+                    e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+                    # print(s_date)
+                    # print(e_date)
+                    diff = abs((e_date - s_date).days)
+                    print(diff)
+                    try:
+                        e_j = Employer_expired_job.objects.get(job_id=j)
+                    except Employer_expired_job.DoesNotExist:
+                        e_j = None
+                    if diff > 30:
+                        if e_j:
+                            expired_job.append(j)
 
-                    else:
-                        Employer_expired_job.objects.create(job_id=j).save()
+                        else:
+                            Employer_expired_job.objects.create(job_id=j).save()
+                            expired_job.append(j)
+                    elif e_j:
                         expired_job.append(j)
-                elif e_j:
-                    expired_job.append(j)
-                else:
-                    jobs.append(j)
-            context = {'jobs': jobs, 'expired': expired_job, 'ep': ep}
-            return render(request, 'employer/job-post.html', context)
+                    else:
+                        jobs.append(j)
+                context = {'jobs': jobs, 'expired': expired_job, 'ep': ep}
+                return render(request, 'employer/job-post.html', context)
+            else:
+                return redirect('/')
         else:
-            return redirect('/')
+            user.first_login = True
+            user.save()
+            return redirect('recruiter:job_post')
     else:
         return redirect('/')
 
@@ -596,26 +604,52 @@ def advance_Search(request):
         education_profile = []
         professional_profile = []
 
-        c_jobtitle =[]
-        c_location=[]
-        c_exp =[]
-        c_jobtype=[]
+        c_jobtitle = []
+        c_location = []
+        c_exp = []
+        c_jobtype = []
+        print(request.method)
         if request.method == 'GET':
-            job_title = request.GET.get('job_title', None)
-            location = request.GET.get('location', None)
-            experience = request.GET.get('experience', None)
-            job_type = request.GET.get('job_type', None)
-            print(job_title)
-            print(location)
-            print(experience)
-            print(job_type)
+            formset = keyWordFormset(request.GET or None)
+        elif request.method == 'POST':
+            print(request.POST)
+            job_title = request.POST.get('job_title', None)
+            location = request.POST.get('location', None)
+            experience = request.POST.get('experience', None)
+            job_type = request.POST.get('job_type', None)
+            minExp = request.POST.get('minExp', None)
+            maxExp = request.POST.get('maxExp', None)
+            minlakh = request.POST.get('minlakh', None)
+            minthousand = request.POST.get('minthousand', None)
+            maxlakh = request.POST.get('maxlakh', None)
+            maxthousand = request.POST.get('maxthousand', None)
+            active = request.POST.get('active', None)
 
+            formset = keyWordFormset(request.POST)
+            if formset.is_valid():
+
+                for form in formset:
+
+                    keyword = form.cleaned_data.get('keyword')
+                    print(keyword)
             if job_type == 'Job Type':
-                job_type=None
+                job_type = None
             if experience == 'Experience':
-                experience=None
+                experience = None
             if location == 'Location':
-                location=None
+                location = None
+            if minExp =='Minimum':
+                minExp = None
+            if maxExp == 'To Maximum':
+                maxExp = None
+            if minlakh =='Lacs':
+                minlakh = None
+            if maxlakh =='Lacs':
+                maxlakh = None
+            if minthousand == 'Thousand':
+                minthousand = None
+            if maxthousand =='Thousand':
+                maxthousand = None
             print(job_type)
             print(experience)
             print(location)
@@ -623,37 +657,47 @@ def advance_Search(request):
 
             for c in candidates:
                 if (job_title is not None):
-                    a=Candidate_expdetail.objects.filter(department=job_title)
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.filter(department=job_title)
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 else:
-                    a=Candidate_expdetail.objects.all()
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.all()
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 if (job_type is not None):
-                    a=Candidate_expdetail.objects.filter(job_type=job_type)
-                    c_jobtype.append(a.user_id)
+                    a = Candidate_expdetail.objects.filter(job_type=job_type)
+                    for ab in a:
+                        c_jobtype.append(ab.user_id)
                 else:
-                    a=Candidate_expdetail.objects.all()
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.all()
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 if (experience is not None):
-                    a=Candidate_expdetail.objects.filter(Total_Working=experience)
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.filter(Total_Working=experience)
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 else:
-                    a=Candidate_expdetail.objects.all()
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.all()
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 if (location is not None):
-                    a=Candidate_expdetail.objects.filter(prefer_location=location)
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.filter(prefer_location=location)
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
                 else:
-                    a=Candidate_expdetail.objects.all()
-                    c_jobtitle.append(a.user_id)
+                    a = Candidate_expdetail.objects.all()
+                    for ab in a:
+                        c_jobtitle.append(ab.user_id)
             s1 = set(c_jobtype)
-            s2= set(c_location)
-            s3= set(c_exp)
-            s4= set(c_jobtype)
-            set1= s1.intersection(s2)
+            s2 = set(c_location)
+            s3 = set(c_exp)
+            s4 = set(c_jobtype)
+            set1 = s1.intersection(s2)
             set2 = set1.intersection(s3)
             candidate_list_Set = set2.intersection(s4)
             candidate_list = list(candidate_list_Set)
-            return render(request, 'employer/advance-search.html')
+            return JsonResponse({"msg":"done"})
+
+        return render(request, 'employer/advance-search.html',{'form2':formset})
     else:
         return redirect('recruiter:employer/login')
