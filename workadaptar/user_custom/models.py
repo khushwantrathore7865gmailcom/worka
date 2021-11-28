@@ -44,6 +44,7 @@ class User_custom(AbstractUser, PermissionsMixin):
     is_active = models.BooleanField(default=False)
     first_login = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    is_email_verified = models.BooleanField(default=False)
     objects = CustomAccountManager()
 
     USERNAME_FIELD = 'email'

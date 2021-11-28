@@ -273,6 +273,7 @@
 
 <body>
 
+    {% comment %}
     <header>
         <div class="container">
             <div class="row">
@@ -324,7 +325,11 @@
                                     <li class="nav-item">
                                         <div class="dropdown">
                                             <button class="dropbtn">
-                                                <img style="background-color: black;"src="/static/images/green.png">
+                                                {% if c is not None %}
+                                                <img style="background-color: black;"src="{{c.profile_pic.url}}">
+                                                {% else %}
+                                                <img style="background-color: black;"src="{% static 'profile/avatar.png' %}">
+                                                {% endif %}
                                                 <!-- <img src={{cp.profile_pic.url}}> -->
                                             </button>
                                             <div class="dropdown-content">
@@ -345,6 +350,52 @@
             </div>
         </div>
 
+    </header> {% endcomment %}
+    <header>
+        <div class="container">
+            <div class="row" style="margin-bottom:-25px">
+                <div class="col-md-12 col-12">
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mx-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#work-main">How it works</a>
+                                    </li>
+                                    <!--	  <li class="nav-item">-->
+                                    <!--        <a class="nav-link" href="#">Testimonial</a>-->
+                                    <!--      </li>-->
+
+                                </ul>
+
+
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:resume' %}"> Build Resume</a>
+                                    </li>
+                                    <li class="nav-item button" style="border-start-end-radius: 0px; border-end-start-radius: 1px; height:50px;background-color: #8cdd87;">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#recruitermodal" style="margin-top: 5px;">Recruiter Login</a>
+                                    </li>
+                                    <li class="nav-item button" style="border-start-end-radius: 0px; border-end-start-radius: 0px;height:50px;background-color: #8cdd87; ">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#jobseekermodal" style="margin-top: 5px;">Jobseeker Login</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </header>
     {% comment %}
     <header>
@@ -353,7 +404,7 @@
                 <div class="col-md-12 col-12">
                     <div class="top-navbar">
                         <nav class="navbar navbar-expand-lg ">
-                            <a href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <a href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/"><img src="{{c.profile_pic.url}} " width="60" height="60"></a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -450,22 +501,24 @@
                         </div>
                     </div>
                 </div> {% endcomment %}
+
+                {% if p %}
                 <div class="col-md-3 col-12" style="max-width: inherit;margin-top:40px ">
                     <div class="job-left job-left-images-new" style="box-shadow: 7px 0px 30px 2px;">
 
                         <div style="    padding-right: 13px;    padding-left: 11px; text-align: center">
-                            <img src="/static/images/green.png" style="height: 94px;width:auto;background: black;"> {% comment %} <img src="{{cp.profile_pic.url}}" style="height: 94px;"> {% endcomment %}
+                             <img src="{{cp.profile_pic.url}}" style="height: 94px;">
                         </div>
 
                         <div class="job-left-desc" style="padding-top: 104px;margin-top: -122px;background: white;">
-                            <h2 style="text-align:center;margin-top: 50px;">Karan Varma{{c.user.first_name}} {{c.user.last_name}}</h2>
+                            <h2 style="text-align:center;margin-top: 50px;">{{c.user.first_name}} {{c.user.last_name}}</h2>
 
 
                             <h5 style="text-align: initial;margin-left: 22px;"><i style="color: #03A84E; font-size: 20px;" class="fa fa-briefcase" aria-hidden="true"></i> : UX Developer
                                 <span>{{cep.role}}</span></h5>
                             <h5 style="text-align: initial;margin-left: 22px;"> <i style="color: #03A84E; font-size: 20px;" class="fa fa-building" aria-hidden="true"></i> : WebiSoft private Ltd.ptd
                                 <!--Need update here -->
-                                <span></span>
+                                <span></span></h5>
 
                                 <h5 style="text-align: initial;margin-left: 22px;"><i style="color: #03A84E; font-size: 25px;" class="fa fa-map-marker" aria-hidden="true"></i> : Nashik
                                     <span>{{cp.city}}, Maharashtra{{cp.state}}</span></h5>
@@ -485,6 +538,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
                 <div class="col s9 widgets pr0">
                     <div class="mt15">
                         <div id="profile-middle-section-widgets" class="naukri-wdgt-section">
@@ -509,44 +563,36 @@
                                     <div class="cvPreview">
                                         <div class="row">
                                             <div class="col s9">
-                                                <div class="left" style="display: inline-flex;padding-left: inherit;"><b title="Newone Resume.pdf" class="truncate exten"><!-- react-text: 624 -->New Resume.pdf<!-- /react-text --><!-- react-text: 625 -->&nbsp;-&nbsp;<!-- /react-text --><!-- react-text: 626 -->&nbsp;<!-- /react-text --></b>
-                                                    <span class="updateOn">
-                                                  <!-- react-text: 628 -->Uploaded on
-                                                  <!-- /react-text -->
-                                                  <!-- react-text: 629 -->Oct 04, 2021
-                                                  <!-- /react-text -->
-                                                  </span>
+                                                <div class="left" style="display: inline-flex;padding-left: inherit;"><b title="Newone Resume.pdf" class="truncate exten"><!-- react-text: 624 -->
+                                                    {{cr.resume_link}}<!-- /react-text --><!-- react-text: 625 -->&nbsp;-&nbsp;<!-- /react-text --><!-- react-text: 626 -->&nbsp;<!-- /react-text --></b>
+
                                                 </div>
                                             </div>
+                                            {% if re %}
                                             <div class="col s3">
-                                                <div class="right download" style="    margin-top: auto;"><i class="icon" title="Click here to download your resume">Download</i></div>
-                                            </div>
-                                        </div>
+                                                <div class="right download" style="    margin-top: auto;"><a  href="#" role="button"><i class="icon" title="Click here to download your resume">Download</i></a></div>
+                                            </div>{% endif %}
+                                        </div>{% if re %}
                                         <div class="row">
                                             <div class="col s12"><a href="javascript:;" class="link right fs14 fw500">DELETE RESUME</a></div>
-                                        </div>
+                                        </div>{% endif %}
                                     </div>
                                     <div class="row">
                                         <div class="cvUpload col s12">
                                             <div class="uploadCont" style="border: groove;padding: 50px;">
                                                 <div class="uploadBtn">
-                                                    <div>
-                                                        <form class="download" method="get" action="/Profile/download" style="display: none;">
-                                                            <div class="icon-wrap center">
-                                                                <div class="lig-wrap"><button class="blue-text waves-effect waves-teal btn-flat" data-ga-track="spa-event|EditProfile|DownloadResume|Download" type="submit"><i class="ligature-icons">Download</i></button></div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+
                                                     <section>
-                                                        <div class="action" style="    text-align: -webkit-center;">
-                                                            <div class="uploadContainer" style="text-align: -webkit-center;margin: 10px;"><input type="file" id="attachCV" style="background-color: gray;    max-width: -webkit-fill-available; border-radius: 10px;" class="fileUpload waves-effect waves-light btn-large"></div>
+                                                        <form method="post" class="action" style="    text-align: -webkit-center;" enctype="multipart/form-data">
+                                                            {% csrf_token %}
+                                                            {{form4}}<br>
                                                             <div style="width: fit-content;">
-                                                                <div id="result"></div><input style="border-radius: 20px;" type="button" value="Update Resume" class="btn btn-block dummyUpload fs14"></div>
-                                                        </div>
+                                                            <button class="btn-success" style="border-radius: 20px;" type="submit">Update Resume</button></div>
+                                                        </form>
                                                     </section>
                                                     <ul id="results_resumeParser"></ul>
                                                 </div>
-                                                <div class="format" style="text-align: center;">Supported Formats: doc, docx, rtf, pdf, upto 2 MB</div>
+                                                <div class="format" style="text-align: center;">Supported Formats: doc, docx, rtf, pdf</div>
                                             </div>
                                             <div class="center-align"></div>
                                         </div>
@@ -563,7 +609,7 @@
                                     <div class="widgetHead" style="margin: 20px;font-size: larger;"><span class="widgetTitle">Resume Headline</span><a href="#"><span class="edit icon" style="margin-left: 20px; text-decoration: none;" data-target="#form-dialog" data-toggle="modal" >Edit</span></a></div>
                                     <div class="widgetCont" style="margin: 20px;">
                                         <div class="prefill">
-                                            <div>Customer Care Executive with B.Sc in Computers skilled in Hindi,Marathi,Customer Service,Software Development,Android Development,Business Development,Web Development</div>
+                                            <div>{{rh.resume_headline}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -577,8 +623,10 @@
                                 <div class="cardPad">
                                     <div class="widgetHead" style="margin:20px;font-size:larger"><span class="widgetTitle">Key Skills</span><a href="#"><span class="edit icon" style="margin-left: 20px;text-decoration: none;" data-target="#skillsmodel " data-toggle="modal">Edit</span></a></div>
                                     <div class="widgetCont" style="margin: 20px;">
-                                        <div class="prefill"><span class="chip" title="Hindi">Hindi</span><span class="chip" title="Marathi">Marathi</span><span class="chip" title="Customer Service">Customer Service</span><span class="chip" title="Software Development">Software Development</span>
-                                            <span class="chip" title="Android Development">Android Development</span><span class="chip" title="Business Development">Business Development</span><span class="chip" title="Web Development">Web Development</span></div>
+                                        <div class="prefill">{% for s in skills %}
+                                            <span class="chip" title="Hindi">{{s.skill}}</span>
+                                        {% endfor %}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -591,22 +639,17 @@
                         <div class="cardPad">
                             <div class="widgetHead" style=" font-size: larger;margin: 20px;"><span class="widgetTitle">Employment</span><span class="add no-outline button-medium" tabindex="0" style="float: right;"><a href ="#"data-target="#employmentmodel " data-toggle="modal"style="text-decoration: none;">Add Employment</a></span></div>
                             <div class="widgetCont" style="margin: 29px;">
+                                {% for p in professional %}
                                 <div class="row emp-list">
-                                    <div class="col s12 item title"><span class="truncate ln15" title="Customer Care Executive">Customer Care Executive</span><span class="edit icon" tabindex="0">Edit</span></div>
-                                    <div class="col s12 item"><span class="truncate ln15 fs13" title="Datamatics Global Services">Global Services</span></div>
-                                    <div class="col s12 item fs13">Feb 2021 to Aug 2021 (7 months)</div>
+                                    <div class="col s12 item title"><span class="truncate ln15" title="Customer Care Executive">{{p.designation}}</span><span class="edit icon" tabindex="0">Edit</span></div>
+                                    <div class="col s12 item"><span class="truncate ln15 fs13" title="Datamatics Global Services">{{p.organization}}</span></div>
+                                    <div class="col s12 item fs13">{{p.start_month}} {{p.start_date}} to {{p.end_month}} {{p.end_date}}</div>
                                     <!-- react-text: 658 -->
                                     <!-- /react-text -->
                                     <div class="col s12 item prefill fs13"><a href="javascript:void(0);" class="no-outline" tabindex="0"><strong>Add Job Profile</strong></a></div>
                                 </div>
-                                <div class="row emp-list">
-                                    <div class="col s12 item title"><span class="truncate ln15" title="Customer Care Executive">Customer Care Executive</span><span class="edit icon" tabindex="0">Edit</span></div>
-                                    <div class="col s12 item"><span class="truncate ln15 fs13" title="Datamatics Global Services">Global Services</span></div>
-                                    <div class="col s12 item fs13">Feb 2020 to May 2021 (1 year 4 months)</div>
-                                    <!-- react-text: 669 -->
-                                    <!-- /react-text -->
-                                    <div class="col s12 item prefill fs13"><a href="javascript:void(0);" class="no-outline" tabindex="0"><strong>Add Job Profile</strong></a></div>
-                                </div>
+                                {% endfor %}
+
                             </div>
                         </div>
                     </div>
@@ -1195,8 +1238,8 @@
 
                 <div class="modal-body">
                     <span tabindex="0 " class="add no-outline " style="float: right;"><a href="#" style="text-decoration:none">Delete</a></span>
-                    <form>
-
+                    <form method="post">
+                        {% csrf_token %}
                         {% comment %}
                         <div class="form-group pmd-textfield pmd-textfield-floating-label">
                             <label for="full-name">Full Name</label>
@@ -1211,8 +1254,8 @@
                             <input type="tel" class="mat-input form-control" id="mobil" value="">
                         </div> {% endcomment %}
                         <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                            <label class="control-label">Edit heading</label>
-                            <textarea required class="form-control"></textarea>
+
+                           {{form7}}
                         </div>
                         <div class="modal-footer">
                             <input class="btn btn-default " type="submit" value="Save ">
@@ -1330,7 +1373,13 @@
 
                         <div class="modelstyle ">
                             <div class="col-md-10 col-12 " style="max-width: initial;">
-                                <form class="form-horizontal " method="post " action=" ">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {{form3.as_p}}
+                                    <button type="submit">Save</button>
+                                </form>
+                                {% comment %}
+                                <form class="form-horizontal " method="post">
                                     <span tabindex="0 " class="add no-outline " style="float: right;"><a href="#" style="text-decoration:none">Delete</a></span> {% csrf_token %}
                                     <label style="font-size: 20px; ">Designation</label>
 
@@ -1380,11 +1429,12 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer ">
-                                        <input type="submit" class="btn btn-default " value="Save ">
-                                        <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                                        <button type="submit" class="btn btn-default ">submit</button>
+                                        <button type="button" class="btn btn-default " data-dismiss="modal ">Close</button>
                                     </div>
 
                                 </form>
+                                {% endcomment %}
                             </div>
                         </div>
 
@@ -1506,7 +1556,11 @@
                                 <a href="#custom">Custom</a>
                                 <a href="#support">Support</a>
                                 <a href="#tools">Tools</a>
+
                             </div>
+                            <button type="submit">Submit</button>
+                            </form>
+
                         </div>
 
                         <!--Rating start-->
@@ -1520,24 +1574,7 @@
 
                         <div class="modelstyle ">
                             <div class="col-md-10 col-12 " style="max-width: initial;">
-                                <form class="form-horizontal " method="post " action=" ">
-                                    <!-- <span tabindex="0 " class="add no-outline " style="float: right;"><a href="#" style="text-decoration:none">Delete</a></span>  -->
-                                    {% csrf_token %}
 
-
-                                    <div class="input-group ">
-                                        <label style="font-size: 20px; "> {{form5.skill.label}}</label> {{form5.skill}}
-                                    </div>
-                                    <div class="input-group ">
-
-                                        {{form5.rating.label}} {{form5.rating}}
-                                    </div>
-                                    <div class="modal-footer ">
-                                        <input type="submit" class="btn btn-default" value="Save">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal ">Close</button>
-                                    </div>
-
-                                </form>
                             </div>
                         </div>
                         <!-- <div class="modal-footer ">
@@ -1754,6 +1791,7 @@
         
         document.getElementById("demo").appendChild(l);
     }
+
     </script>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

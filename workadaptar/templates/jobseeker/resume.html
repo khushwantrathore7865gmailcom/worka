@@ -234,6 +234,64 @@
 
 <body style="background-color: grey;">
     {% comment %}
+     {% if request.user.is_candidate %}
+                <div class="top-navbar">
+                    <nav class="navbar navbar-expand-lg ">
+<a class="" href="{% url 'jobseeker:jobseeker_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+<nav class="navbar mr-auto">
+<form class="form-inline" type="get">
+<div class="input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+  </div>
+  <input type="text" class="form-control"  id="search_box" name="search_box" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+</div>
+</form>
+</nav>
+
+
+
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+    <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'jobseeker:resume' %}">Resume</a>
+  </li>
+
+  <li class="nav-item bell-icon">
+    <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
+  </li>
+     <li class="nav-item">
+<div class="dropdown">
+<button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
+<div class="dropdown-content">
+<a href="{% url 'jobseeker:profile' %}">My Profile</a>
+<a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
+<a href="{% url 'jobseeker:logout' %}">Log Out</a>
+</div>
+</div>
+     </li>
+
+
+ </ul>
+
+</div>
+</nav>
+                </div>
+                {% else %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
@@ -271,7 +329,8 @@
                 </form>
             </div>
         </div>
-    </nav> {% endcomment %}
+    </nav>
+    {% endif %}{% endcomment %}
     <div class="bannerTxt banr">
 
         <div class="wrap bannerPos bannerPosRW">
