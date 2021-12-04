@@ -28,6 +28,7 @@ import razorpay
 from django.contrib.auth.decorators import login_required
 from django.core.files import File
 from io import BytesIO
+
 client = razorpay.Client(auth=("rzp_test_N6naZCMdnNcNcU", "pdkCmhFp28iS6acXCLJuyPFb"))
 
 
@@ -830,8 +831,10 @@ def ProfileEdit(request):
     except Candidate.DoesNotExist:
         profile = None
     print(profile)
+    print('notrun', request.method)
     if profile is not None:
         if request.method == 'POST':
+            print('run', request.method)
             form1 = ProfileRegisterForm(data=request.POST or None, files=request.FILES or None)
             form2 = ProfileRegisterForm_edu(request.POST or None)
             form3 = ProfileRegisterForm_profdetail(request.POST or None)
@@ -840,7 +843,7 @@ def ProfileEdit(request):
             form6 = ProfileRegistration_expdetail(request.POST or None)
             form7 = Resume_headlineForm(request.POST)
             form8 = ProfileRegistration_skills(request.POST)
-            # print(form1)
+            print('form2', form2.is_valid())
             if form1.is_valid():
                 print(form1.cleaned_data.get('profile_pic'))
                 if form1.cleaned_data.get('birth_date'):
@@ -862,9 +865,11 @@ def ProfileEdit(request):
                     f2.user_id = profile
                     f2.save()
             if form3.is_valid():
-                f3 = form3.save(commit=False)
-                if form3.cleaned_data.get('designation'):
+                if form2.cleaned_data.get('designation'):
+                    f3 = form3.save(commit=False)
+                    print(f3)
                     f3.user_id = profile
+                    print('f3', f3.user_id)
                     f3.save()
             if form4.is_valid():
                 f4 = form4.save(commit=False)
@@ -892,13 +897,7 @@ def ProfileEdit(request):
                 d = form6.cleaned_data.get('department')
                 print(d)
                 if d != "":
-                    print("after d is not none")
-                    try:
-                        cep = Candidate_expdetail.objects.get(user_id=profile)
-                    except Candidate_profile.DoesNotExist:
-                        cep = None
-                    if cep:
-                        cep.delete()
+
                     f6 = form6.save(commit=False)
                     f6.user_id = profile
                     f6.save()
@@ -918,27 +917,38 @@ def ProfileEdit(request):
         print(request.method)
         try:
             c = Candidate_profile.objects.get(user_id=profile)
-            print(c)
         except Candidate_profile.DoesNotExist:
             c = None
-            print(c)
+        if c is None:
+            cN = 0
+        else:
+            cN=10
         try:
             cr = Candidate_resume.objects.get(user_id=profile)
         except Candidate_resume.DoesNotExist:
             cr = None
         if cr is not None:
             re = True
+            crN=10
         else:
             re = False
+            crN =0
         try:
             cep = Candidate_expdetail.objects.get(user_id=profile)
         except Candidate_expdetail.DoesNotExist:
             cep = None
+        if cep is None:
+            cepN=0
+        else:
+            cepN=10
         try:
             Resume = Resume_headline.objects.get(user_id=profile)
         except Resume_headline.DoesNotExist:
             Resume = None
-
+        if Resume is None:
+            rN=0
+        else:
+            rN=10
         form1 = ProfileRegisterForm(instance=c)
         form2 = ProfileRegisterForm_edu()
         form3 = ProfileRegisterForm_profdetail()
@@ -948,14 +958,27 @@ def ProfileEdit(request):
         form7 = Resume_headlineForm(instance=Resume)
         form8 = ProfileRegistration_skills()
         skills = Candidate_skills.objects.filter(user_id=profile)
-        print(skills)
+        if len(skills)!=0:
+            sN= 10
+        else:
+            sN=0
         edu = Candidate_edu.objects.filter(user_id=profile)
+        if len(edu)!=0:
+            eN=10
+        else:
+            eN=0
         professional = Candidate_profdetail.objects.filter(user_id=profile)
+        if len(professional)!=0:
+            pN=10
+        else:
+            pN=0
+        per = ((sN+pN+eN+rN+crN+cepN+cN)/70)*100
+        print(per)
         return render(request, 'jobseeker/Profile.html',
                       {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, 'form6': form6, 'form7': form7,
                        'form8': form8,
-                       'skills': skills, 'edu': edu, 'professional': professional, 'c': c, 'cr': cr, 're': re,
-                       'rh': Resume})
+                       'skills': skills, 'edu': edu, 'professional': professional, 'c': c, 'cr': cr, 're': re,'cep':cep,
+                       'rh': Resume,'per':per})
 
     else:
         return redirect('/')

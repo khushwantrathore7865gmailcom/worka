@@ -7,8 +7,8 @@ from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
 from .models import Employer, Employer_profile, Employer_candidate_jobanswer, Employer_job, Employer_job_Applied, \
-    Employer_jobquestion, Employer_expired_job
-from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm, QuestionFormset,keyWordFormset
+    Employer_jobquestion, Employer_expired_job, Employer_Subscription
+from .forms import SignUpForm, ProfileRegisterForm, JobPostForm, JobsQuestionForm, QuestionFormset, keyWordFormset
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -25,7 +25,16 @@ from django.forms import modelformset_factory
 from django.db import transaction, IntegrityError
 from django.contrib.auth.decorators import login_required
 from bs4 import BeautifulSoup
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+import razorpay
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseBadRequest
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+razorpay_client = razorpay.Client(
+    auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+
 
 class SignUpView(View):
     form_class = SignUpForm
@@ -49,7 +58,7 @@ class SignUpView(View):
                 user = form.save(commit=False)
                 user.username = user.email
                 user.user_name = user.email
-                user.is_active = False
+                user.is_active = True
                 user.is_employeer = True
                 user.save()
                 new_employe = Employer(user=user, is_email_verified=False)
@@ -119,7 +128,10 @@ def login_employer(request):
             if Pattern.match(username):
                 c = Employer_profile.objects.get(phone=username)
                 username = c.user_id.user.username
+            print(password)
+            print(username)
             user = authenticate(request, username=username, password=password)
+            print(user)
 
             if user is not None and user.is_employeer:
                 login(request, user)
@@ -258,48 +270,90 @@ def job_detail(request, pk):
 def view_applied_candidate(request, pk):
     user = request.user
     if user is not None and user.is_employeer:
-        candidate_user = []
-        candidate_profile = []
-        education_profile = []
-        professional_profile = []
-        skill = []
-        resume = []
-        expect = []
-        candidate_answer = []
-        # Question=[]
-        e = Employer.objects.get(user=request.user)
+        e = Employer.objects.get(user=user)
+        try:
+            eS = Employer_Subscription.objects.get(emp_id=e)
+        except Employer_Subscription.DoesNotExist:
+            eS = None
 
-        cp = Employer_profile.objects.get(employer=e)
-        job = Employer_job.objects.get(pk=pk)
+        if eS is not None:
+            start_date = eS.subscribed_on
+            today = datetime.now()
+            stat_date = str(start_date)
+            start_date = stat_date[:19]
+            tday = str(today)
+            today = tday[:19]
+            s_date = datetime.strptime(start_date, "%Y-%m-%d %H:%M:%S")
+            e_date = datetime.strptime(today, "%Y-%m-%d %H:%M:%S")
+            # print(s_date)
+            # print(e_date)
+            diff = abs((e_date - s_date).days)
+            print(diff)
+            if diff > eS.subscription_interval:
+                eS.delete()
 
-        valkey = request.GET.get('keyword_box', None)
-        valcomp = request.GET.get('company_box', None)
-        valloc = request.GET.get('location_box', None)
-        valmin_box = request.GET.get('min_box', None)
-        valmax_box = request.GET.get('max_box', None)
-        valmin_salary_box = request.GET.get('min_salary_box', None)
-        valmax_salary_box = request.GET.get('max_salary_box', None)
-        question = Employer_jobquestion.objects.filter(job_id=job)
-        candidate_Applied = Employer_job_Applied.objects.filter(job_id=job)
-        for can in candidate_Applied:
-            c = can.candidate_id
-            c_p = Candidate_profile.objects.get(user_id=c)
-            c_e = Candidate_edu.objects.filter(user_id=c).first()
-            p_p = Candidate_profdetail.objects.filter(user_id=c)
-            c_ed = Candidate_expdetail.objects.get(user_id=c)
-            c_sk = Candidate_skills.objects.filter(user_id=c)
-            if (valkey is not None) | (valloc is not None) | (valcomp is not None) | (valmax_box is not None) | (
-                    valmin_box is not None) | (
-                    valmin_box is not None) | (valmax_salary_box is not None) | (valmin_salary_box is not None):
-                for c_sks in c_sk:
-                    try:
-                        c_skss = c_sks.skill
-                    except c_sks.DoesNotExist:
-                        pass
-                    if c_skss == valkey:
+            candidate_user = []
+            candidate_profile = []
+            education_profile = []
+            professional_profile = []
+            skill = []
+            resume = []
+            expect = []
+            candidate_answer = []
+            # Question=[]
+            e = Employer.objects.get(user=request.user)
+
+            cp = Employer_profile.objects.get(employer=e)
+            job = Employer_job.objects.get(pk=pk)
+
+            valkey = request.GET.get('keyword_box', None)
+            valcomp = request.GET.get('company_box', None)
+            valloc = request.GET.get('location_box', None)
+            valmin_box = request.GET.get('min_box', None)
+            valmax_box = request.GET.get('max_box', None)
+            valmin_salary_box = request.GET.get('min_salary_box', None)
+            valmax_salary_box = request.GET.get('max_salary_box', None)
+            question = Employer_jobquestion.objects.filter(job_id=job)
+            candidate_Applied = Employer_job_Applied.objects.filter(job_id=job)
+            for can in candidate_Applied:
+                c = can.candidate_id
+                c_p = Candidate_profile.objects.get(user_id=c)
+                c_e = Candidate_edu.objects.filter(user_id=c).first()
+                p_p = Candidate_profdetail.objects.filter(user_id=c)
+                c_ed = Candidate_expdetail.objects.get(user_id=c)
+                c_sk = Candidate_skills.objects.filter(user_id=c)
+                if (valkey is not None) | (valloc is not None) | (valcomp is not None) | (valmax_box is not None) | (
+                        valmin_box is not None) | (
+                        valmin_box is not None) | (valmax_salary_box is not None) | (valmin_salary_box is not None):
+                    for c_sks in c_sk:
+                        try:
+                            c_skss = c_sks.skill
+                        except c_sks.DoesNotExist:
+                            pass
+                        if c_skss == valkey:
+
+                            candidate_profile.append(c_p)
+                            print("working filter")
+                            print(candidate_profile)
+                            candidate_user.append(c.user)
+                            education_profile.append(c_e)
+                            professional_profile.append(p_p)
+                            expect.append(c_ed)
+                            skill.append(c_sk)
+
+                            resume.append(Candidate_resume.objects.get(user_id=c))
+                            for q in question:
+                                candidate_answer.append(
+                                    Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+                            continue
+                        else:
+                            pass
+
+                    if valloc in c_ed.prefer_location:
+                        print(valloc)
 
                         candidate_profile.append(c_p)
-                        print("working filter")
+                        print("working location filter")
                         print(candidate_profile)
                         candidate_user.append(c.user)
                         education_profile.append(c_e)
@@ -312,34 +366,33 @@ def view_applied_candidate(request, pk):
                             candidate_answer.append(
                                 Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
                         continue
-                    else:
-                        pass
+                    for p_ps in p_p:
+                        try:
+                            p_pss = p_ps.organization
+                        except c_sks.DoesNotExist:
+                            pass
+                        if p_pss == valcomp:
 
-                if valloc in c_ed.prefer_location:
-                    print(valloc)
+                            candidate_profile.append(c_p)
+                            print("working filter")
+                            print(candidate_profile)
+                            candidate_user.append(c.user)
+                            education_profile.append(c_e)
+                            professional_profile.append(p_p)
+                            expect.append(c_ed)
+                            skill.append(c_sk)
 
-                    candidate_profile.append(c_p)
-                    print("working location filter")
-                    print(candidate_profile)
-                    candidate_user.append(c.user)
-                    education_profile.append(c_e)
-                    professional_profile.append(p_p)
-                    expect.append(c_ed)
-                    skill.append(c_sk)
-
-                    resume.append(Candidate_resume.objects.get(user_id=c))
-                    for q in question:
-                        candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
-                    continue
-                for p_ps in p_p:
-                    try:
-                        p_pss = p_ps.organization
-                    except c_sks.DoesNotExist:
-                        pass
-                    if p_pss == valcomp:
+                            resume.append(Candidate_resume.objects.get(user_id=c))
+                            for q in question:
+                                candidate_answer.append(
+                                    Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+                            continue
+                        else:
+                            pass
+                    if valmin_box <= c_ed.Total_Working <= valmax_box:
 
                         candidate_profile.append(c_p)
-                        print("working filter")
+                        print("working location filter")
                         print(candidate_profile)
                         candidate_user.append(c.user)
                         education_profile.append(c_e)
@@ -352,67 +405,115 @@ def view_applied_candidate(request, pk):
                             candidate_answer.append(
                                 Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
                         continue
+                    if valmin_salary_box <= c_ed.exp_salary <= valmax_salary_box:
+
+                        candidate_profile.append(c_p)
+                        print("working location filter")
+                        print(candidate_profile)
+                        candidate_user.append(c.user)
+                        education_profile.append(c_e)
+                        professional_profile.append(p_p)
+                        expect.append(c_ed)
+                        skill.append(c_sk)
+
+                        resume.append(Candidate_resume.objects.get(user_id=c))
+                        for q in question:
+                            candidate_answer.append(
+                                Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+                        continue
+
+
                     else:
                         pass
-                if valmin_box <= c_ed.Total_Working <= valmax_box:
-
-                    candidate_profile.append(c_p)
-                    print("working location filter")
-                    print(candidate_profile)
-                    candidate_user.append(c.user)
-                    education_profile.append(c_e)
-                    professional_profile.append(p_p)
-                    expect.append(c_ed)
-                    skill.append(c_sk)
-
-                    resume.append(Candidate_resume.objects.get(user_id=c))
-                    for q in question:
-                        candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
-                    continue
-                if valmin_salary_box <= c_ed.exp_salary <= valmax_salary_box:
-
-                    candidate_profile.append(c_p)
-                    print("working location filter")
-                    print(candidate_profile)
-                    candidate_user.append(c.user)
-                    education_profile.append(c_e)
-                    professional_profile.append(p_p)
-                    expect.append(c_ed)
-                    skill.append(c_sk)
-
-                    resume.append(Candidate_resume.objects.get(user_id=c))
-                    for q in question:
-                        candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
-                    continue
-
-
                 else:
-                    pass
-            else:
-                candidate_profile.append(c_p)
-                candidate_user.append(c.user)
-                education_profile.append(c_e)
-                professional_profile.append(p_p)
-                expect.append(c_ed)
-                skill.append(c_sk)
+                    candidate_profile.append(c_p)
+                    candidate_user.append(c.user)
+                    education_profile.append(c_e)
+                    professional_profile.append(p_p)
+                    expect.append(c_ed)
+                    skill.append(c_sk)
 
-                resume.append(Candidate_resume.objects.get(user_id=c))
-                for q in question:
-                    candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
+                    resume.append(Candidate_resume.objects.get(user_id=c))
+                    for q in question:
+                        candidate_answer.append(Employer_candidate_jobanswer.objects.get(question_id=q, candidate_id=c))
 
-        quest = zip(question, candidate_answer)
-        # print(candidate_answer)
-        objects = zip(candidate_profile, education_profile, professional_profile, skill, resume,
-                      candidate_user, candidate_Applied, expect)
+            quest = zip(question, candidate_answer)
+            # print(candidate_answer)
+            objects = zip(candidate_profile, education_profile, professional_profile, skill, resume,
+                          candidate_user, candidate_Applied, expect)
 
-        return render(request, 'employer/job_candidate.html',
-                      {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer, 'cp': cp})
-        # return render(request, 'employer/job_candidate.html',
-        #               {'candidate': objects, 'job': job, 'quest': quest})
+            return render(request, 'employer/job_candidate.html',
+                          {'candidate': objects, 'job': job, 'question': question, 'answer': candidate_answer,
+                           'cp': cp})
+        else:
+            currency = 'INR'
+            amount = 20000  # Rs. 200
+
+            # Create a Razorpay Order
+            razorpay_order = razorpay_client.order.create(dict(amount=amount,
+                                                               currency=currency,
+                                                               payment_capture='0'))
+
+            # order id of newly created order.
+            razorpay_order_id = razorpay_order['id']
+            callback_url = 'recruiter:paymenthandler'
+
+            # we need to pass these details to frontend.
+            context = {}
+            context['razorpay_order_id'] = razorpay_order_id
+            context['razorpay_merchant_key'] = settings.RAZOR_KEY_ID
+            context['razorpay_amount'] = amount
+            context['currency'] = currency
+            context['callback_url'] = callback_url
+            return render(request,'employer/buySubscription.html',context=context)
+
     else:
         return redirect('/')
 
 
+@csrf_exempt
+def paymenthandler(request):
+    # only accept POST request.
+    if request.method == "POST":
+        try:
+
+            # get the required parameters from post request.
+            payment_id = request.POST.get('razorpay_payment_id', '')
+            razorpay_order_id = request.POST.get('razorpay_order_id', '')
+            signature = request.POST.get('razorpay_signature', '')
+            params_dict = {
+                'razorpay_order_id': razorpay_order_id,
+                'razorpay_payment_id': payment_id,
+                'razorpay_signature': signature
+            }
+
+            # verify the payment signature.
+            result = razorpay_client.utility.verify_payment_signature(
+                params_dict)
+            if result is None:
+                amount = 20000  # Rs. 200
+                try:
+
+                    # capture the payemt
+                    razorpay_client.payment.capture(payment_id, amount)
+
+                    # render success page on successful caputre of payment
+                    return render(request, 'employer/paymentsuccess.html')
+                except:
+
+                    # if there is an error while capturing payment.
+                    return render(request, 'employer/paymentfail.html')
+            else:
+
+                # if signature verification fails.
+                return render(request, 'employer/paymentfail.html')
+        except:
+
+            # if we don't find the required parameters in POST data
+            return HttpResponseBadRequest()
+    else:
+        # if other than POST request is made.
+        return HttpResponseBadRequest()
 @login_required(login_url='/')
 def shortlistview_applied_candidate(request, pk):
     user = request.user
@@ -629,7 +730,6 @@ def advance_Search(request):
             if formset.is_valid():
 
                 for form in formset:
-
                     keyword = form.cleaned_data.get('keyword')
                     print(keyword)
             if job_type == 'Job Type':
@@ -638,17 +738,17 @@ def advance_Search(request):
                 experience = None
             if location == 'Location':
                 location = None
-            if minExp =='Minimum':
+            if minExp == 'Minimum':
                 minExp = None
             if maxExp == 'To Maximum':
                 maxExp = None
-            if minlakh =='Lacs':
+            if minlakh == 'Lacs':
                 minlakh = None
-            if maxlakh =='Lacs':
+            if maxlakh == 'Lacs':
                 maxlakh = None
             if minthousand == 'Thousand':
                 minthousand = None
-            if maxthousand =='Thousand':
+            if maxthousand == 'Thousand':
                 maxthousand = None
             print(job_type)
             print(experience)
@@ -696,8 +796,8 @@ def advance_Search(request):
             set2 = set1.intersection(s3)
             candidate_list_Set = set2.intersection(s4)
             candidate_list = list(candidate_list_Set)
-            return JsonResponse({"msg":"done"})
+            return JsonResponse({"msg": "done"})
 
-        return render(request, 'employer/advance-search.html',{'form2':formset})
+        return render(request, 'employer/advance-search.html', {'form2': formset})
     else:
         return redirect('recruiter:employer/login')

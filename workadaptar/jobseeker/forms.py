@@ -385,7 +385,7 @@ class ProfileRegisterForm_profdetail(forms.ModelForm):
         attrs={'class': "input100"}))
     start_year = forms.ChoiceField(choices=year, required=False, label='start year', widget=forms.Select(
         attrs={'class': "input100"}))
-    is_current = forms.BooleanField(label='Currently working', widget=forms.CheckboxInput())
+    # is_current = forms.BooleanField(label='Currently working', widget=forms.CheckboxInput())
     end_date = forms.ChoiceField(choices=date, required=False, label='end date', widget=forms.Select(
         attrs={'class': "input100"}))
     end_month = forms.ChoiceField(choices=month, required=False, label='end month', widget=forms.Select(
@@ -402,7 +402,7 @@ class ProfileRegisterForm_profdetail(forms.ModelForm):
             'start_date',
             'start_month',
             'start_year',
-            'is_current',
+            # 'is_current',
             'end_date',
             'end_month',
             'end_year',
