@@ -1857,3 +1857,5 @@ def BuiltResume(request):
         pdf.save(filename, File(BytesIO(pdf.content)))
 
     return render(request, 'jobseeker/BuiltResume.html')
+def ResumeEditor(request):
+    return render(request, 'jobseeker/ResumeEditor.html')

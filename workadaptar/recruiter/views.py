@@ -465,7 +465,7 @@ def view_applied_candidate(request, pk):
             context['razorpay_amount'] = amount
             context['currency'] = currency
             context['callback_url'] = callback_url
-            return render(request,'employer/buySubscription.html',context=context)
+            return render(request, 'employer/buySubscription.html', context=context)
 
     else:
         return redirect('/')
@@ -514,6 +514,8 @@ def paymenthandler(request):
     else:
         # if other than POST request is made.
         return HttpResponseBadRequest()
+
+
 @login_required(login_url='/')
 def shortlistview_applied_candidate(request, pk):
     user = request.user
@@ -640,6 +642,50 @@ def ProfileView(request):
         "profile": profile,
 
     })
+
+
+@login_required(login_url='/')
+def ProfileEdit(request):
+    try:
+        profile = Employer.objects.get(user=request.user)
+    except Candidate.DoesNotExist:
+        profile = None
+    print(profile)
+    print('notrun', request.method)
+    if profile is not None:
+        if request.method == 'POST':
+            print('run', request.method)
+            form1 = ProfileRegisterForm(data=request.POST or None, files=request.FILES or None)
+
+            if form1.is_valid():
+                print(form1.cleaned_data.get('profile_pic'))
+                if form1.cleaned_data.get('birth_date'):
+                    f1 = form1.save(commit=False)
+                    try:
+                        c = Employer_profile.objects.get(employer=profile)
+                    except Employer_profile.DoesNotExist:
+                        c = None
+                    if c:
+                        c.delete()
+
+                    f1.user_id = profile
+
+                    f1.save()
+
+            return redirect('jobseeker:ProfileEdit')
+        print(request.method)
+        try:
+            c = Employer_profile.objects.get(employer=profile)
+        except Employer_profile.DoesNotExist:
+            c = None
+
+        form1 = ProfileRegisterForm(instance=c)
+
+        return render(request, 'jobseeker/Profile.html',
+                      {"form1": form1, 'c': c})
+
+    else:
+        return redirect('/')
 
 
 @login_required(login_url='/')

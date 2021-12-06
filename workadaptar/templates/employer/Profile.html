@@ -1,0 +1,1744 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/style_Addjob.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/common_v23.min.css' %}">
+    <script type="text/javascript" src="{% static 'js/nLoggerJB_v3.0.min.js' %}"></script>
+
+
+
+
+
+    <script type="text/javascript">
+        nLogger.init({
+            "tag": "profile",
+            "nLogger": {
+                "beaconUrl": "https:\/\/lg.naukri.com\/uba",
+                "eventName": "newMonkError",
+                "deviceType": "SERVER"
+            },
+            "boomerang": {
+                "logBW": false,
+                "beaconUrl": "https:\/\/lg.naukri.com\/uba",
+                "imageURL": "\/\/static.naukri.com\/s\/0\/0\/i\/",
+                "eventName": "newMonkPerformance",
+                "deviceType": "SERVER"
+            },
+            "tenantId": 1,
+            "appId": 105,
+            "userIP": ""
+        });
+    </script>
+
+    <style>
+        .right-align {
+            text-align: right;
+        }
+        
+        .dropbtn {
+            background-color: #FFFFFF;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown:hover .dropbtn {
+            background-color: #03A84E;
+        }
+        
+        .job-left.job-left-images-new img {
+            width: 270px;
+            height: 270px;
+            border-radius: 50%;
+        }
+        
+        .modal-dialog {
+            max-width: 800px;
+            margin: 1.75rem auto;
+        }
+        
+        .modelstyle {
+            padding: 50px;
+        }
+        
+        .employment,
+        .employment-section {
+            box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
+            box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
+            background: #fff;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        
+        .skills-left {
+            box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
+            box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .skills-right {
+            box-shadow: 12px 12px 50px 0px rgb(138 132 132 / 25%);
+            box-shadow: -12px -12px 50px 0px rgb(0 0 0 / 25%);
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        u {
+            color: blue;
+        }
+        
+        .custom-select {
+            position: relative;
+            font-family: Arial;
+        }
+        
+        .custom-select select {
+            display: none;
+            /*hide original SELECT element:*/
+        }
+        
+        .select-selected {
+            background-color: DodgerBlue;
+        }
+        /*style the arrow inside the select element:*/
+        
+        .select-selected:after {
+            position: absolute;
+            content: "";
+            top: 14px;
+            right: 10px;
+            width: 0;
+            height: 0;
+            border: 6px solid transparent;
+            border-color: #fff transparent transparent transparent;
+        }
+        /*point the arrow upwards when the select box is open (active):*/
+        
+        .select-selected.select-arrow-active:after {
+            border-color: transparent transparent #fff transparent;
+            top: 7px;
+        }
+        /*style the items (options), including the selected item:*/
+        
+        .select-items div,
+        .select-selected {
+            color: #ffffff;
+            padding: 8px 16px;
+            border: 1px solid transparent;
+            border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+            cursor: pointer;
+            user-select: none;
+        }
+        /*style items (options):*/
+        
+        .select-items {
+            position: absolute;
+            background-color: DodgerBlue;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 99;
+        }
+        /*hide the items when the select box is closed:*/
+        
+        .select-hide {
+            display: none;
+        }
+        
+        .select-items div:hover,
+        .same-as-selected {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        .closebtn {
+            padding-left: 10px;
+            color: #888;
+            font-weight: bold;
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        .closebtn:hover {
+            color: #000;
+        }
+        
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 6px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .dropbtn:hover,
+        .dropbtn:focus {
+            background-color: #3e8e41;
+        }
+        
+        #myInput {
+            box-sizing: border-box;
+            background-image: url('searchicon.png');
+            background-position: 14px 12px;
+            background-repeat: no-repeat;
+            font-size: 16px;
+            padding: 14px 20px 12px 45px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        #myInput:focus {
+            outline: 3px solid #ddd;
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            overflow: auto;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown a:hover {
+            background-color: #ddd;
+        }
+        
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% comment %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg" style="padding: 0rem 0rem; ">
+                            <a class="" href="{% url 'jobseeker:jobseeker_home' %}" style="margin-left: 60px;"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <nav class="navbar mr-auto" style="margin-right: 125px;display: contents; ">
+                                    <form class="form-inline" type="get" style="margin-inline: auto;">
+                                        <div class="input-group" style="box-shadow: 0px 0px 14px 3px lightgrey;padding: inherit;border-radius: 10px;margin-top: 5px;padding: 2px;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true" style="margin: 10px;"></i></span>
+                                            </div>
+                                            <input type="text" class="form-control" id="search_box" name="search_box" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1" style="width: 350px;">
+                                        </div>
+                                    </form>
+                                </nav>
+
+
+
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true" style="font-size: 27px;"></i></a>
+                                        <span class="menu-text">Home</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-briefcase" aria-hidden="true"></i></a>
+                                        <span class="menu-text">Applied</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                        <span class="menu-text">Saved</span>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:resume' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-id-card" aria-hidden="true"></i></a>
+                                        <span class="menu-text">Resume</span>
+                                    </li>
+
+                                    <li class="nav-item bell-icon">
+                                        <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><img src="{% static 'images/bell.png' %}"></a>
+                                        <span class="menu-text">Notification</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="dropdown">
+                                            <button class="dropbtn">
+                                                {% if c is not None %}
+                                                <img style="background-color: black;"src="{{c.profile_pic.url}}">
+                                                {% else %}
+                                                <img style="background-color: black;"src="{% static 'profile/avatar.png' %}">
+                                                {% endif %}
+                                                <!-- <img src={{cp.profile_pic.url}}> -->
+                                            </button>
+                                            <div class="dropdown-content">
+                                                <a href="{% url 'jobseeker:profile' %}">My Profile</a>
+                                                <a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
+                                                <a href="{% url 'jobseeker:logout' %}">Log Out</a>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header> {% endcomment %}
+    <header>
+        <div class="container">
+            <div class="row" style="margin-bottom:-25px">
+                <div class="col-md-12 col-12">
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mx-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#work-main">How it works</a>
+                                    </li>
+                                    <!--	  <li class="nav-item">-->
+                                    <!--        <a class="nav-link" href="#">Testimonial</a>-->
+                                    <!--      </li>-->
+
+                                </ul>
+
+
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:resume' %}"> Build Resume</a>
+                                    </li>
+                                    <li class="nav-item button" style="border-start-end-radius: 0px; border-end-start-radius: 1px; height:50px;background-color: #8cdd87;">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#recruitermodal" style="margin-top: 5px;">Recruiter Login</a>
+                                    </li>
+                                    <li class="nav-item button" style="border-start-end-radius: 0px; border-end-start-radius: 0px;height:50px;background-color: #8cdd87; ">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#jobseekermodal" style="margin-top: 5px;">Jobseeker Login</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    {% comment %}
+    <header>
+        <div class="container">
+            <div class="row" style="margin-bottom:-25px">
+                <div class="col-md-12 col-12">
+                    <div class="top-navbar">
+                        <nav class="navbar navbar-expand-lg ">
+                            <a href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/"><img src="{{c.profile_pic.url}} " width="60" height="60"></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mx-auto">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/">Home <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#work-main">How it works</a>
+                                    </li>
+                                    <!--	  <li class="nav-item">-->
+                                    <!--        <a class="nav-link" href="#">Testimonial</a>-->
+                                    <!--      </li>-->
+
+                                </ul>
+
+
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'jobseeker:resume' %}"> Build Resume</a>
+                                    </li>
+                                    <li class="nav-item button" style="border-start-end-radius: 0px; border-end-start-radius: 1px; height:50px;background-color: #8cdd87;">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#recruitermodal" style="margin-top: 5px;">Recruiter Login</a>
+                                    </li>
+                                    <li class="nav-item button" style="border-start-end-radius: 0px; border-end-start-radius: 0px;height:50px;background-color: #8cdd87; ">
+                                        <a class="nav-link" href="#" data-toggle="modal" data-target="#jobseekermodal" style="margin-top: 5px;">Jobseeker Login</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header> {% endcomment %}
+
+    <section class="job-portal" style="padding: 0px 0px;">
+
+        <div class="container">
+            <div class="col-md-12">
+
+                <div class="heading">
+                    <h3>Profile <span>Page</span></h3>
+                    <h4> Introducing The great plateform for easy job search, supervised and trusted Jobs.</h4>
+                </div>
+            </div>
+            
+            <a class="btn btn-success" style="margin-left: 25px ;border-radius: 20px;    float: right;margin: 16px;" href="{% url 'jobseeker:jobseeker_home' %}">
+                Skip and Continue
+        </a>
+            <div class="progress pmd-progress mb-3" style="height:20px;background: aliceblue;margin: 10px;">
+                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated active" style="width: {{per}}%;height: -webkit-fill-available;">
+                    {{per}}%</div>
+            </div>
+
+
+
+            <div class="" style="margin: 10px; padding: 10px;color:rgb(153, 9, 9);">
+                <span class="closebtn" style="color:grey" onclick="this.parentElement.style.display='none';">&times;</span>
+                <strong>Please fill your profile in order to get jobs results</strong>
+            </div>
+
+            <!-- New Udate page -->
+            <div class="row" style="    padding: 2.5rem;">
+                <!-- <div class="col s12 pad0">
+                    <div class="col s6 pad0 fs13">
+                        <div><span class="">Profile Last updated</span>
+                             react-text: 617 -->
+                <!-- /react-text <span class="fw700">today</span></div>
+        </div>
+        </div> -->
+                {% comment %}
+                <div class="col s3 widgets p10" style="padding-right: 55px;margin-right: -462px;">
+                    <div style="padding-right: 344px;margin-right: 91px">
+                        <div class="card mt15 quickLink ">
+                            <ul class="collection" style="border: none;">
+                                <li class="collection-header" style="text-align: center;">
+                                    <h5>Quick Links</h5>
+                                </li>
+                                <li class="collection-item"><span class="text">Attach Resume</span><a href="javascript:;" class="secondary-content">Update</a></li>
+                                <li class="collection-item"><span class="text">Resume Headline</span></li>
+                                <li class="collection-item"><span class="text">Key Skills</span></li>
+                                <li class="collection-item"><span class="text">Employment</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                                <li class="collection-item"><span class="text">Education</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                                <li class="collection-item"><span class="text">IT Skills</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                                <li class="collection-item"><span class="text">Projects</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                                <li class="collection-item"><span class="text">Profile Summary</span><a href="javascript:;" class="secondary-content">Add</a></li>
+                                <li class="collection-item"><span class="text">Accomplishments</span></li>
+                                <li class="collection-item"><span class="text">Career Profile</span></li>
+                                <li class="collection-item"><span class="text">Personal Details</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+
+                {% if c %}
+                <div class="col-md-3 col-12" style="max-width: inherit;margin-top:40px ">
+                    <div class="job-left job-left-images-new" style="box-shadow: 7px 0px 30px 2px;">
+
+                        <div style="    padding-right: 13px;    padding-left: 11px; text-align: center">
+                             <img src="{{c.profile_pic.url}}" style="height: 94px;">
+                        </div>
+
+                        <div class="job-left-desc" style="padding-top: 104px;margin-top: -122px;background: white;">
+                            <h2 style="text-align:center;margin-top: 50px;">{{c.user_id.user.first_name}} {{c.user_id.user.last_name}}</h2>
+
+
+                            <h5 style="text-align: initial;margin-left: 22px;"><i style="color: #03A84E; font-size: 20px;" class="fa fa-briefcase" aria-hidden="true"></i> :
+                                <span>{{cep.role}}</span></h5>
+
+
+                                <h5 style="text-align: initial;margin-left: 22px;"><i style="color: #03A84E; font-size: 25px;" class="fa fa-map-marker" aria-hidden="true"></i> :
+                                    <span>{{c.city}}, {{c.state}}</span></h5>
+                                <h5 style="text-align: initial;margin-left: 22px;"> <i style="color: #03A84E; font-size: 30px;" class="fa fa-mobile-phone" aria-hidden="true"></i> :
+                                    {{c.phone}}
+                                   </h5>
+                                <!--Need Update Here -->
+                                <h5 style="text-align: initial;margin-left: 22px;"><i style="color: #03A84E; font-size: 20px;" class="fa fa-envelope" aria-hidden="true"></i> : {% if c.is_email_verified %}
+                                    <span>{{c.user_id.user}}  <i style="color: #03A84E; "class="fa fa-check">verified</i></span> {% else %}
+                                    <span>{{c.user_id.user}}  <a href="{% url 'jobseeker:sendVerificationMail' %}"><i style="color: #03A84E;">verify</i></a></span> {% endif %}
+                                </h5>
+                                <div>
+                                    <h5 style="text-align: center;">Resume Headline</h5>
+                                    <span> {{rh.resume_headline}}</span>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="col s9 widgets pr0">
+                    <div class="mt15">
+                        <div id="profile-middle-section-widgets" class="naukri-wdgt-section">
+                            <div id="profile-middle-section-widgets.inventory-1"></div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload" id="lazyAttachCV" data-loaded="true" style="box-shadow: 7px 0px 30px 2px;">
+                        <div class="card mt15"><span id="attachCVMsgBox" tabindex="-1"><!-- react-empty: 124 --></span>
+                            <div class="attachCV" style="padding: 20px;">
+                                <div class="heading row" style="margin-bottom: auto;">
+                                    <div class="row main" style="margin-bottom: auto;">
+                                        <div class="col s12" style="margin: 23px;font-size: x-large;">
+                                            <!-- react-text: 129 -->Attach Resume
+                                            <!-- /react-text -->
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-left: auto;">
+                                        <div class="col s12 subHeadinfo">Resume is the most important document recruiters look for. Recruiters generally do not look at profiles without resumes.</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="cvPreview">
+                                        <div class="row">
+                                            <div class="col s9">
+                                                <div class="left" style="display: inline-flex;padding-left: inherit;"><b title="Newone Resume.pdf" class="truncate exten"><!-- react-text: 624 -->
+                                                    {{cr.resume_link}}<!-- /react-text --><!-- react-text: 625 -->&nbsp;-&nbsp;<!-- /react-text --><!-- react-text: 626 -->&nbsp;<!-- /react-text --></b>
+
+                                                </div>
+                                            </div>
+                                            {% if re %}
+                                            <div class="col s3">
+                                                <div class="right download" style="    margin-top: auto;"><a  href="#" role="button"><i class="icon" title="Click here to download your resume">Download</i></a></div>
+                                            </div>{% endif %}
+                                        </div>{% if re %}
+                                        <div class="row">
+                                            <div class="col s12"><a href="javascript:;" class="link right fs14 fw500">DELETE RESUME</a></div>
+                                        </div>{% endif %}
+                                    </div>
+                                    <div class="row">
+                                        <div class="cvUpload col s12">
+                                            <div class="uploadCont" style="border: groove;padding: 50px;">
+                                                <div class="uploadBtn">
+
+                                                    <section>
+                                                        <form method="post" class="action" style="    text-align: -webkit-center;" enctype="multipart/form-data">
+                                                            {% csrf_token %}
+                                                            {{form4}}<br>
+                                                            <div style="width: fit-content;">
+                                                            <button class="btn-success" style="border-radius: 20px;" type="submit">Update Resume</button></div>
+                                                        </form>
+                                                    </section>
+                                                    <ul id="results_resumeParser"></ul>
+                                                </div>
+                                                <div class="format" style="text-align: center;">Supported Formats: doc, docx, rtf, pdf</div>
+                                            </div>
+                                            <div class="center-align"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload" id="lazyResumeHead" data-loaded="true" style="box-shadow: 7px 0px 30px 2px;">
+                        <div class="resumeHeadline">
+                            <div class="card mt15" style="padding: 20px;">
+                                <!-- react-empty: 184 -->
+                                <div class="cardPad">
+                                    <div class="widgetHead" style="margin: 20px;font-size: larger;"><span class="widgetTitle">Resume Headline</span><a href="#"><span class="edit icon" style="margin-left: 20px; text-decoration: none;" data-target="#form-dialog" data-toggle="modal" >Edit</span></a></div>
+                                    <div class="widgetCont" style="margin: 20px;">
+                                        <div class="prefill">
+                                            <div>{{rh.resume_headline}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload" id="lazyKeySkills" data-loaded="true" style="box-shadow: 7px 0px 30px 2px;">
+                        <div class="keySkills">
+                            <div class="card" style="padding: 20px;">
+                                <!-- react-empty: 199 -->
+                                <div class="cardPad">
+                                    <div class="widgetHead" style="margin:20px;font-size:larger"><span class="widgetTitle">Key Skills</span><a href="#"><span class="edit icon" style="margin-left: 20px;text-decoration: none;" data-target="#skillsmodel " data-toggle="modal">Edit</span></a></div>
+                                    <div class="widgetCont" style="margin: 20px;">
+                                        <div class="prefill">{% for s in skills %}
+                                            <span class="chip" title="Hindi">{{s.skill}}</span>
+                                        {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="card" style="box-shadow: 7px 0px 30px 2px;">
+                        <!-- react-empty: 214 -->
+                        <div class="cardPad">
+                            <div class="widgetHead" style=" font-size: larger;margin: 20px;"><span class="widgetTitle">Employment</span><span class="add no-outline button-medium" tabindex="0" style="float: right;"><a href ="#"data-target="#employmentmodel " data-toggle="modal"style="text-decoration: none;">Add Employment</a></span></div>
+                            <div class="widgetCont" style="margin: 29px;">
+                                {% for p in professional %}
+                                <div class="row emp-list">
+                                    <div class="col s12 item title"><span class="truncate ln15" title="Customer Care Executive">{{p.designation}}</span></div>
+                                    <div class="col s12 item"><span class="truncate ln15 fs13" title="Datamatics Global Services">{{p.organization}}</span></div>
+                                    <div class="col s12 item fs13">{{p.start_month}}/{{p.start_year}} to {{p.end_month}}/{{p.end_year}}</div>
+                                    <!-- react-text: 658 -->
+                                    <!-- /react-text -->
+<!--                                    <div class="col s12 item prefill fs13"><a href="javascript:void(0);" class="no-outline" tabindex="0"><strong>Add Job Profile</strong></a></div>-->
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-plugin="lazyload" id="lazyEducation" data-loaded="true" style="box-shadow: 7px 0px 30px 2px;">
+                        <div class="education">
+                            <div class="card">
+                                <!-- react-empty: 226 -->
+                                <div class="cardPad" style="margin: 20px;">
+                                    <div class="widgetHead" style="font-size: larger; margin:20px"><span class="widgetTitle">Education</span><span tabindex="0" class="add no-outline" style="float: right;"><a href="#" data-target="#educationmodel " data-toggle="modal"style="text-decoration: none;">Add Education</a></span></div>
+                                    <div class="widgetCont" style="margin: 20px;">
+                                        <div class="prefill">
+                                            {% for e in edu %}
+                                            <div class="row edu-list" data-prefillid="b6c169d44a02160ffab61f41b217111c36f4283618a2e04411e56d4c06f64435">
+                                                <div class="col s12 item"><span class="col title elps" title="MCA">{{e.institute_name}}</span><span class="col title elps" title="Computers">{{e.degree}}</span></div>
+                                                <div class="col s12 item ">{{e.course_type}}</div>
+                                                <div class="col s12 item">
+                                                    <!-- react-text: 682 -->{{e.start_month}}/{{e.start_year}} to {{e.end_month}}/{{e.end_year}}
+                                                    <!-- /react-text -->
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+
+
+                                </div>
+                            </div>
+                            <div class="lightbox profileEditDrawer educationEdit ">
+                                <div class="crossLayer "><span class="icon ">CrossLayer</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    
+                    <div data-plugin="lazyload " id="lazyDesiredProfile " data-loaded="true " style="box-shadow: 7px 0px 30px 2px;">
+                        <div class="desiredProfile ">
+                            <div class="card ">
+                                <!-- react-empty: 349 -->
+                                <div class="cardPad " style="margin: 20px;">
+                                    <div class="widgetHead " style="margin: 20px; font-size:larger"><span class="widgetTitle ">Career Profile</span><a href="#"><span class="edit icon" tabindex="0 " style="margin-left: 10px;text-decoration:none;" data-target="#careermodel " data-toggle="modal">Edit</span></a></div>
+                                    <div class="widgetCont m0 " style="margin: 20px;">
+                                        <div class="row hori-list ">
+
+                                            <div class="col s6 ">
+                                                <div class="title ">Department</div>
+                                                <div class="desc ">{{cep.department}}</div>
+                                            </div>
+
+                                            <div class="col s6 ">
+                                                <div class="title ">Job Role</div>
+                                                <div class="desc ">{{cep.role}}</div>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Desired Job Type</div>
+                                                <div class="desc ">{{cep.job_type}}</div>
+                                            </div>
+
+                                            <div class="col s6 ">
+                                                <div class="title ">Preferred Work Location</div>
+                                                <div class="desc ">{{cep.prefer_location}}</div>
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Expected Salary</div>
+                                                <div class="grey-text ">{{cep.exp_salary}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lightbox desiredProfile profileEditDrawer ">
+                                <div class="crossLayer "><span class="icon ">CrossLayer</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-plugin="lazyload " id="lazyPersonalDetail " data-loaded="true " style="box-shadow: 7px 0px 30px 2px;">
+                        <div>
+                            <div class="personalDetails card ">
+                                <!-- react-empty: 389 -->
+                                <div class="cardPad " style="margin: 20px;">
+                                    <div class="widgetHead " style="margin: 20px; font-size:larger"><span class="widgetTitle ">Personal Details</span><span class="hide ">ADD</span><a href="#"><span class="icon edit " style="margin-left: 10px;text-decoration: none;" data-target="#personalmodel " data-toggle="modal">Edit</span></a></div>
+                                    <div class="widgetCont " style="margin: 20px;">
+                                        <div class="row hori-list ">
+                                            <div class="col s6 ">
+                                                <div class="title ">Date of Birth</div>
+                                                {{c.birth_date}}/{{c.birth_month}}/{{c.birth_year}}
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Permanent Address</div>
+                                                {{c.address}}
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Gender</div>
+                                               {{c.gender}}
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Area Pin Code</div>
+                                                {{c.pin}}
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Marital Status</div>
+                                                {{c.marital_status}}
+                                            </div>
+                                            <div class="col s6 ">
+                                                <div class="title ">Hometown</div>
+                                                {{c.city}},{{c.state}}
+                                            </div>
+
+
+                                    </div>
+                                    <div class="lightbox profileEditDrawer ">
+                                        <div class="crossLayer " data-ga-track="spa-event|EditProfile|PersonalDetails|Cancel "><span class="icon ">CrossLayer</span></div>
+                                        <div class="drawer-content "></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- New page update -->
+            <!-- <div class="row ">
+
+                <div class="col-md-3 col-12 ">
+                    <div class="job-left ">
+                        <img src={{profile.profile_pic.url}}>
+
+                        <center>
+                            <form class="form-horizontal " method="post " action=" " enctype="multipart/form-data ">
+                                <div class='file file--uploading'>
+                                    <label for='input-file'>
+                  <i class="fa fa-paperclip " aria-hidden="true "> </i>Add Profile Photo
+                </label>
+
+                                    <input id='input-file' type='file' />
+                                </div>
+                            </form>
+                        </center>
+
+
+
+                        <div class="job-left-desc ">
+                            <h2>{{user.first_name}} {{user.last_name}}</h2>
+                            {% for p in professional %}
+                            <!--								<h4>UX/ UI Designer</h4>
+            {% if p.is_current %}
+            <h5>Current Compant</h5>
+            <h6>{{p.organization}}</h6>
+            <h5>Current Job position</h5>
+            <h6>{{p.designation}}</h6>
+            <h5>Working from </h5>
+            <h6>{{p.start_year}}</h6>
+            {% endif %} {% endfor %}
+                            -->
+            <!-- <div class="center-align ">
+                <i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+
+                <a href="# " data-toggle="modal " data-target="#personalmodel "><b><u>Edit Details</u></b></a>
+            </div> -->
+            <!--
+            {% comment %}
+            <div class="download_btn ">
+                <a class="btn btn-primary " href={{resume.resume_link.url}} role="button "><img src=" {% static 'images/download3.png' %} ">Download Resume</a>
+            </div> {% endcomment %}
+        </div>
+
+        </div>
+        </div>
+
+        <div class="col-md-9 col-12 ">
+            <div class="row ">
+                <div class="col-md-7 col-12 ">
+                    <div class="skills-left ">
+                        <div class="right-align ">
+                            <i class="fa fa-plus-square-o " aria-hidden="true "></i>
+
+                            <a href="# " data-toggle="modal " data-target="#skillsmodel "><b><u>Add Skills</u></b></a>
+                            <Br>
+                        </div>
+                        <h5><b>Skills</b> </h5>
+                        <div class="skill-list ">
+                            <div class="skill-list-left ">
+                                <h6>Skills</h6>
+
+                                {% for s in skills %}
+                                <div>{{s.skill}}</div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="skill-list-right ">
+                                <h6>Rating</h6>
+                                {% for s in skills %}
+                                <div>{{s.rating}}</div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                        <br>
+                        <br>
+                        <div class="right-align ">
+                            <i class="fa fa-plus-square-o " aria-hidden="true "></i>
+
+                            <a href="# " data-toggle="modal " data-target="#educationmodel "><b><u>Add Education</u></b></a>
+                            <Br>
+                        </div>
+                        <h5><b>Education </b> </h5> <br>
+                        <span>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#educationmodel "><b><u> Add Post Graduation </u></b></a></small></b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#educationmodel "><b><u>Add Under Graduation </u></b></a></small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#educationmodel "><b><u> Add 12th </u></b></a> </small> </b> <br>
+
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+ <a href="# " data-toggle="modal " data-target="#educationmodel "><b><u>Add 10th</u></b></a> </small> </b> <br>
+
+</span>
+                        <div class="skill-list second ">
+                            <div class="skill-list-left ">
+                                {% for s in edu %}
+                                <div>{{s.institute_name}}</div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="skill-list-right ">
+
+                                {% for s in edu %}
+                                <div>{{s.start_year}}-{{s.end_year}}</div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-5 col-12 ">
+                    <div class="skills-right ">
+                        <div class="right-align ">
+                            <i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+
+                            <a href="# " data-toggle="modal " data-target="#personalmodel "><b><u>Edit Details</u></b></a>
+                            <Br>
+                        </div>
+
+                        <h5><b>Contact Details</b></h5>
+                        <br>
+                        <p><img src=" {% static 'images/mail.png' %} "> <span><b>Email ID</b> : {{user.email}}</span></p>
+                        <p><img src="{% static 'images/phone.png' %} "> <span><b>Phone no.</b> : {{c.phone}}</span></p>
+                        <p><img src=" {% static 'images/location.png' %} "> <span><b>Address</b> : {{c.address}},{{c.city}},{{c.state}}</span></p>
+
+                        <!--								<hr>-->
+            <!--								<div class="contact-btn ">-->
+            <!--									<button>Shorlist </button>-->
+            <!--									<button>Save for later</button>-->
+            <!--									<button><span><i class="fa fa-exclamation-triangle " aria-hidden="true "></i> Report user</span></button>-->
+            <!--								-->
+            <!--								</div>
+
+        </div>
+
+        </div>
+
+        </div>
+
+
+        <div class="employment ">
+
+            <div class="card-panel ">
+                <div class="right-align ">
+
+                    <i class="fa fa-arrow-circle-down " aria-hidden="true "></i>
+
+
+                    <a href="# " data-toggle="modal " data-target="#educationmodel "><b><u>Download Resume</u></b></a>
+                    <Br>
+                </div>
+            </div>
+            <span>
+            <b>
+              <h5 class="left-align ">Attach Resume/CV</h5>
+            </b>
+            <small>
+              <p> please upload in pdf format only</p>
+            </small>
+            <center>
+              <div class='file file--uploading'>
+                <label for='input-file'>
+                  <i class="fa fa-paperclip " aria-hidden="true "> </i>Attach Resume
+                </label>
+                <input id='input-file' type='file' />
+              </div>
+            </center>
+            </form>
+          </span>
+        </div>
+        </div>
+        </div> -->
+
+            <!-- <div class="employment ">
+                <div class="right-align ">
+                    <i class="fa fa-plus-square-o " aria-hidden="true "></i>
+
+                    <a href="# " data-toggle="modal " data-target="#employmentmodel "><b><u>Add Employment</u></b></a>
+                    <Br>
+                </div>
+
+                <h5><b>Employment</b></h5>
+                <br>
+                <span>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#employmentmodel "><b><u> Add Current Company </u></b></a></small></b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#employmentmodel "><b><u>Add previous Company </u></b></a> </small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#employmentmodel "><b><u> Add Internship</u></b></a> </small> </b> <br>
+
+
+
+</span> {% for s in professional %}
+
+
+                <h4>{{s.designation}}</h4>
+                <p class="small ">{{s.organization}}</p>
+                {% if p.is_current %}
+                <p class="small ">{{s.start_month}} {{s.start_year}} to present</p>
+                {% else %}
+                <p class="small ">{{s.start_month}} {{s.start_year}} to {{s.end_month}} {{s.end_year}}</p>
+                {% endif %}
+
+                <p>Available to join in 1 Months</p>
+                <p>Created and automated build and deployment process for the application re-engineering setup for better user experience, and leading up to building a continuous integration system for all our products. Experience with container based deployments
+                    using Docker, working with Docker images... <span>Read More</span></p>
+                <p class="skills active "><span>Top 5 Key Skills:</span> {% for sk in skills %}{{sk.skill}} {% endfor %}</p>
+
+                <hr> {% endfor %}
+
+            </div> -->
+
+            <!-- <div class="employment ">
+                <div class="right-align ">
+                    <i class="fa fa-plus-square-o " aria-hidden="true "></i>
+
+                    <a href="# " data-toggle="modal " data-target="#careermodel "><b><u>Add Career</u></b></a>
+                    <Br>
+                </div>
+
+                <h5><b>Career Profile</b></h5>
+                <br>
+                <span>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#careermodel "><b><u> Add Expected Role </u></b></a></small></b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#careermodel "><b><u>Add Expected Salary </u></b></a> </small> </b> <br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#careermodel "><b><u> Add Expected Employment Type</u></b></a> </small> </b>
+<br>
+<small><b><i class="fa fa-pencil-square-o " aria-hidden="true "></i>
+<a href="# " data-toggle="modal " data-target="#careermodel "><b><u> Add Preffered Location</u></b></a> </small> </b> <br>
+
+
+
+
+</span> {% for s in edu %}
+                <p>{{s.institute_name}} <span></span></p>
+                <!--		<p>Arizona State University <span><img src="images/skills-btn.png "></span></p>-->
+
+            {% endfor %}
+        </div> -->
+
+        </div>
+
+        </div>
+
+        </div>
+        </div>
+
+    </section>
+
+    <!--Model Resume Hedding-->
+    <div tabindex="-1" class="modal pmd-modal fade" id="form-dialog" style="display: none;padding: initial;" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header pmd-modal-border">
+
+                    <h2 class="modal-title" style="font-size: x-large;">Resume Heading</h2>
+
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+
+                </div>
+
+                <div class="modal-body">
+                    <span tabindex="0 " class="add no-outline " style="float: right;"><a href="#" style="text-decoration:none">Delete</a></span>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% comment %}
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <label for="full-name">Full Name</label>
+                            <input id="full-name" class="form-control" type="text">
+                        </div>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="mat-input form-control" id="email" value="">
+                        </div>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                            <label for="mobil">Mobile No.</label>
+                            <input type="tel" class="mat-input form-control" id="mobil" value="">
+                        </div> {% endcomment %}
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label">
+
+                           {{form7}}
+                        </div>
+                        <div class="modal-footer">
+                            <input class="btn btn-default " type="submit" value="Save ">
+                            <button data-dismiss="modal" class="btn pmd-ripple-effect btn-dark pmd-btn-flat" type="button">Reset</button>
+                            <!-- <button data-dismiss="modal" class="btn pmd-ripple-effect btn-primary pmd-btn-flat" type="button">Done</button> -->
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--End-->
+
+    <div class="container ">
+
+
+        <!-- Modal -->
+        <div class="modal fade " id="educationmodel " aria-hidden="true">
+            <div class="modal-dialog ">
+
+                <!-- Modal content-->
+                <div class="modal-content ">
+                    <div class="modal-header pmd-modal-border">
+
+                        <h2 class="modal-title" style="font-size: x-large;">Education Profile</h2>
+
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+
+                    </div>
+
+                    <div class="modelstyle ">
+                        <div class="col-md-10 col-12 " style="max-width: initial;">
+                            <form class="form-horizontal " method="post" action=" ">
+                                <span tabindex="0 " class="add no-outline " style="float: right;"><a href="#" style="text-decoration:none">Delete</a></span>
+                                <!-- <h3>Education</h3> -->
+                                {% csrf_token %}
+
+
+
+                                <div class="input-group ">
+                                    <label style="font-size: 20px; ">{{form2.institute_name.label}}</label> {{form2.institute_name}}
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-3 input-group ">
+
+                                        {{form2.start_date.label}} {{form2.start_date}}
+                                    </div>
+                                    <div class="col-3 input-group ">
+
+                                        {{form2.start_month.label}} {{form2.start_month}}
+                                    </div>
+                                    <div class="col-3 input-group ">
+
+                                        {{form2.start_year.label}} {{form2.start_year}}
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-3 input-group ">
+
+                                        {{form2.end_date.label}} {{form2.end_date}}
+                                    </div>
+                                    <div class="col-3 input-group ">
+
+                                        {{form2.end_month.label}} {{form2.end_month}}
+                                    </div>
+                                    <div class="col-3 input-group ">
+
+                                        {{form2.end_year.label}} {{form2.end_year}}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 input-group ">
+
+                                        {{form2.course_type.label}} {{form2.course_type}}
+                                    </div>
+                                    <div class="col-5 input-group ">
+
+                                        {{form2.degree.label}} {{form2.degree}}
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer ">
+                                    <input class="btn btn-default " type="submit" value="Save ">
+                                    <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- employment modal-->
+        <div class="container ">
+
+
+            <!-- Modal -->
+            <div class="modal fade " id="employmentmodel ">
+                <div class="modal-dialog ">
+
+                    <!-- Modal content-->
+                    <div class="modal-content ">
+                        <div class="modal-header pmd-modal-border">
+
+                            <h2 class="modal-title" style="font-size: x-large;">Employment Profile</h2>
+
+                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+
+                        </div>
+
+                        <div class="modelstyle ">
+                        <div class="col-md-10 col-12 " style="max-width: initial;">
+                            <form class="form-horizontal " method="post" action=" ">
+                                <span tabindex="0 " class="add no-outline " style="float: right;"><a href="#" style="text-decoration:none">Delete</a></span>
+                                <!-- <h3>Education</h3> -->
+                                {% csrf_token %}
+
+
+                                {{ form3.non_field_errors }}
+                                <div class="input-group ">
+                                    <label style="font-size: 20px; ">{{form3.designation.label}}</label> {{form3.designation}}
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 input-group ">
+
+                                        {{form3.organization.label}} {{form3.organization}}
+                                    </div>
+                                    <div class="col-5 input-group ">
+
+                                        {{form3.salary.label}} {{form3.salary}}
+                                    </div>
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-3 input-group ">
+
+                                        {{form3.start_date.label}} {{form3.start_date}}
+                                    </div>
+                                    <div class="col-3 input-group ">
+
+                                        {{form3.start_month.label}} {{form3.start_month}}
+                                    </div>
+                                    <div class="col-3 input-group ">
+
+                                        {{form3.start_year.label}} {{form3.start_year}}
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-3 input-group ">
+
+                                        {{form3.end_date.label}} {{form3.end_date}}
+                                    </div>
+                                    <div class="col-3 input-group ">
+
+                                        {{form3.end_month.label}} {{form3.end_month}}
+                                    </div>
+                                    <div class="col-3 input-group ">
+
+                                        {{form3.end_year.label}} {{form3.end_year}}
+                                    </div>
+                                </div>
+
+
+                                <div class="modal-footer ">
+                                    <input class="btn btn-default " type="submit" value="Save ">
+                                    <button type="button" class="btn btn-default " data-dismiss="modal ">Close</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <!--skills -->
+        <div class="container ">
+
+
+            <!-- Modal -->
+            <div class="modal fade " id="skillsmodel ">
+                <div class="modal-dialog ">
+
+                    <!-- Modal content-->
+                    <div class="modal-content ">
+                        <div class="modal-header pmd-modal-border">
+
+                            <h2 class="modal-title" style="font-size: x-large;">Skills</h2>
+
+                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+
+                        </div>
+                        <!-- <div class="chip" style="background: lightgrey;border-radius: 10px;width: fit-content;padding: 9px;margin: 10px;">Java
+                            <a class="pmd-chip-action" href="javascript:void(0);">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+                            </a>
+                        </div> -->
+
+                        <div class="row" id="demo" style="margin: 10px;">
+
+
+                        <!--Rating start-->
+                        <div class="container">
+                            <span id="rateMe4" class="feedback"></span>
+                        </div>
+
+                        <!-- rating.js file -->
+                        {% comment %} <script src="js/addons/rating.js"></script> {% endcomment %}
+                        <!--Rating end-->
+
+                        <div class="modelstyle " style="display: contents;">
+                            <div class="col" style="max-width: initial;">
+                                <form method="post">
+                            {% csrf_token %}
+                        <div class="row" style="margin-top:20px;border: 1px solid rgba(222, 221, 221, 1);">
+                             {{ form8.management_form }} {% for form in form8 %}
+                            <div class="form-row spacer" style="margin:5px">
+                                <div class="">
+                                     <div class="input-group">
+                                        {{form.skill}}<br>
+                                         {{form.rating}}
+                                        <div class="input-group-append" style="margin:5px">
+                                            <button class="btn btn-success add-form-row">+</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            </div>
+                            
+                            <div class="modal-footer ">
+                                <button class="btn btn-default" type="submit">Submit</button>
+                                <button  type="button " class="btn btn-default " data-dismiss="modal">Close</button>
+                            </div>
+                            </form>
+                            </div>
+                        </div>
+                        <!-- <div class="modal-footer ">
+                            <button type="button" class="btn btn-default" data-dismiss="modal ">Close</button>
+                        </div> -->
+                    </div>
+
+                    {% comment %}
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                    </div> {% endcomment %}
+                </div>
+
+
+            </div>
+        </div>
+        <!-- Career-->
+
+        <div class="container ">
+
+
+            <!-- Modal -->
+            <div class="modal fade " id="careermodel ">
+                <div class="modal-dialog ">
+
+                    <!-- Modal content-->
+                    <div class="modal-content ">
+                        <div class="modal-header pmd-modal-border">
+
+                            <h2 class="modal-title" style="font-size: x-large;">Career Profile</h2>
+
+                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+
+                        </div>
+
+                        <div class="modelstyle ">
+                            <div class="col-md-10 col-12 " style="max-width: initial;">
+                                <form class="form-horizontal " method="post" action=" ">
+                                    <span tabindex="0 " class="add no-outline " style="float: right;"><a href="#" style="text-decoration:none">Delete</a></span> {% csrf_token %}
+
+
+                                    <div class="input-group ">
+                                        <label style="font-size: 20px; "> {{form6.department.label}}</label> {{form6.department}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form6.role.label}} {{form6.role}}
+                                    </div>
+
+                                    {{form6.job_type.label}}
+                                    <div class="input100 ">
+
+
+
+                                        {{form6.job_type}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form6.exp_salary.label}} {{form6.exp_salary}}
+                                    </div>
+                                    <div class="modal-footer ">
+                                        <input type="submit" class="btn btn-default " value="Save ">
+                                        <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {% comment %}
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                    </div>
+                </div> {% endcomment %}
+
+
+            </div>
+        </div>
+
+        <!--personal-->
+
+        <div class="container ">
+
+
+            <!-- Modal -->
+            <div class="modal fade " id="personalmodel " role="dialog ">
+                <div class="modal-dialog " style="max-width:721px; ">
+
+                    <!-- Modal content-->
+                    <div class="modal-content ">
+                        <div class="modal-header pmd-modal-border">
+
+                            <h2 class="modal-title" style="font-size: x-large;">Personal Details</h2>
+
+                            <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+
+                        </div>
+
+                        <div class="modelstyle ">
+                            <div class="col-md-10 col-12 " style="max-width: initial;">
+                                <form class="form-horizontal " method="post" action=" " enctype="multipart/form-data">
+                                    <span tabindex="0 " class="add no-outline " style="float: right;"><a href="#" style="text-decoration:none">Delete</a></span> {% csrf_token %} {{form1.profile_pic}}
+                                    <div class="input-group ">
+
+                                        <label style="font-size: 20px; "> {{form1.phone.label}}</label> {{form1.phone}}
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-3 input-group ">
+
+                                            <label style="font-size: 20px; "> {{form1.birth_date.label}}</label> {{form1.birth_date}}
+                                        </div>
+                                        <div class="col-3 input-group ">
+
+                                            {{form1.birth_month.label}} {{form1.birth_month}}
+                                        </div>
+                                        <div class="col-3 input-group ">
+
+                                            {{form1.birth_year.label}} {{form1.birth_year}}
+                                        </div>
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form1.gender.label}} {{form1.gender}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form1.address.label}} {{form1.address}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form1.city.label}} {{form1.city}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form1.state.label}} {{form1.state}}
+                                    </div>
+                                    <div class="input-group ">
+
+                                        {{form1.marital_status.label}} {{form1.marital_status}}
+                                    </div>
+
+                                    <div class="modal-footer " style=" ">
+                                        <input type="submit" class="btn btn-default " value="Save ">
+                                        <button type="button " class="btn btn-default " data-dismiss="modal " style="color:#fff ">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {% comment %}
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-default " data-dismiss="modal ">Close</button>
+                    </div>
+                </div> {% endcomment %}
+
+
+            </div>
+        </div>
+
+        <!---->
+        
+
+
+
+
+
+
+
+        <footer>
+            <p>Footer section</p>
+        </footer>
+
+        {% comment %} <script>
+            // Rating Initialization
+            $(document).ready(function() {
+                $('#rateMe4').mdbRate();
+            });
+        </script>  {% endcomment %}
+        <script>
+            /* When the user clicks on the button,
+                                                                                                                                                                                                                                                                                                                                                                                                                                    toggle between hiding and showing the dropdown content */
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            function filterFunction() {
+                var input, filter, ul, li, a, i;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                div = document.getElementById("myDropdown");
+                a = div.getElementsByTagName("a");
+                for (i = 0; i < a.length; i++) {
+                    txtValue = a[i].textContent || a[i].innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        a[i].style.display = "";
+                    } else {
+                        a[i].style.display = "none";
+                    }
+                }
+            }
+        </script>
+
+        <script>
+    function myKey() {
+                                            
+        var x = document.getElementById("myInput").value;
+        var l = document.createElement("DIV");
+        l.setAttribute("class","chip")
+        l.appendChild(document.createTextNode(x));
+        
+        document.getElementById("demo").appendChild(l);
+    }
+
+    </script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
+</body>
+
+
+<script type="text/javascript">
+        function updateElementIndex(el, prefix, ndx) {
+            var id_regex = new RegExp('(' + prefix + '-\\d+)');
+            var replacement = prefix + '-' + ndx;
+            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+            if (el.id) el.id = el.id.replace(id_regex, replacement);
+            if (el.name) el.name = el.name.replace(id_regex, replacement);
+        }
+
+        function cloneMore(selector, prefix) {
+            var newElement = $(selector).clone(true);
+            var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+            newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
+                var name = $(this).attr('name')
+                if (name) {
+                    name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                    var id = 'id_' + name;
+                    $(this).attr({
+                        'name': name,
+                        'id': id
+                    }).val('').removeAttr('checked');
+                }
+            });
+            newElement.find('label').each(function() {
+                var forValue = $(this).attr('for');
+                if (forValue) {
+                    forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                    $(this).attr({
+                        'for': forValue
+                    });
+                }
+            });
+            total++;
+            $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+            $(selector).after(newElement);
+            var conditionRow = $('.form-row:not(:last)');
+            conditionRow.find('.btn.add-form-row')
+                .removeClass('btn-success').addClass('btn-danger')
+                .removeClass('add-form-row').addClass('remove-form-row')
+                .html('-');
+            return false;
+        }
+
+        function deleteForm(prefix, btn) {
+            var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+            if (total > 1) {
+                btn.closest('.form-row').remove();
+                var forms = $('.form-row');
+                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+                for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                    $(forms.get(i)).find(':input').each(function() {
+                        updateElementIndex(this, prefix, i);
+                    });
+                }
+            }
+            return false;
+        }
+        $(document).on('click', '.add-form-row', function(e) {
+            e.preventDefault();
+            cloneMore('.form-row:last', 'form');
+            return false;
+        });
+        $(document).on('click', '.remove-form-row', function(e) {
+            e.preventDefault();
+            deleteForm('form', $(this));
+            return false;
+        });
+    </script>
+<style>
+    .input100 {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    #mf {
+        width: 50%;
+    }
+    
+    .btn {
+        font-size: 10px;
+    }
+    
+    h6,
+    h5,
+    h8 {
+        color: rgb(15, 165, 23);
+    }
+    
+    .btn {
+        background-color: rgb(15, 165, 23);
+    }
+    
+    .file {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .file>input[type='file'] {
+        display: none
+    }
+    
+    .file>label {
+        font-size: 1rem;
+        font-weight: 300;
+        cursor: pointer;
+        outline: 0;
+        user-select: none;
+        border-color: rgb(216, 216, 216) rgb(209, 209, 209) rgb(186, 186, 186);
+        border-style: solid;
+        border-radius: 4px;
+        border-width: 1px;
+        background-color: rgb(15, 165, 23);
+        color: hsl(0, 0%, 29%);
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .file--upload>label:active {
+        background-color: rgb(15, 165, 23);
+    }
+    
+    .file--uploading>label {
+        color: hsl(127, 57%, 97%);
+        border-color: rgb(15, 165, 23);
+    }
+    
+    .file--uploading>label>i {
+        animation: pulse 5s infinite;
+    }
+    
+    .file--uploading>label:hover {
+        border-color: hsl(101, 93%, 45%);
+        background-color: hsl(115, 100%, 45%);
+    }
+    
+    .file--uploading>label:active {
+        background-color: hsl(48, 100%, 91%);
+    }
+    
+    @keyframes pulse {
+        0% {
+            color: hsl(0, 0%, 85%);
+        }
+        50% {
+            color: hsl(0, 0%, 100%);
+        }
+        100% {
+            color: hsl(0, 0%, 100%);
+        }
+    }
+    
+    table,
+    th,
+    td {
+        border: 0px solid rgb(255, 255, 255);
+    }
+    
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+    }
+    
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .closebtn:hover {
+        color: black;
+    }
+    .clip{
+        font-weight:bold;
+        background: rgb(243, 241, 241);
+        border-radius: 2px;
+        width: fit-content;
+        padding: 9px;
+        margin: 10px;
+    }
+</style>
+
+
+</html>

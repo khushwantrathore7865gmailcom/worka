@@ -147,8 +147,8 @@
                                         <div class="dropdown">
                                             <button class="dropbtn"><img src={{ep.company_logo.url}}></button>
                                             <div class="dropdown-content">
-                                                <a href="#">My Profile</a>
-                                                <a href="#">Edit Profile</a>
+                                                <a href="{% url 'recruiter:profile' %}">My Profile</a>
+                                                <a href="{% url 'recruiter:ProfileEdit' %}">Edit Profile</a>
                                                 <a href="{% url 'recruiter:logout' %}">Log Out</a>
                                             </div>
                                         </div>

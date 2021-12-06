@@ -1,0 +1,217 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  
+<!-- Mirrored from grocbees.com/job-portal/skills.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 03:56:35 GMT -->
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/style_skills.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+ <style>
+.dropbtn {
+  background-color: #FFFFFF;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #03A84E;}
+
+
+		</style>
+  </head>
+  <body>
+
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-12">
+					<div class="top-navbar">
+						<nav class="navbar navbar-expand-lg ">
+  <a class="" href="{% url 'jobseeker:jobseeker_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav class="navbar mr-auto">
+ <form class="form-inline" type="get">
+    <div class="input-group" style="box-shadow: 0px 0px 14px 3px lightgrey;padding: inherit;border-radius: 10px;margin: 15px;padding: 2px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+      </div>
+      <input type="text" class="form-control"  id="search_box" name="search_box" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+  </form>
+</nav>
+
+
+
+	<ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
+      </li>
+
+	  <li class="nav-item">
+        <a class="nav-link" href="{% url 'jobseeker:resume' %}">Resume</a>
+      </li>
+
+	  <li class="nav-item bell-icon">
+        <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
+      </li>
+         <li class="nav-item">
+<div class="dropdown">
+  <button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
+  <div class="dropdown-content">
+    <a href="{% url 'jobseeker:profile' %}">My Profile</a>
+    <a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
+    <a href="{% url 'jobseeker:logout' %}">Log Out</a>
+  </div>
+</div>
+         </li>
+
+
+	 </ul>
+
+  </div>
+</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</header>
+
+<section class="job-portal">
+	<div class="container">
+		<div class="row">
+		
+			<div class="col-md-3 col-12">
+				<div class="job-left">
+						<img src={{profile.profile_pic.url}}>
+						<div class="job-left-desc">
+							<h2>{{user.first_name}} {{user.last_name}}</h2>
+							{% for p in professional %}
+<!--								<h4>UX/ UI Designer</h4>-->
+							{% if p.is_current %}
+								<h5>Current Compant</h5>
+								<h6>{{p.organization}}</h6>
+								<h5>Current Job position</h5>
+								<h6>{{p.designation}}</h6>
+								<h5>Working from </h5>
+								<h6>{{p.start_year}}</h6>
+							{% endif %}
+							{% endfor %}
+								<div class="download_btn">
+									{% if resume %}
+									<a class="btn btn-primary" href={{resume.resume_link.url}} role="button"><img src=" {% static 'images/download3.png' %} ">Download Resume</a>
+									{% else %}
+							<a class="btn btn-primary" href="{% url 'jobseeker:ProfileEdit' %}" role="button">Upload Resume</a>
+									{% endif %}
+								</div>
+							</div>
+
+				</div>
+			</div>
+			
+			<div class="col-md-9 col-12">
+				<div class="row">
+						<div class="col-md-7 col-12">
+							<div class="skills-left">
+								<h3>Skills <img src=" {% static 'images/skills-btn.png' %} "></h3>
+								<div class="skill-list">
+									<div class="skill-list-left">
+										<h3>Skills</h3>
+												{% for s in skills %}
+										<div>{{s.skill}}</div>
+										{% endfor %}
+									</div>
+									
+									<div class="skill-list-right">
+										<h3>Rating</h3>
+										{% for s in skills %}
+										<div>{{s.rating}}</div>
+										{% endfor %}
+									</div>
+									
+								</div>
+								
+
+								
+								
+							</div>
+						</div>
+						
+						
+						<div class="col-md-5 col-12">
+							<div class="skills-right">
+							  <h3>Contact Details</h3>
+								<p><img src=" {% static 'images/mail.png' %}"> <span><b>Email ID</b> : {{user.email}}</span></p>
+<!--								<p><img src="images/phone.png"> <span><b>Phone no.</b> : (252) 555-0126</span></p>-->
+								<p><img src=" {% static 'images/location.png' %}"> <span><b>Address</b> : 1901 Thornridge Cir. Shiloh, Hawaii 81063</span></p>
+
+							</div>
+
+						</div>
+						
+				</div>
+					
+
+				
+</div>
+
+</div>
+	</div>
+</section>
+
+<footer>
+<p>Footer section</p>
+</footer>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+
+<!-- Mirrored from grocbees.com/job-portal/skills.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Jul 2021 03:56:40 GMT -->
+</html>
