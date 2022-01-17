@@ -58,7 +58,7 @@
   </head>
   <body>
 
-	<header>
+	{% comment %} <header>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 col-12">
@@ -111,7 +111,7 @@
 {% comment %} <li class="nav-item">
     <a class="nav-link" href="#"><i class="fas fa-address-card fa-2x"></i></a>
     <span class="menu-text">About Us </span>
-  </li> {% endcomment %}
+  </li> 
 
 
 
@@ -139,10 +139,89 @@
 			</div>
 		</div>
 
-	</header>
+	</header> {% endcomment %}
+
+  <header>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="top-navbar">
+                    <nav class="navbar navbar-expand-lg ">
+                        <a class="" href="{% url 'recruiter:employer_home' %}"> <img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <nav class="navbar mr-auto">
+                                <form class="form-inline new-form">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+                                        <button class="search">Search</button>
+                                    </div>
+                                </form>
+                            </nav>
+
+
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{% url 'recruiter:employer_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true"></i></a>
+                                    <span class="menu-text">Home</span>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{% url 'recruiter:job_post' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fas fa-briefcase"></i></a>
+                                    <span class="menu-text">Add job </span>
+                                </li>
+                                <!--	  <li class="nav-item">-->
+                                <!--        <a class="nav-link" href="#">Resume</a>-->
+                                <!--      </li>-->
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'recruiter:advance-search' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fas fa-search"></i></a>
+                                    <span class="menu-text">Adv Search</span>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fas fa-phone-square-alt fa-xs"></i></a>
+                                    <span class="menu-text">Contact Us </span>
+                                </li>
+
+
+
+                                <li class="nav-item bell-icon ">
+                                    <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-bell" aria-hidden="true"></i> </a>
+                                    <span class="menu-text">Notification</span>
+                                </li>
+
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="dropbtn"><img src={{ep.company_logo.url}}></button>
+                                        <div class="dropdown-content">
+                                            <a href="#">My Profile</a>
+                                            <a href="#">Edit Profile</a>
+                                            <a href="{% url 'recruiter:logout' %}">Log Out</a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
        <section class="job-portal all-jobs">
 	<div class="container main-wid">
-		<div class="row">
+		<div class="row" >
 			<div class="col-md-10 col-12 mx-auto">
 				<div class="heading">
 					<h3>{{job.job_title}}</h3>
@@ -153,7 +232,7 @@
 				<div class="heading-action">
 					<ul class="list-inline">
 						<li>Action <span>Taken</span></li>
-                        <li><a href="{% url 'recruiter:shortlist_view_applied_candidate' job.pk %}"><span><img src="images/ribban.png"></span> Shortlisted candidate</a></li>
+                        <li><a href="{% url 'recruiter:shortlist_view_applied_candidate' job.pk %}"><span class="fa fa-archive"></span> Shortlisted candidate</a></li>
 						<li><a href="{% url 'recruiter:disqualify_view_applied_candidate' job.pk %}"><span><i class="fa fa-check-circle" aria-hidden="true"></i></span> Disqualified candidates</a>  </li>
 
 					</ul>
@@ -188,7 +267,7 @@
 							<h4>CTC  </h4>
 							<div class="ctc-inner">
 							 <span class="from">From</span>
-							<input type="text" id="min_salary_box" name="min_salary_box" placeholder="Minimum"> to</span>
+							<input type="text" id="min_salary_box" name="min_salary_box" placeholder="Minimum"> <span class="from">to</span>
 							<input type="text" id="max_salary_box" name="max_salary_box"  placeholder="Max">
 
 						</div>
@@ -228,34 +307,27 @@
 					<div class="job-right-jobs">
           
 					<!-- <input type="checkbox" placehlder="check"> -->
-          <div class="col-md-4 col-4 p-3 mb-2 bgcolor">
-             							<div class="text-jobs">
+          <div class="col-md-4 col-4 p-3 mb-2 bgcolor" style="background:#f7f7f7">
+             							<div class="text-jobs" style="padding: 15px;">
 
               <h5>Skills</h5>  </div>
-              <p class="text-black">{% for s in c.3 %}
-                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Human Resource Management</a>
-                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Shortlist</a>
-                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Shortlist</a>
-                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Shortlist</a>
-                <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Shortlist</a>
-                
-                              {% comment %} {{s.skill}}({{s.rating}}),  {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),
-                              {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),
-                              {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}), {{s.skill}}({{s.rating}}),  {% endcomment %}
-                                  
-                                  {% endfor %}
+              <p class="text-black">
+                 {% for s in c.3 %}
+                <a class="btn btn-success" style="margin:5px;color:white" role="button">{{s.skill}} ({{s.rating}})</a>
+
+               {% endfor %}
                               </p>
-                              <div class = "post_body text-white">
+                              <div class = "post_body text-white" >
                                 {{ post.body|safe|truncatewords:"50"|linebreaks }}
                                 <a href="{{ url_for_full_content }}">view  more</a>
                                 <br>
-                                <div class= "btm">
+                                {% comment %} <div class= "btm">
                                 <a class="btn btn-success  " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Shortlist</a>
                                 <a class="btn btn-success " href="{% url 'recruiter:disqualify' c.6.pk %}" role="button">Reject</a>
-                                </div>
+                                </div> {% endcomment %}
                     </div>
                   </div>
-<div class="col-md-9 col-12">
+<div class="col-md-9 col-12" style="padding-top: 20px;">
 						<div class="job-right-jobs-image">
 
 						<img src={{c.0.profile_pic.url}}>
@@ -268,10 +340,10 @@
 
   <ul class="list-inline">
 
-									<li><img src="{% static 'images/suitcase.png' %}">{{c.7.Total_Working}}</li>
+									<li><img src="{% static 'images/suitcase.png' %}"> System Engg{{c.7.Total_Working}}</li>
 
 									<li><img src="{% static 'images/money.png' %}"> {{c.7.exp_salary}}</li>
-									<li><img src="{% static 'images/location.png' %}"> {{c.7.prefer_location}}</li>
+									<li><img src="{% static 'images/location.png' %}"> Jaipur {{c.7.prefer_location}}</li>
 								</ul>
                 
 							</div>
@@ -281,14 +353,15 @@
                             </div>
 					</div>
           
-               <div class="info">
+               <div class="info" style="padding-bottom: 15px;white-space: nowrap;    padding-left: 20px;">
 							<div class="info-left">
 								<ul class="list-inline">
-                           	<li><img src="{% static 'images/mail.png' %}"> Email ID: <span>{{c.0.user_id}}</span></li>
-									<li><img src="{% static 'images/phone.png' %}"> Phone no. : <span>{{c.0.phone}}</span></li>
-									<li><img src="{% static 'images/location.png' %}"> Pref. Location : <span>{{c.0.address}}</span></li>
-									<li><img src="{% static 'images/educa.png' %}">Education :  <span>{{c.1.degree}} from {{c.1.institute_name}}</span></li>
-                                    <li><img src="{% static 'images/educa.png' %}">Company :  <span>{{c.2.0.organization}} </span></li>
+                           	<li><abbr title="Email"> <img class="email" src="{% static 'images/mail.png' %}"></abbr> : <span>{{c.0.user_id}}</span></li>
+                            
+									<li><abbr title="Phone No."><img class="phone" src="{% static 'images/phone.png' %}"></abbr> : <span>{{c.0.phone}}</span></li>
+									{% comment %} <li><img id="location" src="{% static 'images/location.png' %}"> Pref. Location : <span>{{c.0.address}}</span></li> {% endcomment %}
+									<li><abbr title="Education"><img class="education" src="{% static 'images/educa.png' %}"></abbr> : <span>{{c.1.degree}} from {{c.1.institute_name}}</span></li>
+                                    <li><abbr title="Company"><img class="company" src="{% static 'images/suitcase.png' %}"></abbr> : <div  style="display: inline-flex;white-space: pre-wrap;"><span style="width: 450px;">{{c.2.0.organization}},  LLC is an American multinational technology company that specializes in Internet-related services and products, which include online <a href="#" >..view more</a></span> </div></li>
 
 								</ul>
                 
@@ -302,8 +375,8 @@
 
 
 <div class="download">
-							<button><a href="{{c.4.coverletter_link.url}}" ><img src="{% static 'images/download1.png' %}">Download Cover Letter</a></button>
-							<button><a href="{{c.4.resume_link.url}}"><img src="{% static 'images/download2.png' %}">Download Resume</a></button>
+							{% comment %} <button style="margin: 10px;"><a href="{{c.4.coverletter_link.url}}" ><i class="fa fa-eye" style="color:green;margin: 5px;"aria-hidden="true" style="font-size: 27px;"> </i>See More</a></button> {% endcomment %}
+							{% comment %} <button style="margin: 10px; float:right;text-align-last: center;"><a style="" href="{{c.4.resume_link.url}}"><img src="{% static 'images/download2.png' %}"><p style="margin-top: unset;">Download Resume</p></a></button> {% endcomment %}
 
 
 
@@ -313,8 +386,13 @@
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
         <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{c.0.user_id}}" aria-expanded="false" aria-controls="collapseOne">
-         Check the answer to your question
+         Check the question and answer
         </button>
+        <button style="margin: 10px;"><a style="" href="{{c.4.resume_link.url}}"><img src="{% static 'images/download2.png' %}">Download Resume</a></button>
+        <div class= "btm" style="float:right;position: initial;">
+          <button style="margin: 10px;"><a class="" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button"><span class="fa fa-check-circle" style="color:green;margin:5px;margin-right:15px"></span>Shortlist</a></button>
+            <button style="margin: 10px;"><a class="" href="{% url 'recruiter:disqualify' c.6.pk %}" role="button"><span class="fa fa-close" style="color:red;margin:5px;margin-right:15px"></span>Reject</a></button>
+          </div>
       </h5>
     </div>
 
@@ -413,14 +491,15 @@ box-shadow:0px;
 padding:5px;
 }
 *{
-box-sizing:unset;
+{% comment %} box-sizing:unset; {% endcomment %}
 }
 .job-right.all-job-rights .job-right-jobs {
     padding: 0px 0px 0px 0px;
 }
 
 .card-header{
-background-color:#ced4da;
+background-color:#f7f7f7;
+padding: 0.75rem 2.25rem;
 }
 
 

@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="/static/images/green.png">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
@@ -343,6 +344,9 @@
                                 <h3>Acadmic History</h3>
 
                                 <ul class="was-validated">
+                                    <div class="row form3 spacer">
+                                        <div class="col-12">
+                                            <label style="font-size: 20px;">Academic</label>
                                     <div class="form-row">
                                         <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
                                             <label for="outlineValidationCustom01" class="is-valid">School/College Name *</label>
@@ -404,12 +408,15 @@
 
                                     </div>
                                     <div class="form-row" style="display: grid;margin-bottom: 20px;">
-                                        <button class="btn btn-outline-success" onclick="">+</button>
+                                        <button class="btn btn-outline-success adddd-form-row">Add More</button>
                                     </div>
                                 </ul>
 
                                 <h3>Work Experience</h3>
                                 <ul class="was-validated">
+                                    <div class="row form2 spacer">
+                                        <div class="col-12">
+                                            <label style="font-size: 20px;">Experience</label>
                                     <div class="form-row">
                                         <div class="col-md-12 form-group pmd-textfield pmd-textfield-outline pmd-textfield-floating-label">
                                             <label for="outlineValidationCustom01" class="is-valid">Company/Orgnization Name *</label>
@@ -457,14 +464,17 @@
 
                                     </div>
                                     <div class="form-row" style="display: grid;margin-bottom: 20px;">
-                                        <button class="btn btn-outline-success" onclick="">+</button>
+                                        <button class="btn btn-outline-success addd-form-row" id="f2" >Add More</button>
                                     </div>
 
                                 </ul>
 
                                 <h3>Certification</h3>
-
+                                
                                 <ul class="was-validated">
+                                    <div class="row form1 spacer">
+                                        <div class="col-12">
+                                            <label style="font-size: 20px;">Certificate form</label>
                                     <div class="custom-control custom-checkbox mb-3">
                                         <input type="checkbox" class="custom-control-input" id="certi" name="certi" required>
                                         <label class="custom-control-label" for="customControlValidation1" style="color: black;">Doesn't Have Certificate</label>
@@ -504,115 +514,30 @@
                                                 </div>
                                             </div>
                                             <div class="form-row" style="display: grid;">
-                                                <button class="btn btn-outline-success" onclick="">+</button>
-                                            </div>
+                                                <button class="btn btn-outline-success add-form-row" >Add More</button>
+                                            </div> 
 
+                                            
+                                                
+                                                    
+                
+                
+                                                    {% comment %} <div class="input-group">
+                                                        <input type="text" name="form-0-question" class="form-control" placeholder="Enter Question here" id="id_form-0-question">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-success add-form-row">+</button>
+                                                        </div>
+                
+                                                    </div> {% endcomment %}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
 
 
                                 </ul>
-                                <!-- <h3>Enter Any Keyword</h3>
-                                <ul id="demo">
-
-
-                                    <li>Software</li>
-                                    <li>CEO</li>
-                                    <li>director, manager</li>
-                                    <li>Software Developer</li>
-                                    <li>Front -end Developer</li>
-                                    <li>Front -end Developer</li>
-                                    <li>Webflow</li>
-                                    <li>Back -end Developer</li>
-                                    <li>Wordpress</li>
-                                    <li>Manager Director</li>
-
-
-                                    <li class="desk" style="float:right;    "><input style="border: ridge;margin-top:5px" type="text" id="textLi" placeholder="Type your key word  +">
-                                        <button class="btn btn-outline-success" onclick="myKeys()">+</button>
-                                    </li>
-                                    <li class="mob"><input type="text" id="textL" placeholder="Type your key word ">
-                                        <button class="btn btn-outline-success" onclick="myKeys()">+</button>
-                                    </li>
-
-                                </ul> -->
-                                <!-- {{ form2.management_form }} {% for form in form2 %}
-                                <div class="row form-row spacer">
-                                    <div class="col-8">
-                                        <div class="input-group">
-                                            {{form.keyword}}
-                                            <div class="input-group-append">
-                                                <button class="btn btn-success add-form-row">+</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %} -->
-
-                                <!-- <h3>Total Experience</h3> -->
-
-                                <!-- <div class="select-option-experience">
-                                    <div class="select-option-experience-first">
-                                        <select>
-									<option>Minimum</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-								<select>
-								</div>
-								<span class="to">to</span>
-								<div class="select-option-experience-first">
-								<select>
-									<option>To Maximum</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-								<select>
-							</div>
-						</div> -->
-
-                                <!-- <h3>Annual Salery <span class="usd">USD <select></select></span>
-                                </h3> -->
-
-                                <!-- <div class="select-option-salery">
-                                    <div class="select-option-experience-first">
-                                        <select>
-									<option>Lacs</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-								<select>
-								</div>
-								<div class="select-option-experience-first">
-								<select>
-									<option>Thousand</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-								<select>
-								</div>
-								<span class="to">to</span>
-							<div class="select-option-experience-first">
-								<select>
-									<option>Lacs</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-								<select>
-								</div>
-								<div class="select-option-experience-first">
-								<select>
-									<option>Thousand</option>
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-								<select>
-								</div>
-							</div> -->
-
-
+                                
                             </div>
 
                             <div class="search-body-footer">
@@ -621,16 +546,7 @@
                                     <span>Clear x</span>
                                 </div>
 
-                                <!-- <div class="search-body-footer-right">
-                                    <p><span>Active in:</span>
-                                        <select>
-								<option>30 days</option>
-								<option>30 days</option>
-							</select>
-
-                                        <span class="question"><i class="fa fa-question-circle" aria-hidden="true"></i></span>
-                                    </p>
-                                </div> -->
+                                
 
 
                             </div>
@@ -641,6 +557,7 @@
 
 
                 </form>
+               
             </div>
         </div>
 
@@ -720,6 +637,227 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    
+    {% comment %} 1 st Certification form {% endcomment %}
+    {% block custom_js %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function updateElementIndex(el, prefix, ndx) {
+            var id_regex = new RegExp('(' + prefix + '-\\d+)');
+            var replacement = prefix + '-' + ndx;
+            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+            if (el.id) el.id = el.id.replace(id_regex, replacement);
+            if (el.name) el.name = el.name.replace(id_regex, replacement);
+        }
+
+        function cloneMore(selector, prefix) {
+            var newElement = $(selector).clone(true);
+            var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+            newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
+                var name = $(this).attr('name')
+                if (name) {
+                    name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                    var id = 'id_' + name;
+                    $(this).attr({
+                        'name': name,
+                        'id': id
+                    }).val('').removeAttr('checked');
+                }
+            });
+            newElement.find('label').each(function() {
+                var forValue = $(this).attr('for');
+                if (forValue) {
+                    forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                    $(this).attr({
+                        'for': forValue
+                    });
+                }
+            });
+            total++;
+            $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+            $(selector).after(newElement);
+            var conditionRow = $('.form1:not(:last)');
+            conditionRow.find('.btn.add-form-row')
+                .removeClass('btn-outline-success').addClass('btn-danger')
+                .removeClass('add-form-row').addClass('remove-form-row')
+                .html('-');
+            return false;
+        }
+
+        function deleteForm(prefix, btn) {
+            var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+            if (total > 1) {
+                btn.closest('.form1').remove();
+                var forms = $('.form1');
+                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+                for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                    $(forms.get(i)).find(':input').each(function() {
+                        updateElementIndex(this, prefix, i);
+                    });
+                }
+            }
+            return false;
+        }
+        $(document).on('click', '.add-form-row', function(e) {
+            e.preventDefault();
+            cloneMore('.form1:last', 'form1');
+            return false;
+        });
+        $(document).on('click', '.remove-form-row', function(e) {
+            e.preventDefault();
+            deleteForm('form1', $(this));
+            return false;
+        });
+    </script>
+    {% endblock %}
+
+    {% comment %} 2 nd Experiece form {% endcomment %}
+     {% block customm_js %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function updateElementIndex2(el, prefix, ndx) {
+            var id_regex = new RegExp('(' + prefix + '-\\d+)');
+            var replacement = prefix + '-' + ndx;
+            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+            if (el.id) el.id = el.id.replace(id_regex, replacement);
+            if (el.name) el.name = el.name.replace(id_regex, replacement);
+        }
+
+        function cloneMore2(selector, prefix) {
+            var newElement = $(selector).clone(true);
+            var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+            newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
+                var name = $(this).attr('name')
+                if (name) {
+                    name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                    var id = 'id_' + name;
+                    $(this).attr({
+                        'name': name,
+                        'id': id
+                    }).val('').removeAttr('checked');
+                }
+            });
+            newElement.find('label').each(function() {
+                var forValue = $(this).attr('for');
+                if (forValue) {
+                    forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                    $(this).attr({
+                        'for': forValue
+                    });
+                }
+            });
+            total++;
+            $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+            $(selector).after(newElement);
+            var conditionRow = $('.form2:not(:last)');
+            conditionRow.find('.btn.addd-form-row')
+                .html('-');
+            
+            document.getElementById('f2').setAttribute('class','btn btn-danger removee-form-row');
+                
+            return false;
+        }
+
+        function deleteForm2(prefix, btn) {
+            var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+            if (total > 1) {
+                btn.closest('.form2').remove();
+                var forms = $('.form2');
+                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+                for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                    $(forms.get(i)).find(':input').each(function() {
+                        updateElementIndex2(this, prefix, i);
+                    });
+                }
+            }
+            return false;
+        }
+        $(document).on('click', '.addd-form-row', function(e) {
+            e.preventDefault();
+            cloneMore2('.form2:last', 'form2');
+            return false;
+        });
+        $(document).on('click', '.removee-form-row', function(e) {
+            e.preventDefault();
+            deleteForm2('form2', $(this));
+            return false;
+        });
+    </script>
+    {% endblock %} 
+
+    {% comment %} 3 rd Form Academic {% endcomment %}
+    {% block custommm_js %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        function updateElementIndex3(el, prefix, ndx) {
+            var id_regex = new RegExp('(' + prefix + '-\\d+)');
+            var replacement = prefix + '-' + ndx;
+            if ($(el).attr("for")) $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
+            if (el.id) el.id = el.id.replace(id_regex, replacement);
+            if (el.name) el.name = el.name.replace(id_regex, replacement);
+        }
+
+        function cloneMore3(selector, prefix) {
+            var newElement = $(selector).clone(true);
+            var total = $('#id_' + prefix + '-TOTAL_FORMS').val();
+            newElement.find(':input:not([type=button]):not([type=submit]):not([type=reset])').each(function() {
+                var name = $(this).attr('name')
+                if (name) {
+                    name = name.replace('-' + (total - 1) + '-', '-' + total + '-');
+                    var id = 'id_' + name;
+                    $(this).attr({
+                        'name': name,
+                        'id': id
+                    }).val('').removeAttr('checked');
+                }
+            });
+            newElement.find('label').each(function() {
+                var forValue = $(this).attr('for');
+                if (forValue) {
+                    forValue = forValue.replace('-' + (total - 1) + '-', '-' + total + '-');
+                    $(this).attr({
+                        'for': forValue
+                    });
+                }
+            });
+            total++;
+            $('#id_' + prefix + '-TOTAL_FORMS').val(total);
+            $(selector).after(newElement);
+            var conditionRow = $('.form3:not(:last)');
+            conditionRow.find('.btn.adddd-form-row')
+                .removeClass('btn-outline-success').addClass('btn-danger')
+                .removeClass('adddd-form-row').addClass('removeee-form-row')
+                .html('-');
+            return false;
+        }
+
+        function deleteForm3(prefix, btn) {
+            var total = parseInt($('#id_' + prefix + '-TOTAL_FORMS').val());
+            if (total > 1) {
+                btn.closest('.form3').remove();
+                var forms = $('.form3');
+                $('#id_' + prefix + '-TOTAL_FORMS').val(forms.length);
+                for (var i = 0, formCount = forms.length; i < formCount; i++) {
+                    $(forms.get(i)).find(':input').each(function() {
+                        updateElementIndex3(this, prefix, i);
+                    });
+                }
+            }
+            return false;
+        }
+        $(document).on('click', '.adddd-form-row', function(e) {
+            e.preventDefault();
+            cloneMore3('.form3:last', 'form3');
+            return false;
+        });
+        $(document).on('click', '.removeee-form-row', function(e) {
+            e.preventDefault();
+            deleteForm3('form3', $(this));
+            return false;
+        });
+    </script>
+    {% endblock %}
 </body>
 
 </html>

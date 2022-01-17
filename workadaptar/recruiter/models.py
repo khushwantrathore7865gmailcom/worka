@@ -27,7 +27,7 @@ class Employer_profile(models.Model):
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                  message="Please enter valid phone number. Correct format is 91XXXXXXXX")
-    phone = models.CharField(validators=[phone_regex], max_length=20, blank=True,unique=True)
+    phone = models.CharField(validators=[phone_regex], max_length=20, blank=True, unique=True)
     company_type = models.CharField(max_length=250, blank=True, )
     company_name = models.CharField(max_length=250, blank=True, )
     company_logo = models.ImageField(blank=True, )
@@ -97,3 +97,9 @@ class Employer_job_Applied(models.Model):
     applied_on = models.DateTimeField(auto_now_add=True)
     is_shortlisted = models.BooleanField(default=False)
     is_disqualified = models.BooleanField(default=False)
+
+
+class Employer_Subscription(models.Model):
+    emp_id = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    subscription_interval = models.IntegerField()
+    subscribed_on = models.DateTimeField(auto_now_add=True)

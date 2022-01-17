@@ -1,0 +1,381 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href=" {% static 'css/style12.css'%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="shortcut icon" href="/static/images/green.png">
+
+    <style>
+        /* The side navigation menu */
+        
+         ::-webkit-scrollbar {
+            width: 20px;
+        }
+        /* Track */
+        
+         ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 2px grey;
+        }
+        /* Handle */
+        
+         ::-webkit-scrollbar-thumb {
+            background: lightgrey;
+        }
+        /* Handle on hover */
+        
+         ::-webkit-scrollbar-thumb:hover {
+            background: grey;
+        }
+        
+        .sidenav {
+            height: 100%;
+            /* 100% Full-height */
+            width: 0;
+            /* 0 width - change this with JavaScript */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Stay on top */
+            top: 0;
+            /* Stay at the top */
+            left: 0;
+            background-color: #111;
+            /* Black*/
+            overflow-x: hidden;
+            /* Disable horizontal scroll */
+            padding-top: 60px;
+            /* Place content 60px from the top */
+            transition: 0.5s;
+            /* 0.5 second transition effect to slide in the sidenav */
+        }
+        /* The navigation menu links */
+        
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        /* When you mouse over the navigation links, change their color */
+        
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+        /* Position and style the close button (top right corner) */
+        
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+        
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+        }
+        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+    </style>
+
+    <style type="text/css">
+        <!-- span.cls_004 {
+            font-family: Arial, serif;
+            font-size: 10.1px;
+            color: rgb(56, 55, 55);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+        
+        div.cls_004 {
+            font-family: Arial, serif;
+            font-size: 10.1px;
+            color: rgb(56, 55, 55);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+        
+        span.cls_003 {
+            font-family: Arial, serif;
+            font-size: 25.1px;
+            color: rgb(94, 123, 204);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
+        
+        div.cls_003 {
+            font-family: Arial, serif;
+            font-size: 25.1px;
+            color: rgb(94, 123, 204);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
+        
+        span.cls_005 {
+            font-family: Arial, serif;
+            font-size: 12.1px;
+            color: rgb(56, 55, 55);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+        
+        div.cls_005 {
+            font-family: Arial, serif;
+            font-size: 12.1px;
+            color: rgb(56, 55, 55);
+            font-weight: normal;
+            font-style: normal;
+            text-decoration: none
+        }
+        
+        span.cls_002 {
+            font-family: Arial, serif;
+            font-size: 12.1px;
+            color: rgb(94, 123, 204);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
+        
+        div.cls_002 {
+            font-family: Arial, serif;
+            font-size: 12.1px;
+            color: rgb(94, 123, 204);
+            font-weight: bold;
+            font-style: normal;
+            text-decoration: none
+        }
+        
+        span.cls_006 {
+            font-family: Arial, serif;
+            font-size: 10.1px;
+            color: rgb(56, 55, 55);
+            font-weight: normal;
+            font-style: italic;
+            text-decoration: none
+        }
+        
+        div.cls_006 {
+            font-family: Arial, serif;
+            font-size: 10.1px;
+            color: rgb(56, 55, 55);
+            font-weight: normal;
+            font-style: italic;
+            text-decoration: none
+        }
+        
+        -->
+    </style>
+</head>
+
+<body>
+
+    <div id="mySidenav" class="sidenav">
+        <div style="display: inline-flex;color: white;"> <a href="#">Templates</a> <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a></div>
+
+        <a href="#" align=center style="padding: 20px;"><img height="200px" width="150px" src="/static/images/Rt1.jpg" title="Neno"></a>
+        <a href="#" align=center style="padding: 20px;"><img height="200px" width="150px" src="/static/images/Rt2.jpg" title="Profesional"></a>
+        <a href="#" align=center style="padding: 20px;"><img height="200px" width="150px" src="/static/images/Rt3.jpg" title="College"></a>
+        <a href="#" align=center style="padding: 20px;"><img height="200px" width="150px" src="/static/images/Rt4.jpg" title="Job"></a>
+        <a href="#" align=center style="padding: 20px;"><img height="200px" width="150px" src="/static/images/Rt5.jpg" title="Neno"></a>
+        <a href="#" align=center style="padding: 20px;"><img height="200px" width="150px" src="/static/images/Rt6.jpg" title="Neno"></a>
+        <a href="#" align=center style="padding: 20px;"><img height="200px" width="150px" src="/static/images/Rt7.jpg" title="Neno"></a>
+        <a href="#" align=center style="padding: 20px;"><img height="200px" width="150px" src="/static/images/Rt8.jpg" title="Neno"></a>
+        <a href="#" align=center style="padding: 20px;"><img height="200px" width="150px" src="/static/images/Rt9.jpg" title="Neno"></a>
+    </div>
+
+    <!-- Use any element to open the sidenav -->
+
+
+    <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+    <div id="main">
+        <header class="header" id="myHeader">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-12">
+                        <div class="top-navbar">
+                            <nav class="navbar navbar-expand-lg ">
+                                <a class="" href="#"><img src="{% static 'images/green.png' %} " width="60" height="60">
+
+                                </a>
+                                <h2 style="font-weight: bold;
+                                    font-family: auto;
+                                    font-size: x-large;"> Template View</h2>
+
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav ml-auto">
+
+
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true" style="font-size: 27px;"></i></a>
+                                            <span class="menu-text">Home</span>
+                                        </li>
+
+                                        <!--	  <li class="nav-item">-->
+                                        <!--        <a class="nav-link" href="#">Resume</a>-->
+                                        <!--      </li>-->
+
+                                        <li class="nav-item ">
+                                            <a class="nav-link " href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-phone-square"></i></a>
+                                            <span class="menu-text">Contact Us </span>
+                                        </li>
+
+                                        {% comment %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-address-card fa-2x"></i></a>
+                                            <span class="menu-text">About Us </span>
+                                        </li> {% endcomment %}
+
+
+                                        <li class="nav-item ">
+                                            <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;" onclick="openNav()"><i class="fa fa-list" aria-hidden="true" style="font-size: 27px;"></i></a>
+                                            <span onclick="openNav()">Templates</span>
+                                        </li>
+
+                                        <li class="nav-item ">
+                                            <a class="nav-link " href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-download"></i></a>
+                                            <span class="menu-text">Download </span>
+                                        </li>
+                                        <!-- <li class="nav-item">
+                                            <a class="nav-link" href="#"><img src="images/job-portal/78a389427595e07efd8a3870fe50c28c.jpg"></a>
+                                        </li> -->
+
+                                    </ul>
+
+                                </div>
+                                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button> -->
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <section>
+
+
+            <div style="margin-top: 50px ;position:relative;left:50%;margin-left:-297px;top:0px;width:595px;height:842px;border-style:outset;overflow:hidden">
+                <div style="position:absolute;left:0px;top:0px">
+                    <img src="/static/images/background1.jpg" width=595 height=842></div>
+                <div style="position:absolute;left:406.48px;top:70.38px" class="cls_004"><span class="cls_004">123-456-7890</span></div>
+                <div style="position:absolute;left:170.47px;top:65.01px" class="cls_003"><span class="cls_003">Powell Finwood</span></div>
+                <div style="position:absolute;left:406.48px;top:83.89px" class="cls_004"><span class="cls_004">hello@reallygreatsite.com</span></div>
+                <div style="position:absolute;left:406.48px;top:97.41px" class="cls_004"><span class="cls_004"> </span>
+                    <A HREF="http://www.reallygreatsite.com/">www.reallygreatsite.com</A> </div>
+                <div style="position:absolute;left:170.47px;top:99.31px" class="cls_005"><span class="cls_005">9436 Feather Street, Santa Fe,</span></div>
+                <div style="position:absolute;left:406.48px;top:110.92px" class="cls_004"><span class="cls_004">@reallygreatsite</span></div>
+                <div style="position:absolute;left:170.47px;top:115.83px" class="cls_005"><span class="cls_005">New Mexico 87501</span></div>
+                <div style="position:absolute;left:38.82px;top:188.53px" class="cls_002"><span class="cls_002">ABOUT ME</span></div>
+                <div style="position:absolute;left:297.19px;top:188.53px" class="cls_002"><span class="cls_002">WORK HISTORY</span></div>
+                <div style="position:absolute;left:38.82px;top:227.21px" class="cls_005"><span class="cls_005">I am an efficient and confident sales</span></div>
+                <div style="position:absolute;left:297.19px;top:227.16px" class="cls_004"><span class="cls_004">Account Sales Executive</span></div>
+                <div style="position:absolute;left:297.19px;top:240.67px" class="cls_004"><span class="cls_004">Sandrine Logistics</span></div>
+                <div style="position:absolute;left:38.82px;top:243.72px" class="cls_005"><span class="cls_005">executive with demonstrated experience</span></div>
+                <div style="position:absolute;left:297.19px;top:254.19px" class="cls_006"><span class="cls_006">February 2019 to Present</span></div>
+                <div style="position:absolute;left:38.82px;top:260.24px" class="cls_005"><span class="cls_005">of working in the logistics and supply</span></div>
+                <div style="position:absolute;left:297.19px;top:267.70px" class="cls_004"><span class="cls_004">Responsible for all sales activities in the area, from lead</span></div>
+                <div style="position:absolute;left:38.82px;top:276.75px" class="cls_005"><span class="cls_005">chain industry. My experienced helped</span></div>
+                <div style="position:absolute;left:297.19px;top:281.21px" class="cls_004"><span class="cls_004">generation to closing. Works closely with sales and</span></div>
+                <div style="position:absolute;left:38.82px;top:293.27px" class="cls_005"><span class="cls_005">me develop expert knowledge of the</span></div>
+                <div style="position:absolute;left:297.19px;top:294.72px" class="cls_004"><span class="cls_004">support teams to foster high customer satisfaction and</span></div>
+                <div style="position:absolute;left:297.19px;top:308.23px" class="cls_004"><span class="cls_004">generate profit.</span></div>
+                <div style="position:absolute;left:38.82px;top:309.78px" class="cls_005"><span class="cls_005">sales process and supply chain. I am</span></div>
+                <div style="position:absolute;left:38.82px;top:326.29px" class="cls_005"><span class="cls_005">highly motivated to continue learning and</span></div>
+                <div style="position:absolute;left:297.19px;top:335.25px" class="cls_004"><span class="cls_004">Field Sales Executive</span></div>
+                <div style="position:absolute;left:38.82px;top:342.81px" class="cls_005"><span class="cls_005">improving my craft.</span></div>
+                <div style="position:absolute;left:297.19px;top:348.77px" class="cls_004"><span class="cls_004">Errandeo Services</span></div>
+                <div style="position:absolute;left:297.19px;top:362.28px" class="cls_006"><span class="cls_006">November 2015 to February 2019</span></div>
+                <div style="position:absolute;left:297.19px;top:375.79px" class="cls_004"><span class="cls_004">Managed key accounts in Fairhill and coordinated with</span></div>
+                <div style="position:absolute;left:297.19px;top:389.30px" class="cls_004"><span class="cls_004">Operations team to boost customer loyalty.</span></div>
+                <div style="position:absolute;left:38.82px;top:407.75px" class="cls_002"><span class="cls_002">SKILLS & PROFICIENCIES</span></div>
+                <div style="position:absolute;left:297.19px;top:416.32px" class="cls_004"><span class="cls_004">Retail Sales Executive</span></div>
+                <div style="position:absolute;left:297.19px;top:429.83px" class="cls_004"><span class="cls_004">Dualitee Apparel</span></div>
+                <div style="position:absolute;left:55.82px;top:443.34px" class="cls_004"><span class="cls_004">Account management</span></div>
+                <div style="position:absolute;left:297.19px;top:443.34px" class="cls_006"><span class="cls_006">April 2011 to October 2014</span></div>
+                <div style="position:absolute;left:55.82px;top:456.86px" class="cls_004"><span class="cls_004">Strategic and social selling</span></div>
+                <div style="position:absolute;left:297.19px;top:456.86px" class="cls_004"><span class="cls_004">Provided prompt customer service in opening of new</span></div>
+                <div style="position:absolute;left:55.82px;top:470.37px" class="cls_004"><span class="cls_004">Proficient in using CRM software</span></div>
+                <div style="position:absolute;left:297.19px;top:470.37px" class="cls_004"><span class="cls_004">accounts and helped maintain sales culture.</span></div>
+                <div style="position:absolute;left:38.82px;top:525.19px" class="cls_002"><span class="cls_002">CERTIFICATION & VOLUNTEER WORK</span></div>
+                <div style="position:absolute;left:297.19px;top:525.19px" class="cls_002"><span class="cls_002">EDUCATIONAL BACKGROUND</span></div>
+                <div style="position:absolute;left:38.82px;top:559.97px" class="cls_004"><span class="cls_004">Volunteer Administrator</span></div>
+                <div style="position:absolute;left:297.19px;top:562.97px" class="cls_004"><span class="cls_004">Salguerro University</span></div>
+                <div style="position:absolute;left:38.82px;top:573.48px" class="cls_004"><span class="cls_004">Fairhill Baptist Church</span></div>
+                <div style="position:absolute;left:297.19px;top:576.49px" class="cls_004"><span class="cls_004">Salguerro</span></div>
+                <div style="position:absolute;left:38.82px;top:586.99px" class="cls_006"><span class="cls_006">2015 to 2021</span></div>
+                <div style="position:absolute;left:297.19px;top:590.00px" class="cls_004"><span class="cls_004">Bachelor's Degree in Business Administration,</span></div>
+                <div style="position:absolute;left:38.82px;top:600.51px" class="cls_004"><span class="cls_004">Collaborated with a team of 10 volunteers to</span></div>
+                <div style="position:absolute;left:297.19px;top:603.51px" class="cls_004"><span class="cls_004">Major in Supply Chain Management</span></div>
+                <div style="position:absolute;left:38.82px;top:614.02px" class="cls_004"><span class="cls_004">raise funds, renovate the church, and build a kid's</span></div>
+                <div style="position:absolute;left:297.19px;top:617.02px" class="cls_006"><span class="cls_006">2015</span></div>
+                <div style="position:absolute;left:38.82px;top:627.53px" class="cls_004"><span class="cls_004">park.</span></div>
+                <div style="position:absolute;left:297.19px;top:630.53px" class="cls_004"><span class="cls_004">Graduated as Cum Laude</span></div>
+                <div style="position:absolute;left:38.82px;top:654.55px" class="cls_004"><span class="cls_004">Inbound Sales and Marketing Certificate</span></div>
+                <div style="position:absolute;left:297.19px;top:657.55px" class="cls_004"><span class="cls_004">University of Fort Leburg</span></div>
+                <div style="position:absolute;left:38.82px;top:668.06px" class="cls_004"><span class="cls_004">Murrayfield School of Marketing</span></div>
+                <div style="position:absolute;left:297.19px;top:671.07px" class="cls_004"><span class="cls_004">Fort Leburg</span></div>
+                <div style="position:absolute;left:38.82px;top:681.57px" class="cls_004"><span class="cls_004">2012</span></div>
+                <div style="position:absolute;left:297.19px;top:684.58px" class="cls_004"><span class="cls_004">Associate's Degree in Sales and Marketing</span></div>
+                <div style="position:absolute;left:38.82px;top:695.09px" class="cls_004"><span class="cls_004">Online program covered how to identify new</span></div>
+                <div style="position:absolute;left:297.19px;top:698.09px" class="cls_004"><span class="cls_004">2011</span></div>
+                <div style="position:absolute;left:38.82px;top:708.60px" class="cls_004"><span class="cls_004">sales prospects and build an inbound marketing</span></div>
+                <div style="position:absolute;left:297.19px;top:711.60px" class="cls_004"><span class="cls_004">Graduated with Distinction</span></div>
+                <div style="position:absolute;left:38.82px;top:722.11px" class="cls_004"><span class="cls_004">strategy.</span></div>
+            </div>
+
+        </section>
+
+    </div>
+
+
+
+
+
+    <script>
+        /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "300px";
+            document.getElementById("main").style.marginLeft = "300px";
+        }
+
+        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+    </script>
+</body>
+
+</html>

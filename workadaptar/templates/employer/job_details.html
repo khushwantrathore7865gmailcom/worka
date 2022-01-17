@@ -54,7 +54,7 @@
   </head>
   <body>
 
-	<header>
+	{% comment %} <header>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 col-12">
@@ -107,7 +107,7 @@
 {% comment %} <li class="nav-item">
     <a class="nav-link" href="#"style="text-align: center;padding: 0rem 0rem;"><i class="fas fa-address-card fa-2x"></i></a>
     <span class="menu-text">About Us </span>
-  </li> {% endcomment %}
+  </li> 
 
   
 
@@ -134,7 +134,86 @@
 			</div>
 		</div>
 
-	</header>
+	</header> {% endcomment %}
+
+  <header>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="top-navbar">
+                    <nav class="navbar navbar-expand-lg ">
+                        <a class="" href="{% url 'recruiter:employer_home' %}"> <img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <nav class="navbar mr-auto">
+                                <form class="form-inline new-form">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
+                                        <button class="search">Search</button>
+                                    </div>
+                                </form>
+                            </nav>
+
+
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{% url 'recruiter:employer_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true"></i></a>
+                                    <span class="menu-text">Home</span>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{% url 'recruiter:job_post' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fas fa-briefcase"></i></a>
+                                    <span class="menu-text">Add job </span>
+                                </li>
+                                <!--	  <li class="nav-item">-->
+                                <!--        <a class="nav-link" href="#">Resume</a>-->
+                                <!--      </li>-->
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'recruiter:advance-search' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fas fa-search"></i></a>
+                                    <span class="menu-text">Adv Search</span>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a class="nav-link " href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fas fa-phone-square-alt fa-xs"></i></a>
+                                    <span class="menu-text">Contact Us </span>
+                                </li>
+
+
+
+                                <li class="nav-item bell-icon ">
+                                    <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-bell" aria-hidden="true"></i> </a>
+                                    <span class="menu-text">Notification</span>
+                                </li>
+
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="dropbtn"><img src={{ep.company_logo.url}}></button>
+                                        <div class="dropdown-content">
+                                            <a href="#">My Profile</a>
+                                            <a href="#">Edit Profile</a>
+                                            <a href="{% url 'recruiter:logout' %}">Log Out</a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
     <section class="job-portal">
 	<div class="container">
 		<div class="row">

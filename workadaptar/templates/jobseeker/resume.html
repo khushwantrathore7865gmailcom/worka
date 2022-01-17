@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Build Resume</title>
     <link rel="stylesheet" href="{% static 'css/ffcommon_v103.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/stylemod.css' %}">
     <link rel="stylesheet" href="{% static 'css/elCommon_v1.min.css' %}" />
@@ -29,12 +29,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="/static/images/green.png">
+    
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style13.css' %}">
+    {% comment %} <link type="text/css" rel="stylesheet" href="{% static 'plugins1.css' %}"> {% endcomment %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css'%}">
+    <link rel="stylesheet" type="text/css" href=" {% static 'css/main.css' %}">
 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
     <style>
         .btn {
             border-color: goldenrod;
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
+            padding: 10px 30px;
         }
     </style>
     <style>
@@ -119,25 +128,29 @@
     </style>
 
 </head>
-{% comment %} <header style="background:white; ">
+
+{% if request.user.is_candidate %}
+<header style="background: white;">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 col-12" style="margin-bottom:-10px">
+            <div class="col-md-12 col-12">
                 <div class="top-navbar">
-                    <nav class="navbar navbar-expand-lg ">
-                        <a class="" style="margin-right: 50px;" href="{% url 'jobseeker:jobseeker_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                    <nav class="navbar navbar-expand-lg" style="padding: 0rem 0rem; ">
+                        <a class="" href="{% url 'jobseeker:jobseeker_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<span class="navbar-toggler-icon"></span>
+</button>
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <nav class="navbar mr-auto" style="margin-right: 125px; ">
-                                <form class="form-inline" type="get">
+                            <nav class="navbar mr-auto" style="margin-right: 125px;     display: contents;">
+                                <form class="form-inline" type="get" style="margin-inline: auto;    width: 50%;">
                                     <div class="input-group" style="box-shadow: 0px 0px 14px 3px lightgrey;padding: inherit;border-radius: 10px;margin: 15px;padding: 2px;">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true" style="margin: 10px;"></i></span>
                                         </div>
-                                        <input type="text" class="form-control" id="search_box" name="search_box" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1" style="width: 350px;">
+                                        <input type="text" class="form-control" id="search_box" name="search_box" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1" style="width: 350px;background: none;
+                                        margin: auto;
+                                        border: none;">
                                     </div>
                                 </form>
                             </nav>
@@ -146,25 +159,33 @@
 
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
+                                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true" style="font-size: 27px;"></i></a>
+                                    <span class="menu-text">Home</span>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
+                                    <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-briefcase" aria-hidden="true"></i></a>
+                                    <span class="menu-text">Applied</span>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
+                                    <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                    <span class="menu-text">Saved</span>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'jobseeker:resume' %}">Resume</a>
+                                    <a class="nav-link" href="{% url 'jobseeker:resume' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-id-card" aria-hidden="true"></i></a>
+                                    <span class="menu-text">Resume</span>
                                 </li>
 
                                 <li class="nav-item bell-icon">
-                                    <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
+                                    <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><img src="{% static 'images/bell.png' %}"></a>
+                                    <span class="menu-text">Notification</span>
                                 </li>
                                 <li class="nav-item">
                                     <div class="dropdown">
-                                        <button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
+                                        <button class="dropbtn">
+                                            <img style="background-color: black;"src="/static/images/green.png">
+                                            <!-- <img src={{cp.profile_pic.url}}> -->
+                                        </button>
                                         <div class="dropdown-content">
                                             <a href="{% url 'jobseeker:profile' %}">My Profile</a>
                                             <a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
@@ -182,8 +203,9 @@
             </div>
         </div>
     </div>
-</header> {% endcomment %}
 
+</header>
+{%else%}
 <header>
     <div class="container" style="max-width: inherit; background-color:white">
         <div class="row" style="margin-bottom:-25px">
@@ -197,7 +219,7 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mx-auto">
-                                <li class="nav-item active">
+                                <li class="nav-item ">
                                     <a class="nav-link" href="http://ec2-54-184-90-146.us-west-2.compute.amazonaws.com/">Home <span class="sr-only">(current)</span></a>
                                 </li>
                                 <li class="nav-item">
@@ -214,9 +236,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'jobseeker:resume' %}"> Build Resume</a>
                                 </li>
-                                <li class="nav-item button" style="border-start-end-radius: 0px 0px;border-end-start-radius: 0px 63px; background:#2cd177">
+                                {% comment %} <li class="nav-item button" style="border-start-end-radius: 0px 0px;border-end-start-radius: 0px 63px; background:#2cd177">
                                     <a class="nav-link" href="#" data-toggle="modal" data-target="#recruitermodal">Recruiter Login</a>
-                                </li>
+                                </li> {% endcomment %}
                                 <li class="nav-item button" style="border-start-end-radius: 0px 0px;border-end-start-radius: 0px 63px; background:#2cd177">
                                     <a class="nav-link" href="#" data-toggle="modal" data-target="#jobseekermodal">Jobseeker Login</a>
                                 </li>
@@ -229,108 +251,13 @@
         </div>
     </div>
 
+    
 </header>
 
+{% endif %}
 
 <body style="background-color: grey;">
-    {% comment %}
-     {% if request.user.is_candidate %}
-                <div class="top-navbar">
-                    <nav class="navbar navbar-expand-lg ">
-<a class="" href="{% url 'jobseeker:jobseeker_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>
-</button>
-
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-<nav class="navbar mr-auto">
-<form class="form-inline" type="get">
-<div class="input-group">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
-  </div>
-  <input type="text" class="form-control"  id="search_box" name="search_box" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1">
-</div>
-</form>
-</nav>
-
-
-
-<ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-    <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}"><i class="fa fa-home" aria-hidden="true"></i></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}">Applied</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}">Saved</a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'jobseeker:resume' %}">Resume</a>
-  </li>
-
-  <li class="nav-item bell-icon">
-    <a class="nav-link" href="#"><img src="{% static 'images/bell.png' %}"></a>
-  </li>
-     <li class="nav-item">
-<div class="dropdown">
-<button class="dropbtn"><img src={{cp.profile_pic.url}}></button>
-<div class="dropdown-content">
-<a href="{% url 'jobseeker:profile' %}">My Profile</a>
-<a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
-<a href="{% url 'jobseeker:logout' %}">Log Out</a>
-</div>
-</div>
-     </li>
-
-
- </ul>
-
-</div>
-</nav>
-                </div>
-                {% else %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown
-                </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav>
-    {% endif %}{% endcomment %}
+    
     <div class="bannerTxt banr">
 
         <div class="wrap bannerPos bannerPosRW">
@@ -338,7 +265,7 @@
                 <h1 class="font_26" style="color: white; ">
                     The perfect Resume is a gateway to the Right Job. Highlight your achievelemts, education and expertise with <span class="bolder" style="color:#89fabc">Workadapter Professional Resume.</span></h1>
                 <h2 id="heading" class="videoText">
-                    At <span class="bolder" style="color:#89fabc">Workadapter.com</span> you can avail our professional Resume Writing Service to make your resume stand from the others. Our Resume Services help job seekers belonging to varied industries,
+                    At <span class="bolder" style="color:#89fabc">Workadapter</span> you can avail our professional Resume Writing Service to make your resume stand from the others. Our Resume Services help job seekers belonging to varied industries,
                     professional experience and positions land the right job. We specialize in resume writing; thus, presenting your achievements, skills and education in the most effective manner.
                 </h2>
             </div>
@@ -441,7 +368,7 @@
                                             8 Working days
                                             <!-- {% csrf_token %} {{form3.delivery_type_senior}} -->
                                         </div>
-                                        <button type="button" style="border-color: #03A84E;" class="btn btn-success">Buy Now</button>
+                                        <a type="button" style="background: green;border-color: green;" href="{% url 'jobseeker:builtresume' %}" class="btn btn-success">Buy Now</a>
                                     </form>
                                     <!--                                <p><input type="radio" name="delivry" value="regular" onclick="ffSrvHdl.changeRWService();" checked='checked' /><span class="txtBlue">Regular</span> 8 working days</p>-->
                                     <!--                                <p><input type="radio" name="delivry" value="exprs" onclick="ffSrvHdl.changeRWService();" /><span class="txtBlue">Express</span> 4 working days(-->
@@ -467,7 +394,7 @@
                                             8 Working days
                                             <!-- {% csrf_token %} {{form3.delivery_type_senior}} -->
                                         </div>
-                                        <button type="button" style="border-color: #03A84E;" class="btn btn-success">Buy Now</button>
+                                        <button type="button" style="background: green;border-color: green;" class="btn btn-success">Buy Now</button>
                                     </form>
                                     <!-- <form method="POST" action="">
                                         <div style="text-align: start">
@@ -499,7 +426,7 @@
                                             8 Working days
                                             <!-- {% csrf_token %} {{form3.delivery_type_senior}} -->
                                         </div>
-                                        <button type="button" style="border-color: #03A84E;" class="btn btn-success">Buy Now</button>
+                                        <button type="button" style="background: green;border-color: green;" class="btn btn-success">Buy Now</button>
                                     </form>
                                     <!--                                <p><input type="radio" name="delivry" value="regular" onclick="ffSrvHdl.changeRWService();" checked='checked' /><span class="txtBlue">Regular</span> 8 working days</p>-->
                                     <!--                                <p><input type="radio" name="delivry" value="exprs" onclick="ffSrvHdl.changeRWService();" /><span class="txtBlue">Express</span> 4 working days(-->
@@ -522,7 +449,7 @@
                                         <div style="text-align: start">
                                             {% csrf_token %} {{form4.delivery_type_Executive}}
                                         </div>
-                                        <button type="button" style="border-color: #03A84E;" class="btn btn-success" style="text-align:center">Success</button>
+                                        <button type="button" style="background: green; border-color: green;" class="btn btn-success" style="text-align:center">Success</button>
                                     </form>
                                     <!--                                <p><input type="radio" name="delivry" value="regular" onclick="ffSrvHdl.changeRWService();" checked='checked' /><span class="txtBlue">Regular</span> 8 working days</p>-->
                                     <!--                                <p><input type="radio" name="delivry" value="exprs" onclick="ffSrvHdl.changeRWService();" /><span class="txtBlue">Express</span> 4 working days(-->
@@ -545,6 +472,83 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="jobseekermodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: fit-content;background-color: white;width: auto;padding: inherit;">
+                    <div class="modal-header theme-bg full-width" style="padding-left: 33px;min-width: 458px;">
+                        <h5 class="modal-title" id="exampleModalLabel" style="color:white;font-weight: bold;">Jobseeker Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" style="line-height: normal;padding-top: 9px;font-size: x-large;padding-right: 40px;" aria-label="Close">
+                                <span aria-hidden="true"style="color:white">&times;</span>
+                                </button>
+                    </div>
+                    <div class="modal-body" style="padding: 0px;">
+                        <div class="new-logwrap" style="width: auto;padding: 36px;">
+                            <!-- <div class="form-group">
+                                        <label>Username</label>
+                                        <div class="input-with-icon">
+                                            <input type="text" class="form-control" placeholder="Enter Your Username">
+                                            <i class="theme-cl ti-user"></i>
+                                        </div>
+                                    </div> -->
+                            <form class="login-recruiter" action="{% url 'jobseeker:jobseeker/login' %}" method="POST">
+                                {% csrf_token %}{% for message in messages %}
+                                <p id="messages" style="color:rgb(153, 9, 9);" class="alert ">{{message}}</p>
+                                {% endfor %}
+                                <div class="form-group" style="    padding: 5px 5px 5px;">
+                                    <label>Email</label>
+                                    <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
+                                        <input class="input100" style="border-radius: 5px;margin-bottom: -19px;" type="text" name="username" placeholder="Email/MobileNo." required>
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="    padding: 5px 5px 5px;">
+                                    <label>Password</label>
+                                    <div class="wrap-input100 validate-input" data-validate="Please enter password">
+                                        <input class="input100" style="border-radius: 5px;margin-bottom: -19px;" type="password" name="pass" placeholder="Password" required>
+                                        <span class="focus-input100"></span>
+                                    </div>
+                                    {% if request.GET.next %}
+                                    <input type="hidden" name="next" value="{{request.GET.next}}"> {% endif %}
+                                    <br>
+                                </div>
+
+                                <!-- <div class="form-groups">
+                                            <input type="submit" name="recruiter-login" class="btn btn-primary theme-bg full-width" value="Login" role="button">
+                                        </div> -->
+                                <div class="container-login100-form-btn">
+                                    <button class="login100-form-btn" style="border-radius: 5px;" type="submit">
+                                                Login
+                                            </button>
+                                </div>
+                            </form>
+
+                            <!-- <div class="forget-account text-center">
+                                        <a class="theme-cl" href="#">Forget Password?</a>
+                                    </div> -->
+
+                            <!-- <div class="register-account text-center">
+                                        Don't have an account? <a class="theme-cl" href="register-recruiter.php">Register</a>
+                                    </div> -->
+                            <div class="flex-col-c p-t-80 p-b-40">
+                                <a href="{% url 'jobseeker:reset_password' %}" class="txt0" style="color:green;">
+                                            Forgot Password?
+                                        </a>
+
+                                <span class="txt1 p-b-9">
+                                            Don’t have an account?
+                                            <a href="{% url 'jobseeker:jobseeker/register' %}" class="txt3">
+                                            Register
+                                            </a>
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
         <script>
             function openCity(cityName) {

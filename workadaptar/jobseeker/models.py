@@ -137,7 +137,7 @@ class Candidate_profile(models.Model):
     user_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='user_profile')
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
                                  message="Please enter valid phone number. Correct format is 91XXXXXXXX")
-    phone = models.CharField(validators=[phone_regex], max_length=20, blank=True,unique=True)
+    phone = models.CharField(validators=[phone_regex], max_length=20, blank=True, unique=True)
     birth_date = models.IntegerField(null=True)
     birth_month = models.IntegerField(null=True)
     birth_year = models.IntegerField(null=True)
@@ -154,12 +154,12 @@ class Candidate_profile(models.Model):
 class Candidate_edu(models.Model):
     user_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='user_edu')
     institute_name = models.CharField(max_length=250)
-    start_date = models.IntegerField(choices=date, null=True)
-    start_month = models.IntegerField(choices=month, null=True)
-    start_year = models.IntegerField(choices=year, null=True)
-    end_date = models.IntegerField(choices=date, null=True, blank=True)
-    end_month = models.IntegerField(choices=month, null=True, blank=True)
-    end_year = models.IntegerField(choices=year, null=True, blank=True)
+    start_date = models.CharField(choices=date, null=True, max_length=20)
+    start_month = models.CharField(choices=month, null=True, max_length=20)
+    start_year = models.CharField(choices=year, null=True, max_length=20)
+    end_date = models.CharField(choices=date, null=True, blank=True, max_length=20)
+    end_month = models.CharField(choices=month, null=True, blank=True, max_length=20)
+    end_year = models.CharField(choices=year, null=True, blank=True, max_length=20)
     course_type = models.CharField(max_length=250)
     degree = models.CharField(max_length=250)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -170,12 +170,12 @@ class Candidate_profdetail(models.Model):
     designation = models.CharField(max_length=250)
     organization = models.CharField(max_length=250)
     salary = models.CharField(max_length=250)
-    start_date = models.IntegerField(choices=date,null=True)
-    start_month = models.IntegerField(choices=month,null=True)
-    start_year = models.IntegerField(choices=year,null=True)
-    end_date = models.IntegerField(choices=date,null=True, blank=True)
-    end_month = models.IntegerField(choices=month,null=True, blank=True)
-    end_year = models.IntegerField(choices=year,null=True, blank=True)
+    start_date = models.CharField(choices=date, null=True, max_length=20)
+    start_month = models.CharField(choices=month, null=True, max_length=20)
+    start_year = models.CharField(choices=year, null=True, max_length=20)
+    end_date = models.CharField(choices=date, null=True, blank=True, max_length=20)
+    end_month = models.CharField(choices=month, null=True, blank=True, max_length=20)
+    end_year = models.CharField(choices=year, null=True, blank=True, max_length=20)
     is_current = models.BooleanField(default=False)
 
 
@@ -183,6 +183,16 @@ class Candidate_resume(models.Model):
     user_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='user_resume')
     resume_link = models.FileField(upload_to="resume/", blank=True)
 
+
+class Candidate_certificate(models.Model):
+    user_id = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='user_certificate')
+    title = models.CharField(max_length=250)
+    organization = models.CharField(max_length=250)
+    detail = models.CharField(max_length=250)
+
+    start_year = models.CharField(choices=year, null=True, max_length=20)
+
+    end_year = models.CharField(choices=year, null=True, blank=True, max_length=20)
 
 
 class Candidate_skills(models.Model):

@@ -8,10 +8,11 @@ from django.utils.http import urlsafe_base64_decode
 from user_custom.models import User_custom
 from django.utils.encoding import force_text
 from .models import Candidate, Candidate_profile, Candidate_edu, Candidate_skills, Candidate_profdetail, \
-    Candidate_resume, Resume_order, Candidate_expdetail, Resume_headline
+    Candidate_resume, Resume_order, Candidate_expdetail, Resume_headline, Candidate_certificate
 from .forms import SignUpForm, ProfileRegisterForm, ProfileRegisterForm_edu, ProfileRegisterForm_profdetail, \
     ProfileRegisterForm_resume, ProfileRegistration_expdetail, ProfileRegistration_skills, Resumeforming_Entery, \
-    Resumeforming_Executive, Resumeforming_Mid, Resumeforming_senior, Resume_headlineForm
+    Resumeforming_Executive, Resumeforming_Mid, Resumeforming_senior, Resume_headlineForm, profesional, education, \
+    certificate
 from django.views.generic import View
 from django.contrib import messages
 from django.contrib.sites.shortcuts import get_current_site
@@ -28,6 +29,7 @@ import razorpay
 from django.contrib.auth.decorators import login_required
 from django.core.files import File
 from io import BytesIO
+
 client = razorpay.Client(auth=("rzp_test_N6naZCMdnNcNcU", "pdkCmhFp28iS6acXCLJuyPFb"))
 
 
@@ -830,8 +832,10 @@ def ProfileEdit(request):
     except Candidate.DoesNotExist:
         profile = None
     print(profile)
+    print('notrun', request.method)
     if profile is not None:
         if request.method == 'POST':
+            print('run', request.method)
             form1 = ProfileRegisterForm(data=request.POST or None, files=request.FILES or None)
             form2 = ProfileRegisterForm_edu(request.POST or None)
             form3 = ProfileRegisterForm_profdetail(request.POST or None)
@@ -840,7 +844,7 @@ def ProfileEdit(request):
             form6 = ProfileRegistration_expdetail(request.POST or None)
             form7 = Resume_headlineForm(request.POST)
             form8 = ProfileRegistration_skills(request.POST)
-            # print(form1)
+            print('form2', form2.is_valid())
             if form1.is_valid():
                 print(form1.cleaned_data.get('profile_pic'))
                 if form1.cleaned_data.get('birth_date'):
@@ -862,9 +866,11 @@ def ProfileEdit(request):
                     f2.user_id = profile
                     f2.save()
             if form3.is_valid():
-                f3 = form3.save(commit=False)
-                if form3.cleaned_data.get('designation'):
+                if form2.cleaned_data.get('designation'):
+                    f3 = form3.save(commit=False)
+                    print(f3)
                     f3.user_id = profile
+                    print('f3', f3.user_id)
                     f3.save()
             if form4.is_valid():
                 f4 = form4.save(commit=False)
@@ -892,13 +898,6 @@ def ProfileEdit(request):
                 d = form6.cleaned_data.get('department')
                 print(d)
                 if d != "":
-                    print("after d is not none")
-                    try:
-                        cep = Candidate_expdetail.objects.get(user_id=profile)
-                    except Candidate_profile.DoesNotExist:
-                        cep = None
-                    if cep:
-                        cep.delete()
                     f6 = form6.save(commit=False)
                     f6.user_id = profile
                     f6.save()
@@ -918,27 +917,38 @@ def ProfileEdit(request):
         print(request.method)
         try:
             c = Candidate_profile.objects.get(user_id=profile)
-            print(c)
         except Candidate_profile.DoesNotExist:
             c = None
-            print(c)
+        if c is None:
+            cN = 0
+        else:
+            cN = 10
         try:
             cr = Candidate_resume.objects.get(user_id=profile)
         except Candidate_resume.DoesNotExist:
             cr = None
         if cr is not None:
             re = True
+            crN = 10
         else:
             re = False
+            crN = 0
         try:
             cep = Candidate_expdetail.objects.get(user_id=profile)
         except Candidate_expdetail.DoesNotExist:
             cep = None
+        if cep is None:
+            cepN = 0
+        else:
+            cepN = 10
         try:
             Resume = Resume_headline.objects.get(user_id=profile)
         except Resume_headline.DoesNotExist:
             Resume = None
-
+        if Resume is None:
+            rN = 0
+        else:
+            rN = 10
         form1 = ProfileRegisterForm(instance=c)
         form2 = ProfileRegisterForm_edu()
         form3 = ProfileRegisterForm_profdetail()
@@ -948,14 +958,28 @@ def ProfileEdit(request):
         form7 = Resume_headlineForm(instance=Resume)
         form8 = ProfileRegistration_skills()
         skills = Candidate_skills.objects.filter(user_id=profile)
-        print(skills)
+        if len(skills) != 0:
+            sN = 10
+        else:
+            sN = 0
         edu = Candidate_edu.objects.filter(user_id=profile)
+        if len(edu) != 0:
+            eN = 10
+        else:
+            eN = 0
         professional = Candidate_profdetail.objects.filter(user_id=profile)
+        if len(professional) != 0:
+            pN = 10
+        else:
+            pN = 0
+        per = ((sN + pN + eN + rN + crN + cepN + cN) / 70) * 100
+        print(per)
         return render(request, 'jobseeker/Profile.html',
                       {"form1": form1, 'form2': form2, "form3": form3, 'form4': form4, 'form6': form6, 'form7': form7,
                        'form8': form8,
                        'skills': skills, 'edu': edu, 'professional': professional, 'c': c, 'cr': cr, 're': re,
-                       'rh': Resume})
+                       'cep': cep,
+                       'rh': Resume, 'per': per})
 
     else:
         return redirect('/')
@@ -1782,55 +1806,74 @@ def payment(request, Experience, add):
     return render(request, 'jobseeker/payment.html', {'amount': a, 'user': name})
 
 
+@login_required(login_url='/')
 def BuiltResume(request):
+    u = request.user
+    e = Candidate_edu.objects.filter(user_id=u)
+    p = Candidate_profile.objects.filter(user_id=u)
+    c = Candidate_certificate.objects.filter(user_id=u)
+    s = Candidate_skills.objects.filter(user_id=u)
     if request.method == 'POST':
-        name = request.GET.get('name', None)
-        mname = request.GET.get('middlename', None)
-        lname = request.GET.get('lastname', None)
-        dob = request.GET.get('dob', None)
-        gender = request.GET.get('gender', None)
-        marital_status = request.GET.get('marital_status', None)
-        email = request.GET.get('email', None)
-        mobile = request.GET.get('mobile', None)
-        address = request.GET.get('address', None)
-        city = request.GET.get('city', None)
-        state = request.GET.get('state', None)
-        pin = request.GET.get('pin', None)
-        url = request.GET.get('search_box', None)
-        img = request.FILES['image']
-        skills = request.GET.get('skills', None)
-        personalinterest = request.GET.get('personalinterest', None)
-        scname = request.GET.get('scname', None)
-        degree = request.GET.get('degree', None)
-        specialization = request.GET.get('specialization', None)
-        studding = request.GET.get('studding', None)
-        startyr = request.GET.get('startyr', None)
-        endyr = request.GET.get('endyr', None)
-        per = request.GET.get('per', None)
-        orgname = request.GET.get('orgname', None)
-        designation = request.GET.get('designation', None)
-        salary = request.GET.get('salary', None)
-        working = request.GET.get('working', None)
-        startyear = request.GET.get('startyear', None)
-        endyear = request.GET.get('endyear', None)
-        workdetails = request.GET.get('workdetails', None)
-        certi = request.GET.get('certi', None)
-        certiorg = request.GET.get('certiorg', None)
-        certititle = request.GET.get('certititle', None)
-        startcerti = request.GET.get('startcerti', None)
-        endcerti = request.GET.get('endcerti', None)
-        certidetails = request.GET.get('certidetails', None)
-        context = {'name': name, 'mname': mname, 'lname': lname, 'dob': dob, 'gender': gender,
-                   'marital_status': marital_status, 'email': email, 'mobile': mobile, 'address': address, 'city': city,
-                   'state': state, 'pin': pin, 'url': url, 'img': img, 'skills': skills,
-                   'personalinterest': personalinterest, 'scname': scname, 'degree': degree, 'studding': studding,
-                   'startyr': startyr, 'endyr': endyr, 'per': per, 'orgname': orgname, 'designation': designation,
-                   'salary': salary, 'working': working, 'startyear': startyear, 'endyear': endyear,
-                   'workdetails': workdetails, 'certi': certi, 'certiorg': certiorg, 'certititle': certititle,
-                   'startcerti': startcerti, 'endcerti': endcerti, 'certidetails': certidetails,
-                   'specialization': specialization}
-        pdf = render_to_pdf('commons/agreement.html', context)
-        filename = f"agreement/{request.user}.pdf"
-        pdf.save(filename, File(BytesIO(pdf.content)))
+        form1 = ProfileRegisterForm(request.POST, instance=u)
+        form2 = education(request.POST, prefix='edu', instance=e)
+        form3 = profesional(request.POST, prefix='pro', instance=p)
+        form4 = certificate(request.POST, prefix='certi', instance=c)
+        form5 = ProfileRegistration_skills(request.POST, prefix='skill', instance=s)
+        if form1.is_valid():
+            form1.save(commit=False)
+            form1.user_id = u
+            form1.save()
+        if form2.is_valid():
+            for f2 in form2:
+                f2.user_id = u
+                f2.save()
+        if form3.is_valid():
+            for f3 in form3:
+                f3.user_id = u
+                f3.save()
+        if form4.is_valid():
+            for f4 in form4:
+                f4.user_id = u
+                f4.save()
+        if form5.is_valid():
+            for form in form5:
 
-    return render(request, 'jobseeker/BuiltResume.html')
+                skill = form.cleaned_data.get('skill')
+                rating = form.cleaned_data.get('rating')
+
+                if skill:
+                    Candidate_skills(user_id=u, skill=skill, rating=rating).save()
+
+    form1 = ProfileRegisterForm(instance=u)
+    form2 = education(prefix='edu', instance=e)
+    form3 = profesional(prefix='pro', instance=p)
+    form4 = certificate(prefix='certi', instance=c)
+    form5 = ProfileRegistration_skills(prefix='skill', instance=s)
+    return render(request, 'jobseeker/BuiltResume.html',
+                  {'form1': form1, 'form2': form2, 'form3': form3, 'form4': form4, 'form5': form5})
+
+
+@login_required(login_url='/')
+def ResumeEditor(request):
+    return render(request, 'jobseeker/ResumeEditor.html')
+
+
+def jobApply(request, pk):
+    if request.method == 'GET':
+        j = Employer_job.objects.get(pk=pk)
+        q = Employer_jobquestion.objects.filter(job_id=j)
+        return render(request, 'jobseeker/jobApply.html', {'job': j, 'ques': q})
+    elif request.method == 'POST':
+        print(request.POST)
+
+        c = Candidate.objects.get(user=request.user)
+        job = Employer_job.objects.get(pk=pk)
+        questions = Employer_jobquestion.objects.filter(job_id=job)
+        for q in questions:
+            print(request.POST.get(q.question))
+
+            get_text = request.POST.get(q.question)
+            print(get_text)
+            Employer_candidate_jobanswer.objects.create(candidate_id=c, question_id=q, answer=get_text).save()
+        Employer_job_Applied.objects.create(candidate_id=c, job_id=job).save()
+        return redirect('jobseeker:jobseeker_home')

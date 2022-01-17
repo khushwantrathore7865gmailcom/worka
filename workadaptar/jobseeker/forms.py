@@ -214,80 +214,27 @@ class ProfileRegisterForm(forms.ModelForm):
         ]
 
 
-#
-# ProfileRegisterForm_edu = modelformset_factory(
-#
-#     Candidate_edu,
-#     fields=('institute_name',
-#             'start_date',
-#             'start_month',
-#             'start_year',
-#             'end_date',
-#             'end_month',
-#             'end_year',
-#             'course_type',
-#             'degree',),
-#     extra=1,
-#     widgets={'institute_name': forms.TextInput(attrs={
-#         'class': 'form-control',
-#
-#     }),
-#         'start_date': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#         'start_month': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#         'start_year': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#         'end_date': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#         'end_month': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#         'end_year': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#         'course_type': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#         'degree': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#     })
-
-
 class ProfileRegisterForm_edu(forms.ModelForm):
     institute_name = forms.CharField(max_length=30, required=False, label='institute name', widget=forms.TextInput(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
 
     course_type = forms.CharField(max_length=30, required=False, label='course type', widget=forms.TextInput(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     degree = forms.CharField(max_length=30, required=False, label='degree', widget=forms.TextInput(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     start_date = forms.ChoiceField(choices=date, required=False, label='start date', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     start_month = forms.ChoiceField(choices=month, required=False, label='start month', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     start_year = forms.ChoiceField(choices=year, required=False, label='start year', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
 
     end_date = forms.ChoiceField(choices=date, required=False, label='end date', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     end_month = forms.ChoiceField(choices=month, required=False, label='end month', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     end_year = forms.ChoiceField(choices=year, required=False, label='end year', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
 
     class Meta:
         model = Candidate_edu
@@ -304,6 +251,9 @@ class ProfileRegisterForm_edu(forms.ModelForm):
         ]
 
 
+education = formset_factory(ProfileRegisterForm_edu, extra=1)
+
+
 class ProfileRegisterForm_resume(forms.ModelForm):
     class Meta:
         model = Candidate_resume
@@ -313,85 +263,26 @@ class ProfileRegisterForm_resume(forms.ModelForm):
 
 
 #
-# ProfileRegisterForm_profdetail = modelformset_factory(
-#
-#     Candidate_profdetail,
-#     fields=('designation',
-#             'organization',
-#             'salary',
-#             'start_date',
-#             'start_month',
-#             'start_year',
-#             'is_current',
-#             'end_date',
-#             'end_month',
-#             'end_year',),
-#     extra=1,
-#     widgets={'designation': forms.TextInput(attrs={
-#         'class': 'input100',
-#
-#     }),
-#         'organization': forms.TextInput(attrs={
-#             'class': 'input100',
-#
-#         }),
-#         'salary': forms.TextInput(attrs={
-#             'class': 'input100',
-#
-#         }),
-#         'start_date': forms.TextInput(attrs={
-#             'class': 'input100',
-#
-#         }),
-#         'start_month': forms.TextInput(attrs={
-#             'class': 'input100',
-#
-#         }),
-#         'start_year': forms.TextInput(attrs={
-#             'class': 'input100',
-#
-#         }),
-#         'is_current': forms.CheckboxInput(attrs={
-#             'class': 'input100',
-#
-#         }),
-#         'end_date': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#         'end_month': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#         'end_year': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#     })
-
-
-
-
 class ProfileRegisterForm_profdetail(forms.ModelForm):
     designation = forms.CharField(max_length=30, required=False, label='designation', widget=forms.TextInput(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     organization = forms.CharField(max_length=30, required=False, label='organization', widget=forms.TextInput(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     salary = forms.CharField(max_length=30, required=False, label='salary', widget=forms.TextInput(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     start_date = forms.ChoiceField(choices=date, required=False, label='start date', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     start_month = forms.ChoiceField(choices=month, required=False, label='start month', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     start_year = forms.ChoiceField(choices=year, required=False, label='start year', widget=forms.Select(
-        attrs={'class': "input100"}))
-    is_current = forms.BooleanField(label='Currently working', widget=forms.CheckboxInput())
+        attrs={'class': "input100 form-control"}))
+    # is_current = forms.BooleanField(label='Currently working', widget=forms.CheckboxInput())
     end_date = forms.ChoiceField(choices=date, required=False, label='end date', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     end_month = forms.ChoiceField(choices=month, required=False, label='end month', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
     end_year = forms.ChoiceField(choices=year, required=False, label='end year', widget=forms.Select(
-        attrs={'class': "input100"}))
+        attrs={'class': "input100 form-control"}))
 
     class Meta:
         model = Candidate_profdetail
@@ -402,33 +293,46 @@ class ProfileRegisterForm_profdetail(forms.ModelForm):
             'start_date',
             'start_month',
             'start_year',
-            'is_current',
+            # 'is_current',
             'end_date',
             'end_month',
             'end_year',
         ]
 
 
-#
-#
-# ProfileRegistration_skills = modelformset_factory(
-#
-#     Candidate_skills,
-#     fields=('skill',
-#             'rating',
-#             ),
-#     extra=1,
-#     widgets={'skill': forms.TextInput(attrs={
-#         'class': 'form-control',
-#
-#     }),
-#         'rating': forms.TextInput(attrs={
-#             'class': 'form-control',
-#
-#         }),
-#
-#     })
-#
+profesional = formset_factory(ProfileRegisterForm_profdetail, extra=1)
+
+
+class ProfileRegisterForm_certificate(forms.ModelForm):
+    title = forms.CharField(max_length=30, required=False, label='designation', widget=forms.TextInput(
+        attrs={'class': "input100 form-control"}))
+    organization = forms.CharField(max_length=30, required=False, label='organization', widget=forms.TextInput(
+        attrs={'class': "input100 form-control"}))
+    detail = forms.CharField(max_length=30, required=False, label='salary', widget=forms.TextInput(
+        attrs={'class': "input100 form-control"}))
+
+    start_year = forms.ChoiceField(choices=year, required=False, label='start year', widget=forms.Select(
+        attrs={'class': "input100 form-control"}))
+
+    end_year = forms.ChoiceField(choices=year, required=False, label='end year', widget=forms.Select(
+        attrs={'class': "input100 form-control"}))
+
+    class Meta:
+        model = Candidate_profdetail
+        fields = [
+            'title',
+            'organization',
+            'detail',
+
+            'start_year',
+
+            'end_year',
+        ]
+
+
+certificate = formset_factory(ProfileRegisterForm_certificate, extra=1)
+
+
 class BookForm(forms.Form):
     skill = forms.CharField(
         label='Skill',
@@ -449,15 +353,6 @@ class BookForm(forms.Form):
 ProfileRegistration_skills = formset_factory(BookForm, extra=1)
 
 
-# class ProfileRegistration_skills(forms.ModelForm):
-#     class Meta:
-#         model = Candidate_skills
-#         fields = [
-#             'skill',
-#             'rating',
-#         ]
-
-
 class ProfileRegistration_expdetail(forms.ModelForm):
     class Meta:
         model = Candidate_expdetail
@@ -474,23 +369,11 @@ class Resumeforming_Entery(forms.Form):
 
     }))
 
-    # class Meta:
-    #     model = Resume_order
-    #     fields = [
-    #         'delivery_type',
-    #     ]
-
 
 class Resumeforming_Mid(forms.Form):
     delivery_type_Mid = forms.CharField(widget=forms.RadioSelect(choices=delivery, attrs={
 
     }))
-
-    # class Meta:
-    #     model = Resume_order
-    #     fields = [
-    #         'delivery_type',
-    #     ]
 
 
 class Resumeforming_senior(forms.Form):
@@ -498,24 +381,11 @@ class Resumeforming_senior(forms.Form):
         'name': 'Resumeforming_senior',
     }))
 
-    # class Meta:
-    #     model = Resume_order
-    #     fields = [
-    #         'delivery_type',
-    #     ]
-
 
 class Resumeforming_Executive(forms.Form):
     delivery_type_Executive = forms.CharField(widget=forms.RadioSelect(choices=delivery, attrs={
         'name': 'Resumeforming_Executive',
     }))
-
-    # class Meta:
-    #     model = Resume_order
-    #     fields = [
-    #
-    #         'delivery_type',
-    #     ]
 
 
 class Resume_headlineForm(forms.ModelForm):

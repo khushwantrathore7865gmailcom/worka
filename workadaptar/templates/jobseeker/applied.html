@@ -51,7 +51,7 @@
   </head>
   <body>
 
-	<header>
+	{% comment %} <header>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 col-12">
@@ -115,8 +115,81 @@
 			</div>
 		</div>
 
-	</header>
+	</header> {% endcomment %}
 
+  <header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="top-navbar">
+                    <nav class="navbar navbar-expand-lg" style="padding: 0rem 0rem; ">
+                        <a class="" href="{% url 'jobseeker:jobseeker_home' %}"><img src="{% static 'images/green.png' %} " width="60" height="60"></a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <nav class="navbar mr-auto" style="margin-right: 125px;     display: contents;">
+                                <form class="form-inline" type="get" style="margin-inline: auto;">
+                                    <div class="input-group" style="box-shadow: 0px 0px 14px 3px lightgrey;padding: inherit;border-radius: 10px;margin: 15px;padding: 2px;">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true" style="margin: 10px;"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" id="search_box" name="search_box" placeholder="Job Title" aria-label="Username" aria-describedby="basic-addon1" style="width: 350px;">
+                                    </div>
+                                </form>
+                            </nav>
+
+
+
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'jobseeker:jobseeker_home' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-home" aria-hidden="true" style="font-size: 27px;"></i></a>
+                                    <span class="menu-text">Home</span>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'jobseeker:AppliedJobs' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-briefcase" aria-hidden="true"></i></a>
+                                    <span class="menu-text">Applied</span>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'jobseeker:SavedJobs' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-bookmark" aria-hidden="true"></i></a>
+                                    <span class="menu-text">Saved</span>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'jobseeker:resume' %}" style="text-align: center;padding: 0rem 0rem;"><i class="fa fa-id-card" aria-hidden="true"></i></a>
+                                    <span class="menu-text">Resume</span>
+                                </li>
+
+                                <li class="nav-item bell-icon">
+                                    <a class="nav-link" href="#" style="text-align: center;padding: 0rem 0rem;"><img src="{% static 'images/bell.png' %}"></a>
+                                    <span class="menu-text">Notification</span>
+                                </li>
+                                <li class="nav-item">
+                                    <div class="dropdown">
+                                        <button class="dropbtn">
+                                            <img style="background-color: black;"src="/static/images/green.png">
+                                            <!-- <img src={{cp.profile_pic.url}}> -->
+                                        </button>
+                                        <div class="dropdown-content">
+                                            <a href="{% url 'jobseeker:profile' %}">My Profile</a>
+                                            <a href="{% url 'jobseeker:ProfileEdit' %}">Edit Profile</a>
+                                            <a href="{% url 'jobseeker:logout' %}">Log Out</a>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
 <section class="job-portal">
 	<div class="container">
 		<div class="row">
